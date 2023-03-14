@@ -1,5 +1,5 @@
-# Forget-My-Not
-Tired of forgetting all your passwords? We have a solution for you!
+# Vergiss Mein Nicht
+Sind Sie genervt von der ewigen Suche nach dem Passwort? Wir haben die Lösung!
 
 # Planskizzen
 
