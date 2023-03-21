@@ -15,3 +15,6 @@ Bevor wir mit der eigentlichen Programmierung loslegten, gingen wir zunächst in
 
 Bei dieser Skizze lässt sich schon erkennen, dass es sich hierbei um eine grobe Vorstellung handeln soll, wie das Fenster aussehen soll, wenn man einen Account für unsere Webside erstellen möchte. Wenn man durch seine Email und sein Passwort sich bei unserem Programm registriert hat, kann man sich hier auch danach gleichzeitig anmelden, um dann zu dem Hauptfenster zu gelangen, welches der vorher erläuterten Skizze entspricht. 
 
+
+In dieser Skizze soll die Funktionsweise unseres Passwortmanagers visualisiert werden. Wenn man sich zu aller erst in seinen Account einloggt, legt man entweder zuerst sein Masterpasswort fest, welches die anderen normalen Passwörter, die man bereits hat, verschlüsselt, oder man hat bereits ein Masterpasswort, welches aktiv die anderen Passwörter verschlüsselt, indem es diese unkenntlich macht. Wenn man sein Masterpasswort eingibt bzw. dieses bestätigt, dann werden die anderen PAsswörter einem zur Anzeige freigeschaltet.
+
