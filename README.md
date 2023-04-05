@@ -85,4 +85,7 @@ Dieser Code ist ein Beispiel für eine Implementierung einer einfachen Benutzerr
 
 ![carbon (7)](https://user-images.githubusercontent.com/111282979/230140426-4839234f-eedf-477d-9894-65578f5069b3.png)
 
+Die erste Funktion (mailUpdate) prüft zunächst, ob der Benutzer authentifiziert ist. In diesem Fall wird ein Joi-Test erstellt, um sicherzustellen, dass die Anfrage einen gültigen E-Mail-Adresswert enthält. Wenn die Anfrage gültig ist, wird die updatedata-Funktion aufgerufen, um die E-Mail-Adresse des Benutzers in der Datenbank zu aktualisieren. Dann wird ein neues JWT mit den aktualisierten Benutzerdetails erstellt und als Antwort an den Client gesendet. Die zweite Funktion (Passwort vergessen) ist noch nicht implementiert und gibt nur eine nicht bereitgestellte Antwort zurück.
+Die dritte Funktion (passwordReset) ist ebenfalls nicht implementiert und gibt nur eine Antwort zurück, dass sie noch nicht implementiert ist.
+
 
