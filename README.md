@@ -16,17 +16,16 @@ Bevor wir mit der eigentlichen Programmierung loslegten, gingen wir zunächst in
 Bei dieser Skizze lässt sich schon erkennen, dass es sich hierbei um eine grobe Vorstellung handeln soll, wie das Fenster aussehen soll, wenn man einen Account für unsere Webside erstellen möchte. Wenn man durch seine Email und sein Passwort sich bei unserem Programm registriert hat, kann man sich hier auch danach gleichzeitig anmelden, um dann zu dem Hauptfenster zu gelangen, welches der vorher erläuterten Skizze entspricht. 
 
 
-In dieser Skizze soll die Funktionsweise unseres Passwortmanagers visualisiert werden. Wenn man sich zu aller erst in seinen Account einloggt, legt man entweder zuerst sein Masterpasswort fest, welches die anderen normalen Passwörter, die man bereits hat, verschlüsselt, oder man hat bereits ein Masterpasswort, welches aktiv die anderen Passwörter verschlüsselt, indem es diese unkenntlich macht. Wenn man sein Masterpasswort eingibt bzw. dieses bestätigt, dann werden die anderen PAsswörter einem zur Anzeige freigeschaltet.
+In dieser Skizze soll die Funktionsweise unseres Passwortmanagers visualisiert werden. Wenn man sich zu aller erst in seinen Account einloggt, legt man entweder zuerst sein Masterpasswort fest, welches die anderen normalen Passwörter, die man bereits hat, verschlüsselt, oder man hat bereits ein Masterpasswort, welches aktiv die anderen Passwörter verschlüsselt, indem es diese unkenntlich macht. Wenn man sein Masterpasswort eingibt bzw. dieses bestätigt, dann werden die anderen Paswörter einem zur Anzeige freigeschaltet.
 
 <img width="417" alt="image" src="https://user-images.githubusercontent.com/65679099/230046973-ca71bb0f-eb67-489f-a4b1-0f72b401cc57.png">
 
-Im oberen Bild wird der Aufbau unserer Firestore Datenbank visualisiert. Diese Datenbank organisiert und und speichert die Daten unserer Nutzer. 
+Im oberen Bild wird der Aufbau unserer Firestore Datenbank visualisiert. Diese Datenbank organisiert und und speichert die Daten unserer Nutzer. Die Firestore Datenbank umfasst die Passwörter, die als Items gekennzeichnet sind, den Benutzer selbst, die Beschreibung, das Passwort, welches durch das Masterpasswort verschlüsselt wird und nochmal den seperaten Benutzernamen. Eine Erklärung der Programmierung dieser Datenbank folgt. 
 
 
 <img width="382" alt="image" src="https://user-images.githubusercontent.com/65679099/230047083-10ea2da5-707f-4c4e-9487-9576a169b1c4.png">
 
-
-Passwort hinzufügen zum Passwortmanager
+In dieser Abbildung soll gezeigt werden, dass unser Programm Passwörter hinzufügen kann und dieses verwaltet. Zudem kommt hier unsere besondere Funktion ins Spiel, welches es unseren Nutzern erlaubt automatisch starke Passwörter zu generieren, die wiederum von dem Masterpasswort geschützt sind. Wenn der Benutzer das richtige Masterpasswort eingegeben hat und dies bestätigt wurde, werden die eigentlichen Passwörter die man besitzt entschlüsselt. Damit der Benutzer sich sein neu generiertes starkes Passwort nicht selber merken muss, gibt es die Option sich die Passwörter zu kopieren und sie dann anschließend wo auch immer einzufügen. Man muss sisch somit nur das Masterpasswort merken.
 
 <img width="496" alt="image" src="https://user-images.githubusercontent.com/65679099/230047597-923a63fb-f1cf-4b16-a339-ce325aa7320e.png">
 
