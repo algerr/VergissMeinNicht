@@ -5,7 +5,12 @@
 - [Blogeinträge](#blogeinträge)
 - [Vergiss Mein Nicht](#vergiss-mein-nicht)
 - [Planskizzen](#planskizzen)
-    - [Hauptthema](#hauptthema)
+   - [Hauptthema](#hauptthema)
+   - [Das Login Fenster](#das-login-fenster)
+   - [Die Firebase Datenbank](#die-firebase-datenbank)
+   - [Die Passwort Verwaltung](#die-passwort-verwaltung)
+   - [Der Ablauf des Programms](#der-ablauf-des-programms)
+   - [Vergleich zur 2FA-Authetifizierung](#vergleich-zur-2fa-authentifizierung)
 
 
 
