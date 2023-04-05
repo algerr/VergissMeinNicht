@@ -5,7 +5,7 @@
 - [Blogeinträge](#blogeinträge)
 - [Vergiss Mein Nicht](#vergiss-mein-nicht)
 - [Planskizzen](#planskizzen)
-  -[Hauptthema](#hauptthema)
+    - [Hauptthema](#hauptthema)
 
 
 
