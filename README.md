@@ -47,6 +47,11 @@ Im oberen Bild wird der Aufbau unserer Firestore Datenbank visualisiert. Diese D
 
 <img width="382" alt="image" src="https://user-images.githubusercontent.com/65679099/230047083-10ea2da5-707f-4c4e-9487-9576a169b1c4.png">
 
+Dies ist die Funktion des Node.js/Express.js-Controllers, um neue Benutzer in der Anwendung zu registrieren.
+Zunächst definiert die Funktion ein Joi-Objekt, indem sie die erforderlichen Felder (Benutzername, Passwort und E-Mail-Adresse) angibt und validiert. Es wurde angegeben, dass der Wert für die E-Mail-Adresse eine gültige E-Mail-Adresse sein muss, aber auch leer gelassen werden kann.
+Der Benutzername, das Passwort und die E-Mail-Adresse werden dann aus dem Text der Anfrage extrahiert. Die Eingabe wird dann validiert, indem ein Joi-Objekt auf die Eingabe angewendet wird. Bei ungültiger Eingabe wird eine Fehlermeldung mit dem HTTP-Statuscode 400 zurückgegeben. Dann wird überprüft, ob der Benutzername bereits in der Datenbank existiert. In diesem Szenario wird eine Fehlermeldung mit dem HTTP-Statuscode 400 zurückgegeben. Wenn der Benutzername nicht existiert, wird die Funktion aufgerufen, die den neuen Benutzer in der Datenbank speichert. Passwörter werden verschlüsselt, bevor sie in der Datenbank gespeichert werden. Wenn das Speichern erfolgreich ist, wird eine Erfolgsmeldung mit dem HTTP-Statuscode 200 zurückgegeben.
+Dieser Code ist ein Beispiel für eine Implementierung einer einfachen Benutzerregistrierungsfunktion in Node.js/Express.js und enthält Verschlüsselungs- und Eingabevalidierungstechniken, um sicherzustellen, dass Benutzerdaten sicher in der Datenbank gespeichert werden.
+
 In dieser Abbildung soll gezeigt werden, dass unser Programm Passwörter hinzufügen kann und diese verwaltet. Zudem kommt hier unsere besondere Funktion ins Spiel, welche es unseren Nutzern erlaubt automatisch starke Passwörter zu generieren, die wiederum von dem Masterpasswort geschützt sind. Wenn der Benutzer das richtige Masterpasswort eingegeben hat und dies bestätigt wurde, werden die eigentlichen Passwörter die man besitzt entschlüsselt. Damit der Benutzer sich sein neu generiertes starkes Passwort nicht selber merken muss, gibt es die Option sich die Passwörter zu kopieren und sie dann anschließend wo auch immer einzufügen. Man muss sich somit nur das Masterpasswort merken.
 
 ## Der Ablauf vom Programm
