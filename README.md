@@ -29,7 +29,7 @@ In dieser Abbildung soll gezeigt werden, dass unser Programm Passwörter hinzuf�
 
 <img width="496" alt="image" src="https://user-images.githubusercontent.com/65679099/230047597-923a63fb-f1cf-4b16-a339-ce325aa7320e.png">
 
-Authentifizierungsablauf, wie Sicherheit gewährleistet werden kann
+In der folgenden Skizze wird der genau Ablauf unseres Programms thematisiert. Wenn man sich zunächst einloggen möchte, gibt man seine Benutzerdaten , also seine Email und sein Passwort ein. Diese Informationen werden an die die Firebase geschickt und abgeglichen. Wenn die eingegeben Daten korrekt sind, wird man zu der Hauptseite hingeleitet, welche das Herzstück von allem ist. Von der Hauptseite aus können dann wie bereits angesprochen die eigenen Passwörter festgelegt bzw. auch generiert werden und anschließend werden diese durch das festgelegte Masterpasswort geschützt. Bei der Eingabe des Masterpassworts weden die anderen Passwörter von der Firebase freigeschaltet, sodass man anschließend auf diese zugreifen kann. Auf diese Art kann die unseren Nutzern die versprochene Sicherheit gewährleistet werden. 
 
 ----->> Unterpunkt 2fa authentifizierung
 
