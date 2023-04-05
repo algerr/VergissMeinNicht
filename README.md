@@ -109,6 +109,12 @@ Die Funktion extrahiert diese Daten dann aus dem Text der HTTP-Anforderung und v
 Wenn die Authentifizierung erfolgreich ist, wird ein neues Kennwortobjekt in der Datenbank erstellt und das neue Kennwort als Antwort zurückgegeben. Die Antwort enthält auch eine Erfolgsmeldung.
 Die Funktion verwendet verschiedene Hilfsfunktionen wie firestoreWrite, um Daten in die Datenbank zu schreiben.
 
+![carbon (11)](https://user-images.githubusercontent.com/111282979/230160847-b3c8428a-e329-49de-ab84-fcdbd7440786.png)
+
+Diese Funktion ist für das Löschen von Datensätzen in Firebase verantwortlich. Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Es prüft dann, ob der übergebene Parameter für die Passwort-ID gültig ist. Wenn der Benutzer nicht der Eigentümer des gelöschten Elements ist, wird ein Fehler zurückgegeben. Schließlich wird eine Funktion aufgerufen, um den Eintrag mit der übergebenen Passwort-ID aus der Datenbank zu entfernen. Wenn das Löschen erfolgreich war, wird eine Erfolgsmeldung zurückgegeben.
+
+
+
 
 
 
