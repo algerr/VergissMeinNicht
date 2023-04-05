@@ -81,12 +81,14 @@ Zunächst definiert die Funktion ein Joi-Objekt, indem sie die erforderlichen Fe
 Der Benutzername, das Passwort und die E-Mail-Adresse werden dann aus dem Text der Anfrage extrahiert. Die Eingabe wird dann validiert, indem ein Joi-Objekt auf die Eingabe angewendet wird. Bei ungültiger Eingabe wird eine Fehlermeldung mit dem HTTP-Statuscode 400 zurückgegeben. Dann wird überprüft, ob der Benutzername bereits in der Datenbank existiert. In diesem Szenario wird eine Fehlermeldung mit dem HTTP-Statuscode 400 zurückgegeben. Wenn der Benutzername nicht existiert, wird die Funktion aufgerufen, die den neuen Benutzer in der Datenbank speichert. Passwörter werden verschlüsselt, bevor sie in der Datenbank gespeichert werden. Wenn das Speichern erfolgreich ist, wird eine Erfolgsmeldung mit dem HTTP-Statuscode 200 zurückgegeben.
 Dieser Code ist ein Beispiel für eine Implementierung einer einfachen Benutzerregistrierungsfunktion in Node.js/Express.js und enthält Verschlüsselungs- und Eingabevalidierungstechniken, um sicherzustellen, dass Benutzerdaten sicher in der Datenbank gespeichert werden. 
 
-
+# Die Authentifizierung
 
 ![carbon (7)](https://user-images.githubusercontent.com/111282979/230140426-4839234f-eedf-477d-9894-65578f5069b3.png)
 
 Die erste Funktion (mailUpdate) prüft zunächst, ob der Benutzer authentifiziert ist. In diesem Fall wird ein Joi-Test erstellt, um sicherzustellen, dass die Anfrage einen gültigen E-Mail-Adresswert enthält. Wenn die Anfrage gültig ist, wird die updatedata-Funktion aufgerufen, um die E-Mail-Adresse des Benutzers in der Datenbank zu aktualisieren. Dann wird ein neues JWT mit den aktualisierten Benutzerdetails erstellt und als Antwort an den Client gesendet. Die zweite Funktion (Passwort vergessen) ist noch nicht implementiert und gibt nur eine nicht bereitgestellte Antwort zurück.
 Die dritte Funktion (passwordReset) ist ebenfalls nicht implementiert und gibt nur eine Antwort zurück, dass sie noch nicht implementiert ist.
+
+# Die Passwortverwaltung
 
 ![carbon (8)](https://user-images.githubusercontent.com/111282979/230147964-b0eaeb27-d949-463b-913f-f02baa7a526c.png)
 
@@ -95,12 +97,16 @@ Die Funktion "Passwort vergessen" ist noch nicht implementiert und gibt nur eine
 Die Funktion „Passwort ändern“ erfordert eine Benutzerauthentifizierung. Wenn der Benutzer nicht authentifiziert ist, wird eine Fehlermeldung zurückgegeben.
 Die Joi.object-Funktion definiert ein Schema, das die alten und neuen Passwörter des Benutzers enthält. Dann werden das alte und das neue Passwort aus dem Request-Objekt extrahiert und zur Authentifizierung in das Joi-Objekt eingefügt. Wenn der Test fehlschlägt, wird eine Fehlermeldung zurückgegeben. Dann wird versucht, den Benutzer aus der Datenbank auszulesen. Wenn der Benutzer nicht existiert, wird eine Fehlermeldung zurückgegeben. Wenn der Benutzer existiert, wird das alte eingegebene Passwort mit dem in der Datenbank gespeicherten Passwort verglichen. Wenn das Passwort korrekt ist, wird das Passwort in der Datenbank mit dem neu eingegebenen Passwort aktualisiert. Andernfalls wird eine Fehlermeldung zurückgegeben, dass das alte Passwort ungültig ist.
 
+# Die Löschung des Benutzerkontos
+
 ![carbon (9)](https://user-images.githubusercontent.com/111282979/230159660-fce57a40-ef9c-403c-bd71-573086e5d4f5.png)
 
 Dieser Code ist die Funktion zum Löschen des Benutzerkontos.
 Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Andernfalls wird eine Fehlermeldung zurückgegeben.
 Anschließend wird eine Abfrage an die Firestore-Datenbank gesendet, um alle Passwörter abzurufen, die dem Benutzer gehören, dessen Konto gelöscht wird. Anschließend wird für jedes Dokument die Methode .delete() aufgerufen, um Einträge aus der Sammlung „Passwords“ zu entfernen.
 Die Funktion deleteata() wird dann aufgerufen, um den Benutzer aus der Sammlung "Benutzer" zu entfernen. Abschließend wird eine Erfolgsmeldung mit dem Statuscode 200 zurückgegeben.
+
+# Der Sicherheitsschritt
 
 ![carbon (10)](https://user-images.githubusercontent.com/111282979/230160241-9bbd6e2f-15b1-4392-be47-b872b41b6e5f.png)
 
@@ -109,15 +115,21 @@ Die Funktion extrahiert diese Daten dann aus dem Text der HTTP-Anforderung und v
 Wenn die Authentifizierung erfolgreich ist, wird ein neues Kennwortobjekt in der Datenbank erstellt und das neue Kennwort als Antwort zurückgegeben. Die Antwort enthält auch eine Erfolgsmeldung.
 Die Funktion verwendet verschiedene Hilfsfunktionen wie firestoreWrite, um Daten in die Datenbank zu schreiben.
 
+# Die Löschung von Datensätzen in der Firebase 
+
 ![carbon (11)](https://user-images.githubusercontent.com/111282979/230160847-b3c8428a-e329-49de-ab84-fcdbd7440786.png)
 
 Diese Funktion ist für das Löschen von Datensätzen in Firebase verantwortlich. Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Es prüft dann, ob der übergebene Parameter für die Passwort-ID gültig ist. Wenn der Benutzer nicht der Eigentümer des gelöschten Elements ist, wird ein Fehler zurückgegeben. Schließlich wird eine Funktion aufgerufen, um den Eintrag mit der übergebenen Passwort-ID aus der Datenbank zu entfernen. Wenn das Löschen erfolgreich war, wird eine Erfolgsmeldung zurückgegeben.
+
+# Die Aktualisierung
 
 ![carbon (12)](https://user-images.githubusercontent.com/111282979/230161692-40e98031-1e9f-4995-9559-4ec7e2e98459.png)
 
 Der Code definiert eine Funktion namens "update", die, wenn sie aufgerufen wird, ein Objekt mit Anforderungs- und Antwortinformationen erwartet.
 Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Andernfalls wird eine Fehlermeldung an den Client gesendet.
 Als Nächstes wird ein Authentifizierungsschema definiert, das die Validierung von vier Attributen erfordert: Beschreibung, Verschlüsselungskennwort, authNonce und Kennwort-ID. Description,crypted_password und authNonce werden aus dem Anforderungstext entnommen und passwordId wird aus den Anforderungsparametern entnommen. Die Schemavalidierung erfolgt durch Aufrufen der „validate“-Methode in Joi, einem Validierungsframework. Wenn der Test fehlschlägt, wird eine Fehlermeldung an den Client zurückgegeben. Es wird dann überprüft, ob das Passwort mit dem aktuellen Benutzernamen übereinstimmt. Andernfalls wird eine Fehlermeldung an den Client zurückgesendet. Schließlich wird firestoreUpdate aufgerufen, um das Kennwort in der Firestore-Datenbank zu aktualisieren. Eine Bestätigungsnachricht wird an den Client zurückgesendet.
+
+# Der Zugriff auf die Passwörter
 
 ![carbon (13)](https://user-images.githubusercontent.com/111282979/230162236-fd8978e3-dd47-4422-840d-eb2b36bb556f.png)
 
@@ -126,10 +138,14 @@ Dann wird ein leeres itemsArray erstellt, das alle Dokumente in den Elementen du
 Die Funktion passwordUsernameValidation wird verwendet, um das Kennwort anhand des aktuellen Benutzernamens zu validieren. Die Funktion nimmt ein req.firestore Firestore-Objekt und einen Bezeichner als Parameter. Zunächst wird versucht, das Dokument mit der angegebenen ID aus der Firestore-Datenbank auszulesen. Wenn das Dokument nicht gefunden wird, wird false zurückgegeben.
 Andernfalls wird das Passwortobjekt aus dem Dokument genommen und mit der aktuellen username-Eigenschaft des req-Objekts verglichen. Bei Übereinstimmung gibt die Funktion true zurück, andernfalls false.
 
+# Die Extrahierung einzelner Kontoeigenschaften
+
 ![carbon (14)](https://user-images.githubusercontent.com/111282979/230162821-4c117801-5eee-42b8-ad46-375460f23a5c.png)
 
 Dieser Code definiert zwei Funktionen parseUser und parsePassword. Beide Funktionen werden verwendet, um Objekte mit bestimmten Eigenschaften zu extrahieren. Die Funktion parseUser extrahiert den Benutzernamen, das Passwort und die E-Mail-Adresse aus dem Benutzerobjekt und gibt ein neues Objekt mit diesen Eigenschaften zurück.
 Die Funktion parsePassword extrahiert die Eigenschaften username, description, password_encrypted und nonce aus dem Passwortobjekt und gibt ein neues Objekt mit diesen Eigenschaften zurück.
+
+# Die Datenverwaltung
 
 ![carbon (15)](https://user-images.githubusercontent.com/111282979/230163584-b22e0256-0d82-45dd-88a1-f11712df5786.png)
 
@@ -138,6 +154,8 @@ Die erste Funktion, adddata, ermöglicht das Hinzufügen von Daten zu einer Fire
 Die zweite Funktion, readdata, ermöglicht es Ihnen, Daten aus der Firestore-Sammlung basierend auf der Dokument-ID zu lesen. Dokumentfelder werden im JSON-Format zurückgegeben.
 Mit der dritten Funktion, updatedata, können Sie die Daten im Dokument der Firestore-Sammlung aktualisieren. Dazu ist es erforderlich, die Dokument-ID zu aktualisieren und die alten Felder mit aktualisierten Daten zu überschreiben.
 Die vierte Funktion, Daten löschen, ermöglicht Ihnen das Entfernen von Daten aus Dokumenten in der Firestore-Sammlung basierend auf der Dokument-ID. Alle Funktionen arbeiten mit der Firestore-Instanzdatenbank und einer Reihe von Sammlungsnamen. Sie verwenden die Befehle add, doc, get, update und delete von Firestore, um ihre jeweiligen Operationen auszuführen.
+
+# Die Firebase-Cloudfunktion
 
 ![carbon (16)](https://user-images.githubusercontent.com/111282979/230164283-da4cb773-0c5f-45ae-9f38-4d68c0e342b6.png)
 
