@@ -11,6 +11,7 @@
    - [Die Passwort Verwaltung](#die-passwort-verwaltung)
    - [Der Ablauf vom Programm](#der-ablauf-vom-programm)
    - [Vergleich zur 2FA-Authetifizierung](#vergleich-zur-2fa-authentifizierung)
+- [Der Login](#der-login)
 
 
 # Blogeinträge
@@ -59,3 +60,8 @@ In der folgenden Skizze wird der genaue Ablauf unseres Programms thematisiert. W
 Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Konzept unterscheidet, soll dies die sich unten befindliche Abbildung illustrieren. Bei der 2FA-Authetifizierung ist es so, dass der Benutzer nach der Eingabe seiner Daten dazu aufgefordert wird seine Identität zu bestätigen. Dies kann auf mehreren Wegen durchgeführt werden. Entweder erhält der Benutzer eine Email auf dem Konte mit welchem er sich anmeldet, die er anschließend bestätigen muss oder eine SMS, welche zu der Telefonnummer gelangt, mit welcher das Email Konto verknüpft ist. Das Problem allerdings hier, ist, dass der Nutzer gefährdet ist, sobald ein Hacker den Zugriff auf seine Telefonnummer oder sein Emailkonto hat. Wir umgehen dieses Problem, indem wir ein zusätliches Masterpasswort haben, welches der Hacker ebenfalls entschlüsseln müsste, um an die ganzen Passwörter eines Nutzers zu kommen. 
 
 <img width="375" alt="image" src="https://user-images.githubusercontent.com/65679099/230047871-1663e6fb-b793-4c72-8bbc-32c5ef511c72.png">
+
+# Der Login
+
+![carbon (5)](https://user-images.githubusercontent.com/111282979/230135631-df8116af-2512-4c7e-a147-b0da3d60ca4e.png)
+
