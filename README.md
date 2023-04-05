@@ -18,3 +18,20 @@ Bei dieser Skizze lässt sich schon erkennen, dass es sich hierbei um eine grobe
 
 In dieser Skizze soll die Funktionsweise unseres Passwortmanagers visualisiert werden. Wenn man sich zu aller erst in seinen Account einloggt, legt man entweder zuerst sein Masterpasswort fest, welches die anderen normalen Passwörter, die man bereits hat, verschlüsselt, oder man hat bereits ein Masterpasswort, welches aktiv die anderen Passwörter verschlüsselt, indem es diese unkenntlich macht. Wenn man sein Masterpasswort eingibt bzw. dieses bestätigt, dann werden die anderen PAsswörter einem zur Anzeige freigeschaltet.
 
+<img width="417" alt="image" src="https://user-images.githubusercontent.com/65679099/230046973-ca71bb0f-eb67-489f-a4b1-0f72b401cc57.png">
+
+Firestore Datenbank
+
+
+<img width="382" alt="image" src="https://user-images.githubusercontent.com/65679099/230047083-10ea2da5-707f-4c4e-9487-9576a169b1c4.png">
+
+
+Passwort hinzufügen zum Passwortmanager
+
+<img width="496" alt="image" src="https://user-images.githubusercontent.com/65679099/230047597-923a63fb-f1cf-4b16-a339-ce325aa7320e.png">
+
+Authentifizierungsablauf, wie Sicherheit gewährleistet werden kann
+
+----->> Unterpunkt 2fa authentifizierung
+
+<img width="375" alt="image" src="https://user-images.githubusercontent.com/65679099/230047871-1663e6fb-b793-4c72-8bbc-32c5ef511c72.png">
