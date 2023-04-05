@@ -139,6 +139,11 @@ Die zweite Funktion, readdata, ermöglicht es Ihnen, Daten aus der Firestore-Sam
 Mit der dritten Funktion, updatedata, können Sie die Daten im Dokument der Firestore-Sammlung aktualisieren. Dazu ist es erforderlich, die Dokument-ID zu aktualisieren und die alten Felder mit aktualisierten Daten zu überschreiben.
 Die vierte Funktion, Daten löschen, ermöglicht Ihnen das Entfernen von Daten aus Dokumenten in der Firestore-Sammlung basierend auf der Dokument-ID. Alle Funktionen arbeiten mit der Firestore-Instanzdatenbank und einer Reihe von Sammlungsnamen. Sie verwenden die Befehle add, doc, get, update und delete von Firestore, um ihre jeweiligen Operationen auszuführen.
 
+![carbon (16)](https://user-images.githubusercontent.com/111282979/230164283-da4cb773-0c5f-45ae-9f38-4d68c0e342b6.png)
+
+Diese Codezeile erstellt eine Firebase-Cloudfunktion, die als HTTP-Endpunkt dient. Die API wird ausgeführt, wenn auf einen bestimmten Endpunkt zugegriffen wird. functions.https.onRequest ist eine Firebase Cloud Function, die als HTTP-Request-Handler fungiert. app ist ein Express-Objekt, das Routen und Handler für API-Endpunkte enthält. Zusammen bilden sie die Cloud-Funktionalität von Firebase, die HTTP-Anforderungen an in der Anwendung definierte Routen und Handler umleitet.
+
+
 
 
 
