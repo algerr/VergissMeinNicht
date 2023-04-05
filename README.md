@@ -119,6 +119,13 @@ Der Code definiert eine Funktion namens "update", die, wenn sie aufgerufen wird,
 Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Andernfalls wird eine Fehlermeldung an den Client gesendet.
 Als Nächstes wird ein Authentifizierungsschema definiert, das die Validierung von vier Attributen erfordert: Beschreibung, Verschlüsselungskennwort, authNonce und Kennwort-ID. Description,crypted_password und authNonce werden aus dem Anforderungstext entnommen und passwordId wird aus den Anforderungsparametern entnommen. Die Schemavalidierung erfolgt durch Aufrufen der „validate“-Methode in Joi, einem Validierungsframework. Wenn der Test fehlschlägt, wird eine Fehlermeldung an den Client zurückgegeben. Es wird dann überprüft, ob das Passwort mit dem aktuellen Benutzernamen übereinstimmt. Andernfalls wird eine Fehlermeldung an den Client zurückgesendet. Schließlich wird firestoreUpdate aufgerufen, um das Kennwort in der Firestore-Datenbank zu aktualisieren. Eine Bestätigungsnachricht wird an den Client zurückgesendet.
 
+![carbon (13)](https://user-images.githubusercontent.com/111282979/230162236-fd8978e3-dd47-4422-840d-eb2b36bb556f.png)
+
+Die Funktion getAll wird aufgerufen, um alle Passwörter eines bestimmten Benutzers aus der Datenbank abzurufen. Der Benutzer muss authentifiziert werden, um diese Funktion auszuführen, andernfalls wird ein Fehler zurückgegeben. Die Funktion sucht nach allen Dokumenten in der Sammlung "Passwörter", deren Feld "Benutzername" mit dem authentifizierten Benutzernamen übereinstimmt, und gibt sie als Einträge zurück.
+Dann wird ein leeres itemsArray erstellt, das alle Dokumente in den Elementen durchläuft, und jedes Element wird mit dem ID-Feld und allen anderen Feldern im Dokument in ein Objekt konvertiert und dem itemsArray hinzugefügt. Schließlich wird das itemsArray als Antwort an den Client zurückgegeben.
+Die Funktion passwordUsernameValidation wird verwendet, um das Kennwort anhand des aktuellen Benutzernamens zu validieren. Die Funktion nimmt ein req.firestore Firestore-Objekt und einen Bezeichner als Parameter. Zunächst wird versucht, das Dokument mit der angegebenen ID aus der Firestore-Datenbank auszulesen. Wenn das Dokument nicht gefunden wird, wird false zurückgegeben.
+Andernfalls wird das Passwortobjekt aus dem Dokument genommen und mit der aktuellen username-Eigenschaft des req-Objekts verglichen. Bei Übereinstimmung gibt die Funktion true zurück, andernfalls false.
+
 
 
 
