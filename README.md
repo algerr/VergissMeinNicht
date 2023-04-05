@@ -13,7 +13,9 @@
    - [Vergleich zur 2FA-Authetifizierung](#vergleich-zur-2fa-authentifizierung)
 
 
+# Blogeinträge
 
+[Zu den Blogeinträgen]
 
 # Vergiss Mein Nicht
 Sind Sie genervt von der ewigen Suche nach dem Passwort? Wir haben die Lösung!
