@@ -20,7 +20,7 @@ In dieser Skizze soll die Funktionsweise unseres Passwortmanagers visualisiert w
 
 <img width="417" alt="image" src="https://user-images.githubusercontent.com/65679099/230046973-ca71bb0f-eb67-489f-a4b1-0f72b401cc57.png">
 
-Firestore Datenbank
+Im oberen Bild wird der Aufbau unserer Firestore Datenbank visualisiert. Diese Datenbank organisiert und und speichert die Daten unserer Nutzer. 
 
 
 <img width="382" alt="image" src="https://user-images.githubusercontent.com/65679099/230047083-10ea2da5-707f-4c4e-9487-9576a169b1c4.png">
