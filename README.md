@@ -102,6 +102,14 @@ Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Andernfalls wir
 Anschließend wird eine Abfrage an die Firestore-Datenbank gesendet, um alle Passwörter abzurufen, die dem Benutzer gehören, dessen Konto gelöscht wird. Anschließend wird für jedes Dokument die Methode .delete() aufgerufen, um Einträge aus der Sammlung „Passwords“ zu entfernen.
 Die Funktion deleteata() wird dann aufgerufen, um den Benutzer aus der Sammlung "Benutzer" zu entfernen. Abschließend wird eine Erfolgsmeldung mit dem Statuscode 200 zurückgegeben.
 
+![carbon (10)](https://user-images.githubusercontent.com/111282979/230160241-9bbd6e2f-15b1-4392-be47-b872b41b6e5f.png)
+
+Dieses Snippet definiert eine Funktion namens add, die eine HTTP-POST-Anforderung an einen bestimmten Endpunkt verarbeitet. Die Funktion zum Speichern des neuen Passworts für den aktuell authentifizierten Benutzer in der Datenbank. Zunächst prüft die Funktion, ob der Benutzer authentifiziert ist. Andernfalls wird eine Fehlermeldung zurückgegeben und die Funktion beendet. Als nächstes wird ein Datenvalidierungsschema definiert, das erforderliche Felder für das Passwort enthält, nämlich Beschreibung, verschlüsseltes Passwort und Validierungsnachricht.
+Die Funktion extrahiert diese Daten dann aus dem Text der HTTP-Anforderung und verifiziert sie anhand des zuvor definierten Schemas. Schlägt der Test fehl, wird eine Fehlermeldung zurückgegeben und die Funktion beendet.
+Wenn die Authentifizierung erfolgreich ist, wird ein neues Kennwortobjekt in der Datenbank erstellt und das neue Kennwort als Antwort zurückgegeben. Die Antwort enthält auch eine Erfolgsmeldung.
+Die Funktion verwendet verschiedene Hilfsfunktionen wie firestoreWrite, um Daten in die Datenbank zu schreiben.
+
+
 
 
 
