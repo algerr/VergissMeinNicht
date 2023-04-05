@@ -131,6 +131,15 @@ Andernfalls wird das Passwortobjekt aus dem Dokument genommen und mit der aktuel
 Dieser Code definiert zwei Funktionen parseUser und parsePassword. Beide Funktionen werden verwendet, um Objekte mit bestimmten Eigenschaften zu extrahieren. Die Funktion parseUser extrahiert den Benutzernamen, das Passwort und die E-Mail-Adresse aus dem Benutzerobjekt und gibt ein neues Objekt mit diesen Eigenschaften zurück.
 Die Funktion parsePassword extrahiert die Eigenschaften username, description, password_encrypted und nonce aus dem Passwortobjekt und gibt ein neues Objekt mit diesen Eigenschaften zurück.
 
+![carbon (15)](https://user-images.githubusercontent.com/111282979/230163584-b22e0256-0d82-45dd-88a1-f11712df5786.png)
+
+Dieser Code ist eine Reihe von JavaScript-Funktionen, die zum Erstellen, Lesen, Aktualisieren und Löschen (CRUD) in der Google Cloud Platform Firestore-Datenbank verwendet werden können.
+Die erste Funktion, adddata, ermöglicht das Hinzufügen von Daten zu einer Firestore-Sammlung. Überprüft, ob für das Dokument eine ID angegeben ist. Wenn dies der Fall ist, werden die Daten mit der angegebenen ID in die Sammlung eingefügt. Andernfalls wird das Dokument automatisch mit einer eindeutigen ID generiert.
+Die zweite Funktion, readdata, ermöglicht es Ihnen, Daten aus der Firestore-Sammlung basierend auf der Dokument-ID zu lesen. Dokumentfelder werden im JSON-Format zurückgegeben.
+Mit der dritten Funktion, updatedata, können Sie die Daten im Dokument der Firestore-Sammlung aktualisieren. Dazu ist es erforderlich, die Dokument-ID zu aktualisieren und die alten Felder mit aktualisierten Daten zu überschreiben.
+Die vierte Funktion, Daten löschen, ermöglicht Ihnen das Entfernen von Daten aus Dokumenten in der Firestore-Sammlung basierend auf der Dokument-ID. Alle Funktionen arbeiten mit der Firestore-Instanzdatenbank und einer Reihe von Sammlungsnamen. Sie verwenden die Befehle add, doc, get, update und delete von Firestore, um ihre jeweiligen Operationen auszuführen.
+
+
 
 
 
