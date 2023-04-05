@@ -97,6 +97,11 @@ Die Joi.object-Funktion definiert ein Schema, das die alten und neuen Passwörte
 
 ![carbon (9)](https://user-images.githubusercontent.com/111282979/230159660-fce57a40-ef9c-403c-bd71-573086e5d4f5.png)
 
+Dieser Code ist die Funktion zum Löschen des Benutzerkontos.
+Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Andernfalls wird eine Fehlermeldung zurückgegeben.
+Anschließend wird eine Abfrage an die Firestore-Datenbank gesendet, um alle Passwörter abzurufen, die dem Benutzer gehören, dessen Konto gelöscht wird. Anschließend wird für jedes Dokument die Methode .delete() aufgerufen, um Einträge aus der Sammlung „Passwords“ zu entfernen.
+Die Funktion deleteata() wird dann aufgerufen, um den Benutzer aus der Sammlung "Benutzer" zu entfernen. Abschließend wird eine Erfolgsmeldung mit dem Statuscode 200 zurückgegeben.
+
 
 
 
