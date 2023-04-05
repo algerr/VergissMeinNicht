@@ -9,7 +9,7 @@
    - [Das Login Fenster](#das-login-fenster)
    - [Die Firebase Datenbank](#die-firebase-datenbank)
    - [Die Passwort Verwaltung](#die-passwort-verwaltung)
-   - [Der Ablauf des Programms](#der-ablauf-des-programms)
+   - [Der Ablauf vom Programm](#der-ablauf-vom-programm)
    - [Vergleich zur 2FA-Authetifizierung](#vergleich-zur-2fa-authentifizierung)
 
 
@@ -46,7 +46,7 @@ Im oberen Bild wird der Aufbau unserer Firestore Datenbank visualisiert. Diese D
 
 In dieser Abbildung soll gezeigt werden, dass unser Programm Passwörter hinzufügen kann und diese verwaltet. Zudem kommt hier unsere besondere Funktion ins Spiel, welche es unseren Nutzern erlaubt automatisch starke Passwörter zu generieren, die wiederum von dem Masterpasswort geschützt sind. Wenn der Benutzer das richtige Masterpasswort eingegeben hat und dies bestätigt wurde, werden die eigentlichen Passwörter die man besitzt entschlüsselt. Damit der Benutzer sich sein neu generiertes starkes Passwort nicht selber merken muss, gibt es die Option sich die Passwörter zu kopieren und sie dann anschließend wo auch immer einzufügen. Man muss sich somit nur das Masterpasswort merken.
 
-## Der Ablauf des Prgramms
+## Der Ablauf vom Programm
 
 <img width="496" alt="image" src="https://user-images.githubusercontent.com/65679099/230047597-923a63fb-f1cf-4b16-a339-ce325aa7320e.png">
 
