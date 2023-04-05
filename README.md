@@ -113,6 +113,12 @@ Die Funktion verwendet verschiedene Hilfsfunktionen wie firestoreWrite, um Daten
 
 Diese Funktion ist für das Löschen von Datensätzen in Firebase verantwortlich. Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Es prüft dann, ob der übergebene Parameter für die Passwort-ID gültig ist. Wenn der Benutzer nicht der Eigentümer des gelöschten Elements ist, wird ein Fehler zurückgegeben. Schließlich wird eine Funktion aufgerufen, um den Eintrag mit der übergebenen Passwort-ID aus der Datenbank zu entfernen. Wenn das Löschen erfolgreich war, wird eine Erfolgsmeldung zurückgegeben.
 
+![carbon (12)](https://user-images.githubusercontent.com/111282979/230161692-40e98031-1e9f-4995-9559-4ec7e2e98459.png)
+
+Der Code definiert eine Funktion namens "update", die, wenn sie aufgerufen wird, ein Objekt mit Anforderungs- und Antwortinformationen erwartet.
+Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Andernfalls wird eine Fehlermeldung an den Client gesendet.
+Als Nächstes wird ein Authentifizierungsschema definiert, das die Validierung von vier Attributen erfordert: Beschreibung, Verschlüsselungskennwort, authNonce und Kennwort-ID. Description,crypted_password und authNonce werden aus dem Anforderungstext entnommen und passwordId wird aus den Anforderungsparametern entnommen. Die Schemavalidierung erfolgt durch Aufrufen der „validate“-Methode in Joi, einem Validierungsframework. Wenn der Test fehlschlägt, wird eine Fehlermeldung an den Client zurückgegeben. Es wird dann überprüft, ob das Passwort mit dem aktuellen Benutzernamen übereinstimmt. Andernfalls wird eine Fehlermeldung an den Client zurückgesendet. Schließlich wird firestoreUpdate aufgerufen, um das Kennwort in der Firestore-Datenbank zu aktualisieren. Eine Bestätigungsnachricht wird an den Client zurückgesendet.
+
 
 
 
