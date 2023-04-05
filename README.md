@@ -15,7 +15,7 @@
 
 # Blogeinträge
 
-[Zu den Blogeinträgen]
+[Zu den Blogeinträgen](https://github.com/algerr/blogeintraege-2)
 
 # Vergiss Mein Nicht
 Sind Sie genervt von der ewigen Suche nach dem Passwort? Wir haben die Lösung!
