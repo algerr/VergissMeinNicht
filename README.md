@@ -126,6 +126,11 @@ Dann wird ein leeres itemsArray erstellt, das alle Dokumente in den Elementen du
 Die Funktion passwordUsernameValidation wird verwendet, um das Kennwort anhand des aktuellen Benutzernamens zu validieren. Die Funktion nimmt ein req.firestore Firestore-Objekt und einen Bezeichner als Parameter. Zunächst wird versucht, das Dokument mit der angegebenen ID aus der Firestore-Datenbank auszulesen. Wenn das Dokument nicht gefunden wird, wird false zurückgegeben.
 Andernfalls wird das Passwortobjekt aus dem Dokument genommen und mit der aktuellen username-Eigenschaft des req-Objekts verglichen. Bei Übereinstimmung gibt die Funktion true zurück, andernfalls false.
 
+![carbon (14)](https://user-images.githubusercontent.com/111282979/230162821-4c117801-5eee-42b8-ad46-375460f23a5c.png)
+
+Dieser Code definiert zwei Funktionen parseUser und parsePassword. Beide Funktionen werden verwendet, um Objekte mit bestimmten Eigenschaften zu extrahieren. Die Funktion parseUser extrahiert den Benutzernamen, das Passwort und die E-Mail-Adresse aus dem Benutzerobjekt und gibt ein neues Objekt mit diesen Eigenschaften zurück.
+Die Funktion parsePassword extrahiert die Eigenschaften username, description, password_encrypted und nonce aus dem Passwortobjekt und gibt ein neues Objekt mit diesen Eigenschaften zurück.
+
 
 
 
