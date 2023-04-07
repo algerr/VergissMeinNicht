@@ -1,7 +1,3 @@
-| a   | b | b |   | n |
-|:-----|:---|:---|:---|:---|
-| asd |   | w |   |   |
-
 # Inhaltsverzeichnis
 
 - [Blogeinträge](#blogeinträge)
