@@ -172,9 +172,10 @@ Diese Codezeile erstellt eine Firebase-Cloudfunktion, die als HTTP-Endpunkt dien
 
 | connections  |   |
 |---|---|
-| Benutzer  | guter_passant679  |
-| Passwort  |  Baumwolle12345 | 
-
+| Benutzer  | "guter_passant679"  |
+| Beschreibung |  "7834" | 
+| Sicherheitswert |  HJoi7w0q09h9028h20j1j2r012jm019t  | 
+| Verschlüsseltes Passwort | KpLI8S67jefi6d3NFRVZw+UHDkjUFP839z |
 
 
 
