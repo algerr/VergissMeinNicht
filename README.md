@@ -183,3 +183,5 @@ Diese Codezeile erstellt eine Firebase-Cloudfunktion, die als HTTP-Endpunkt dien
 
 
 
+
+
