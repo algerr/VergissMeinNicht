@@ -172,8 +172,8 @@ Diese Codezeile erstellt eine Firebase-Cloudfunktion, die als HTTP-Endpunkt dien
 
 | Sammlungen (VergissMeinNicht) | Dokumente (Benutzer)  | Felder (guter_passant679)  |
 |---|---|---|
-| Benutzer |guter_passant679, AndreasNikita909,NXKITAVATA4BIRA2                                                                                                          |benutzername: guter_passant679 ; <br /> email: guter_passant@gmail.com; <br /> passwort: HaMsterrad88 | 
-| Passwort | Hu9dGerT47+lIKBez62bV, Hbe83jdFrB4brk+Hdue38, Zudl09ASv5FbnB7Uq9JbY | benutzername: guter_passant679; Beschreibung: Twitter; sicherheitswert: NOKDefo5HgBef34fRG579; verschüsseltes Passwort: EL09jd83mBn34U5newoWSSwmf51 |
+| Benutzer |guter_passant679, <br />  AndreasNikita909, <br /> NXKITAVATA4BIRA2                                                                                                          |benutzername: guter_passant679 ; <br /> email: guter_passant@gmail.com; <br /> passwort: HaMsterrad88 | 
+| Passwort | Hu9dGerT47+lIKBez62bV, Hbe83jdFrB4brk+Hdue38, Zudl09ASv5FbnB7Uq9JbY | benutzername: guter_passant679; <br /> Beschreibung: Twitter; <br /> sicherheitswert: NOKDefo5HgBef34fRG579; <br /> verschüsseltes Passwort: EL09jd83mBn34U5newoWSSwmf51 |
 
 
 
