@@ -170,12 +170,11 @@ Die vierte Funktion, Daten löschen, ermöglicht Ihnen das Entfernen von Daten a
 
 Diese Codezeile erstellt eine Firebase-Cloudfunktion, die als HTTP-Endpunkt dient. Die API wird ausgeführt, wenn auf einen bestimmten Endpunkt zugegriffen wird. functions.https.onRequest ist eine Firebase Cloud Function, die als HTTP-Request-Handler fungiert. app ist ein Express-Objekt, das Routen und Handler für API-Endpunkte enthält. Zusammen bilden sie die Cloud-Funktionalität von Firebase, die HTTP-Anforderungen an in der Anwendung definierte Routen und Handler umleitet.
 
-| connections  |   |
-|---|---|
-| Benutzer  | "guter_passant679"  |
-| Beschreibung |  "7834" | 
-| Sicherheitswert |  HJoi7w0q09h9028h20j1j2r012jm019t  | 
-| Verschlüsseltes Passwort | KpLI8S67jefi6d3NFRVZw+UHDkjUFP839z |
+| Sammlungen  | Dokumente   | Felder |
+|---|---|---|
+| Benutzer | "guter_passant679" "AndreasNikita", "NXKITAVATA_BIRA" | Sicherheitswert |  HJoi7w0q09h9028h20j1j2r012jm019t  | 
+| Passwort | "7834", "Baustelle678", "HaMsterrad88"    |  Verschlüsseltes Passwort | KpLI8S67jefi6d3NFRVZw+UHDkjUFP839z |
+
 
 
 Firestore ist eine von Google entwickelte dokumentenorientierte NoSQL-Datenbank. Im Gegensatz zu relationalen Datenbanken (z. B. SQL-Datenbanken) hat Firestore keine Tabellen, Zeilen oder Spalten, stattdessen werden Daten in Dokumenten gespeichert, die in Sammlungen organisiert sind. Jedes Dokument enthält Felder und Werte, die als JSON-Objekt dargestellt werden. Dokumente in der Sammlung müssen keine festen Felder haben. Dokumente sind daher flexibler und skalierbarer als relationale Datenbanken.
