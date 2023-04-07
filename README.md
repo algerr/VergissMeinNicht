@@ -170,10 +170,10 @@ Die vierte Funktion, Daten löschen, ermöglicht Ihnen das Entfernen von Daten a
 
 Diese Codezeile erstellt eine Firebase-Cloudfunktion, die als HTTP-Endpunkt dient. Die API wird ausgeführt, wenn auf einen bestimmten Endpunkt zugegriffen wird. functions.https.onRequest ist eine Firebase Cloud Function, die als HTTP-Request-Handler fungiert. app ist ein Express-Objekt, das Routen und Handler für API-Endpunkte enthält. Zusammen bilden sie die Cloud-Funktionalität von Firebase, die HTTP-Anforderungen an in der Anwendung definierte Routen und Handler umleitet.
 
-| Sammlungen (VergissMeinNicht) | Dokumente (Benutzer)  | Felder  |
+| Sammlungen (VergissMeinNicht) | Dokumente (Benutzer)  | Felder (guter_passant679)  |
 |---|---|---|
 | Benutzer | "guter_passant679" "AndreasNikita", "NXKITAVATA_BIRA" |benutzername: "guter_passant679" ; email: "guter_passant@gmail.com"; passwort: "HaMsterrad88" | 
-| Passwort | "Baustelle678", "Hbe83jdFRB4brk+Hdue38", "ZudgveajfDIdIG45FfhIO783gfpg" | benutzername: "guter_passant679"; Beschreibung: "7834"; sicherheitswert: "NOKDefo5HgBef34fRG579"; verschüsseltes Passwort: "EPfrgrgrgIOPEFejnfuefoeufipeäafefübgrügCIRPVRBrhrü" |
+| Passwort | "Baustelle678", "Hbe83jdFrB4brk+Hdue38", "Zudgveajf4Hi8KcefhIO783gfpg" | benutzername: "guter_passant679"; Beschreibung: "7834"; sicherheitswert: "NOKDefo5HgBef34fRG579"; verschüsseltes Passwort: "EL09jd83mBn34U5newoWSSwmf51" |
 
 
 
