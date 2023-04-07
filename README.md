@@ -184,7 +184,7 @@ Firestore bietet verschiedene Funktionen zum Schreiben, Lesen, Aktualisieren und
 
 ![carbon (17)](https://user-images.githubusercontent.com/111282979/230663349-6f15f7f9-8909-43fb-8b54-ae5ad715564b.png)
 
-In dem folgenden Bild sind die Operationen in Codeform zu erkennen. Der gegebene Code zeigt die Funktionen zum Schreiben, Lesen, Aktualisieren und Löschen von Daten in Firestore. Die Funktion datenHinzufuegen fügt Daten in eine Sammlung hinzu und kann eine ID für das Dokument festlegen oder automatisch eine zufällige ID erstellen. Die Funktion datenLesen liest Daten aus einem Dokument mit einer bestimmten ID in einer Sammlung. Die Funktion datenAktualisieren aktualisiert Daten in einem Dokument mit einer bestimmten ID in einer Sammlung. Die Funktion datenLoeschen löscht Daten aus einem Dokument mit einer bestimmten ID in einer Sammlung.
+In dem folgenden Bild sind die Operationen in Codeform zu erkennen. Der angegebene Code demonstriert die Fähigkeit, Daten in Firestore zu schreiben, zu lesen, zu aktualisieren und zu löschen. Die adddata-Funktion fügt der Sammlung Daten hinzu und kann die ID des Dokuments festlegen oder automatisch eine zufällige ID generieren. Die readdata-Funktion liest Daten aus einem Dokument mit einer bestimmten ID innerhalb einer Sammlung. Die updatedata-Funktion aktualisiert die Daten im Dokument mit der angegebenen ID in der Sammlung. Die Funktion „deletedata“ löscht Daten aus einem Dokument mit einer bestimmten ID in einer Sammlung.
 
 
 
