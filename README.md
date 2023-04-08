@@ -159,7 +159,21 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 
    <details>
    <summary><h2>Der ReduxStore</h2></summary>
+   
+   <details>
+   <summary><h3>Der Erzeuger der Aktion</h3></summary>
+   <hr>
+   </details>
       
+    ## Die Aktionstypen
+    
+    ## Die Authentifizierung
+      
+    ## Das Modalfenster
+      
+    ## Die Passwörter
+    
+
    
    
    
