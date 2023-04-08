@@ -113,10 +113,11 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <details>
    <summary><h3>Die Passwörter</h3></summary>
    ## Der EingabeBereich 
-      
+   In diesem Bereich legt man sein Masterpasswort fest, welches die anderen Passwörter schützen soll, indem es diese verschlüsselt. Der Eingabebereich befindet sich      links über dem Feld, wo mann ein neues Passwort festlegen kann.  
    
    
    ## Ein neues Passwort hinzufügen
+   Unten links hat man die Option seine Passwörter, die man bereits z.B. für die einzelnen Social Media Accounts festgelegt hat, einzugeben. Neben der Eingabe des        Passwort gibt es das zusätliche Feld "Beschreibung", in welchem man hinzufügt, wofür das Passwort ist. Mann kann also in die Beschreibung "Twitter" schreiben, damit    man anschließend weiß, dass das Passwort für den Twitter Account ist. Wenn man dann nun das Feld für die Beschreibung und das Passwort ausgefüllt hat, drückt man      auf das Feld "Speichern", um seine Eingabe zu bestätigen. Die festgelegt Passwörter werden dann sobald das Masterpasswort nicht mehr eingegeben ist, verschlüsselt.
    
    ## Die Passwortanzeige
    <hr>
@@ -146,6 +147,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <details>
    <summary><h2>Die Hilfsfunktionen</h2></summary>
    ## Die Verschlüsselung
+   Die Verschlüsselung seiner aufgelisteten Passwörter erfolgt genau dann, wenn das festgelegte Passwort nicht mehr eingegeben ist. Die eigentlichen Passwörter werden    dann verschlüsselt, indem an der Stelle des Passworts eine lange Kombination aus Zahlen, Buchstaben und Zeichen dort auftritt. Wenn man das Masterpasswort wieder in    das Eingabefeld einfügt, dann werden wieder automatisch die aufgelisteten Passwörter entschlüsselt.
       
    ## Der Server 
       
