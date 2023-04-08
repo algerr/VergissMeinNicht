@@ -21,24 +21,24 @@ module.exports = (req, res, next) => {
         return next()
     }
 
-    let decodedToken
+    let entschluesseltesToken
     try {
-        // Verifizieren des Tokens und Dekodieren der Daten (z.B. Benutzername)
-        decodedToken = jwt.verify(token, process.env.TOKEN_SECRET)
+        // Verifizieren des Tokens und entschluesseln der Daten (z.B. Benutzername)
+        entschluesseltesToken = jwt.verify(token, process.env.TOKEN_SECRET)
     } catch (error) {
-        // Wenn das Verifizieren fehlschlägt, ist der Benutzer nicht authentifiziert
+        // Wenn das Verifizieren fehlschlägt, ist der Benutzer nicht authentifiziert.
         req.authentifizierungsUeberpruefung = false
         return next()
     }
 
-    if(!decodedToken) {
-        // Wenn kein dekodiertes Token vorhanden ist, ist der Benutzer nicht authentifiziert
+    if(!entschluesseltesToken) {
+        // Wenn kein dekodiertes Token vorhanden ist, ist der Benutzer nicht authentifiziert.
         req.authentifizierungsUeberpruefung = false
         return next()
     }
 
-    // Wenn alles erfolgreich war, ist der Benutzer authentifiziert und der Benutzername wird der Anfrage hinzugefügt
+    // Wenn alles erfolgreich war, ist der Benutzer authentifiziert und der Benutzername wird der Anfrage hinzugefügt.
     req.authentifizierungsUeberpruefung = true
-    req.benutzername = decodedToken.benutzername
+    req.benutzername = entschluesseltesToken.benutzername
     next()
 }
