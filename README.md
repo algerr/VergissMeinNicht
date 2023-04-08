@@ -3,12 +3,14 @@
 
 https://user-images.githubusercontent.com/65679099/230721605-d894c2f3-10a2-4caa-b00d-018e8061457d.mp4
 
-Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.app/
+# VergissMeinNicht
+Sind Sie genervt von der ewigen Suche nach dem Passwort? Wir haben die Lösung!
+
+Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser Hauptziel, bis zu den Osterferien einen Passwortmanager zu entwickeln, der es den Internetnutzern erleichtern soll, den richtigen Umgang mit den von ihnen genutzten Plattformen zu erlernen. Vor allem sollte den Menschen ab sofort Sicherheit geboten werden, damit Hacker kaum noch eine Chance haben, Daten von anderen zu stehlen. Gerade Unternehmen, die mit mehreren Passwörtern im Internet arbeiten, können von einer solchen Idee sehr profitieren. Auch dass es ein Tool geben sollte, das von sich aus Passwörter generiert, die absolut sicher sind, wäre nur von Vorteil. Die erste Grundidee war also, ein Passwort zu generieren, welches die anderen Passwörter, die man hat, durch Verschlüsselung schützt. Insofern sollte dieses Konzept der 2FA-Authentifizierung ähneln, die ebenfalls eine weit verbreitete Möglichkeit ist, Daten bzw. Konten zu schützen, indem eine zusätzliche Sicherheitsmaßnahme wie eine Bestätigung per E-Mail eingebaut wird. 
 
 # Inhaltsverzeichnis
 
 - [Das Stundenprotokoll](#das-stundenprotokoll)
-- [VergissMeinNicht](#vergissmeinnicht)
 - [Planskizzen](#planskizzen)
    - [Hauptseite](#hauptseite)
    - [Der Login](#der-login)
@@ -30,11 +32,6 @@ Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.a
 # Das Stundenprotokoll
 
 [Zum Stundenprotokoll](https://github.com/algerr/blogeintraege-2)
-
-# VergissMeinNicht
-Sind Sie genervt von der ewigen Suche nach dem Passwort? Wir haben die Lösung!
-
-Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser Hauptziel, bis zu den Osterferien einen Passwortmanager zu entwickeln, der es den Internetnutzern erleichtern soll, den richtigen Umgang mit den von ihnen genutzten Plattformen zu erlernen. Vor allem sollte den Menschen ab sofort Sicherheit geboten werden, damit Hacker kaum noch eine Chance haben, Daten von anderen zu stehlen. Gerade Unternehmen, die mit mehreren Passwörtern im Internet arbeiten, können von einer solchen Idee sehr profitieren. Auch dass es ein Tool geben sollte, das von sich aus Passwörter generiert, die absolut sicher sind, wäre nur von Vorteil. Die erste Grundidee war also, ein Passwort zu generieren, welches die anderen Passwörter, die man hat, durch Verschlüsselung schützt. Insofern sollte dieses Konzept der 2FA-Authentifizierung ähneln, die ebenfalls eine weit verbreitete Möglichkeit ist, Daten bzw. Konten zu schützen, indem eine zusätzliche Sicherheitsmaßnahme wie eine Bestätigung per E-Mail eingebaut wird. 
 
 <details>
   <summary>Planskizzen ansehen</summary>
