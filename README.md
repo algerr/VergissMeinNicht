@@ -102,80 +102,42 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Sollte der Nutzer jedoch noch keinen Account bei VergissMeinNicht besitzen, wird ihm die Möglichkeit geboten, über einen Klick auf die Schaltfläche 'Registrieren' zur Registrierung zu gelangen und sich dort einen Account anlegen zu können.
    Wenn der Nutzer sowohl seinen Benutzernamen, als auch sein Passwort richtig eingegeben hat, wird er auf die Startseite des Passwortmanagers weitergeleitet.
    
-   ## Das Admin-Panel
-      
-   ## Der Authentifizierungs Weg
+   ## Die Registrierung
    
-   ## Das zentrierte Modal
-   
-   <details>
-   <summary><h3>Items</h3></summary>
-   <hr>
-   </details>
-   
-   ## Das neue Hinzufügen 
-   
-   ## Die Items
-    
-   ## Der linke Inhalt
-      
-   ## Das Passwort Display
-   
-   <details>
-   <summary><h3>Login</h3></summary>
-   <hr>
-   </details>
-   
-   ## Der Login
-      
-   ## Der Still
-      
-   ## Das nicht gefundene
+   ## Die Startseite
       
    <details>
-   <summary><h3>Registrieren</h3></summary>
+   <summary><h3>Die Passwörter</h3></summary>
+   
+   ## Der EingabeBereich
+   
+   ## Ein neues Passwort hinzufügen
+   
+   ## Die Passwortanzeige
+   
    <hr>
    </details>
+      
+   ## Die Benutzerauthentifizierung
+   
+   ## Das zentrierte Modalfenster
+   
+   ## Das obere Modalfenster
    
    ## Das Registrieren
-      
-   ## Der Still
-   
-   <details>
-   <summary><h3>Seitenleiste</h3></summary>
-   <hr>
-   </details>
     
    ## Die Seitenleiste
-      
-   ## Der Still
-      
    
-   <details>
-   <summary><h3>Tabelle</h3></summary>
-   <hr>
-   </details>
-      
    ## Die Tabelle
-   
-   ## Der Still
-      
-   ## Das obere Modal
-      
     
    <details>
-   <summary><h3>Benutzerprofil</h3></summary>
+   <summary><h3>Die Accounteinstellungen</h3></summary>
    <hr>
    </details>
       
    ## Die Passwortänderung
       
    ## Die Aktualisierung der Emailadresse 
-      
-   ## Das Benutzerprofil 
-      
-   
-      
       
 
    </details>
