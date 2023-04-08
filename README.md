@@ -22,12 +22,6 @@ Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.a
    - [Die Aktualisierung der Emailadresse](#die-aktualisierung-der-emailadresse)
    - [Das Ändern des Passwortes](#das-aendern-des-passwortes)
    - [Das Löschen des Accounts](#das-loeschen-des-accounts)
-   - [Der Sicherheitsschritt](#der-sicherheitsschritt)
-   - [Die Löschung von Datensätzen in der Firebase](#die-loesung-von-datensätzen-in-der-firebase)
-   - [Die Aktualisierung](#die-aktualisierung)
-   - [Der Zugriff auf die Passwörter](#der-zugriff-auf-die-passwörter)
-   - [Die Extrahierung einzelner Kontoeigenschaften](#die-extrahierung-einzelner-kontoeigenschaften)
-   - [Die Datenverwaltung](#die-datenverwaltung)
    - [Die Firebase-Cloudfunktion](#die-firebase-cloudfunktion)
 
 # Blogeinträge
@@ -123,55 +117,6 @@ Dieser Code ist die Funktion zum Löschen des Benutzerkontos.
 Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Andernfalls wird eine Fehlermeldung zurückgegeben.
 Anschließend wird eine Abfrage an die Firestore-Datenbank gesendet, um alle Passwörter abzurufen, die dem Benutzer gehören, dessen Konto gelöscht wird. Anschließend wird für jedes Dokument die Methode .delete() aufgerufen, um Einträge aus der Sammlung „Passwords“ zu entfernen.
 Die Funktion deleteata() wird dann aufgerufen, um den Benutzer aus der Sammlung "Benutzer" zu entfernen. Abschließend wird eine Erfolgsmeldung mit dem Statuscode 200 zurückgegeben.
-
-## Der Sicherheitsschritt
-
-![carbon (10)](https://user-images.githubusercontent.com/111282979/230160241-9bbd6e2f-15b1-4392-be47-b872b41b6e5f.png)
-
-Dieses Snippet definiert eine Funktion namens add, die eine HTTP-POST-Anforderung an einen bestimmten Endpunkt verarbeitet. Die Funktion zum Speichern des neuen Passworts für den aktuell authentifizierten Benutzer in der Datenbank. Zunächst prüft die Funktion, ob der Benutzer authentifiziert ist. Andernfalls wird eine Fehlermeldung zurückgegeben und die Funktion beendet. Als nächstes wird ein Datenvalidierungsschema definiert, das erforderliche Felder für das Passwort enthält, nämlich Beschreibung, verschlüsseltes Passwort und Validierungsnachricht.
-Die Funktion extrahiert diese Daten dann aus dem Text der HTTP-Anforderung und verifiziert sie anhand des zuvor definierten Schemas. Schlägt der Test fehl, wird eine Fehlermeldung zurückgegeben und die Funktion beendet.
-Wenn die Authentifizierung erfolgreich ist, wird ein neues Kennwortobjekt in der Datenbank erstellt und das neue Kennwort als Antwort zurückgegeben. Die Antwort enthält auch eine Erfolgsmeldung.
-Die Funktion verwendet verschiedene Hilfsfunktionen wie firestoreWrite, um Daten in die Datenbank zu schreiben.
-
-## Die Löschung von Datensätzen in der Firebase 
-
-![carbon (11)](https://user-images.githubusercontent.com/111282979/230160847-b3c8428a-e329-49de-ab84-fcdbd7440786.png)
-
-Diese Funktion ist für das Löschen von Datensätzen in Firebase verantwortlich. Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Es prüft dann, ob der übergebene Parameter für die Passwort-ID gültig ist. Wenn der Benutzer nicht der Eigentümer des gelöschten Elements ist, wird ein Fehler zurückgegeben. Schließlich wird eine Funktion aufgerufen, um den Eintrag mit der übergebenen Passwort-ID aus der Datenbank zu entfernen. Wenn das Löschen erfolgreich war, wird eine Erfolgsmeldung zurückgegeben.
-
-## Die Aktualisierung
-
-![carbon (12)](https://user-images.githubusercontent.com/111282979/230161692-40e98031-1e9f-4995-9559-4ec7e2e98459.png)
-
-Der Code definiert eine Funktion namens "update", die, wenn sie aufgerufen wird, ein Objekt mit Anforderungs- und Antwortinformationen erwartet.
-Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Andernfalls wird eine Fehlermeldung an den Client gesendet.
-Als Nächstes wird ein Authentifizierungsschema definiert, das die Validierung von vier Attributen erfordert: Beschreibung, Verschlüsselungskennwort, authNonce und Kennwort-ID. Description,crypted_password und authNonce werden aus dem Anforderungstext entnommen und passwordId wird aus den Anforderungsparametern entnommen. Die Schemavalidierung erfolgt durch Aufrufen der „validate“-Methode in Joi, einem Validierungsframework. Wenn der Test fehlschlägt, wird eine Fehlermeldung an den Client zurückgegeben. Es wird dann überprüft, ob das Passwort mit dem aktuellen Benutzernamen übereinstimmt. Andernfalls wird eine Fehlermeldung an den Client zurückgesendet. Schließlich wird firestoreUpdate aufgerufen, um das Kennwort in der Firestore-Datenbank zu aktualisieren. Eine Bestätigungsnachricht wird an den Client zurückgesendet.
-
-## Der Zugriff auf die Passwörter
-
-![carbon (13)](https://user-images.githubusercontent.com/111282979/230162236-fd8978e3-dd47-4422-840d-eb2b36bb556f.png)
-
-Die Funktion getAll wird aufgerufen, um alle Passwörter eines bestimmten Benutzers aus der Datenbank abzurufen. Der Benutzer muss authentifiziert werden, um diese Funktion auszuführen, andernfalls wird ein Fehler zurückgegeben. Die Funktion sucht nach allen Dokumenten in der Sammlung "Passwörter", deren Feld "Benutzername" mit dem authentifizierten Benutzernamen übereinstimmt, und gibt sie als Einträge zurück.
-Dann wird ein leeres itemsArray erstellt, das alle Dokumente in den Elementen durchläuft, und jedes Element wird mit dem ID-Feld und allen anderen Feldern im Dokument in ein Objekt konvertiert und dem itemsArray hinzugefügt. Schließlich wird das itemsArray als Antwort an den Client zurückgegeben.
-Die Funktion passwordUsernameValidation wird verwendet, um das Kennwort anhand des aktuellen Benutzernamens zu validieren. Die Funktion nimmt ein req.firestore Firestore-Objekt und einen Bezeichner als Parameter. Zunächst wird versucht, das Dokument mit der angegebenen ID aus der Firestore-Datenbank auszulesen. Wenn das Dokument nicht gefunden wird, wird false zurückgegeben.
-Andernfalls wird das Passwortobjekt aus dem Dokument genommen und mit der aktuellen username-Eigenschaft des req-Objekts verglichen. Bei Übereinstimmung gibt die Funktion true zurück, andernfalls false.
-
-## Die Extrahierung einzelner Kontoeigenschaften
-
-![carbon (14)](https://user-images.githubusercontent.com/111282979/230162821-4c117801-5eee-42b8-ad46-375460f23a5c.png)
-
-Dieser Code definiert zwei Funktionen parseUser und parsePassword. Beide Funktionen werden verwendet, um Objekte mit bestimmten Eigenschaften zu extrahieren. Die Funktion parseUser extrahiert den Benutzernamen, das Passwort und die E-Mail-Adresse aus dem Benutzerobjekt und gibt ein neues Objekt mit diesen Eigenschaften zurück.
-Die Funktion parsePassword extrahiert die Eigenschaften username, description, password_encrypted und nonce aus dem Passwortobjekt und gibt ein neues Objekt mit diesen Eigenschaften zurück.
-
-## Die Datenverwaltung
-
-![carbon (15)](https://user-images.githubusercontent.com/111282979/230163584-b22e0256-0d82-45dd-88a1-f11712df5786.png)
-
-Dieser Code ist eine Reihe von JavaScript-Funktionen, die zum Erstellen, Lesen, Aktualisieren und Löschen (CRUD) in der Google Cloud Platform Firestore-Datenbank verwendet werden können.
-Die erste Funktion, adddata, ermöglicht das Hinzufügen von Daten zu einer Firestore-Sammlung. Überprüft, ob für das Dokument eine ID angegeben ist. Wenn dies der Fall ist, werden die Daten mit der angegebenen ID in die Sammlung eingefügt. Andernfalls wird das Dokument automatisch mit einer eindeutigen ID generiert.
-Die zweite Funktion, readdata, ermöglicht es Ihnen, Daten aus der Firestore-Sammlung basierend auf der Dokument-ID zu lesen. Dokumentfelder werden im JSON-Format zurückgegeben.
-Mit der dritten Funktion, updatedata, können Sie die Daten im Dokument der Firestore-Sammlung aktualisieren. Dazu ist es erforderlich, die Dokument-ID zu aktualisieren und die alten Felder mit aktualisierten Daten zu überschreiben.
-Die vierte Funktion, Daten löschen, ermöglicht Ihnen das Entfernen von Daten aus Dokumenten in der Firestore-Sammlung basierend auf der Dokument-ID. Alle Funktionen arbeiten mit der Firestore-Instanzdatenbank und einer Reihe von Sammlungsnamen. Sie verwenden die Befehle add, doc, get, update und delete von Firestore, um ihre jeweiligen Operationen auszuführen.
 
 ## Die Firebase-Cloudfunktion
 
