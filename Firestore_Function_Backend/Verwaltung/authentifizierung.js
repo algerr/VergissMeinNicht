@@ -115,8 +115,8 @@ exports.anmeldung = async (req, res) => {
 // Der Benutzer soll auch die Möglichkeit haben, sein Passwort aktualisieren zu können.
 exports.passwortAktualisieren = async (req, res) => {
     // Dafuer ist erstmal wichtig, dass der Benutzer in dem Moment autorisiert ist.
-    // Wie die Autorisierungsabfrage "isAuth" genau funktioniert, wird in "../Vermittlung/authentifizierungsUeberpruefung" erklärt.
-    if (!req.isAuth) {
+    // Wie die Autorisierungsabfrage "authentifizierungsUeberpruefung" genau funktioniert, wird in "../Vermittlung/authentifizierungsUeberpruefung" erklärt.
+    if (!req.authentifizierungsUeberpruefung) {
         return res.status(400).send({ status: 0, message: "Nicht autorisiert." })
     }
 
@@ -166,8 +166,8 @@ exports.passwortAktualisieren = async (req, res) => {
 // Der Benutzer soll auch die Möglichkeit haben, seine Email aktualisieren zu können.
 exports.emailAktualisieren = async (req, res) => {
     // Dafuer ist erstmal wichtig, dass der Benutzer in dem Moment autorisiert ist.
-    // Wie die Autorisierungsabfrage "isAuth" genau funktioniert, wird in "../zwischenapp/isAuth" erklärt.
-    if (!req.isAuth) {
+    // Wie die Autorisierungsabfrage "authentifizierungsUeberpruefung" genau funktioniert, wird in "../Vermittlung/authentifizierungsUeberpruefung" erklärt.
+    if (!req.authentifizierungsUeberpruefung) {
         return res.status(400).send({ status: 0, message: "Nicht autorisiert!" })
     }
 
@@ -194,18 +194,27 @@ exports.emailAktualisieren = async (req, res) => {
     return res.status(200).send({ status: 1, token })
 }
 
+// Der Benutzer soll gewiss auch seinen Account löschen können.
 exports.accountLoeschen = async (req, res) => {
-    if (!req.isAuth) {
-        return res.status(400).send({ status: 0, message: "Nicht authentifiziert" })
+    
+    // Dafür muss auf jeden Fall sichergestellt werden, dass der Benutzer authentifiziert ist.
+    if (!req.authentifizierungsUeberpruefung) {
+        // Wenn dies nicht der Fall ist, wird eine Fehlermeldung zurückgegeben.
+        return res.status(400).send({ status: 0, message: "Nicht autorisiert!" })
     }
 
-    const items = await req.firestore.collection("Passwoerter").where("benutzername", "==", req.benutzername).get()
-    items.forEach(async doc => {
+    // Wenn der Nutzer jedoch authentifiziert ist, diese Aktion auszuführen, werden zuerst alle Passwörter gelöscht, die auf den
+    // Namen dieses Benutzers in der Datenbank gespeichert sind.
+    const passwoerter = await req.firestore.collection("passwoerter").where("benutzername", "==", req.benutzername).get()
+    passwoerter.forEach(async doc => {
         await doc.ref.delete()
     })
 
+    // Daraufhin wird auch der Benutzer aus der Datenbank gelöscht und somit sind alle Daten zu diesem Benutzer und auch
+    // der Account selbst permanent gelöscht.
     await datenLoeschen(req.firestore, 'benutzer', req.benutzername)
     
+    // Der Status 1 wird zurückgegeben, da das Löschen problemlos funktioniert hat. (Status 200 (OK)).
     return res.status(200).send({
         status: 1,
     })
