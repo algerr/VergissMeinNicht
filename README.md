@@ -19,7 +19,9 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
    - [Die Kommunikation mit dem Firestore](#die-kommunikation-mit-dem-firestore)
    - [Vergleich zur 2-Faktor-Authentifizierung](#vergleich-zur-2-faktor-authentifizierung)
 - [Das Frontend](#das-frontend)
-- 
+   - [Die Komponenten](#die-komponenten)
+   - [Die Hilfsfunktionen](#die-hilsfunktionen)
+   - [Der Redux-Store](#der-redux-store)
 - [Das Backend](#das-backend)
    - [Die Anmeldung](#die-anmeldung)
    - [Die Registrierung](#die-registrierung)
@@ -32,6 +34,10 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
 # Das Stundenprotokoll
 
 [Zum Stundenprotokoll](https://github.com/algerr/blogeintraege-2)
+
+
+
+
 
 <details>
    <summary><h1>Die Planskizzen</h1></summary>
@@ -79,6 +85,41 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
 </details>
 <hr>
+
+
+<details>
+   <summary><h1>Das Frontend</h1></summary>
+   
+   <details>
+   <summary><h2>Die Komponenten</h2></summary>
+   
+      ##
+   
+   </details>
+   <hr>
+   
+   <details>
+   <summary><h2>Die Hilfsfunktionen</h2></summary>
+   
+      ##
+   
+   </details>
+   <hr>
+   
+   <details>
+   <summary><h2>Der Redux-Store</h2></summary>
+   
+      ##
+   
+   </details>
+   <hr>
+   
+</details>
+<hr>
+
+
+
+
 
 
 
