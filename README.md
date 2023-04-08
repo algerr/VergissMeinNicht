@@ -7,7 +7,7 @@ Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.a
 
 # Inhaltsverzeichnis
 
-- [Blogeinträge](#blogeinträge)
+- [Das Stundenprotokoll](#das-stundenprotokoll)
 - [VergissMeinNicht](#vergissmeinnicht)
 - [Planskizzen](#planskizzen)
    - [Hauptthema](#hauptthema)
@@ -24,18 +24,9 @@ Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.a
    - [Das Löschen des Accounts](#das-loeschen-des-accounts)
    - [Die Firebase-Cloudfunktion](#die-firebase-cloudfunktion)
 
+# Das Stundenprotokoll
 
-<details>
-  <summary>Click to expand</summary>
-
-  ## This is a collapsible header
-
-  This is the content that will be hidden and revealed when the header is collapsed and expanded.
-</details>
-
-# Blogeinträge
-
-[Zu den Blogeinträgen](https://github.com/algerr/blogeintraege-2)
+[Zum Stundenprotokoll](https://github.com/algerr/blogeintraege-2)
 
 # VergissMei Nicht
 Sind Sie genervt von der ewigen Suche nach dem Passwort? Wir haben die Lösung!
