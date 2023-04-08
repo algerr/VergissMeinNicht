@@ -20,6 +20,7 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
    - [Vergleich zur 2-Faktor-Authentifizierung](#vergleich-zur-2-faktor-authentifizierung)
 - [Das Frontend](#das-frontend)
    - [Die Komponenten](#die-komponenten)
+      - [Die Anmeldung](#die-anmeldung)
    - [Die Hilfsfunktionen](#die-hilsfunktionen)
    - [Der Redux-Store](#der-redux-store)
 - [Das Backend](#das-backend)
@@ -94,7 +95,9 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <details>
    <summary><h2>Die Komponenten</h2></summary>
 
-      ##
+      ## Die Anmeldung
+      
+      
 
    </details>
    <hr>
