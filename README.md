@@ -23,6 +23,7 @@ Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.a
    - [Das Ändern des Passwortes](#das-aendern-des-passwortes)
    - [Das Löschen des Accounts](#das-loeschen-des-accounts)
    - [Die Firebase-Cloudfunktion](#die-firebase-cloudfunktion)
+- [Authoren](#authoren)
 
 # Das Stundenprotokoll
 
@@ -144,7 +145,7 @@ In dem folgenden Bild sind die Operationen in Codeform zu erkennen. Der angegebe
 
 
 
-## Authors
+## Authoren
 
 - [Laurenz Brause](https://www.github.com/algerr)
 - [Daniel Pauli](https://github.com/daniel10011011)
