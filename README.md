@@ -108,7 +108,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
       
    <details>
    <summary><h3>Die Passwörter</h3></summary>
-   ## Der EingabeBereich
+   ## Der EingabeBereich 
    
    ## Ein neues Passwort hinzufügen
    
