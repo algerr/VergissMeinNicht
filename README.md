@@ -184,7 +184,13 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <details>
    <summary><h2>Die Hilfsfunktionen</h2></summary>
 
-      ##
+    ## Das Krypto 
+      
+    ## Der Server 
+      
+    ## Das Zeichen 
+      
+     
 
    </details>
    <hr>
