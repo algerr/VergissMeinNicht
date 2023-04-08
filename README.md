@@ -34,9 +34,7 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
 [Zum Stundenprotokoll](https://github.com/algerr/blogeintraege-2)
 
 <details>
-  <summary>Planskizzen ansehen</summary>
-
-   # Planskizzen
+   <summary><h2>Planskizzen ansehen</h2></summary>
    
 ## Hauptseite
 
