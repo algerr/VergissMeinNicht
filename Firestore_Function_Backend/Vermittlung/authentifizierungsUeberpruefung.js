@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
 
     // Wenn kein Authorization-Header vorhanden ist, ist der Benutzer nicht authentifiziert
     if (!authorizationHeader) {
-        req.isAuth = false
+        req.authentifizierungsUeberpruefung = false
         return next()
     }
 
@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
     const token = authorizationHeader.split(' ')[1]
     if (!token || token === '') {
         // Wenn kein Token vorhanden ist, ist der Benutzer nicht authentifiziert
-        req.isAuth = false
+        req.authentifizierungsUeberpruefung = false
         return next()
     }
 
@@ -27,18 +27,18 @@ module.exports = (req, res, next) => {
         decodedToken = jwt.verify(token, process.env.TOKEN_SECRET)
     } catch (error) {
         // Wenn das Verifizieren fehlschlägt, ist der Benutzer nicht authentifiziert
-        req.isAuth = false
+        req.authentifizierungsUeberpruefung = false
         return next()
     }
 
     if(!decodedToken) {
         // Wenn kein dekodiertes Token vorhanden ist, ist der Benutzer nicht authentifiziert
-        req.isAuth = false
+        req.authentifizierungsUeberpruefung = false
         return next()
     }
 
     // Wenn alles erfolgreich war, ist der Benutzer authentifiziert und der Benutzername wird der Anfrage hinzugefügt
-    req.isAuth = true
+    req.authentifizierungsUeberpruefung = true
     req.benutzername = decodedToken.benutzername
     next()
 }
