@@ -172,7 +172,19 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
     ## Das Modalfenster
       
     ## Die Passwörter
+      
+   <details>
+   <summary><h3>Der Reduzierer</h3></summary>
+   <hr>
+   </details>
     
+   ## Die Authentifizierung
+      
+   ## Das Modalfenster
+      
+   ## Die Passwörter
+      
+   ## Der Reduxstore
 
    
    
