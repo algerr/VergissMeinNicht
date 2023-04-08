@@ -102,60 +102,60 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Sollte der Nutzer jedoch noch keinen Account bei VergissMeinNicht besitzen, wird ihm die Möglichkeit geboten, über einen Klick auf die Schaltfläche 'Registrieren' zur Registrierung zu gelangen und sich dort einen Account anlegen zu können.
    Wenn der Nutzer sowohl seinen Benutzernamen, als auch sein Passwort richtig eingegeben hat, wird er auf die Startseite des Passwortmanagers weitergeleitet.
    
-   ## Die Registrierung
-   
-   ## Die Startseite
-      
    <details>
-   <summary><h3>Die Passwörter</h3></summary>
-   
-   ## Der EingabeBereich
-   
-   ## Ein neues Passwort hinzufügen
-   
-   ## Die Passwortanzeige
-   
+   <summary><h3>Accounteinstellungen</h3></summary>
    <hr>
    </details>
       
-   ## Die Benutzerauthentifizierung
+   ## Die Accounteinstellungen
    
-   ## Das zentrierte Modalfenster
+   ## Die Aktualisierung der Email 
+   
+   ## Die Passwortänderung
+   
+   <details>
+   
+   ## Die Benutzerauthentifizierung
    
    ## Das obere Modalfenster
    
-   ## Das Registrieren
+   <summary><h3>Passwörter</h3></summary>
+   <hr>
+   </details>
+   
+   ## Der Eingabebereich
+   
+   ## Das Hinzufügen eines neuen Passworts
     
+   ## Die Passwörter
+      
+   ## Die Anzeige des Passworts
+   
+   </details>
+   
+   ## Die Registrierung 
+   
+   ## Das Routenfenster 
+   
    ## Die Seitenleiste
    
-   ## Die Tabelle
-    
-   <details>
-   <summary><h3>Die Accounteinstellungen</h3></summary>
-   <hr>
-   </details>
-      
-   ## Die Passwortänderung
-      
-   ## Die Aktualisierung der Emailadresse 
-      
-
-   </details>
-   <hr>
+   ## Die Startseite 
+   
+   ## Die Tabelle 
+   
+   ## Das zentrierte Modalfenster 
 
    <details>
    <summary><h2>Die Hilfsfunktionen</h2></summary>
 
-    ## Das Krypto 
+    ## Die Verschlüsselung 
       
     ## Der Server 
       
-    ## Das Zeichen 
+    ## Das Token 
       
-     
-
-   </details>
-   <hr>
+     <details> 
+     <hr> 
 
    <details>
    <summary><h2>Der Redux-Store</h2></summary>
