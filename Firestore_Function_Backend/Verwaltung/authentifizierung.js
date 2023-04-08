@@ -115,7 +115,7 @@ exports.anmeldung = async (req, res) => {
 // Der Benutzer soll auch die Möglichkeit haben, sein Passwort aktualisieren zu können.
 exports.passwortAktualisieren = async (req, res) => {
     // Dafuer ist erstmal wichtig, dass der Benutzer in dem Moment autorisiert ist.
-    // Wie die Autorisierungsabfrage "isAuth" genau funktioniert, wird in "../zwischenapp/isAuth" erklärt.
+    // Wie die Autorisierungsabfrage "isAuth" genau funktioniert, wird in "../Vermittlung/authentifizierungsUeberpruefung" erklärt.
     if (!req.isAuth) {
         return res.status(400).send({ status: 0, message: "Nicht autorisiert." })
     }
