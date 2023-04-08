@@ -34,7 +34,7 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
 [Zum Stundenprotokoll](https://github.com/algerr/blogeintraege-2)
 
 <details>
-   <summary><h2>Planskizzen ansehen</h2></summary>
+   <summary><h1>Planskizzen ansehen</h1></summary>
    
 ## Hauptseite
 
@@ -78,7 +78,10 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 <img width="375" alt="image" src="https://user-images.githubusercontent.com/65679099/230047871-1663e6fb-b793-4c72-8bbc-32c5ef511c72.png">
    
 </details>
-   
+
+<details>
+   <summary><h1>Das Backend</h1></summary>
+
 ## Die Anmeldung
 
 ![Anmeldung](https://user-images.githubusercontent.com/65679099/230729167-a9b3ef5b-ee1a-45a5-8549-1713399c4bb7.png)
@@ -142,7 +145,7 @@ Firestore bietet verschiedene Funktionen zum Schreiben, Lesen, Aktualisieren und
 
 In dem folgenden Bild sind die Operationen in Codeform zu erkennen. Der angegebene Code demonstriert die Fähigkeit, Daten in Firestore zu schreiben, zu lesen, zu aktualisieren und zu löschen. Die adddata-Funktion fügt der Sammlung Daten hinzu und kann die ID des Dokuments festlegen oder automatisch eine zufällige ID generieren. Die readdata-Funktion liest Daten aus einem Dokument mit einer bestimmten ID innerhalb einer Sammlung. Die updatedata-Funktion aktualisiert die Daten im Dokument mit der angegebenen ID in der Sammlung. Die Funktion „deletedata“ löscht Daten aus einem Dokument mit einer bestimmten ID in einer Sammlung.
 
-
+</details>
 
 ## Authoren
 
