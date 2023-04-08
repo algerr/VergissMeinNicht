@@ -109,7 +109,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    ## Das zentrierte Modal
    
    <details>
-   <summary><h3>items</h3></summary>
+   <summary><h3>Items</h3></summary>
    <hr>
    </details>
    
@@ -120,6 +120,61 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    ## Der linke Inhalt
       
    ## Das Passwort Display
+   
+   <details>
+   <summary><h3>Login</h3></summary>
+   <hr>
+   </details>
+   
+   ## Der Login
+      
+   ## Der Still
+      
+   ## Das nicht gefundene
+      
+   <details>
+   <summary><h3>Registrieren</h3></summary>
+   <hr>
+   </details>
+   
+   ## Das Registrieren
+      
+   ## Der Still
+   
+   <details>
+   <summary><h3>Seitenleiste</h3></summary>
+   <hr>
+   </details>
+    
+   ## Die Seitenleiste
+      
+   ## Der Still
+      
+   
+   <details>
+   <summary><h3>Tabelle</h3></summary>
+   <hr>
+   </details>
+      
+   ## Die Tabelle
+   
+   ## Der Still
+      
+   ## Das obere Modal
+      
+    
+   <details>
+   <summary><h3>Benutzerprofil</h3></summary>
+   <hr>
+   </details>
+      
+   ## Die Passwortänderung
+      
+   ## Die Aktualisierung der Emailadresse 
+      
+   ## Das Benutzerprofil 
+      
+   
       
       
 
