@@ -95,7 +95,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <details>
    <summary><h2>Die Komponenten</h2></summary>
 
-      ## Die Anmeldung
+   ## Die Anmeldung
       
       
 
