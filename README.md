@@ -39,6 +39,12 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
 <details>
    <summary><h1>Die Planskizzen</h1></summary>
    
+# Der Aufbau der Projektseite
+   
+Da der Passwortmanager aus sehr vielen einzelnen Teilen, zuerst unterteilt in Front- und Backend und dann noch in die einzelnen Wirkungsbereiche und Funktionen in der Anwendung, besteht![image](https://user-images.githubusercontent.com/65679099/230733373-0a1deaf3-41c3-431f-845f-44b55ec07421.png)
+
+   
+  
 ## Hauptseite
 
 ![224968022-85e0eebb-76bc-40d6-9e07-5ef4b873ab5b](https://user-images.githubusercontent.com/111282979/230732027-9d22d0b8-5d4e-4ea6-b4c6-df0d169a6287.png)
@@ -101,10 +107,12 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Bei der Anmeldung wird der Nutzer gebeten, seinen Benutzernamen und sein Passwort einzugeben. Bei einer falschen Eingabe des Passwortes oder eines nicht existierenden Benutzernamens, wird dem Nutzer ein Hinweis angezeigt.
    Sollte der Nutzer jedoch noch keinen Account bei VergissMeinNicht besitzen, wird ihm die Möglichkeit geboten, über einen Klick auf die Schaltfläche 'Registrieren' zur Registrierung zu gelangen und sich dort einen Account anlegen zu können.
    Wenn der Nutzer sowohl seinen Benutzernamen, als auch sein Passwort richtig eingegeben hat, wird er auf die Startseite des Passwortmanagers weitergeleitet.
+   <details>
+   <summary>Nähere Informationen</summary>
    
-   ## Das Admin-Panel
+   
       
-      
+   </details>
 
    </details>
    <hr>
