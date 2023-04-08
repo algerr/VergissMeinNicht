@@ -1,0 +1,40 @@
+#leisten-wrapper {
+    position: relative;
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+
+#inhalt-wrapper {
+    min-width: 100vw;
+}
+
+#leisten-wrapper .list-group {
+    width: 15rem;
+}
+
+#leisten-wrapper .leisten-heading {
+    padding: 1rem 1.25rem;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+#wrapper.toggled #leisten-wrapper {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    #leisten-wrapper {
+        margin-left: 0;
+    }
+    #inhalt-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+    #wrapper.toggled #leisten-wrapper {
+        margin-left: -15rem;
+    }
+}

@@ -1,0 +1,9 @@
+#registrierungsformular .form-label {
+    flex: auto;
+    max-width: none;
+}
+
+#registrierungsformular .col-sm-10 {
+    flex: auto;
+    max-width: none;
+}

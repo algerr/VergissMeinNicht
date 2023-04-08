@@ -1,0 +1,9 @@
+#anmeldungsformular .col-sm-10 {
+    flex: auto;
+    max-width: none;
+}
+
+#anmeldungsformular .form-label {
+    flex: auto;
+    max-width: none;
+}
