@@ -102,93 +102,88 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Sollte der Nutzer jedoch noch keinen Account bei VergissMeinNicht besitzen, wird ihm die Möglichkeit geboten, über einen Klick auf die Schaltfläche 'Registrieren' zur Registrierung zu gelangen und sich dort einen Account anlegen zu können.
    Wenn der Nutzer sowohl seinen Benutzernamen, als auch sein Passwort richtig eingegeben hat, wird er auf die Startseite des Passwortmanagers weitergeleitet.
    
+   ## Die Registrierung
+   
+   ## Die Startseite
+      
    <details>
-   <summary><h3>Accounteinstellungen</h3></summary>
+   <summary><h3>Die Passwörter</h3></summary>
+   
+   ## Der EingabeBereich
+   
+   ## Ein neues Passwort hinzufügen
+   
+   ## Die Passwortanzeige
+   
    <hr>
    </details>
       
-   ## Die Accounteinstellungen
-   
-   ## Die Aktualisierung der Email 
-   
-   ## Die Passwortänderung
-   
-   <details>
-   
    ## Die Benutzerauthentifizierung
+   
+   ## Das zentrierte Modalfenster
    
    ## Das obere Modalfenster
    
-   <summary><h3>Passwörter</h3></summary>
-   <hr>
-   </details>
-   
-   ## Der Eingabebereich
-   
-   ## Das Hinzufügen eines neuen Passworts
+   ## Das Registrieren
     
-   ## Die Passwörter
-      
-   ## Die Anzeige des Passworts
-   
-   </details>
-   
-   ## Die Registrierung 
-   
-   ## Das Routenfenster 
-   
    ## Die Seitenleiste
    
-   ## Die Startseite 
-   
-   ## Die Tabelle 
-   
-   ## Das zentrierte Modalfenster 
+   ## Die Tabelle
+    
+   <details>
+   <summary><h3>Die Accounteinstellungen</h3></summary>
+   ## Die Passwortänderung
+      
+   ## Die Aktualisierung der Emailadresse 
+   <hr>
+   </details>
+      
+
+   </details>
+   <hr>
 
    <details>
    <summary><h2>Die Hilfsfunktionen</h2></summary>
 
-    ## Die Verschlüsselung 
+    ## Die Verschlüsselung
       
     ## Der Server 
       
     ## Das Token 
       
-   <details> 
-   <hr> 
+     
+
+   </details>
+   <hr>
 
    <details>
-   <summary><h2>Der ReduxStore</h2></summary>
+   <summary><h2>Der Redux-Store</h2></summary>
+
+   ## Die Konfigurierung des Shops 
+
+   <details>
+   <summary><h3>Aktionen</h3></summary>
+   <hr>
+   </details>
+      
+   ## Die Aktionstypen
    
+   ## Die Authentifizierung 
+      
+   ## Die Items
+      
+   ## Die Modale
+      
    <details>
-   <summary><h3>Der Erzeuger der Aktion</h3></summary>
+   <summary><h3>Reduzierungen</h3></summary>
    <hr>
    </details>
       
-    ## Die Aktionstypen
-    
-    ## Die Authentifizierung
-      
-    ## Das Modalfenster
-      
-    ## Die Passwörter
-      
-   <details>
-   <summary><h3>Der Reduzierer</h3></summary>
-   <hr>
-   </details>
-    
    ## Die Authentifizierung
       
-   ## Das Modalfenster
+   ## Die Items
       
-   ## Die Passwörter
-      
-   ## Der Reduxstore
-
-   
-   
-   
+   ## Die Modale 
       
    
       
