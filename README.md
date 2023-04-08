@@ -41,6 +41,9 @@ Wie wir es bereits in unseren Blogeinträgen erwähnt hatten, war seit dem 14.03
 
 # Planskizzen
 
+<details>
+  <summary>Erklärung</summary>
+
 ## Hauptthema
 
 ![image](https://user-images.githubusercontent.com/65679099/224968022-85e0eebb-76bc-40d6-9e07-5ef4b873ab5b.png)
@@ -82,6 +85,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 
 <img width="375" alt="image" src="https://user-images.githubusercontent.com/65679099/230047871-1663e6fb-b793-4c72-8bbc-32c5ef511c72.png">
 
+</details>
+   
 ## Der Login
 
 ![carbon (5)](https://user-images.githubusercontent.com/111282979/230135631-df8116af-2512-4c7e-a147-b0da3d60ca4e.png)
