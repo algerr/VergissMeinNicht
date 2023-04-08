@@ -8,7 +8,7 @@ const { datenHinzufuegen, datenLesen, datenLoeschen } = require('../Grundfnktion
 // Definierung einer Exportfunktion für das Hinzufügen von Passwörtern
 exports.passwortHinzufuegen = async (req, res) => {
     // Überprüfung, ob der Nutzer authentifiziert ist, um unbefugten Zugriff zu verhindern
-    if (!req.isAuth) {
+    if (!req.authentifizierungsUeberpruefung) {
         return res.status(400).send({
             status: 0,
             message: "Nicht autorisiert!"
@@ -57,7 +57,7 @@ exports.passwortHinzufuegen = async (req, res) => {
 exports.passwortLoeschen = async (req, res) => {
     // Zuerst wird überprüft, ob der Nutzer autorisiert ist.
     // Wenn das nicht der Fall ist, wird ein Status 400 gesendet.
-    if (!req.isAuth) {
+    if (!req.authentifizierungsUeberpruefung) {
         return res.status(400).send({
             status: 0,
             message: "Nicht autorisiert!"
@@ -105,7 +105,7 @@ exports.passwortLoeschen = async (req, res) => {
 // Diese Funktion gibt alle Passwörter des aktuellen Benutzers zurück.
 exports.allePasswoerter = async (req, res) => {
     // Prüfen, ob der Benutzer authentifiziert ist.
-    if (!req.isAuth) {
+    if (!req.authentifizierungsUeberpruefung) {
         return res.status(400).send({
             status: 0,
             message: "Nicht autorisiert!"
