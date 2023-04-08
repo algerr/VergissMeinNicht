@@ -108,13 +108,11 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
       
    <details>
    <summary><h3>Die Passwörter</h3></summary>
-   
    ## Der EingabeBereich
    
    ## Ein neues Passwort hinzufügen
    
    ## Die Passwortanzeige
-   
    <hr>
    </details>
       
@@ -137,35 +135,25 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    ## Die Aktualisierung der Emailadresse 
    <hr>
    </details>
-      
-
-   </details>
-   <hr>
+   
 
    <details>
    <summary><h2>Die Hilfsfunktionen</h2></summary>
-
-    ## Die Verschlüsselung
+   ## Die Verschlüsselung
       
-    ## Der Server 
+   ## Der Server 
       
-    ## Das Token 
-      
-     
-
-   </details>
+   ## Das Token 
    <hr>
+   </details>
+  
 
    <details>
    <summary><h2>Der Redux-Store</h2></summary>
-
    ## Die Konfigurierung des Shops 
-
+   <hr>
    <details>
    <summary><h3>Aktionen</h3></summary>
-   <hr>
-   </details>
-      
    ## Die Aktionstypen
    
    ## Die Authentifizierung 
@@ -173,26 +161,18 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    ## Die Items
       
    ## Die Modale
-      
-   <details>
-   <summary><h3>Reduzierungen</h3></summary>
    <hr>
    </details>
       
+   <details>
+   <summary><h3>Reduzierungen</h3></summary>
    ## Die Authentifizierung
       
    ## Die Items
       
    ## Die Modale 
-      
-   
-      
-    
+   <hr>
    </details>
-
-
-</details>
-<hr>
 
 
 
