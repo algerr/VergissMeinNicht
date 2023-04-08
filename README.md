@@ -112,7 +112,6 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
       ##
    
    </details>
-   <hr>
    
 </details>
 <hr>
