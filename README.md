@@ -16,6 +16,8 @@ Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.a
    - [Die Passwort Verwaltung](#die-passwort-verwaltung)
    - [Der Ablauf vom Programm](#der-ablauf-vom-programm)
    - [Vergleich zur 2FA-Authetifizierung](#vergleich-zur-2fa-authentifizierung)
+- [Das Frontend](#das-frontend)
+- 
 - [Das Backend](#das-backend)
    - [Die Anmeldung](#die-anmeldung)
    - [Die Registrierung](#die-registrierung)
@@ -29,14 +31,16 @@ Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.a
 
 [Zum Stundenprotokoll](https://github.com/algerr/blogeintraege-2)
 
-# VergissMei Nicht
+# VergissMeinNicht
 Sind Sie genervt von der ewigen Suche nach dem Passwort? Wir haben die Lösung!
 
 Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser Hauptziel, bis zu den Osterferien einen Passwortmanager zu entwickeln, der es den Internetnutzern erleichtern soll, den richtigen Umgang mit den von ihnen genutzten Plattformen zu erlernen. Vor allem sollte den Menschen ab sofort Sicherheit geboten werden, damit Hacker kaum noch eine Chance haben, Daten von anderen zu stehlen. Gerade Unternehmen, die mit mehreren Passwörtern im Internet arbeiten, können von einer solchen Idee sehr profitieren. Auch dass es ein Tool geben sollte, das von sich aus Passwörter generiert, die absolut sicher sind, wäre nur von Vorteil. Die erste Grundidee war also, ein Passwort zu generieren, welches die anderen Passwörter, die man hat, durch Verschlüsselung schützt. Insofern sollte dieses Konzept der 2FA-Authentifizierung ähneln, die ebenfalls eine weit verbreitete Möglichkeit ist, Daten bzw. Konten zu schützen, indem eine zusätzliche Sicherheitsmaßnahme wie eine Bestätigung per E-Mail eingebaut wird. 
 
 <details>
-  <summary># Planskizzen</summary>
+  <summary>Planskizzen ansehen</summary>
 
+   # Planskizzen
+   
 ## Hauptthema
 
 ![image](https://user-images.githubusercontent.com/65679099/224968022-85e0eebb-76bc-40d6-9e07-5ef4b873ab5b.png)
