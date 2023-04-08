@@ -103,12 +103,18 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Wenn der Nutzer sowohl seinen Benutzernamen, als auch sein Passwort richtig eingegeben hat, wird er auf die Startseite des Passwortmanagers weitergeleitet.
    
    ## Die Registrierung
+      
+   Damit man Gebrauch von unserem Passwortmanager machen kann, muss man sich über das Registrierungsmenü einen Account bei uns erstellen. Dazu benötigt man eine Email,    welche bereits existieren muss und ein Passwort, welches man selber festlegen kann. Bei der Eingabe in die beiden Felder, wird man direkt in das Hauptmenü              weitergeleitet, von welchem man dann sein Masterpasswort und die anderen normalen Passwörter festlegen kann. Wenn man sich ausslogen sollte, kann man einfach bei      seinem nächsten Besuch auf unserer Webside sich mit seinen Benutzerdaten anmelden. Über die Einstellungen kann man ebenfalls jederzeit sein Passwort, welches zur      Anmeldung genutzt wird, ändern.
    
    ## Die Startseite
+   
+   Die Startseite ist das Herz unserer Webside. Von hier aus gelangt man zu jedem Tool unserer Seite. Da es hier besonders um die Funktion unserer Passwortverwaltung      geht, kann auch in der Startseite seine Passwörter verwalten bzw. durch das Masterpasswort schützen.
       
    <details>
    <summary><h3>Die Passwörter</h3></summary>
    ## Der EingabeBereich 
+      
+   
    
    ## Ein neues Passwort hinzufügen
    
