@@ -5,16 +5,16 @@ const jwt = require('jsonwebtoken')
 module.exports = (req, res, next) => {
 
     // Der Authorization-Headers wird aus der HTTP-Anfrage extrahiert.
-    const authorizationHeader = req.get('Authorization')
+    const Authorization_Header = req.get('Authorization')
 
     // Wenn kein Authorization-Header vorhanden ist, ist der Benutzer nicht authentifiziert
-    if (!authorizationHeader) {
+    if (!Authorization_Header) {
         req.authentifizierungsUeberpruefung = false
         return next()
     }
 
     // Das Tokens wird aus dem Authorization-Header extrahiert.
-    const token = authorizationHeader.split(' ')[1]
+    const token = Authorization_Header.split(' ')[1]
     if (!token || token === '') {
         // Wenn kein Token vorhanden ist, ist der Benutzer nicht authentifiziert
         req.authentifizierungsUeberpruefung = false
