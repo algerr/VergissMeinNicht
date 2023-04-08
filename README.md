@@ -3,8 +3,6 @@
 
 https://user-images.githubusercontent.com/65679099/230721605-d894c2f3-10a2-4caa-b00d-018e8061457d.mp4
 
-Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.app/
-
 # Inhaltsverzeichnis
 
 - [Das Stundenprotokoll](#das-stundenprotokoll)
