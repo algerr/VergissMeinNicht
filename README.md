@@ -111,11 +111,15 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <details>
    <summary><h3>items</h3></summary>
    <hr>
-</details>
+   </details>
    
    ## Das neue Hinzufügen 
    
    ## Die Items
+    
+   ## Der linke Inhalt
+      
+   ## Das Passwort Display
       
       
 
