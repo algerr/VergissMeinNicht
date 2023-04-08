@@ -16,9 +16,9 @@ Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.a
    - [Die Passwort Verwaltung](#die-passwort-verwaltung)
    - [Der Ablauf vom Programm](#der-ablauf-vom-programm)
    - [Vergleich zur 2FA-Authetifizierung](#vergleich-zur-2fa-authentifizierung)
-- [Functions](#functions)
+- [Das Backend](#das-backend)
    - [Der Login](#der-login)
-   - [Das Registrieren](#das-registrieren)
+   - [Die Registrierung](#die-registrierung)
    - [Die Authentifizierung](#die-authentifizierung)
    - [Die Passwortverwaltung](#die-passwortverwaltung)
    - [Die Löschung des Benutzerkontos](#die-loeschung-des-benutzerkontos)
@@ -85,15 +85,15 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 
 </details>
    
-## Der Login
+## Die Anmeldung
 
-![carbon (5)](https://user-images.githubusercontent.com/111282979/230135631-df8116af-2512-4c7e-a147-b0da3d60ca4e.png)
+![Anmeldung](https://user-images.githubusercontent.com/65679099/230729167-a9b3ef5b-ee1a-45a5-8549-1713399c4bb7.png)
 
 Zunächst definiert die Funktion ein Joi-Objekt, indem sie die erforderlichen Felder (Benutzername und Passwort) angibt und validiert. Joi ist eine JavaScript-Validierungsbibliothek. Dadurch können Entwickler ein Schema für ein Objekt festlegen, das angibt, welche Eigenschaften vorhanden sein sollten, welche Datentypen erwartet werden können und welche Validierungsregeln für diese Eigenschaft gelten. Der Benutzername und das Passwort werden daraufhin aus dem Anforderungstext abgeleitet. Die Eingabe wird dann verifiziert, indem ein Joi-Objekt auf die Eingabe angewendet wird. Bei ungültiger Eingabe wird eine Fehlermeldung mit dem HTTP-Statuscode 400 zurückgegeben. Dann wird überprüft, ob der Benutzername in der Datenbank existiert. Andernfalls wird auch hier wieder eine Fehlermeldung mit dem HTTP-Statuscode 400 zurückgegeben. Wenn ein Benutzer in der Datenbank gefunden werden sollte, werden seine Daten analysiert, damit sichergestellt wird, dass sie korrekt formatiert sind. Das eingegebene Passwort wird dann mittels bcrypt.compareSync() mit dem vom Benutzer hinterlegten Passwort verglichen. Wenn das eingegebene Passwort korrekt ist, wird das JSON Web Token (JWT) mit den Anmeldeinformationen des Benutzers signiert und an den Client zurückgegeben. Wenn das Passwort falsch ist, wird eine HTTP 400-Fehlermeldung zurückgegeben.
 
-## Das Registrieren 
+## Die Registrierung
 
-![carbon (6)](https://user-images.githubusercontent.com/111282979/230139035-f0f1f943-1dd3-491e-8c21-4bb71e50dcb5.png)
+![Registrierung](https://user-images.githubusercontent.com/65679099/230729402-ec76d72a-d3f3-45ee-b3e2-818ef0221912.png)
 
 Dies ist die Funktion des Node.js/Express.js-Controllers, um neue Benutzer in der Anwendung zu registrieren.
 Zunächst definiert die Funktion ein Joi-Objekt, indem sie die erforderlichen Felder (Benutzername, Passwort und E-Mail-Adresse) angibt und validiert. Es wurde angegeben, dass der Wert für die E-Mail-Adresse eine gültige E-Mail-Adresse sein muss, aber auch leer gelassen werden kann.
