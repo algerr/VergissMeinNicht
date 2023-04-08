@@ -17,7 +17,7 @@ Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.a
    - [Der Ablauf vom Programm](#der-ablauf-vom-programm)
    - [Vergleich zur 2FA-Authetifizierung](#vergleich-zur-2fa-authentifizierung)
 - [Das Backend](#das-backend)
-   - [Der Login](#der-login)
+   - [Die Anmeldung](#die-anmeldung)
    - [Die Registrierung](#die-registrierung)
    - [Die Authentifizierung](#die-authentifizierung)
    - [Die Passwortverwaltung](#die-passwortverwaltung)
