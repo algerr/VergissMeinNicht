@@ -108,7 +108,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    ## Die Startseite
    
-   Die Startseite ist das Herz unserer Webside. Von hier aus gelangt man zu jedem Tool unserer Seite. Da es hier besonders um die Funktion unserer Passwortverwaltung      geht, kann auch in der Startseite seine Passwörter verwalten bzw. durch das Masterpasswort schützen.
+   Die Startseite ist das Herz unserer Webside. Von hier aus gelangt man zu jedem Tool unserer Seite. Da es hier besonders um die Funktion unserer Passwortverwaltung      geht, kann man genau auf der Startseite seine Passwörter verwalten bzw. durch das Masterpasswort schützen.
       
    <details>
    <summary><h3>Die Passwörter</h3></summary>
@@ -135,12 +135,14 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Die Seitenleiste lässt sich nach Wunsch ein- und ausblenden. Wenn diese eingeblendet ist, hat man die Option im Hauptfenster zu bleiben, welches den Namen              "Passwörter" trägt, oder man kann in das Fenster "Accounteinstellungen" wechseln. In den Accounteinstellungen sieht man zunächst einmal seinen festgelegten             Benutzernamen und seine Email mit der man sich im Vorhinein registriert hat. Darüber hinaus kann man in diesem Fenster entweder eine neue Email oder ein neues        Passwort festlegen, falls man etwas an seinen Anmeldedaten verändern möchte. Hier gibt es aber nun auch die Option seinen Account vollständig zu löschen, falls man    sich dazu entscheiden möchte.
    
    ## Die Tabelle
+   In der Tabelle werden die Passwörter mit den zugehörigen Beschreibungen aufgelistet, sodass man diese einsehen kann. Wenn das Masterpasswort eingegeben ist und s      seine Passwörter in dem Moment in der Tabelle nicht verschlüsselt sind, kann man jeweils ein Passwort kopieren und es dann in wo man es auch immer haben möchte        einfügen. Sobald das Masterpasswort wieder ausgetragen ist, zeigt die Tabelle die festgelegt Passwörter nicht mehr an, sondern eine lange Kombination aus              Buchstaben, Zahlen usw., was zur Verschlüsselung der Passwörter dient. 
     
    <details>
    <summary><h3>Die Accounteinstellungen</h3></summary>
    ## Die Passwortänderung
-   Um sein Passwort zu ändern, muss man in dem dazugehörigen Fenster sein altes Passwort eingeben und das neue Passwort, welches von dem Moment an gelten soll. Wir        haben uns dazu entschieden, dass die Benutzer ihr altes Passwort eingeben sollen, damit z.B. Fremde die sich unerlaubten Zugang zu einem Account gewährt haben nicht    einfach das Passwort ändern können und somit dem eigentlichen Benutzer durch die Veränderung des Passworts seinen Account stehlen. Es ist also wenn man so möchte   
+   Um sein Passwort zu ändern, muss man in dem dazugehörigen Fenster sein altes Passwort eingeben und das neue Passwort, welches von dem Moment an gelten soll. Wir        haben uns dazu entschieden, dass die Benutzer ihr altes Passwort eingeben sollen, damit z.B. Fremde die sich unerlaubten Zugang zu einem Account gewährt haben nicht    einfach das Passwort ändern können und somit dem eigentlichen Benutzer durch die Veränderung des Passworts seinen Account stehlen. Es ist also wenn man so möchte      eine weitere Sicherheitsfunktion, um unsere Benutzer vor Dritten zu schützen. Wenn man dann anschließend das alte und neue Passwort eingegeben hat, bestätigt man      das Ganze, indem auf das Feld "Speichern" drückt. 
    ## Die Aktualisierung der Emailadresse 
+   Um seine Emailadresse zu ändern muss man lediglich eine neue Emailadresse in das dafür vorgesehene Feld eingeben und sein Eingabe durch das Feld "Speichern"            bestätigen. 
    <hr>
    </details>
    
