@@ -20,8 +20,8 @@ Vergissmeinnicht - Der Passwortschützer Nr. 1 - https://forgetmynot-2f796.web.a
    - [Die Anmeldung](#die-anmeldung)
    - [Die Registrierung](#die-registrierung)
    - [Die Aktualisierung der Emailadresse](#die-aktualisierung-der-emailadresse)
-   - [Die Passwortverwaltung](#die-passwortverwaltung)
-   - [Die Löschung des Benutzerkontos](#die-loeschung-des-benutzerkontos)
+   - [Das Ändern des Passwortes](#das-aendern-des-passwortes)
+   - [Das Löschen des Accounts](#das-loeschen-des-accounts)
    - [Der Sicherheitsschritt](#der-sicherheitsschritt)
    - [Die Löschung von Datensätzen in der Firebase](#die-loesung-von-datensätzen-in-der-firebase)
    - [Die Aktualisierung](#die-aktualisierung)
@@ -106,18 +106,18 @@ Dieser Code ist ein Beispiel für eine Implementierung einer einfachen Benutzerr
 
 Die erste Funktion (emailAktualisieren) prüft zunächst, ob der Benutzer authentifiziert ist. In diesem Fall wird ein Joi-Test erstellt, um sicherzustellen, dass die Anfrage einen gültigen E-Mail-Adresswert enthält. Wenn die Anfrage gültig ist, wird die updatedata-Funktion aufgerufen, um die E-Mail-Adresse des Benutzers in der Datenbank zu aktualisieren. Dann wird ein neues JWT mit den aktualisierten Benutzerdetails erstellt und als Antwort an den Client gesendet. Die zweite Funktion 
 
-## Die Passwortverwaltung
+## Die Aktualisierung des Passwortes
 
-![carbon (8)](https://user-images.githubusercontent.com/111282979/230147964-b0eaeb27-d949-463b-913f-f02baa7a526c.png)
+![PasswortAktualisierung](https://user-images.githubusercontent.com/65679099/230729893-7db48ed3-c70c-4ac5-8f58-c0bc999ed1dd.png)
 
 Dieser Code definiert drei Funktionen im Zusammenhang mit der Passwortverwaltung und der Benutzerauthentifizierung in der Webanwendung.
 Die Funktion "Passwort vergessen" ist noch nicht implementiert und gibt nur eine Meldung zurück, dass sie noch nicht implementiert ist. Die Funktion „Passwort zurücksetzen“ ist ebenfalls noch nicht implementiert und gibt eine ähnliche Meldung zurück.
 Die Funktion „Passwort ändern“ erfordert eine Benutzerauthentifizierung. Wenn der Benutzer nicht authentifiziert ist, wird eine Fehlermeldung zurückgegeben.
 Die Joi.object-Funktion definiert ein Schema, das die alten und neuen Passwörter des Benutzers enthält. Dann werden das alte und das neue Passwort aus dem Request-Objekt extrahiert und zur Authentifizierung in das Joi-Objekt eingefügt. Wenn der Test fehlschlägt, wird eine Fehlermeldung zurückgegeben. Dann wird versucht, den Benutzer aus der Datenbank auszulesen. Wenn der Benutzer nicht existiert, wird eine Fehlermeldung zurückgegeben. Wenn der Benutzer existiert, wird das alte eingegebene Passwort mit dem in der Datenbank gespeicherten Passwort verglichen. Wenn das Passwort korrekt ist, wird das Passwort in der Datenbank mit dem neu eingegebenen Passwort aktualisiert. Andernfalls wird eine Fehlermeldung zurückgegeben, dass das alte Passwort ungültig ist.
 
-## Die Löschung des Benutzerkontos
+## Das Löschen des Accounts
 
-![carbon (9)](https://user-images.githubusercontent.com/111282979/230159660-fce57a40-ef9c-403c-bd71-573086e5d4f5.png)
+![AccountLöschen](https://user-images.githubusercontent.com/65679099/230730365-a6f0345c-3583-4464-abb9-a73a998c4091.png)
 
 Dieser Code ist die Funktion zum Löschen des Benutzerkontos.
 Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Andernfalls wird eine Fehlermeldung zurückgegeben.
