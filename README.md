@@ -23,6 +23,7 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
       - [Die Anmeldung](#die-anmeldung)
       - [Die Registrierung](#die-registrierung)
       - [Die Startseite](#die-startseite)
+      - [Der Passwort Manager](#der-passwort-manager)
    - [Die Hilfsfunktionen](#die-hilsfunktionen)
    - [Der Redux-Store](#der-redux-store)
 - [Das Backend](#das-backend)
@@ -199,16 +200,46 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    </details>
    
+      
+      
+      
+      
    <details>
    <summary><h3>Der Passwort Manager</h3></summary>
-   ## Der EingabeBereich 
-   In diesem Bereich legt man sein Masterpasswort fest, welches die anderen Passwörter schützen soll, indem es diese verschlüsselt. Der Eingabebereich befindet sich      links über dem Feld, wo mann ein neues Passwort festlegen kann.  
+      
+   Der Passwort Manager ist die Anwendung, bzw. der Service, den wir mit Vergissmeinnicht unseren Nutzern anbieten. Er ist einfach zu verstehen und übersichtlich.
+   Grob kann er in zwei Bereiche eingeteilt werden. Auf der linken Seite findet die Eingabe statt. Das Masterpasswort wird eingegeben und neue Passwörter werden hinzugefügt. Auf der rechten Seite ist die Passwörter-Tabelle, in der alle Passwörter des Nutzers angezeigt werden und kopiert, angezeigt oder gelöscht werden können.
+   Die einzelnen Teilbereiche sind in unterschiedliche Komponente gegliedert, die dann im Passwort Manager gerendert werden.
+      
+   <details>
+   <summary>Nähere Informationen</summary>
+   
+   ![Linke_seite_state](https://user-images.githubusercontent.com/65679099/230801148-fc0c7626-d469-4b6f-9c4a-65762b374980.png)
+      
+   Da eines unserer Merkmale die Echtzeit-Passwortent- und verschlüsselung ist - das bedeutet, dass, sobald das Masterpasswort korrekt eingegeben ist, die Passwörter entschlüsselt und abrufbar sind und, sobald auch nur eine Buchstabe zu viel oder zu wenig eingegeben wird, die Passwörter direkt wieder verschlüsselt werden und nicht mehr abrufbar sind - muss diese ständige Überprüfung des Masterpasswortes irgendwie möglich gemacht werden. Dafür wird die Zustandsvariable `masterPasswort` definiert, die standardmäßig `null` ist. Sobald jedoch eine Eingabe des Masterpasswortes erfolgt, wird das eingegebene Masterpasswort in dieser Variablen gespeichert. 
+      
+   Dies ist möglich, da das Eingabefeld des Masterpasswortes mit dem Event-Listener `onMasterPasswort` verbunden ist. Jedes Mal, wenn auch nur ein Buchstabe entfernt oder hinzugefügt wird, greift dieser Event-Listener ein und speichert das aktuell eingegebene Masterpasswort in der Zustandsvariablen `masterPasswort`.
+      
+   ```javascript
+   <EingabeBereich onMasterPasswortEingabe={this.onMasterPasswortEingabe} />
+   ```
+   
+   </details>
+      
+   
+      
+   ## Der Eingabebereich
+      
+   In diesem Bereich legt man sein Masterpasswort fest, welches die anderen Passwörter schützen soll, indem es diese verschlüsselt. Der Eingabebereich befindet sich      links über dem Feld, wo mann ein neues Passwort festlegen kann.
    
    
    ## Ein neues Passwort hinzufügen
    Unten links hat man die Option seine Passwörter, die man bereits z.B. für die einzelnen Social Media Accounts festgelegt hat, einzugeben. Neben der Eingabe des        Passworts gibt es das zusätliche Feld "Beschreibung", in welchem man hinzufügt, wofür das Passwort ist. Mann kann also in die Beschreibung "Twitter" schreiben,        damit man anschließend weiß, dass das Passwort für den Twitter Account in diesem Fall ist. Wenn man dann nun das Feld für die Beschreibung und das Passwort            ausgefüllt hat, drückt man auf das Feld "Speichern", um seine Eingabe zu bestätigen. Die festgelegt Passwörter werden dann sobald das Masterpasswort nicht mehr        eingegeben ist, verschlüsselt.
    
    ## Die Passwortanzeige
+      
+         
+      
    <hr>
    </details>
       
