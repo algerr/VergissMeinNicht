@@ -17,15 +17,15 @@ class Startseite extends Component {
         const { token, passwoerterFestlegen, setzeInhaltFuerOberesModalfenster } = this.props
 
         // Die Passwörter werden vom Server abgerufen.
-        const result = await passwoerterAbrufen(token)
+        const allePasswoerter = await passwoerterAbrufen(token)
 
         // Wenn Passwörter vorhanden sind, werden sie im Redux-Store gespeichert.
-        if (result.passwoerter) {
-            passwoerterFestlegen(result.passwoerter)
+        if (allePasswoerter.passwoerter) {
+            passwoerterFestlegen(allePasswoerter.passwoerter)
 
         // Ansonsten wird die vom Server zurückgegebene Fehlermeldung in einem Modalfenster angezeigt.
-        } else if (result.error) {
-            setzeInhaltFuerOberesModalfenster("Fehler", result.error, [{ name: "Schließen", variant: "primary" }])
+        } else if (allePasswoerter.error) {
+            setzeInhaltFuerOberesModalfenster("Fehler", allePasswoerter.error, [{ name: "Schließen", variant: "primary" }])
             oberesModalfensterAnzeigen()
         }
     }
