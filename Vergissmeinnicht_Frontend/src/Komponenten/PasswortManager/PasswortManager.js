@@ -16,12 +16,12 @@ import PasswortAnzeige from './PasswortAnzeige'
 
 class PasswortManager extends Component {
 
-    // Für die Speicherung des masterPasswortes wird ein State-Objekt verwendet.
+    // Für die Speicherung des masterPasswortes wird eine Zustandsvariable verwendet.
     state = {
         masterPasswort: null
     }
 
-    // Sobald eine Eingabe des masterPasswortes erfolgt, wird dieses im State "masterPasswort" gespeichert.
+    // Sobald eine Eingabe des masterPasswortes erfolgt, wird dieses in der Variablen "masterPasswort" gespeichert.
     onMasterPasswortEingabe = (masterPasswort) => {
         this.setState({ masterPasswort: masterPasswort })
     }
