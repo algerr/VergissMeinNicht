@@ -190,7 +190,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    
    ## Ein neues Passwort hinzufügen
-   Unten links hat man die Option seine Passwörter, die man bereits z.B. für die einzelnen Social Media Accounts festgelegt hat, einzugeben. Neben der Eingabe des        Passwort gibt es das zusätliche Feld "Beschreibung", in welchem man hinzufügt, wofür das Passwort ist. Mann kann also in die Beschreibung "Twitter" schreiben, damit    man anschließend weiß, dass das Passwort für den Twitter Account ist. Wenn man dann nun das Feld für die Beschreibung und das Passwort ausgefüllt hat, drückt man      auf das Feld "Speichern", um seine Eingabe zu bestätigen. Die festgelegt Passwörter werden dann sobald das Masterpasswort nicht mehr eingegeben ist, verschlüsselt.
+   Unten links hat man die Option seine Passwörter, die man bereits z.B. für die einzelnen Social Media Accounts festgelegt hat, einzugeben. Neben der Eingabe des        Passworts gibt es das zusätliche Feld "Beschreibung", in welchem man hinzufügt, wofür das Passwort ist. Mann kann also in die Beschreibung "Twitter" schreiben,        damit man anschließend weiß, dass das Passwort für den Twitter Account in diesem Fall ist. Wenn man dann nun das Feld für die Beschreibung und das Passwort            ausgefüllt hat, drückt man auf das Feld "Speichern", um seine Eingabe zu bestätigen. Die festgelegt Passwörter werden dann sobald das Masterpasswort nicht mehr        eingegeben ist, verschlüsselt.
    
    ## Die Passwortanzeige
    <hr>
@@ -205,17 +205,17 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    ## Das Registrieren
     
    ## Die Seitenleiste
-   Die Seitenleiste lässt sich nach Wunsch ein- und ausblenden. Wenn diese eingeblendet ist, hat man die Option im Hauptfenster zu bleiben, welches den Namen              "Passwörter" trägt, oder man kann in das Fenster "Accounteinstellungen" wechseln. In den Accounteinstellungen sieht man zunächst einmal seinen festgelegten             Benutzernamen und seine Email mit der man sich im Vorhinein registriert hat. Darüber hinaus kann man in diesem Fenster entweder eine neue Email oder ein neues        Passwort festlegen, falls man etwas an seinen Anmeldedaten verändern möchte. Hier gibt es aber nun auch die Option seinen Account vollständig zu löschen, falls man    sich dazu entscheiden möchte.
+   Die Seitenleiste lässt sich nach Wunsch ein- und ausblenden. Wenn diese eingeblendet ist, hat man die Option im Hauptfenster zu bleiben, welches den Namen              "Passwörter" trägt, oder man kann in das Fenster "Accounteinstellungen" wechseln. In den Accounteinstellungen sieht man zunächst einmal seinen festgelegten             Benutzernamen und seine Email mit der man sich im Vorhinein registriert hat. Darüber hinaus kann man in diesem Fenster entweder eine neue Email oder ein neues        Passwort festlegen, falls man etwas an seinen Anmeldedaten verändern möchte. Hierzu gibt es aber nun auch die Option seinen Account vollständig zu löschen, falls      man sich dazu entscheiden sollte.
    
    ## Die Tabelle
-   In der Tabelle werden die Passwörter mit den zugehörigen Beschreibungen aufgelistet, sodass man diese einsehen kann. Wenn das Masterpasswort eingegeben ist und s      seine Passwörter in dem Moment in der Tabelle nicht verschlüsselt sind, kann man jeweils ein Passwort kopieren und es dann in wo man es auch immer haben möchte        einfügen. Sobald das Masterpasswort wieder ausgetragen ist, zeigt die Tabelle die festgelegt Passwörter nicht mehr an, sondern eine lange Kombination aus              Buchstaben, Zahlen usw., was zur Verschlüsselung der Passwörter dient. 
+   In der Tabelle werden die Passwörter mit den zugehörigen Beschreibungen aufgelistet, sodass man diese einsehen kann. Wenn das Masterpasswort eingegeben ist und        seine Passwörter in dem Moment in der Tabelle nicht verschlüsselt sind, kann man jeweils ein Passwort ansehen und es gegebenfalls kopieren, um es dann anschließend    wo man es auch immer haben möchte, einzufügen. Sobald das Masterpasswort wieder ausgetragen ist, zeigt die Tabelle die festgelegt Passwörter nicht mehr an, sondern    folgende Nachricht:"Das Passwort ist verschlüsselt"
     
    <details>
    <summary><h3>Die Accounteinstellungen</h3></summary>
    ## Die Passwortänderung
-   Um sein Passwort zu ändern, muss man in dem dazugehörigen Fenster sein altes Passwort eingeben und das neue Passwort, welches von dem Moment an gelten soll. Wir        haben uns dazu entschieden, dass die Benutzer ihr altes Passwort eingeben sollen, damit z.B. Fremde die sich unerlaubten Zugang zu einem Account gewährt haben nicht    einfach das Passwort ändern können und somit dem eigentlichen Benutzer durch die Veränderung des Passworts seinen Account stehlen. Es ist also wenn man so möchte      eine weitere Sicherheitsfunktion, um unsere Benutzer vor Dritten zu schützen. Wenn man dann anschließend das alte und neue Passwort eingegeben hat, bestätigt man      das Ganze, indem auf das Feld "Speichern" drückt. 
+   Um sein Passwort zu ändern, muss man in dem dazugehörigen Fenster sein altes Passwort eingeben und das neue Passwort, welches von dem Moment an gelten soll. Wir        haben uns dazu entschieden, dass die Benutzer ihr altes Passwort eingeben sollen, damit z.B. Fremde die sich unerlaubten Zugang zu einem Account gewährt haben nicht    einfach das Passwort ändern können, um  somit dem eigentlichen Benutzer durch die Veränderung des Passworts seinen Account zu stehlen. Es ist also wenn man so          möchte eine weitere Sicherheitsfunktion, um unsere Benutzer vor Dritten zu schützen. Wenn man dann anschließend das alte und neue Passwort eingegeben hat, bestätigt    man das Ganze, indem man auf das Feld "Speichern" drückt. 
    ## Die Aktualisierung der Emailadresse 
-   Um seine Emailadresse zu ändern muss man lediglich eine neue Emailadresse in das dafür vorgesehene Feld eingeben und sein Eingabe durch das Feld "Speichern"            bestätigen. 
+   Um seine Emailadresse zu ändern muss man lediglich eine neue Emailadresse in das dafür vorgesehene Feld eingeben und sein Eingabe durch das Feld "Speichern"            bestätigen. Dieses Feld lässt sich bei den Accounteinstellungen wiederfinden.
    <hr>
    </details>
    
@@ -223,7 +223,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <details>
    <summary><h2>Die Hilfsfunktionen</h2></summary>
    ## Die Verschlüsselung
-   Die Verschlüsselung seiner aufgelisteten Passwörter erfolgt genau dann, wenn das festgelegte Passwort nicht mehr eingegeben ist. Die eigentlichen Passwörter werden    dann verschlüsselt, indem an der Stelle des Passworts eine lange Kombination aus Zahlen, Buchstaben und Zeichen dort auftritt. Wenn man das Masterpasswort wieder in    das Eingabefeld einfügt, dann werden wieder automatisch die aufgelisteten Passwörter entschlüsselt.
+   Die Verschlüsselung seiner aufgelisteten Passwörter erfolgt genau dann, wenn das festgelegte Passwort nicht mehr eingegeben ist. Die eigentlichen Passwörter werden    dann verschlüsselt, indem an der Stelle des Passworts die Nachricht "Passwort ist verschlüsselt", auftritt. Wenn man das Masterpasswort wieder in das Eingabefeld      einfügt, dann werden wieder automatisch die aufgelisteten Passwörter entschlüsselt.
       
    ## Der Server 
       
