@@ -42,16 +42,15 @@ class Registrierung extends Component {
         // "Registrieren"-Buttons verhindert.
         e.preventDefault()
         const { eingabeAbgeschickt } = this.state
-        // Wenn der Zustandsboolean "eingabeAbgeschickt" noch auf "false" gesetzt ist, wird der State aktualisiert,
+        // Wenn das Formular noch nicht abgeschickt wurde, wird der state aktualisiert,
         // da der Registrierungsprozess nun im Gange ist.
         if (!eingabeAbgeschickt) {
             await this.setState({ eingabeAbgeschickt: true })
+            // Benutzername, Passwort und Email werden zur Registrierung an den Server geschickt.
             const { oberesModalfensterAnzeigen, setzeInhaltFuerOberesModalfenster, history } = this.props
-            // Wenn ein Benutzername und Passwort eingegeben wurden,
+            // Wenn der Server als Antwort "status: true" zurückgibt, war die Registrierung erfolgreich.
             if (this.benutzername.value !== "" && this.passwort.value !== "") {
-                // werden diese und die eingegebene Email zur Registrierung an den Server geschickt.
                 const Registrierung = await accountRegistrieren(this.benutzername.value, this.passwort.value, this.email.value)
-                // Wenn der Server als Antwort "status: true" zurückgibt, war die Registrierung erfolgreich.
                 if (Registrierung.status) {
                     // Das wird dem Nutzer über ein modales Fenster gezeigt.
                     setzeInhaltFuerOberesModalfenster("Erfolgreiche Registrierung",

@@ -102,7 +102,7 @@ class Anmeldung extends Component {
                         <Card.Title>Anmeldung</Card.Title>
                         {/* Das Formular zur Anmeldung mit Benutzername und Passwort */}
                         <Form onSubmit={this.onSubmit}>
-                            <Form.Group as={Row} controlId="eingabeBenutzername">
+                            <Form.Group as={Row} controlId="eingabeEmail">
                                 <Form.Label column sm={2}>
                                     Benutzername
                                 </Form.Label>

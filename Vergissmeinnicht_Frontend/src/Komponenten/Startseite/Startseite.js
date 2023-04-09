@@ -6,7 +6,7 @@ import { passwoerterFestlegen } from '../../ReduxStore/aktionsErzeuger/passwoert
 import { passwoerterAbrufen } from '../../Hilfsfunktionen/server'
 import { oberesModalfensterAnzeigen, setzeInhaltFuerOberesModalfenster } from '../../ReduxStore/aktionsErzeuger/modalFenster'
 import Seitenleiste from '../Seitenleiste/Seitenleiste'
-import Passwoerter from '../Passwoerter/Passwoerter'
+import PasswortManager from '../PasswortManager/PasswortManager'
 import AccountEinstellungen from '../AccountEinstellungen/AccountEinstellungen'
 
 class Startseite extends Component {
@@ -17,15 +17,15 @@ class Startseite extends Component {
         const { token, passwoerterFestlegen, setzeInhaltFuerOberesModalfenster } = this.props
 
         // Die Passwörter werden vom Server abgerufen.
-        const allePasswoerter = await passwoerterAbrufen(token)
+        const result = await passwoerterAbrufen(token)
 
         // Wenn Passwörter vorhanden sind, werden sie im Redux-Store gespeichert.
-        if (allePasswoerter.passwoerter) {
-            passwoerterFestlegen(allePasswoerter.passwoerter)
+        if (result.passwoerter) {
+            passwoerterFestlegen(result.passwoerter)
 
         // Ansonsten wird die vom Server zurückgegebene Fehlermeldung in einem Modalfenster angezeigt.
-        } else if (allePasswoerter.error) {
-            setzeInhaltFuerOberesModalfenster("Fehler", allePasswoerter.error, [{ name: "Schließen", variant: "primary" }])
+        } else if (result.error) {
+            setzeInhaltFuerOberesModalfenster("Fehler", result.error, [{ name: "Schließen", variant: "primary" }])
             oberesModalfensterAnzeigen()
         }
     }
@@ -34,10 +34,10 @@ class Startseite extends Component {
         return (
             <Seitenleiste>
                 <Switch>
-                    {/* Wenn /startseite besucht wird, wird automatisch auf die "Passwörter"-Seite umgeleitet. */}
-                    <Redirect exact from="/startseite" to="/startseite/passwoerter" />
-                    {/* Wenn /startseite/passwoerter besucht wird, wird die Passwoerter-Komponente gerendert. */}
-                    <Route path="/startseite/passwoerter" component={Passwoerter} />
+                    {/* Wenn /startseite besucht wird, wird automatisch der Passwortmanager angezeigt. */}
+                    <Redirect exact from="/startseite" to="/startseite/passwortmanager" />
+                    {/* Wenn /startseite/passwortmanager besucht wird, wird die PasswortManager-Komponente gerendert. */}
+                    <Route path="/startseite/passwortmanager" component={PasswortManager} />
                     {/* Wenn /startseite/accounteinstellungen besucht wird, wird automatisch auf die AccountEinstellungen-Komponente gerendert. */}
                     <Route path="/startseite/accounteinstellungen" component={AccountEinstellungen} />
                     {/* Wenn kein passender Pfad gefunden wird, wird auf /404 umgeleitet. */}

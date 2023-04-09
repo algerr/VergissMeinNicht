@@ -4,11 +4,6 @@ html {
   display: flex;
 }
 
-body {
-  flex: 1;
-  display: flex;
-}
-
 #root {
   flex: 1;
   display: flex;
@@ -17,4 +12,9 @@ body {
 .tab-content {
   width: 100%;
   padding: 50px;
+}
+
+body {
+  flex: 1;
+  display: flex;
 }

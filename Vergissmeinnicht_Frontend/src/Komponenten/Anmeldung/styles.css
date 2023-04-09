@@ -7,3 +7,13 @@
     flex: auto;
     max-width: none;
 }
+
+.btn-primary{
+    background-color: #8a2be2;
+    border-color: #8a2be2;
+}
+
+.btn-primary:hover{
+    background-color: #8a2be2;
+    border-color: #8a2be2;
+}

@@ -35,8 +35,7 @@ class Seitenleiste extends Component {
         // So lässt sich das Token aus dem Redux-Store entfernen, sodass der Nutzer nicht wieder angemeldet wird.
         authentifizierungsTokenFestlegen(null)
         // Und die Liste der angezeigten Passwörter kann geleert werden.
-        passwoerterFestlegen
-([])
+        passwoerterFestlegen([])
     }
 
     render() {
@@ -46,8 +45,8 @@ class Seitenleiste extends Component {
                 <div className="border-right bg-light" id="leisten-wrapper">
                     <div className="leisten-heading">VergissMeinNicht</div>
                     <div className="list-group-flush list-group">
-                        {/* Link zu den Passwörtern */}
-                        <Link to="/startseite/passwoerter" className="bg-light list-group-item list-group-item-action">Passwörter</Link>
+                        {/* Link zum Passwort Manager */}
+                        <Link to="/startseite/passwortmanager" className="bg-light list-group-item list-group-item-action">Passwort Manager</Link>
                         {/* Link zu den Accounteinstellungen */}
                         <Link to="/startseite/accounteinstellungen" className="bg-light list-group-item list-group-item-action">Accounteinstellungen</Link>
                     </div>
