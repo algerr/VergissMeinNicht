@@ -21,6 +21,7 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
 - [Das Frontend](#das-frontend)
    - [Die Komponenten](#die-komponenten)
       - [Die Anmeldung](#die-anmeldung)
+      - [Die Registrierung](#die-registrierung)
    - [Die Hilfsfunktionen](#die-hilsfunktionen)
    - [Der Redux-Store](#der-redux-store)
 - [Das Backend](#das-backend)
@@ -139,7 +140,12 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
       
    ## Die Registrierung
       
-   Damit man Gebrauch von unserem Passwortmanager machen kann, muss man sich über das Registrierungsmenü einen Account bei uns erstellen. Dazu benötigt man eine Email,    welche bereits existieren muss und ein Passwort, welches man selber festlegen kann. Bei der Eingabe in die beiden Felder, wird man direkt in das Hauptmenü              weitergeleitet, von welchem man dann sein Masterpasswort und die anderen normalen Passwörter festlegen kann. Wenn man sich ausslogen sollte, kann man einfach bei      seinem nächsten Besuch auf unserer Webside sich mit seinen Benutzerdaten anmelden. Über die Einstellungen kann man ebenfalls jederzeit sein Passwort, welches zur      Anmeldung genutzt wird, ändern. 
+   Um den Passwortmanager überhaupt verwenden zu können, muss man sich zuerst einen Account erstellen. Um sich zu registrieren werden drei Eingaben des Nutzers benötigt. Eine gültige Emailadresse, einen Benutzernamen, der noch nicht in der Datenbank existiert und ein Passwort. Da es dem Nutzer selbst überlassen ist, wie sicher er sein Accountpasswort gestalten möchte, haben wir keine Anforderungen an dieses, wie beispielsweise eine Mindestlänge. Wenn die Registrierung erfolgreich ist, wird man zur Anmeldung weitergeleitet, wo man sich direkt mit seinem frisch registrierten Account anmelden kann.
+      
+   <details>
+   <summary>Nähere Informationen</summary>
+      
+   </details>
    
    
    ## Die Startseite
