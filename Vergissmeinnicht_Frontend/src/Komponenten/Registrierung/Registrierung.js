@@ -42,7 +42,7 @@ class Registrierung extends Component {
         // "Registrieren"-Buttons verhindert.
         e.preventDefault()
         const { eingabeAbgeschickt } = this.state
-        // Wenn das Formular noch nicht abgeschickt wurde, wird der state aktualisiert,
+        // Wenn der Zustandsboolean "eingabeAbgeschickt" noch auf "false" gesetzt ist, wird der State aktualisiert,
         // da der Registrierungsprozess nun im Gange ist.
         if (!eingabeAbgeschickt) {
             await this.setState({ eingabeAbgeschickt: true })
