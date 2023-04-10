@@ -24,6 +24,8 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
       - [Die Registrierung](#die-registrierung)
       - [Die Startseite](#die-startseite)
       - [Der Passwort Manager](#der-passwort-manager)
+      - [Der Eingabebereich](#der-eingabebereich)
+      - [Ein neues Passwort hinzufügen](#ein-neues-passwort-hinzufuegen)
    - [Die Hilfsfunktionen](#die-hilsfunktionen)
    - [Der Redux-Store](#der-redux-store)
 - [Das Backend](#das-backend)
@@ -280,7 +282,13 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
       
    
    ## Ein neues Passwort hinzufügen
-   Unten links hat man die Option seine Passwörter, die man bereits z.B. für die einzelnen Social Media Accounts festgelegt hat, einzugeben. Neben der Eingabe des        Passworts gibt es das zusätliche Feld "Beschreibung", in welchem man hinzufügt, wofür das Passwort ist. Mann kann also in die Beschreibung "Twitter" schreiben,        damit man anschließend weiß, dass das Passwort für den Twitter Account in diesem Fall ist. Wenn man dann nun das Feld für die Beschreibung und das Passwort            ausgefüllt hat, drückt man auf das Feld "Speichern", um seine Eingabe zu bestätigen. Die festgelegt Passwörter werden dann sobald das Masterpasswort nicht mehr        eingegeben ist, verschlüsselt.
+      
+   Eine der wichtigsten Funktionen eines Passwort Managers ist die Eingabe neuer Passwörter. Um diese dem Nutzer so schnell und einfach wie möglich zu machen, kann ein neues Passwort einfach über einen Klick auf die Schaltfläche `Neues Passwort hinzufügen` unter der Eingabe des Masterpasswortes hinzugefügt werden. Daraufhin öffnet sich ein zentriertes Modalfenster, in dem der Nutzer sein neues Passwort hinzufügen kann. 
+      
+   ![image](https://user-images.githubusercontent.com/65679099/230804937-e67dc8fa-a364-45be-ad1e-3853a4d35fcf.png)
+
+   Damit der Nutzer seine Passwörter einfach ordnen und auch wiederfinden kann, muss eine Beschreibung für das Passwort angegeben werden. Wenn beispielsweise das Instagram-Passwort gespeichert werden soll, ist eine Beschreibung wie `Instagram` sinnvoll, da es in der Passwörter-Tabelle auch eine Suchfunktion gibt und somit das Passwort und Sekunden wiedergefunden wird, wenn es nicht schon auf der ersten Seite der Tabelle zu sehen ist.
+   Wenn der Nutzer bereits ein 
    
    ## Die Passwortanzeige
       
