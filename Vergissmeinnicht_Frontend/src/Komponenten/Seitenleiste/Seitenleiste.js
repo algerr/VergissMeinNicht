@@ -12,7 +12,7 @@ class Seitenleiste extends Component {
 
     // Hier wird der Lifecycle-Hook componentDidMount() verwendet, um jQuery aufzurufen, nachdem die Komponente in das DOM eingefügt wurde.
     componentDidMount = () => {
-        // Der Click-Event-Handler wird für das Element mit der ID "menu-toggle" registriert.
+        // Der Click-Event-Handler wird für das Element mit der ID "seitenleiste-toggle" registriert.
         $("#seitenleiste-toggle").click(function (e) {
             // Wenn das Element geklickt wird, wird das Standard-Click-Event verhindert.
             e.preventDefault()
