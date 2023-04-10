@@ -743,7 +743,10 @@ In dem folgenden Bild sind die Operationen in Codeform zu erkennen. Der angegebe
       
       
 #  Das Backend
-      
+
+<details>
+   <summary><h2>Grundfunktionen</h2></summary>
+    
 ## Das Abrufen der Daten 
   
 ![carbon (18)](https://user-images.githubusercontent.com/111282979/230927660-e5e366b3-a736-4167-ab81-cc02ecd658bc.png)
@@ -803,7 +806,25 @@ Dieser Code definiert Funktionen für die Interaktion mit der Firestore-Datenban
 Die Funktion „Daten aktualisieren“ dient zum Aktualisieren der Daten in der Datenbank. Die Funktion muss mit der Firestore-Datenbank, der Sammlung, der ID des zu aktualisierenden Dokuments und den zu aktualisierenden Daten aufgerufen werden.
 Die Funktion „datenLoeschen“ dient zum Löschen von Dokumenten aus der Datenbank. Diese Funktion muss mit der Firestore-Datenbank, der Sammlung und der ID des zu löschenden Dokuments aufgerufen werden.
 Außerdem weist der Code darauf hin, dass zufällige IDs verwendet werden, um das Dokument auf den ersten Blick unkenntlich zu machen. Dies dient dem Schutz der Daten in der Datenbank.
+   
+<details>
+   <summary><h2>Router</h2></summary>
 
+## Die Authentifizierung 
+   
+ ![carbon (19)](https://user-images.githubusercontent.com/111282979/230934221-4e84eb06-a465-4486-ae88-603e2294bc50.png)
+   
+Dieser Code ist Teil der Node.js-Anwendung und für die Implementierung der Routing-Funktionalität verantwortlich. Das Express-Modul wird importiert, um einen Router zu erstellen, der verschiedene Routen für HTTP-Anforderungen an die Anwendung verwaltet. Authentifizierungsverwaltungsfunktionen wie Anmeldung, Registrierung, Kennwortaktualisierung, Kontolöschung und E-Mail-Aktualisierung werden ebenfalls eingegeben.
+Dann werden Routen definiert, indem Verwaltungsfunktionen mit HTTP-Methoden und -Pfads verknüpft werden. Hier wird für jede Funktion eine HTTP-POST-Methode mit dem entsprechenden Pfad definiert, auf den die Anwendung antworten soll.
+Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
+  
+
+   
+
+
+
+</details>
+<hr>
       
      
     
