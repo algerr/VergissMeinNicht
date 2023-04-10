@@ -13,7 +13,7 @@ class Seitenleiste extends Component {
     // Hier wird der Lifecycle-Hook componentDidMount() verwendet, um jQuery aufzurufen, nachdem die Komponente in das DOM eingefügt wurde.
     componentDidMount = () => {
         // Der Click-Event-Handler wird für das Element mit der ID "menu-toggle" registriert.
-        $("#menu-toggle").click(function (e) {
+        $("#seitenleiste-toggle").click(function (e) {
             // Wenn das Element geklickt wird, wird das Standard-Click-Event verhindert.
             e.preventDefault()
             // Die toggleClass() Methode von jQuery wird aufgerufen, um das Element mit der ID "wrapper" ein- oder auszublenden.
@@ -57,7 +57,7 @@ class Seitenleiste extends Component {
                     {/* Navigation Bar */}
                     <nav className="navbar-expand-lg navbar-light navbar border-bottom bg-light">
                         {/* Button zum Anzeigen der Seitenleiste */}
-                        <Button id="menu-toggle" className="btn btn-primary" variant="info">Leiste anzeigen</Button>
+                        <Button id="seitenleiste-toggle" className="btn btn-primary" variant="primary">Leiste anzeigen</Button>
                         {/* Button zum Öffnen der Navigation Bar auf Mobilgeräten, denn wir denken natürlich Cross-Plattform. */}
                         <button type="button" data-toggle="collapse" className="navbar-toggler" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
