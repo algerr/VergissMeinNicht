@@ -790,9 +790,16 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <hr>
    <details>
    <summary><h3>Aktionen</h3></summary>
-   ## Die Aktionstypen
+   
+   ##Die Aktionstypen
+   
+   ![carbon (23)](https://user-images.githubusercontent.com/111282979/230962347-d61d01f3-1859-49fe-b384-4376ff6a86b9.png)
+
+Dieser Code definiert die verschiedenen Aktionstypen in Redux, die verwendet werden, um Aktionen in Ihrer Anwendung eindeutig zu identifizieren. Jeder Aktionstyp ist eine Konstante, die dem Reducer als Schlüssel dient, um zu entscheiden, wie der Status der Anwendung aktualisiert werden soll. Hier ist beispielsweise der Aktionstyp SET_AUTHENTICATION_TOKEN, der zum Speichern des Authentifizierungstokens verwendet wird. Wenn eine Aktion ausgelöst wird, um das Authentifizierungstoken zu speichern, wird dieser Aktionstyp als Schlüssel für den Reduzierer verwendet, um zu entscheiden, wie der Status aktualisiert werden soll. Es gibt auch verschiedene Arten von Kennwortverwaltungsvorgängen, z. B. das Festlegen von Kennwörtern, das Hinzufügen, Aktualisieren und Löschen von Kennwörtern. Jeder dieser Aktionstypen ist ein Schlüssel für den Reduzierer, um die entsprechenden Änderungen im Anwendungszustand vorzunehmen. Schließlich gibt es auch verschiedene Aktionstypen für Mods, wie z. B. Anzeigen, Verbergen und Inhalte für Top- und Medium-Mods festlegen. Wiederum werden diese Arten von Aktionen als Schlüssel für den Reduzierer verwendet, um geeignete Änderungen am Zustand der Anwendung vorzunehmen. Es ist wichtig, dass diese Aktionstypen als dauerhaft definiert sind, um sicherzustellen, dass sie dauerhaft, leicht zugänglich und nicht versehentlich geändert werden können.
    
    ## Die Authentifizierung 
+   
+   
       
    ## Die Items
       
