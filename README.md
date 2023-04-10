@@ -40,9 +40,9 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
       - [Die Aktionstypen](#die-aktionstypen)
       - [Die Authentifizierung](#die-authentifizierung)
       - [Das Modalfenster](#das-modalfenster)
-      - [Die Reduzierungen](#die-reduzierungen)
-      - [Das Modalfenster](#das-modalfenster)
-      - [Der Reduxstore](#der-reduxstore)
+      - [Die Reduzierer](#die-reduzierer)
+      - [Die Steuerung der Modalfenster](#die-steuerung-der-modalfenster)
+      - [Die Verwaltung der Passwörter](#die-verwaltung-der-passwörter)
 - [Das Backend](#das-backend)
   - [Die Grundfunktionen](#die-grundfunktionen)
       - [Das Abrufen der Daten](#das-abrufen-der-daten)
@@ -866,20 +866,15 @@ export const SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER = "SETZE_INHALT_FUER_ZEN
    ![carbon (25)](https://user-images.githubusercontent.com/111282979/230963058-7ebf965c-e9f9-41b3-afc5-d2b80922b558.png)
 
    Wie vermutlich aus den vorigen Texten bereits angeklungen ist, spielt die Authentifizierung bei uns eine wichtige Rolle. Folglich haben wir einen Aktionserzeuger für den die Festlegung, bzw. die Speicherung des Authentifizierungstokens.
-Das Token wird als Parameter an die Funktion übergeben. So gibt die Funktion eine Aktion zurück, die den Aktionstyp `"AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN"` verwendet, um die Aktion in Redux eindeutig zu identifizieren.
+Das Token wird als Parameter an die Funktion übergeben. So gibt die Funktion eine Aktion zurück, die den importierten Aktionstyp `"AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN"` verwendet, um die Aktion in Redux eindeutig zu identifizieren.
 Das Token wird dann als Datenpaket in der Aktion übergeben und im Redux-Store gespeichert. Wenn ein Token existiert, also das Token einen Wert hat, wird ihm der Zusatz `„Bearer“` vorangestellt. Diese Auffüllung wird im Authorization-Header (Autorisierungsheader) der HTTP-Anfrage verwendet, um anzuzeigen, dass sich das Token im Bearer-Schema befindet, da JWTs sich in diesem Format befinden. Die Verwendung des `"Bearer"`-Zusatzes ermöglicht es dem Server, das Token einfach zu validieren, da dieser weiß, wie er mit der HTTP-Anfrage umgehen muss.
    Sollte kein Token vorhanden sein, wird einfach das Token, also `null` als Token übergeben, bzw. im Redux-Store geseichert.
       
    
       
-   ## Das Modal Fenster 
+   ## Die Steuerung der Modalfenster 
    ```javascript 
-    // In dieser Datei werden die Aktionserzeuger-Funktionen für die Verwaltung der Modalfenster in Redux definiert.
-// Durch die Verwendung der Aktionserzeuger-Funktionen wird die Verwaltung der Modalfenster in Redux zentralisiert und vereinfacht,
-// da Aktionstypen und Aktionserzeuger eine gemeinsame Schnittstelle bereitstellen, um eine Aktion auszulösen.
-// Anstatt jedes Mal manuell Aktionen zu erstellen, können diese Aktionserzeuger genutzt werden.
-// So bleibt der Code übersichtlich und kann bei Fehlern besser instandgehalten werden.
-
+   
 // Zuerst werden die Aktionstypen, für die eine Aktion erzeugt werden soll, importiert.
 import { ZENTRIERTES_MODALFENSTER_AUSBLENDEN, OBERES_MODALFENSTER_AUSBLENDEN, ZENTRIERTES_MODALFENSTER_ANZEIGEN, OBERES_MODALFENSTER_ANZEIGEN, SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER, SETZE_INHALT_FUER_OBERES_MODALFENSTER } from './aktionsTypen'
 
@@ -929,11 +924,11 @@ export const setzeInhaltFuerZentriertesModalfenster = (titel, inhalt, buttons) =
     }
 }
    ```      
- Dieser Code definiert eine Reihe von Redux-Aktionsgeneratorfunktionen, die verwendet werden, um die verschiedenen modalen Fenster in der Anwendungsschnittstelle zu verwalten.
-Zunächst werden die erforderlichen Operationstypen aus einer anderen Datei importiert, damit sie später in Aktivitätskonstruktoren verwendet werden können. Dann werden verschiedene Funktionen definiert, von denen jede eine Aktion zurückgibt, um ein bestimmtes modales Fenster zu öffnen oder zu schließen oder den Inhalt eines modalen Fensters einzustellen. Jede Funktion verwendet einen eindeutigen Aktionstyp, um sicherzustellen, dass die Aktion innerhalb der Redux-Anwendung eindeutig identifiziert werden kann. Beispielsweise gibt die ShowTopModalWindow-Funktion eine Aktion zurück, die das oberste modale Fenster mit dem Aktionstyp SHOWTOP_MODALWINDOW öffnet.
-Modale Fenstersteuerungen werden verwendet, um eine einheitliche Schnittstelle zum Auslösen von Aktionen in einer Redux-Anwendung bereitzustellen, die das Erscheinen von modalen Fenstern in der Benutzeroberfläche steuern. Dies erleichtert das Verständnis und die Wartung des Codes.     
-      
-      
+   Mit diesen Aktionserzeuger-Funktionen werden die verschiedenen Modalfenster in der Anwendung verwaltet.
+   Da die Modalfenster über den Redux-Store verwaltet werden, indem die Eigenschaften wie `Titel`, `Inhalt` und `Buttons` und der Boolean `gezeigt` dort gespeichert werden, können sie über Aktionen verändert, beispielsweise angezeigt oder ausgeblendet werden.
+   Zunächst werden die erforderlichen Aktionstypen importiert, damit sie für die Definition der Aktionserzeugern verwendet werden können. 
+   Dann werden verschiedene Funktionen definiert, von denen jede eine Aktion zurückgibt, um ein bestimmtes Modalfenster zu öffnen, zu schließen oder den Inhalt eines Modalfensters einzustellen. Jede Funktion verwendet einen eindeutigen Aktionstyp, um sicherzustellen, dass die Aktion innerhalb der Redux-Anwendung eindeutig identifiziert werden kann. 
+   Beispielsweise erzeugt die Funktion `oberesModalfensterAnzeigen` eine Aktion, die das obere Modalfenster mit dem Aktionstyp OBERES_MODALFENSTER_ANZEIGEN öffnet, bzw. anzeigt.   
       
    ## Die Passwörter 
    
