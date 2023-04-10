@@ -724,32 +724,35 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <hr>
    </details>
   
-
-   <details>
-   <summary><h2>Der Redux-Store</h2></summary>
+  <details>
+   <summary><h1>Der Redux-Store</h1></summary>  
+   
    ## Die Konfigurierung des Shops 
-   <hr>
-   <details>
-   <summary><h3>Aktionen</h3></summary>
+   
+  <details>
+   <summary><h1>Die Aktionen</h1></summary>
+   
    ## Die Aktionstypen
    
-   ## Die Authentifizierung 
-      
-   ## Die Items
-      
-   ## Die Modale
-   <hr>
-   </details>
-      
-   <details>
-   <summary><h3>Reduzierungen</h3></summary>
    ## Die Authentifizierung
-      
+   
    ## Die Items
-      
-   ## Die Modale 
-   <hr>
+   
+   ## Die Modale
+   
+  <details>
+   <summary><h1>Die Reduzierungen</h1></summary>
+   
+   ## Die Authentifizierung
+   
+   ## Die Items
+   
+   ## Die Modale
+   
+   
    </details>
+   <hr>
+    
 
 
 
