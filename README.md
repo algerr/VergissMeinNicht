@@ -1261,10 +1261,9 @@ return store
 export default reduxStore
    ```
 
-   Nachdem die 
-Dieser Code definiert eine Redux-Speicherkonfiguration, die es anderen Modulen ermöglicht, den erstellten Speicher zu importieren und zu verwenden.
-Zunächst werden die benötigten Funktionen Redux, createStore und CombineReducers importiert. Dann werden die drei Reducer Authentifizierung, Passwort und Methode aus separaten Modulen importiert.
-Mit CombineReducers werden diese Reduzierer zu einem Hauptreduzierer namens mainReducer kombiniert. Es wird verwendet, um den Status des Repositorys zu verwalten.
+   Nachdem alle Reduzierer mit Aktionen definiert und exportiert wurden, können diese nun zu einem großen `Hauptreduzierer` zusammengefasst werden und somit der Redux-Store verwaltet werden. So ist der Code übersichtlicher indem die Zustandsänderungen an einem Ort gehandhabt werden können. Dadurch werden keine zusätzlichen Abstraktionsschichten eingeführt und der Hauptreduzierer kann einfacher in die React-Anwendung integriert werden.
+     
+   Mit CombineReducers werden diese Reduzierer zu einem Hauptreduzierer namens mainReducer kombiniert. Es wird verwendet, um den Status des Repositorys zu verwalten.
 Dann folgen zwei Hilfsfunktionen saveInLocalMemory und LoadFromLocalMemory. Die erste Funktion speichert den Cache-Zustand im lokalen Speicher des Browsers, konvertiert den zwischengespeicherten Zustand in eine serialisierte JSON-Zeichenfolge und speichert ihn im Arbeitsspeicher. Die zweite Funktion lädt den Speicherzustand aus dem lokalen Speicher und kehrt zurück, falls er existiert. Der aktuelle Status des Speichers wird dann aus dem lokalen Speicher geladen, sofern verfügbar.
 Schließlich wird die reduxStore-Funktion definiert, um den Speicher zu erstellen. Die reduxStore-Funktion verwendet createStore, um einen Speicher mit dem Hauptreduzierer und dem aus dem lokalen Speicher geladenen Zustand zu erstellen. Der Event-Handler ist bei store.subscribe registriert, um den aktualisierten Status im lokalen Store zu speichern, wenn sich der Status des Stores ändert. Schließlich wird die reduxStore-Funktion als Standardfunktion exportiert, damit andere Module sie importieren und verwenden können.
       
