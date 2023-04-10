@@ -1,4 +1,4 @@
-import { PASSWORT_HINZUFUEGEN, PASSWORT_LOESCHEN, PASSWORT_AKTUALISIEREN, PASSWOERTER_FESTLEGEN } from '../aktionsErzeuger/aktionsTypen'
+import { PASSWORT_HINZUFUEGEN, PASSWORT_LOESCHEN, PASSWOERTER_FESTLEGEN } from '../aktionsErzeuger/aktionsTypen'
 
 // Der anfangsState enthält nur eine leere Liste.
 const anfangsState = {
@@ -22,18 +22,6 @@ const reduzierer = (state = anfangsState, aktion) => {
             return {
                 ...state,
                 liste: [...state.liste, aktion.passwort]
-            }
-
-        // Der Aktionstyp "PASSWORT_AKTUALISIEREN" aktualisiert ein vorhandenes Passwort in der Liste.
-        case PASSWORT_AKTUALISIEREN:
-            return {
-                ...state,
-                liste: state.liste.map(t => {
-                    if (t.id === aktion.passwort.id) {
-                        return aktion.passwort
-                    }
-                    return t
-                })
             }
 
         // Der Aktionstyp PASSWORT_LOESCHEN entfernt ein Passwort aus der Liste.
