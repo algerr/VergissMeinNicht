@@ -951,6 +951,16 @@ module.exports = (req, res, next) => {
 ```
 Dieser Code definiert eine Middleware-Funktion in Node.js, die verwendet wird, um die Benutzerautorisierung mit einem JSON Web Token (JWT) zu überprüfen.
 Eine Middleware-Funktion wird häufig zwischen Anfrage und Antwort in der HTTP-Anfragekette eingefügt, um Benutzerberechtigungen zu überprüfen, bevor die Anfrage an den Hauptanwendungscode weitergeleitet wird. Zunächst extrahiert die Funktion den „Authorization“-Header aus der HTTP-Anforderung, die das JWT-Token enthält. Wenn der Header fehlt oder leer ist, wird der Benutzer als nicht authentifiziert markiert und der folgende Middleware- oder Hauptanwendungscode wird aufgerufen. Wenn ein Token vorhanden ist, wird das Token aus dem Header extrahiert und durch Entschlüsselung unter Verwendung des in der Umgebungsvariablen TOKEN_SECRET gespeicherten geheimen Schlüssels verifiziert. Wenn das Token ungültig ist oder die Entschlüsselung fehlschlägt, wird der Benutzer als nicht authentifiziert markiert und die folgende Middleware oder der folgende Hauptanwendungscode aufgerufen. Wenn das Token jedoch erfolgreich verifiziert und entschlüsselt wird, wird der Benutzer als authentifiziert markiert, indem „true“ an das Attribut „authentication“ in der Anforderung gesendet wird, und der Benutzername wird aus dem Token extrahiert und als Attribut „username“ verwendet. auf Anfrage. Dann wird die nächste Haupt-Middleware oder der Anwendungscode aufgerufen. Die Middleware-Funktion ist daher ein wichtiger Bestandteil des sicheren und autorisierten Webanwendungs-Stacks, da sie sicherstellt, dass nur autorisierte Benutzer auf die meisten Ressourcen oder Funktionen zugreifen können, die durch Validierung und Dekodierung des JWT-Tokens identifiziert werden.
+   
+## Der Firestore
+   
+   ![carbon (22)](https://user-images.githubusercontent.com/111282979/230939931-4bb35db0-94e4-42e8-b889-490689298a2c.png)
+
+Dieser Code definiert die Middleware-Funktionalität für Express-Anwendungen, um sicherzustellen, dass alle ausgehenden HTTP-Antworten mit bestimmten HTTP-Headern gekennzeichnet sind. Diese Header sind nützlich, um Sicherheits- und Datenschutzprobleme zu vermeiden. Zunächst werden einige Konstanten definiert, die die Namen der Header enthalten, die in die HTTP-Antworten eingefügt werden sollen.
+Dann wird die Middleware-Funktion definiert. Es benötigt drei Argumente: das Anforderungsobjekt (req), das Antwortobjekt (res) und die nächste Zwischenfunktion (next).
+Die Header werden dann zu den Middleware-Funktionen hinzugefügt, indem die entsprechenden Methoden für das Response-Objekt (res) aufgerufen werden. Zunächst wird der X-Content-Type-Options-Header auf nosniff gesetzt, um zu verhindern, dass der Browser Dateien mit dem falschen MIME-Typ interpretiert.
+Dann wird der Header \'X-Frame-Options\' auf \'DENY\' gesetzt, um Clickjacking zu verhindern. Der Header der Inhaltssicherheitsrichtlinie ist auf eine Richtlinie festgelegt, die nur HTTPS-Verbindungen zulässt und XSS-Angriffe verhindert.
+Schließlich wird der Header \'X-XSS-Protection\' auf \'1 gesetzt; mode=block\' ist so eingestellt, dass XSS-Angriffe blockiert werden. Die nächste (nächste) Middleware-Funktion wird dann aufgerufen, um die Anforderung an die nächste Middleware-Funktion oder Route weiterzuleiten.
 
 
    
