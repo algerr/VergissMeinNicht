@@ -817,6 +817,16 @@ Außerdem weist der Code darauf hin, dass zufällige IDs verwendet werden, um da
 Dieser Code ist Teil der Node.js-Anwendung und für die Implementierung der Routing-Funktionalität verantwortlich. Das Express-Modul wird importiert, um einen Router zu erstellen, der verschiedene Routen für HTTP-Anforderungen an die Anwendung verwaltet. Authentifizierungsverwaltungsfunktionen wie Anmeldung, Registrierung, Kennwortaktualisierung, Kontolöschung und E-Mail-Aktualisierung werden ebenfalls eingegeben.
 Dann werden Routen definiert, indem Verwaltungsfunktionen mit HTTP-Methoden und -Pfads verknüpft werden. Hier wird für jede Funktion eine HTTP-POST-Methode mit dem entsprechenden Pfad definiert, auf den die Anwendung antworten soll.
 Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
+   
+## Das Passwort
+   
+ ![carbon (20)](https://user-images.githubusercontent.com/111282979/230936231-742f79dd-7c69-4407-bdf6-1ca340854c13.png)
+   
+ Dieser Code erstellt ein Router-Objekt mit dem Express-Modul. Router werden verwendet, um verschiedene Routen in Express zu definieren und sie Verwaltungsfunktionen zuzuordnen. Die Verwaltungsfunktionen für die verschiedenen Routen werden aus \'../Management/password.js\' importiert und sind addpassword, deletepassword und allpasswords. Diese Funktionen sind für das Hinzufügen, Entfernen und Extrahieren von Passwörtern aus der Datenbank verantwortlich. Routen werden definiert, indem geeignete Controller-Funktionen an HTTP-Methoden und -Pfade gebunden werden. 
+router.post(\'/\',Addpassword) definiert eine Route zum Hinzufügen eines Passworts und verwendet die HTTP-POST-Methode und den "/\"-Pfad. router.delete(\'/:passwordId\',passwordLoeschen) definiert eine Route zum Entfernen von Passwörtern basierend auf der ID und verwendet die HTTP-Methode DELETE sowie den Pfad \'/:passwordId\'. Die Passwort-ID wird als Parameter in der URL übergeben. router.get(\'/\',allpasswords) definiert eine Route zum Abrufen aller Passwörter und verwendet die HTTP GET-Methode und den Pfad "/\". 
+Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
+
+   
   
 
    
