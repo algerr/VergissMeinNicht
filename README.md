@@ -986,8 +986,20 @@ Die Funktion `passwoerterFestlegen` erzeugt eine Aktion zum Festlegen der Passw�
       
       
    <details>
-   <summary><h3>Reduzierungen</h3></summary>
-   ## Die Authentifizierung
+   <summary><h3>Die Reduzierer</h3></summary>
+      
+   Reduzierer sind Funktionen, die den Zustand eines Redux-Stores verwalten und diesen mit Aktionsobjekten aktualisieren.
+   Sie erhalten den aktuellen Zustand des Redux-Stores und eine Aktion als Parameter und geben einen neuen Zustand zurück.
+      
+   ```javascript
+   (zustand, aktionsObjekt) => neuerZustand
+   ```
+      
+   Um eine klare Trennung in der Verwaltung der unterschiedlichen Zustände zu ermöglichen, werden unterschiedliche Reduzierer verwendet, die sich um unterschiedliche Teile des Zustandes kümmern.
+      
+   In unserer Anwendung nutzen wir drei Reduzierer für die `Authentifizierung`, die `Passwörter` und die `Modalfenster`.
+      
+   ## Der Authentifizierungsreduzierer
       
 ```javascript      
 import { AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN } from '../aktionsErzeuger/aktionsTypen'
@@ -1019,8 +1031,11 @@ const reduzierer = (zustand = anfangsZustand, aktion) => {
 export default reduzierer
 ```
       
-Das Code-Snippet definiert einen Redux-Reduzierer, der für die Verwaltung des Authentifizierungstokens verantwortlich ist. Der Anfangszustand des Reduzierers enthält eine leere Token-Eigenschaft. Die Reduce-Funktion benötigt zwei Parameter: den aktuellen Zustand und die auszuführende Aktion. Wenn die Aktion vom Typ SET_AUTHENTICATIONTOKEN ist, wird ein neuer Status zurückgegeben, wobei die Tokeneigenschaft in der Aktion auf token gesetzt ist. Andernfalls wird der aktuelle Zustand zurückgegeben.
-Schließlich wird Reducer als Standardexport angezeigt, sodass andere Module es importieren und in Ihr Redux-Speicher-Setup integrieren können.
+   Dieser Reduzierer kümmert sich nur um die Aktualisierung des Authentifizierungstokens im Redux-Store. Der Anfangszustand des Reduzierers enthält ein leeres Token als Eigenschaft. Die `reduzier`-Funktion benötigt zwei Parameter: den aktuellen Zustand und die auszuführende Aktion. 
+   Da dieser Reduzierer nur bei einer Aktion vom Typ `AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN` aktiv werden soll, wird durch ein Switch-Statement überprüft, dass der Aktionstyp auch wirklich `AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN` ist.
+   Wenn dies der Fall ist, wird ein neuer Zustand und ein Token zurückgegeben, das auf das in der Aktion übergebene Token gesetz wird.
+   Andernfalls wird der aktuelle Zustand zurückgegeben.
+   Schließlich wird der Reduzierer als Standardexport angezeigt, sodass andere Module ihn importieren können und so den Zustand des Authentifizierungstoken im Redux-State aktualisieren können.
       
    ## Das Modalfenster
       ```javascript
@@ -1124,70 +1139,64 @@ const reduzierer = (zustand = anfangsZustand, aktion) => {
 export default reduzierer
 ```
       
- Dieser Code definiert eine Funktion namens "reducer", die als Reducer-Funktion in einer Redux-Anwendung verwendet werden kann. Reducer ist eine Funktion, die den Status der Anwendung basierend auf der Aktion und dem aktuellen Status der Anwendung aktualisiert. Die Reducer-Funktion benötigt zwei Parameter: den aktuellen Status der Anwendung und die auszuführende Aktion. Beim ersten Aufruf der Funktion ist der Standardzustand "initialState". Reducer verarbeiten Aktionen mit Switch-Anweisungen basierend auf Aktionstypen. Für jeden Aktionstyp gibt es eine entsprechende Instanz in der switch-Anweisung, die den Status der Anwendung basierend auf dieser Aktion aktualisiert. Jede Instanz gibt einen neuen Zustand zurück, indem sie eine Kopie des vorherigen Zustands erstellt und dann nur die in der Aktion angegebenen Eigenschaften ändert.
-In diesem Fall hat der Zustand zwei Eigenschaften, „top modal“ und „center modal“, die jeweils ein Objekt mit den Eigenschaften „display“, „title“, „content“ und „buttons“ enthalten. Verschiedene Arten von Aktionen können diese Zustandseigenschaften ändern, z. B. das Ein- oder Ausblenden eines Modals oder das Aktualisieren seines Inhalts.
-Schließlich gibt die "Reduce"-Funktion einen neuen Zustand zurück, der durch die durchgeführten Aktionen erzeugt wurde.
+   Wie beim Authentifizierungs-Reduzier wird auch hier ein Anfangszustand für die beiden Modalfenster definiert. Standardmäßig werden beide Modalfenster nicht angezeigt und besitzen keinerlei Inhalt. Die Reduzier-Funktion benötigt nun zwei Parameter: den aktuellen Status der Modalfenster und die auszuführende Aktion. 
+   Um ohne viele `if`-Statements die unterschiedlichen Aktionen verarbeiten zu können, werden ein Switch-Statement verwendet und basierend auf den Aktionstypen Instanzen erzeugt, die je nach Aktion den Zustand aktualisieren. Jede Instanz gibt einen neuen Zustand zurück, indem sie den vorherigen Zustands verwendet und dann nur die in der Aktion angegebenen Eigenschaften ändert.
+In diesem Fall hat der Zustand zwei Eigenschaften, „oberesModalfenster“ und „zentriertesModalfenster“. Verschiedene Arten von Aktionen können diese Zustandseigenschaften ändern, z. B. das Ein- oder Ausblenden eines Modals oder das Aktualisieren seines Inhalts.
+Schließlich gibt die "Reduzier"-Funktion einen neuen Zustand und ein oberes oder zentriertes Modalfenster zurück, die durch die durchgeführten Aktionen erzeugt wurden.
       
-   ## Die Passwörter 
+   ## Der Passwörter-Reduzierer
    ```javascript   
-   import { PASSWORT_HINZUFUEGEN, PASSWORT_LOESCHEN, PASSWORT_AKTUALISIEREN, PASSWOERTER_FESTLEGEN } from '../aktionsErzeuger/aktionsTypen'
+   import { PASSWORT_HINZUFUEGEN, PASSWORT_LOESCHEN, PASSWOERTER_FESTLEGEN } from '../aktionsErzeuger/aktionsTypen'
 
-// Der anfangsState enthält nur eine leere Liste.
-const anfangsState = {
+// Der anfangsZustand enthält nur eine leere Liste.
+const anfangsZustand = {
     liste: []
 }
 
-// Der Reduzierer nimmt den aktuellen State (oder den anfangsState) und eine Aktion entgegen und gibt den neuen State zurück.
-const reduzierer = (state = anfangsState, aktion) => {
+// Der Reduzierer nimmt den aktuellen Zustand (oder den anfangsZustand) und eine Aktion entgegen und gibt den neuen Zustand zurück.
+const reduzierer = (zustand = anfangsZustand, aktion) => {
     // In diesem Switch-Block werden die verschiedenen Aktionstypen behandelt.
     switch (aktion.type) {
 
         // Der Aktionstyp "PASSWOERTER_FESTLEGEN" setzt den gesamten State auf eine neue Liste von Passwörtern.
         case PASSWOERTER_FESTLEGEN:
             return {
-                ...state,
+                ...zustand,
                 liste: aktion.passwoerter
             }
 
         // Der Aktionstyp "PASSWORT_HINZUFUEGEN" fügt der Liste ein neues Passwort hinzu.
         case PASSWORT_HINZUFUEGEN:
             return {
-                ...state,
-                liste: [...state.liste, aktion.passwort]
-            }
-
-        // Der Aktionstyp "PASSWORT_AKTUALISIEREN" aktualisiert ein vorhandenes Passwort in der Liste.
-        case PASSWORT_AKTUALISIEREN:
-            return {
-                ...state,
-                liste: state.liste.map(t => {
-                    if (t.id === aktion.passwort.id) {
-                        return aktion.passwort
-                    }
-                    return t
-                })
+                ...zustand,
+                liste: [...zustand.liste, aktion.passwort]
             }
 
         // Der Aktionstyp PASSWORT_LOESCHEN entfernt ein Passwort aus der Liste.
         case PASSWORT_LOESCHEN:
             return {
-                ...state,
-                liste: state.liste.filter(t => t.id !== aktion.passwort.id)
+                ...zustand,
+                liste: zustand.liste.filter(t => t.id !== aktion.passwort.id)
             }
 
-        // Wenn keiner der oben genannten Aktionstypen aufgerufen wird, gibt der Reduzierer einfach den aktuellen state zurück.
+        // Wenn keiner der oben genannten Aktionstypen aufgerufen wird, gibt der Reduzierer einfach den aktuellen Zustand zurück.
         default:
-            return state
+            return zustand
     }
 }
 
 // Zum Schluss wird der Reduzierer als Standard exportiert, sodass andere Module diesen importieren können.
 export default reduzierer
 ```
+      
+   Beim Passwörter-Reduzierer besteht der Anfangszustand aus einer leeren Liste, in der die Passwörter im Redux-Store gespeichert werden.
+   Auch hier wird mit einem Switch-Statement zwischen den Aktionstypen zur Passwörterverwaltung unterschieden.
+   Wenn ein Passwort hinzugefügt werden soll, wird der neue Zustand und der Zustand der Liste gemeinsam mit dem Passwort aus der Aktion hinten angehängt, zurückgegeben.
+   Beim Löschen eines Passwortes wird ein Zustand der Liste zurückgegeben, in dem das Passwort mit der gewünschten Id entfernt wird.
+   Wenn die Passwörter für die Liste festgelegt werden sollen, wird einfach die Liste mit den Passwörtern aus der Aktion zurückgegeben.
 
       
-   ## Der Reduxstore
- ```javascript 
+   ```javascript 
 // Die beiden essentiellen Funktionen für Redux-Stores.
 import { createStore, combineReducers } from 'redux'
 
@@ -1248,8 +1257,9 @@ return store
 }
 // Der ReduxStore wird als Standardfunktion exportiert, sodass andere Module diesen importieren können.
 export default reduxStore
-```
+   ```
 
+   Nachdem die 
 Dieser Code definiert eine Redux-Speicherkonfiguration, die es anderen Modulen ermöglicht, den erstellten Speicher zu importieren und zu verwenden.
 Zunächst werden die benötigten Funktionen Redux, createStore und CombineReducers importiert. Dann werden die drei Reducer Authentifizierung, Passwort und Methode aus separaten Modulen importiert.
 Mit CombineReducers werden diese Reduzierer zu einem Hauptreduzierer namens mainReducer kombiniert. Es wird verwendet, um den Status des Repositorys zu verwalten.
