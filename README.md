@@ -679,24 +679,50 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    ```javascript
    componentDidMount = () => {
-      // Der Click-Event-Handler wird für das Element mit der ID "seitenleiste-toggle" registriert.
-      $("#seitenleiste-toggle").click(function (e) {
+      // Der Click-Event-Handler wird für das Element mit der ID "seitenleiste-umschalten" registriert.
+      $("#seitenleiste-umschalten").click(function (e) {
          // Wenn das Element geklickt wird, wird das Standard-Click-Event verhindert.
          e.preventDefault()
          // Die toggleClass() Methode von jQuery wird aufgerufen, um das Element mit der ID "wrapper" ein- oder auszublenden.
-         // Wenn das Element die CSS-Klasse "toggled" trägt, wird sie entfernt. Ansonsten wird sie diesem hinzugefügt.
-         $("#wrapper").toggleClass("toggled")
+         // Wenn das Element die CSS-Klasse "anzeigen" trägt, wird sie entfernt. Ansonsten wird sie diesem hinzugefügt.
+         $("#wrapper").toggleClass("anzeigen")
       })
 
       // Wenn der Benutzer scrollt, passt diese Funktion die Position des Elements mit der ID "leisten-wrapper" an,
-      // um es immer sichtbar zu halten.
+      // um die Seitenleiste immer sichtbar zu halten. Diese bewegt sich beim Scrollen nicht.
       window.onscroll = () => {
          $("#leisten-wrapper").css("top", window.pageYOffset)
       }
    }
    ```
       
+   Um das Auf- und Zuklappen der Seitenleiste über die Schaltfläche `Leiste anzeigen` zu ermöglichen, wird über die Methode `componentDidMount` direkt, sobald die Komponente gerendert ist, ein Click-Event-Handler für das Element mit der ID "seitenleiste-toggle" registriert.
+   Diese ID trägt die Schaltfläche.
+      
+   ```javascript
+   <Button id="seitenleiste-toggle" className="btn btn-primary" variant="primary">Leiste anzeigen</Button>
+   ```
    
+   Wenn der Nutzer diese also anklickt, wird zuerst die browserabhängige Standardaktion beim Anklicken einer Schaltfläche verhindert und daraufhin über die `toggleClass`-Methode von jQuery allen Elementen mit der ID `wrapper` die Klasse `anzeigen`, falls sie diese noch nicht besitzen, hinzugefügt und ansonsten entfernt.
+   Zudem wird über den `window.onscroll` Event-Listener die Position der Seitenleiste auch beim Scrollen beibehalten.
+   `window.pageYOffset` ist eine Eigenschaft des `window`-Objekts in JavaScript, die den vertikalen Scroll-Offset, also die vertiale Position, der Seite im aktuellen Fenster zurückgibt.
+   Dadurch dass der Event-Listener `onscroll` an das `window` gebunden wird, wird bei jedem Mal, wenn der Nutzer scrollt, die CSS-Eigenschaft `top` des Elements mit der ID #leisten-wrapper durch jQuery auf den aktuellen Wert von `window.pageYOffset` gesetzt. So bewegt sich die Seitenleiste vertikal mit der Seite mit und bleibt immer sichtbar, auch wenn der Nutzer scrollt.
+      
+   ```javascript
+   // Wenn der Nutzer sich über denn Button in der oberen rechten Ecke abmeldet,
+   onAbmelden = () => {
+      // werden diese beiden Eigenschaften von den props destrukturiert.
+      const { authentifizierungsTokenFestlegen, passwoerterFestlegen} = this.props
+      // So lässt sich das Token aus dem Redux-Store entfernen, sodass der Nutzer nicht wieder angemeldet wird.
+      authentifizierungsTokenFestlegen(null)
+      // Und die Liste der angezeigten Passwörter kann geleert werden.
+      passwoerterFestlegen([])
+   }
+   ```
+   
+   Wenn der Nutzer die Schaltfläche `Abmelden` anklickt, werden die Eigenschaften `authentifizierungsTokenFestlegen` und `passwoerterFestlegen` destrukturiert, sodass daraufhin das Authentifizierungstoken im Redux-Store entfernt, bzw. auf `null` gesetzt werden kann und die Liste der Passwörter im Redux-Store geleert werden kann.
+   So wird sichergestellt, dass der Nutzer, nachdem er sich abgemeldet hat, nicht noch über den lokalen Speicher auf sein Token oder gar die gespeicherten Passwörter zugreifen kann.
+      
       
    </details>
    
@@ -724,35 +750,32 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <hr>
    </details>
   
-  <details>
-   <summary><h1>Der Redux-Store</h1></summary>  
-   
-   ### Die Konfigurierung des Shops 
-   
-  <details>
-   <summary><h1>Die Aktionen</h1></summary>
-   
-   ### Die Aktionstypen
-   
-   ### Die Authentifizierung
-   
-   ### Die Items
-   
-   ### Die Modale
-   
-  <details>
-   <summary><h1>Die Reduzierungen</h1></summary>
-   
-   ### Die Authentifizierung
-   
-   ### Die Items
-   
-   ### Die Modale
-   
-   
-   </details>
+
+   <details>
+   <summary><h2>Der Redux-Store</h2></summary>
+   ## Die Konfigurierung des Shops 
    <hr>
-    
+   <details>
+   <summary><h3>Aktionen</h3></summary>
+   ## Die Aktionstypen
+   
+   ## Die Authentifizierung 
+      
+   ## Die Items
+      
+   ## Die Modale
+   <hr>
+   </details>
+      
+   <details>
+   <summary><h3>Reduzierungen</h3></summary>
+   ## Die Authentifizierung
+      
+   ## Die Items
+      
+   ## Die Modale 
+   <hr>
+   </details>
 
 
 
