@@ -752,7 +752,7 @@ Es gibt zwei JavaScript-Funktionen, die exportiert werden können. Die erste Fun
 Die zweite Funktion heißt passwordDataRetrieval und nimmt ein Passwortobjekt als Parameter. Diese Funktion gibt auch ein neues Objekt zurück, dass die gespeicherten Passwortdaten aus der Datenbank enthält. Dazu gehören Benutzername, Passwortbeschreibung, verschlüsseltes Passwort und Nonce. Allgemeinen handelt es sich bei diesen Funktionen um einfache JavaScript-Module, mit denen Daten aus einer Datenbank verarbeitet und abgerufen werden können.
 
 ## Die Funktionen der Datenbank 
-'''javascript      
+```javascript      
 // fuer die Operationen in der Datenbank werden die Funktionen zum: Hinzufuegen, Lesen, Aktualisieren, Löschen.
 
 // ----------------------------------------------------------------------------------------------------------
@@ -798,7 +798,7 @@ exports.datenAktualisieren = (datenbank, sammlung, id, aktualisierteDaten) => {
 exports.datenLoeschen = (datenbank, sammlung, id) => {
     return datenbank.collection(sammlung).doc(id).delete()
 }
-'''
+```
 
 
       
