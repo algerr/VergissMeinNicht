@@ -1,5 +1,5 @@
 // Diese Funktion 'benutzerDatenAbrufen' erhält ein Benutzerobjekt als Parameter und gibt ein neues Objekt 
-// mit den gespeicherten Daten der Benutzer aus der Datenbank zurück.
+// mit den gespeicherten Daten des Benutzers aus der Datenbank zurück.
 exports.benutzerDatenAbrufen = (benutzer) => {
     return {
         benutzername: benutzer.benutzername,
@@ -8,13 +8,13 @@ exports.benutzerDatenAbrufen = (benutzer) => {
     }
 }
 
-// Diese Funktion 'passwortDaten' erhält ein Passwortobjekt als Parameter und gibt ein neues Objekt 
+// Diese Funktion 'passwortDatenAbrufen' erhält ein Passwortobjekt als Parameter und gibt ein neues Objekt 
 // mit den gespeicherten Daten des Passwortes aus der Datenbank zurück.
 exports.passwortDatenAbrufen = (passwort) => {
     return {
         benutzername: passwort.benutzername,
-        beschreibung: passwort.description,
-        passwort_verschluesselt: passwort.encryptedPass,
-        nonce: passwort.nonce,
+        beschreibung: passwort.beschreibung,
+        verschluesseltesPasswort: passwort.verschluesseltesPasswort,
+        sicherheitswert: passwort.sicherheitswert,
     }
 }
