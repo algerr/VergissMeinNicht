@@ -1304,6 +1304,13 @@ In dem folgenden Bild sind die Operationen in Codeform zu erkennen. Der angegebe
 
       
       
+</details>
+      
+      
+      
+      
+      
+      
       
 #  Das Backend
 
@@ -1918,7 +1925,7 @@ Es gibt zwei Router, PasswordRouter und AuthenticationRouter, die Endpunkte bei 
 
 
 
-</details>
+
 <hr>
       
      
