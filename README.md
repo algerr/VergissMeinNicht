@@ -752,7 +752,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    </details>
    
    ## Die Tabelle
-   In der Tabelle werden die Passwörter mit den zugehörigen Beschreibungen aufgelistet, sodass man diese einsehen kann. Wenn das Masterpasswort eingegeben ist und        seine Passwörter in dem Moment in der Tabelle nicht verschlüsselt sind, kann man jeweils ein Passwort ansehen und es gegebenfalls kopieren, um es dann anschließend    wo man es auch immer haben möchte, einzufügen. Sobald das Masterpasswort wieder ausgetragen ist, zeigt die Tabelle die festgelegt Passwörter nicht mehr an, sondern    folgende Nachricht:"Das Passwort ist verschlüsselt"
+   In der Tabelle werden die Passwörter mit den zugehörigen Beschreibungen aufgelistet, sodass man diese einsehen kann. Wenn das Masterpasswort eingegeben ist und        seine Passwörter in dem Moment in der Tabelle nicht verschlüsselt sind, kann man jeweils ein Passwort ansehen und es gegebenfalls kopieren, um es dann anschließend    wo man es auch immer haben möchte, einzufügen. Sobald das Masterpasswort wieder ausgetragen ist, zeigt die Tabelle die festgelegt Passwörter nicht mehr an, sondern    folgende Nachricht: "Das Passwort ist verschlüsselt!"
     
    <details>
    <summary>Nähere Informationen</summary>
@@ -809,59 +809,59 @@ Das Token wird dann als Datenpaket in die Aktivität eingebettet. Wenn der Token
    ## Das Modal Fenster 
      ```javascript 
     // In dieser Datei werden die Aktionserzeuger-Funktionen für die Verwaltung der Modalfenster in Redux definiert.
-// Durch die Verwendung der Aktionserzeuger-Funktionen wird die Verwaltung der Modalfenster in Redux zentralisiert und vereinfacht,
-// da Aktionstypen und Aktionserzeuger eine gemeinsame Schnittstelle bereitstellen, um eine Aktion auszulösen.
-// Anstatt jedes Mal manuell Aktionen zu erstellen, können diese Aktionserzeuger genutzt werden.
-// So bleibt der Code übersichtlich und kann bei Fehlern besser instandgehalten werden.
+   // Durch die Verwendung der Aktionserzeuger-Funktionen wird die Verwaltung der Modalfenster in Redux zentralisiert und vereinfacht,
+   // da Aktionstypen und Aktionserzeuger eine gemeinsame Schnittstelle bereitstellen, um eine Aktion auszulösen.
+   // Anstatt jedes Mal manuell Aktionen zu erstellen, können diese Aktionserzeuger genutzt werden.
+   // So bleibt der Code übersichtlich und kann bei Fehlern besser instandgehalten werden.
 
-// Zuerst werden die Aktionstypen, für die eine Aktion erzeugt werden soll, importiert.
-import { ZENTRIERTES_MODALFENSTER_AUSBLENDEN, OBERES_MODALFENSTER_AUSBLENDEN, ZENTRIERTES_MODALFENSTER_ANZEIGEN, OBERES_MODALFENSTER_ANZEIGEN, SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER, SETZE_INHALT_FUER_OBERES_MODALFENSTER } from './aktionsTypen'
+   // Zuerst werden die Aktionstypen, für die eine Aktion erzeugt werden soll, importiert.
+   import { ZENTRIERTES_MODALFENSTER_AUSBLENDEN, OBERES_MODALFENSTER_AUSBLENDEN, ZENTRIERTES_MODALFENSTER_ANZEIGEN, OBERES_MODALFENSTER_ANZEIGEN, SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER, SETZE_INHALT_FUER_OBERES_MODALFENSTER } from './aktionsTypen'
 
-// Mit dieser Funktionen, wird das obere Modalfenster angezeigt, da die Aktion "OBERES_MODALFENSTER_ANZEIGEN" ausgeführt wird.
-export const oberesModalfensterAnzeigen = () => {
-    return {
-        type: OBERES_MODALFENSTER_ANZEIGEN,
-    }
-}
+   // Mit dieser Funktionen, wird das obere Modalfenster angezeigt, da die Aktion "OBERES_MODALFENSTER_ANZEIGEN" ausgeführt wird.
+   export const oberesModalfensterAnzeigen = () => {
+       return {
+           type: OBERES_MODALFENSTER_ANZEIGEN,
+       }
+   }
 
-// Mit dieser Funktionen, wird das zentrierte Modalfenster angezeigt, da die Aktion "ZENTRIERTES_MODALFENSTER_ANZEIGEN" ausgeführt wird.
-export const zentriertesModalfensterAnzeigen = () => {
-    return {
-        type: ZENTRIERTES_MODALFENSTER_ANZEIGEN,
-    }
-}
+   // Mit dieser Funktionen, wird das zentrierte Modalfenster angezeigt, da die Aktion "ZENTRIERTES_MODALFENSTER_ANZEIGEN" ausgeführt wird.
+   export const zentriertesModalfensterAnzeigen = () => {
+       return {
+           type: ZENTRIERTES_MODALFENSTER_ANZEIGEN,
+       }
+   }
 
-// Mit dieser Funktionen, wird das obere Modalfenster ausgeblendet, da die Aktion "OBERES_MODALFENSTER_AUSBLENDEN" ausgeführt wird.
-export const oberesModalfensterAusblenden = () => {
-    return {
-        type: OBERES_MODALFENSTER_AUSBLENDEN,
-    }
-}
+   // Mit dieser Funktionen, wird das obere Modalfenster ausgeblendet, da die Aktion "OBERES_MODALFENSTER_AUSBLENDEN" ausgeführt wird.
+   export const oberesModalfensterAusblenden = () => {
+       return {
+           type: OBERES_MODALFENSTER_AUSBLENDEN,
+       }
+   }
 
-// Mit dieser Funktionen, wird das zentrierte Modalfenster ausgeblendet, da die Aktion "ZENTRIERTES_MODALFENSTER_AUSBLENDEN" ausgeführt wird.
-export const zentriertesModalfensterAusblenden = () => {
-    return {
-        type: ZENTRIERTES_MODALFENSTER_AUSBLENDEN,
-    }
-}
+   // Mit dieser Funktionen, wird das zentrierte Modalfenster ausgeblendet, da die Aktion "ZENTRIERTES_MODALFENSTER_AUSBLENDEN" ausgeführt wird.
+   export const zentriertesModalfensterAusblenden = () => {
+       return {
+           type: ZENTRIERTES_MODALFENSTER_AUSBLENDEN,
+       }
+   }
 
-// Mit dieser Funktionen, wird der Inhalt für das obere Modalfenster gesetzt, da die Aktion "SETZE_INHALT_FUER_OBERES_MODALFENSTER" ausgeführt wird.
-// Der Inhalt besteht aus einem Titel im Header des Modalfensters, dem Inhalt im Body und den Buttons im Footer.
-export const setzeInhaltFuerOberesModalfenster = (titel, inhalt, buttons) => {
-    return {
-        type: SETZE_INHALT_FUER_OBERES_MODALFENSTER,
-        titel, inhalt, buttons
-    }
-}
+   // Mit dieser Funktionen, wird der Inhalt für das obere Modalfenster gesetzt, da die Aktion "SETZE_INHALT_FUER_OBERES_MODALFENSTER" ausgeführt wird.
+   // Der Inhalt besteht aus einem Titel im Header des Modalfensters, dem Inhalt im Body und den Buttons im Footer.
+   export const setzeInhaltFuerOberesModalfenster = (titel, inhalt, buttons) => {
+       return {
+           type: SETZE_INHALT_FUER_OBERES_MODALFENSTER,
+           titel, inhalt, buttons
+       }
+   }
 
-// Mit dieser Funktionen, wird der Inhalt für das zentrierte Modalfenster gesetzt, da die Aktion "SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER" ausgeführt wird.
-// Der Inhalt besteht aus einem Titel im Header des Modalfensters, dem Inhalt im Body und den Buttons im Footer.
-export const setzeInhaltFuerZentriertesModalfenster = (titel, inhalt, buttons) => {
-    return {
-        type: SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER,
-        titel, inhalt, buttons
-    }
-}
+   // Mit dieser Funktionen, wird der Inhalt für das zentrierte Modalfenster gesetzt, da die Aktion "SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER" ausgeführt wird.
+   // Der Inhalt besteht aus einem Titel im Header des Modalfensters, dem Inhalt im Body und den Buttons im Footer.
+   export const setzeInhaltFuerZentriertesModalfenster = (titel, inhalt, buttons) => {
+       return {
+           type: SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER,
+           titel, inhalt, buttons
+       }
+   }
 ```      
  Dieser Code definiert eine Reihe von Redux-Aktionsgeneratorfunktionen, die verwendet werden, um die verschiedenen modalen Fenster in der Anwendungsschnittstelle zu verwalten.
 Zunächst werden die erforderlichen Operationstypen aus einer anderen Datei importiert, damit sie später in Aktivitätskonstruktoren verwendet werden können. Dann werden verschiedene Funktionen definiert, von denen jede eine Aktion zurückgibt, um ein bestimmtes modales Fenster zu öffnen oder zu schließen oder den Inhalt eines modalen Fensters einzustellen. Jede Funktion verwendet einen eindeutigen Aktionstyp, um sicherzustellen, dass die Aktion innerhalb der Redux-Anwendung eindeutig identifiziert werden kann. Beispielsweise gibt die ShowTopModalWindow-Funktion eine Aktion zurück, die das oberste modale Fenster mit dem Aktionstyp SHOWTOP_MODALWINDOW öffnet.
@@ -1209,7 +1209,7 @@ Mit CombineReducers werden diese Reduzierer zu einem Hauptreduzierer namens main
 Dann folgen zwei Hilfsfunktionen saveInLocalMemory und LoadFromLocalMemory. Die erste Funktion speichert den Cache-Zustand im lokalen Speicher des Browsers, konvertiert den zwischengespeicherten Zustand in eine serialisierte JSON-Zeichenfolge und speichert ihn im Arbeitsspeicher. Die zweite Funktion lädt den Speicherzustand aus dem lokalen Speicher und kehrt zurück, falls er existiert. Der aktuelle Status des Speichers wird dann aus dem lokalen Speicher geladen, sofern verfügbar.
 Schließlich wird die reduxStore-Funktion definiert, um den Speicher zu erstellen. Die reduxStore-Funktion verwendet createStore, um einen Speicher mit dem Hauptreduzierer und dem aus dem lokalen Speicher geladenen Zustand zu erstellen. Der Event-Handler ist bei store.subscribe registriert, um den aktualisierten Status im lokalen Store zu speichern, wenn sich der Status des Stores ändert. Schließlich wird die reduxStore-Funktion als Standardfunktion exportiert, damit andere Module sie importieren und verwenden können.
       
-      
+   </details> 
    <hr>
    </details>
 
