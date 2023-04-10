@@ -26,6 +26,7 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
       - [Der Passwort Manager](#der-passwort-manager)
       - [Der Eingabebereich](#der-eingabebereich)
       - [Ein neues Passwort hinzufügen](#ein-neues-passwort-hinzufuegen)
+      - [Die Passwortanzeige](#die-passwortanzeige)
    - [Die Hilfsfunktionen](#die-hilsfunktionen)
    - [Der Redux-Store](#der-redux-store)
 - [Das Backend](#das-backend)
@@ -392,7 +393,98 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    
    ## Die Passwortanzeige
+   
+   Um die Passwörter zu schützen, wird sichergestellt, dass sie dem Nutzer nur angezeigt werden, wenn das Masterpasswort vollständig eingegeben ist. Wenn dies nicht der Fall ist, wird ein Passworttext "●●●●●●●●●●●●●●●●●●●●●●" angezeigt, der das Passwort maskiert. Neben dem Passwort gibt es drei Schaltflächen, um das Passwort zu kopieren, anzuzeigen und zu löschen. Solange das Passwort nicht durch die Eingabe des Masterpasswortes entschlüsselt ist, kann das Passwort nicht kopiert und nicht angezeigt werden. Zudem ist der Hintergrund des Passworttextes rot und wird erst bei korrekter Eingabe des Masterpasswortes grün.
       
+   <details>
+   <summary>Nähere Informationen</summary>
+   
+   Auch in dieser Komponente wird mit Zustandsvariablen gearbeitet. 
+      
+   ```javascript
+   state = {
+      kopierText: "Kopieren",
+      passwortText: "●●●●●●●●●●●●●●●●●●●●●●"
+   }
+   ```
+   
+   Der `Kopiertext` ist der Text, der als `Tooltip` angezeigt wird, wenn der Nutzer mit dem Mauszeiger über die `Kopieren`-Schaltfläche fährt.
+   Der `Passworttext` ist der Text, der in der Tabelle als Passwort angezeigt wird. Solange das Passwort nicht entschlüsselt ist, bleibt dieser in seinem Standardzustand. 
+      
+   ```javascript
+   render() {
+        // Das "passwort" und "masterPasswort werden aus den Komponenteneigenschaften ("props") destrukturiert.
+        const { passwort, masterPasswort } = this.props
+        // Aus dem passwort wird das verschlüsselte Passwort und der Sicherheitswert extrahiert.
+        const { verschluesseltesPasswort, sicherheitswert } = passwort
+        // Entschlüsselt das verschlüsselte Passwort mithilfe der "entschluesseln()" Funktion und dem Master-Passwort.
+        const entschluesseltesPasswort = entschluesseln(masterPasswort, verschluesseltesPasswort, sicherheitswert)
+
+        return (
+            <React.Fragment>
+                {
+                    // Ein bedingtes Rendern, das je nach dem, ob das Passwort erfolgreich entschlüsselt wurde oder nicht, 
+                    // einen grünen oder roten Alert-Container rendert, in dem sich der Passworttext befindet.
+                    entschluesseltesPasswort.entschluesselt ?
+                        <Alert variant="success" style={{ width: "fit-content", float: "left", margin: "auto" }} ref={elem => this.alert = elem}>{this.state.passwortText}</Alert> :
+                        <Alert variant="danger" style={{ width: "fit-content", float: "left", margin: "auto" }} ref={elem => this.alert = elem}>{this.state.passwortText}</Alert>
+                }
+                {/* Das OverlayTrigger-Element zeigt einen Text über einem Button an, wenn man die Maus darüberbewegt. */}
+                {/* Beim Button zum Kopieren wird der stateabhängige Kopiertext angezeigt. */}
+                <OverlayTrigger overlay={<Tooltip id="tooltip-copy">{this.state.kopierText}</Tooltip>}>
+                    <Button variant="light" style={{ textAlign: "center", margin: 8 }} onClick={() => this.onKopieren(entschluesseltesPasswort)}><MdCopy size={30} /></Button>
+                </OverlayTrigger>
+
+                {/* Beim Button zum Ansehen des Passwortes wird "Ansehen" angezeigt. */}
+                <OverlayTrigger overlay={<Tooltip id="tooltip-view">Ansehen</Tooltip>}>
+                    <Button variant="warning" style={{ textAlign: "center", margin: 8 }} onClick={() => this.onAnsehen(entschluesseltesPasswort)}><MdEye size={30} color="white" /></Button>
+                </OverlayTrigger>
+
+                {/* Beim Button zum Löschen des Passwortes wird "Löschen" angezeigt. */}
+                <OverlayTrigger overlay={<Tooltip id="tooltip-view">Löschen</Tooltip>}>
+                    <Button variant="danger" style={{ textAlign: "center", margin: 8 }} onClick={this.onLoeschen}><MdTrash size={30} color="white" /></Button>
+                </OverlayTrigger>
+
+            </React.Fragment>
+
+        )
+    }
+   
+   Die wichtigsten Eigenschaften der Komponente, die destrukturiert und als freie Variablen genutzt werden müssen, sind das Passwort, das gespeichert ist und das Masterpasswort, das dieses Passwort schützt. Dazu werden noch das verschlüsselte Passwort und der Sicherheitswert aus dem Passwort extrahiert und mit all den Eigenschaften das Passwort mit der Hilfsfunktion `entschluesseln` entschlüsselt.
+   
+  Da sich die Darstellung der Passwortanzeige in einer Tabellenspalte befindet, beeinträchtigt ein Container hier wieder sehr das Design, weshalb auf eine React.Fragment-Komponente zurückgegriffen wird. 
+  Zuerst wird, je nachdem, ob das Passwort durch die aktuelle Eingabe des Masterpasswortes entschlüsselt werden kann, ein grüner oder roter Alert-Container mit dem jeweiligen Passworttext gerendert. Die drei Schaltflächen werden mit `Tooltips` in einer `OverlayTrigger`-Komponente gerendert, sodass über der Schaltfläche zum Kopieren des Passwortes der Kopiertext und über den anderen beiden `Ansehen` und `Löschen` angezeigt werden kann. Bei einem Klick wird die jeweils definierte Funktion aufgerufen. 
+  
+   |     Schaltfläche     |   Kopieren   |   Ansehen   |    Löschen   |
+   |:--------------------:|:------------:|:-----------:|:------------:|
+   | Aufgerufene Funktion | onKopieren() | onAnsehen() | onLoeschen() |
+
+   ### onKopieren
+   
+   Wenn der Nutzer auf die Schaltfläche `Kopieren` klickt, wird zuerst überprüft, ob das Passwort, das kopiert werden soll, überhaupt entschlüsselt ist. Wenn es entschlüsselt ist, wird es in die Zwischenablage des Nutzers kopiert und der Kopiertext, der, wenn man die Maus über die Schaltfläche bewegt, angezeigt wird, für 3 Sekunden auf "Passwort kopiert!" geändert.
+   Wenn das Passwort nicht entschlüsselt ist, wird der Kopiertext für 3 Sekunden auf "Das Passwort ist noch verschlüsselt!" geändert.
+   
+   ### onAnsehen
+   
+   Auch beim Ansehen des Passwortes wird überprüft, ob das gewünschte Passwort entschlüsselt ist. Wenn dies der Fall ist, wird der Passworttext, der in der Tabelle angezeigt wird, für 3 Sekunden auf das entschlüsselte Passwort gesetzt. Wenn das Passwort noch nicht entschlüsselt ist, wird der Passworttext für 3 Sekunden auf "Das Passwort ist noch verschlüsselt!" gesetzt, bevor er wieder mit "●●●●●●●●●●●●●●●●●●●●●●" maskiert wird.
+   
+   ### onLoeschen
+   
+   Bei einem Klick auf die Schaltfläche zum Löschen des Passwortes wird der Nutzer noch einmal über ein oberes Modalfenster gefragt, ob er dieses Passwort wirklich löschen möchte. Wenn er auf `Ja` klickt wird die Funktion `passwortLoeschenFinal` aufgerufen, die das Löschen des Passwortes veranlasst.
+   
+   ### passwortLoeschenFinal
+   
+   Wenn der Nutzer sich also sicher ist, dass er das Passwort löschen möchte, werden zuerst wichtige Eigenschaften des Komponenten destrukturiert, um sie frei nutzen zu können und das Modalfenster, worüber der Nutzer das Löschen des Passwortes gerade bestätigt hat, wird ausgeblendet. 
+   
+   | **Benötigte Props**: | passwort | token | setzeInhaltFuerOberesModalfenster | oberesModalfensterAnzeigen | oberesModalfensterAusblenden |
+|----------------:|---------------:|----------------------------------:|---------------------------:|----------------------------------:|---------------------|
+   
+   Daraufhin wird eine Anfrage zum Löschen des Passwortes an den Server geschickt, in der das Token des Nutzers und die Id des Passwortes übergeben werden.
+   Wenn vom Server ein Fehler zurückgegeben wird, wird dieser dem Nutzer in einem oberen Modalfenster angezeigt.
+   Sollte alles funktioniert haben, wird das Passwort auch aus dem Redux-Store und somit aus der Tabelle gelöscht und kann nicht wiederhergestellt werden.
+   
+      
+   </details>
          
       
    <hr>
