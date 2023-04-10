@@ -8,7 +8,6 @@ export const AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN = "AUTHENTIFIZIERUNGSTOKEN_FESTLE
 // Hier werden die Aktionstypen für die Verwaltung der Passwörter hinzugefügt.
 export const PASSWOERTER_FESTLEGEN = "PASSWOERTER_FESTLEGEN"
 export const PASSWORT_HINZUFUEGEN = "PASSWORT_HINZUFUEGEN"
-export const PASSWORT_AKTUALISIEREN = "PASSWORT_AKTUALISIEREN"
 export const PASSWORT_LOESCHEN = "PASSWORT_LOESCHEN"
 
 // Hier werden die Aktionstypen für die Modalfenster festgelegt.
