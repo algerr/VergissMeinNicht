@@ -798,10 +798,19 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 Dieser Code definiert die verschiedenen Aktionstypen in Redux, die verwendet werden, um Aktionen in Ihrer Anwendung eindeutig zu identifizieren. Jeder Aktionstyp ist eine Konstante, die dem Reducer als Schlüssel dient, um zu entscheiden, wie der Status der Anwendung aktualisiert werden soll. Hier ist beispielsweise der Aktionstyp SET_AUTHENTICATION_TOKEN, der zum Speichern des Authentifizierungstokens verwendet wird. Wenn eine Aktion ausgelöst wird, um das Authentifizierungstoken zu speichern, wird dieser Aktionstyp als Schlüssel für den Reduzierer verwendet, um zu entscheiden, wie der Status aktualisiert werden soll. Es gibt auch verschiedene Arten von Kennwortverwaltungsvorgängen, z. B. das Festlegen von Kennwörtern, das Hinzufügen, Aktualisieren und Löschen von Kennwörtern. Jeder dieser Aktionstypen ist ein Schlüssel für den Reduzierer, um die entsprechenden Änderungen im Anwendungszustand vorzunehmen. Schließlich gibt es auch verschiedene Aktionstypen für Mods, wie z. B. Anzeigen, Verbergen und Inhalte für Top- und Medium-Mods festlegen. Wiederum werden diese Arten von Aktionen als Schlüssel für den Reduzierer verwendet, um geeignete Änderungen am Zustand der Anwendung vorzunehmen. Es ist wichtig, dass diese Aktionstypen als dauerhaft definiert sind, um sicherzustellen, dass sie dauerhaft, leicht zugänglich und nicht versehentlich geändert werden können.
    
    ## Die Authentifizierung 
-   
+      
+   ![carbon (25)](https://user-images.githubusercontent.com/111282979/230963058-7ebf965c-e9f9-41b3-afc5-d2b80922b558.png)
+
+Dieser Code definiert eine AuthenticationTokenSet-Funktion, die ein Token akzeptiert und eine Aktion zurückgibt. Diese Funktion wird in Redux verwendet, um Authentifizierungstoken zu speichern. Zunächst wird der Aktionstyp AUTHENTICATION_TOKEN_SET eingetragen, mit dem die Aktion in der Redux-Anwendung definiert wird.
+Der Token wird dann als Parameter an die Funktion übergeben. Die Funktion gibt eine Aktion zurück, die den Aktionstyp SET_AUTHENTICATION_TOKEN verwendet, um die Aktion in Redux eindeutig zu identifizieren.
+Das Token wird dann als Datenpaket in die Aktivität eingebettet. Wenn der Token existiert, wird ihm das Wort „Bearer“ vorangestellt. Diese Auffüllung wird im Autorisierungsheader von HTTP-Anforderungen verwendet, um anzuzeigen, dass sich das Token im Schema des Inhabertokens befindet. Die Verwendung eines Bearer-Token-Schemas ermöglicht es dem Server, das Token einfach zu validieren, da es Teil der Autorisierung in der HTTP-Anforderung ist. Dies macht es einfacher und sicherer, die Authentifizierung in Ihrer Anwendung zu implementieren.
    
       
    ## Die Items
+      
+      
+      
+      
       
    ## Die Modale
    <hr>
