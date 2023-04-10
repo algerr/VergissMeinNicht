@@ -873,7 +873,7 @@ Das Token wird dann als Datenpaket in der Aktion übergeben und im Redux-Store g
    
       
    ## Das Modal Fenster 
-     ```javascript 
+   ```javascript 
     // In dieser Datei werden die Aktionserzeuger-Funktionen für die Verwaltung der Modalfenster in Redux definiert.
 // Durch die Verwendung der Aktionserzeuger-Funktionen wird die Verwaltung der Modalfenster in Redux zentralisiert und vereinfacht,
 // da Aktionstypen und Aktionserzeuger eine gemeinsame Schnittstelle bereitstellen, um eine Aktion auszulösen.
@@ -928,7 +928,7 @@ export const setzeInhaltFuerZentriertesModalfenster = (titel, inhalt, buttons) =
         titel, inhalt, buttons
     }
 }
-```      
+   ```      
  Dieser Code definiert eine Reihe von Redux-Aktionsgeneratorfunktionen, die verwendet werden, um die verschiedenen modalen Fenster in der Anwendungsschnittstelle zu verwalten.
 Zunächst werden die erforderlichen Operationstypen aus einer anderen Datei importiert, damit sie später in Aktivitätskonstruktoren verwendet werden können. Dann werden verschiedene Funktionen definiert, von denen jede eine Aktion zurückgibt, um ein bestimmtes modales Fenster zu öffnen oder zu schließen oder den Inhalt eines modalen Fensters einzustellen. Jede Funktion verwendet einen eindeutigen Aktionstyp, um sicherzustellen, dass die Aktion innerhalb der Redux-Anwendung eindeutig identifiziert werden kann. Beispielsweise gibt die ShowTopModalWindow-Funktion eine Aktion zurück, die das oberste modale Fenster mit dem Aktionstyp SHOWTOP_MODALWINDOW öffnet.
 Modale Fenstersteuerungen werden verwendet, um eine einheitliche Schnittstelle zum Auslösen von Aktionen in einer Redux-Anwendung bereitzustellen, die das Erscheinen von modalen Fenstern in der Benutzeroberfläche steuern. Dies erleichtert das Verständnis und die Wartung des Codes.     
