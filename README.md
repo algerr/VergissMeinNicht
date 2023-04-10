@@ -723,6 +723,31 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Wenn der Nutzer die Schaltfläche `Abmelden` anklickt, werden die Eigenschaften `authentifizierungsTokenFestlegen` und `passwoerterFestlegen` destrukturiert, sodass daraufhin das Authentifizierungstoken im Redux-Store entfernt, bzw. auf `null` gesetzt werden kann und die Liste der Passwörter im Redux-Store geleert werden kann.
    So wird sichergestellt, dass der Nutzer, nachdem er sich abgemeldet hat, nicht noch über den lokalen Speicher auf sein Token oder gar die gespeicherten Passwörter zugreifen kann.
       
+   ```javascript
+   // Die Funktion mapStateToProps nimmt das Authentifizierungstoken aus dem Redux-Store 
+   // und übergibt es an die Komponente.
+   const mapStateToProps = state => {
+      return {
+         token: state.authentifizierung.token
+      }
+   }
+      
+   const mapDispatchToProps = dispatch => {
+       return {
+           authentifizierungsTokenFestlegen: (token) => dispatch(authentifizierungsTokenFestlegen(token)),
+           passwoerterFestlegen: (data) => dispatch(passwoerterFestlegen(data))
+       }
+   }
+
+   // Hier wird die Seitenleisten-Komponente mit Redux verbunden, indem mapStateToProps und mapDispatchToProps
+   // als Parameter an die connect-Funktion übergeben werden, die eine neue Komponente zurückgibt,
+   // die mit dem Redux-Store verbunden ist.
+   export default connect(mapStateToProps, mapDispatchToProps)(Seitenleiste)
+   ```
+      
+   Aus dem Redux-Store wird lediglich das Token benötigt, welches als Eigenschaft an die Komponente durch die Funktion `mapStateToProps` übergeben wird.
+   Mit `mapDispatchToProps` werden zwei Methoden `authentifizierungsTokenFestlegen` und `passwoerterFestlegen` zurückgegeben, die die gleichnamigen Aktionserzeuger aufrufen, die als Argumente `token` bzw. `data` nehmen.
+   Um das Token und diese Aktionserzeuger-Funktionen als Eigenschaften an die Seitenleisten-Komponente zu übergeben, wird die Komponente durch die beiden Funktionen mit dem Redux-Store verbunden.
       
    </details>
    
