@@ -532,7 +532,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    Das zentrale Modalfenster ist für die Eingabe des Nutzers gedacht. Es besteht aus einem Titel, dem Inhalt, den Schaltflächen im Footer und dem Zustand, ob es gezeigt wird oder nicht. Darüber lässt sich das Öffnen und Schließen des Modalfensters regeln. 
    
-   ```
+   ```javascript
    const { titel, inhalt, buttons, gezeigt } = this.props
         return (
             // Die Modal-Komponente von Bootstrap wird als Grundlage genutzt, um das Modalfenster anzuzeigen.
@@ -603,12 +603,84 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <Modal show={gezeigt} onHide={this.fensterSchliessen} centered>
    ```
       
+   Durch die Verbindung zum Redux-Store können die State-Variablen aus dem Redux-Store auf die Eigenschaften der Komponente gemapped werden. So kann immer das aktuelle Modalfenster gerendert werden.
+      
+   ```javascript
+   // Mapping der Redux-State-Variablen auf die Props-Objekte der Komponente.
+   const mapStateToProps = state => {
+      return {
+        gezeigt: state.modalFenster.zentriertesModalfenster.gezeigt,
+        titel: state.modalFenster.zentriertesModalfenster.titel,
+        inhalt: state.modalFenster.zentriertesModalfenster.inhalt,
+        buttons: state.modalFenster.zentriertesModalfenster.buttons,
+        }
+   }
+   ```
+      
+      
    </details>
 
 
     
    ## Die Seitenleiste
    Die Seitenleiste lässt sich nach Wunsch ein- und ausblenden. Wenn diese eingeblendet ist, hat man die Option im Hauptfenster zu bleiben, welches den Namen              "Passwörter" trägt, oder man kann in das Fenster "Accounteinstellungen" wechseln. In den Accounteinstellungen sieht man zunächst einmal seinen festgelegten             Benutzernamen und seine Email mit der man sich im Vorhinein registriert hat. Darüber hinaus kann man in diesem Fenster entweder eine neue Email oder ein neues        Passwort festlegen, falls man etwas an seinen Anmeldedaten verändern möchte. Hierzu gibt es aber nun auch die Option seinen Account vollständig zu löschen, falls      man sich dazu entscheiden sollte.
+   
+   <details>
+   <summary>Nähere Informationen</summary>
+      
+   Die Seitenleiste umfasst sowohl die Leiste am linken Bildschirmrand, als auch die Navigationsbar am oberen Bildschirmrand. 
+      
+   ```javascript
+      {/* Seitenleiste */}
+      <div className="border-right bg-light" id="leisten-wrapper">
+         <div className="leisten-heading">VergissMeinNicht</div>
+         <div className="list-group-flush list-group">
+            {/* Link zum Passwort Manager */}
+            <Link to="/startseite/passwortmanager" className="bg-light list-group-item list-group-item-action">Passwort Manager</Link>
+            {/* Link zu den Accounteinstellungen */}
+            <Link to="/startseite/accounteinstellungen" className="bg-light list-group-item list-group-item-action">Accounteinstellungen</Link>
+         </div>
+      </div>
+   ```
+      
+   ![image](https://user-images.githubusercontent.com/65679099/230928485-4c235bfb-aac0-449e-932f-5935c779f579.png)
+      
+   Um das Styling über CSS gut und übersichtlich zu gestalten, haben sowohl die Divs als auch die Links in der Seitenleiste viele Klassenbezeichnungen. 
+   Oben an der Seitenleiste befindet sich die Überschrift "VergissMeinNicht". Darunter sind zwei Links zum Passwort Manager und zu den Accounteinstellungen.
+   Beim Anklicken, wird man auf die jeweilige Seite weitergeleitet.
+   
+   ```javascript
+   {/* Navigation Bar */}
+   <nav className="navbar-expand-lg navbar-light navbar border-bottom bg-light">
+      {/* Button zum Anzeigen der Seitenleiste */}
+      <Button id="seitenleiste-toggle" className="btn btn-primary" variant="primary">Leiste anzeigen</Button>
+      {/* Button zum Öffnen der Navigation Bar auf Mobilgeräten, denn wir denken natürlich Cross-Plattform. */}
+      <button type="button" data-toggle="collapse" className="navbar-toggler" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+              aria-expanded="false" aria-label="Toggle navigation">
+         <span className="navbar-toggler-icon"></span>
+      </button>
+
+      {/* Navigation Bar Inhalt */}
+      <div className="navbar-collapse collapse" id="navbarSupportedContent">
+         <ul className="mt-2 ml-auto navbar-nav mt-lg-0">
+            <li className="nav-item">
+               {/* Button zum Abmelden */}
+               <Link to="/anmeldung" className="nav-link" onClick={this.onAbmelden}>Abmelden</Link>
+            </li>
+         </ul>
+      </div>
+   </nav>
+   ```
+      
+   Die Navigationsbar beinhaltet zwei Elemente. Auf der linken Seite befindet sich eine Schaltfläche, um die Seitenleiste ein- und auszuklappen. 
+   Da das Anzeigen der Navigationsbar auf mobilen Geräten zu einer schlechten Benutzbarkeit der Webseite führt, werden auf diesen Geräten drei Striche in der oberen rechten Ecke angezeigt, um die Navigationsbar zu öffnen.
+   Auf allen Geräten, die die Navigationsbar ohne Probleme anzeigen können, wird in der oberen rechten Ecke eine Schaltfläche zur Abmeldung angezeigt. Bei einem Klick auf diese wird der Nutzer zur Anmeldung weitergeleitet und die Funktion `onAbmelden` wird ausgeführt.
+      
+   
+   
+      Auf der rechten Seite befindet sich eine Schaltfläche zur Abmeldung.
+      
+   </details>
    
    ## Die Tabelle
    In der Tabelle werden die Passwörter mit den zugehörigen Beschreibungen aufgelistet, sodass man diese einsehen kann. Wenn das Masterpasswort eingegeben ist und        seine Passwörter in dem Moment in der Tabelle nicht verschlüsselt sind, kann man jeweils ein Passwort ansehen und es gegebenfalls kopieren, um es dann anschließend    wo man es auch immer haben möchte, einzufügen. Sobald das Masterpasswort wieder ausgetragen ist, zeigt die Tabelle die festgelegt Passwörter nicht mehr an, sondern    folgende Nachricht:"Das Passwort ist verschlüsselt"
@@ -826,60 +898,9 @@ Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
 router.post(\'/\',Addpassword) definiert eine Route zum Hinzufügen eines Passworts und verwendet die HTTP-POST-Methode und den "/\"-Pfad. router.delete(\'/:passwordId\',passwordLoeschen) definiert eine Route zum Entfernen von Passwörtern basierend auf der ID und verwendet die HTTP-Methode DELETE sowie den Pfad \'/:passwordId\'. Die Passwort-ID wird als Parameter in der URL übergeben. router.get(\'/\',allpasswords) definiert eine Route zum Abrufen aller Passwörter und verwendet die HTTP GET-Methode und den Pfad "/\". 
 Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
 
-<details>
-   <summary><h2>Vermittlung</h2></summary>
    
-## Das Überprüfen der Authentifizierung 
-   
-  ```javascript
- // Importieren des 'jsonwebtoken'-Moduls für die Verarbeitung von JSON-Web-Token
-const jwt = require('jsonwebtoken')
+  
 
-// Middleware für die Überprüfung der Autorisierung des Benutzers mit JWT
-module.exports = (req, res, next) => {
-
-    // Der Authorization-Headers wird aus der HTTP-Anfrage extrahiert.
-    const Authorization_Header = req.get('Authorization')
-
-    // Wenn kein Authorization-Header vorhanden ist, ist der Benutzer nicht authentifiziert
-    if (!Authorization_Header) {
-        req.authentifizierungsUeberpruefung = false
-        return next()
-    }
-
-    // Das Tokens wird aus dem Authorization-Header extrahiert.
-    const token = Authorization_Header.split(' ')[1]
-    if (!token || token === '') {
-        // Wenn kein Token vorhanden ist, ist der Benutzer nicht authentifiziert
-        req.authentifizierungsUeberpruefung = false
-        return next()
-    }
-
-    let entschluesseltesToken
-    try {
-        // Verifizieren des Tokens und entschluesseln der Daten (z.B. Benutzername)
-        entschluesseltesToken = jwt.verify(token, process.env.TOKEN_SECRET)
-    } catch (error) {
-        // Wenn das Verifizieren fehlschlägt, ist der Benutzer nicht authentifiziert.
-        req.authentifizierungsUeberpruefung = false
-        return next()
-    }
-
-    if(!entschluesseltesToken) {
-        // Wenn kein dekodiertes Token vorhanden ist, ist der Benutzer nicht authentifiziert.
-        req.authentifizierungsUeberpruefung = false
-        return next()
-    }
-
-    // Wenn alles erfolgreich war, ist der Benutzer authentifiziert und der Benutzername wird der Anfrage hinzugefügt.
-    req.authentifizierungsUeberpruefung = true
-    req.benutzername = entschluesseltesToken.benutzername
-    next()
-}
-```  
-Dieser Code definiert eine Middleware-Funktion zur Validierung der Benutzerautorisierung mithilfe von JSON Web Token (JWT) in der Node.js-Anwendung.
-Zunächst wird das Modul jsonwebtoken importiert, mit dem das JWT verarbeitet wird. Die Middleware wird als Funktion exportiert, die drei Parameter req, res und next akzeptiert. Diese Funktion extrahiert den Authorization-Header aus der HTTP-Anforderung und prüft, ob ein Token vorhanden ist. Wenn das Token fehlt, wird die Anfrage nicht authentifiziert und die nächste Middleware im Express-Stack wird aufgerufen.
-Ist ein Token vorhanden, wird dieser authentifiziert und die darin enthaltenen Daten entschlüsselt. Schlägt die Überprüfung fehl, gilt die Anfrage als nicht authentifiziert. Andernfalls wird der Benutzername aus dem entschlüsselten Token extrahiert und der Anfrage als Attribut hinzugefügt, bevor die nächste Middleware aufgerufen wird. Auf der Middleware-Seite wird die Eigenschaft „authentication check“ auf „true“ gesetzt, um anzuzeigen, dass die Anfrage authentifiziert wurde.
    
 
 
