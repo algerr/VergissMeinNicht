@@ -865,9 +865,11 @@ export const SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER = "SETZE_INHALT_FUER_ZEN
       
    ![carbon (25)](https://user-images.githubusercontent.com/111282979/230963058-7ebf965c-e9f9-41b3-afc5-d2b80922b558.png)
 
-   Wie vermutlich aus den vorigen Texten bereits angeklungen ist, spielt die Authentifizierung bei uns eine wichtige Rolle. Folglich haben wir einen Aktionserzeuger  Diese Funktion wird in Redux verwendet, um Authentifizierungstoken zu speichern. Zunächst wird der Aktionstyp AUTHENTICATION_TOKEN_SET eingetragen, mit dem die Aktion in der Redux-Anwendung definiert wird.
-Der Token wird dann als Parameter an die Funktion übergeben. Die Funktion gibt eine Aktion zurück, die den Aktionstyp SET_AUTHENTICATION_TOKEN verwendet, um die Aktion in Redux eindeutig zu identifizieren.
-Das Token wird dann als Datenpaket in die Aktivität eingebettet. Wenn der Token existiert, wird ihm das Wort „Bearer“ vorangestellt. Diese Auffüllung wird im Autorisierungsheader von HTTP-Anforderungen verwendet, um anzuzeigen, dass sich das Token im Schema des Inhabertokens befindet. Die Verwendung eines Bearer-Token-Schemas ermöglicht es dem Server, das Token einfach zu validieren, da es Teil der Autorisierung in der HTTP-Anforderung ist. Dies macht es einfacher und sicherer, die Authentifizierung in Ihrer Anwendung zu implementieren.
+   Wie vermutlich aus den vorigen Texten bereits angeklungen ist, spielt die Authentifizierung bei uns eine wichtige Rolle. Folglich haben wir einen Aktionserzeuger für den die Festlegung, bzw. die Speicherung des Authentifizierungstokens.
+Das Token wird als Parameter an die Funktion übergeben. So gibt die Funktion eine Aktion zurück, die den Aktionstyp `"AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN"` verwendet, um die Aktion in Redux eindeutig zu identifizieren.
+Das Token wird dann als Datenpaket in der Aktion übergeben und im Redux-Store gespeichert. Wenn ein Token existiert, also das Token einen Wert hat, wird ihm der Zusatz `„Bearer“` vorangestellt. Diese Auffüllung wird im Authorization-Header (Autorisierungsheader) der HTTP-Anfrage verwendet, um anzuzeigen, dass sich das Token im Bearer-Schema befindet, da JWTs sich in diesem Format befinden. Die Verwendung des `"Bearer"`-Zusatzes ermöglicht es dem Server, das Token einfach zu validieren, da dieser weiß, wie er mit der HTTP-Anfrage umgehen muss.
+   Sollte kein Token vorhanden sein, wird einfach das Token, also `null` als Token übergeben, bzw. im Redux-Store geseichert.
+      
    
       
    ## Das Modal Fenster 
