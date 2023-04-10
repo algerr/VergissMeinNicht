@@ -791,7 +791,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <details>
    <summary><h3>Der Aktionserzeuger</h3></summary>
    
-   ##Die Aktionstypen
+   ## Die Aktionstypen
    
    ![carbon (23)](https://user-images.githubusercontent.com/111282979/230962347-d61d01f3-1859-49fe-b384-4376ff6a86b9.png)
 
@@ -807,25 +807,407 @@ Das Token wird dann als Datenpaket in die Aktivität eingebettet. Wenn der Token
    
       
    ## Das Modal Fenster 
-      
-      
+     ```javascript 
+    // In dieser Datei werden die Aktionserzeuger-Funktionen für die Verwaltung der Modalfenster in Redux definiert.
+// Durch die Verwendung der Aktionserzeuger-Funktionen wird die Verwaltung der Modalfenster in Redux zentralisiert und vereinfacht,
+// da Aktionstypen und Aktionserzeuger eine gemeinsame Schnittstelle bereitstellen, um eine Aktion auszulösen.
+// Anstatt jedes Mal manuell Aktionen zu erstellen, können diese Aktionserzeuger genutzt werden.
+// So bleibt der Code übersichtlich und kann bei Fehlern besser instandgehalten werden.
+
+// Zuerst werden die Aktionstypen, für die eine Aktion erzeugt werden soll, importiert.
+import { ZENTRIERTES_MODALFENSTER_AUSBLENDEN, OBERES_MODALFENSTER_AUSBLENDEN, ZENTRIERTES_MODALFENSTER_ANZEIGEN, OBERES_MODALFENSTER_ANZEIGEN, SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER, SETZE_INHALT_FUER_OBERES_MODALFENSTER } from './aktionsTypen'
+
+// Mit dieser Funktionen, wird das obere Modalfenster angezeigt, da die Aktion "OBERES_MODALFENSTER_ANZEIGEN" ausgeführt wird.
+export const oberesModalfensterAnzeigen = () => {
+    return {
+        type: OBERES_MODALFENSTER_ANZEIGEN,
+    }
+}
+
+// Mit dieser Funktionen, wird das zentrierte Modalfenster angezeigt, da die Aktion "ZENTRIERTES_MODALFENSTER_ANZEIGEN" ausgeführt wird.
+export const zentriertesModalfensterAnzeigen = () => {
+    return {
+        type: ZENTRIERTES_MODALFENSTER_ANZEIGEN,
+    }
+}
+
+// Mit dieser Funktionen, wird das obere Modalfenster ausgeblendet, da die Aktion "OBERES_MODALFENSTER_AUSBLENDEN" ausgeführt wird.
+export const oberesModalfensterAusblenden = () => {
+    return {
+        type: OBERES_MODALFENSTER_AUSBLENDEN,
+    }
+}
+
+// Mit dieser Funktionen, wird das zentrierte Modalfenster ausgeblendet, da die Aktion "ZENTRIERTES_MODALFENSTER_AUSBLENDEN" ausgeführt wird.
+export const zentriertesModalfensterAusblenden = () => {
+    return {
+        type: ZENTRIERTES_MODALFENSTER_AUSBLENDEN,
+    }
+}
+
+// Mit dieser Funktionen, wird der Inhalt für das obere Modalfenster gesetzt, da die Aktion "SETZE_INHALT_FUER_OBERES_MODALFENSTER" ausgeführt wird.
+// Der Inhalt besteht aus einem Titel im Header des Modalfensters, dem Inhalt im Body und den Buttons im Footer.
+export const setzeInhaltFuerOberesModalfenster = (titel, inhalt, buttons) => {
+    return {
+        type: SETZE_INHALT_FUER_OBERES_MODALFENSTER,
+        titel, inhalt, buttons
+    }
+}
+
+// Mit dieser Funktionen, wird der Inhalt für das zentrierte Modalfenster gesetzt, da die Aktion "SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER" ausgeführt wird.
+// Der Inhalt besteht aus einem Titel im Header des Modalfensters, dem Inhalt im Body und den Buttons im Footer.
+export const setzeInhaltFuerZentriertesModalfenster = (titel, inhalt, buttons) => {
+    return {
+        type: SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER,
+        titel, inhalt, buttons
+    }
+}
+```      
+ Dieser Code definiert eine Reihe von Redux-Aktionsgeneratorfunktionen, die verwendet werden, um die verschiedenen modalen Fenster in der Anwendungsschnittstelle zu verwalten.
+Zunächst werden die erforderlichen Operationstypen aus einer anderen Datei importiert, damit sie später in Aktivitätskonstruktoren verwendet werden können. Dann werden verschiedene Funktionen definiert, von denen jede eine Aktion zurückgibt, um ein bestimmtes modales Fenster zu öffnen oder zu schließen oder den Inhalt eines modalen Fensters einzustellen. Jede Funktion verwendet einen eindeutigen Aktionstyp, um sicherzustellen, dass die Aktion innerhalb der Redux-Anwendung eindeutig identifiziert werden kann. Beispielsweise gibt die ShowTopModalWindow-Funktion eine Aktion zurück, die das oberste modale Fenster mit dem Aktionstyp SHOWTOP_MODALWINDOW öffnet.
+Modale Fenstersteuerungen werden verwendet, um eine einheitliche Schnittstelle zum Auslösen von Aktionen in einer Redux-Anwendung bereitzustellen, die das Erscheinen von modalen Fenstern in der Benutzeroberfläche steuern. Dies erleichtert das Verständnis und die Wartung des Codes.     
       
       
       
    ## Die Passwörter 
    
+   ```javascript   
+    // In dieser Datei werden die Aktionserzeuger-Funktionen für die Verwaltung der Passwörter in Redux definiert.
+// Durch die Verwendung der Aktionserzeuger-Funktionen wird die Verwaltung der Modalfenster in Redux zentralisiert und vereinfacht,
+// da Aktionstypen und Aktionserzeuger eine gemeinsame Schnittstelle bereitstellen, um eine Aktion auszulösen.
+// Anstatt jedes Mal manuell Aktionen zu erstellen, können diese Aktionserzeuger genutzt werden.
+// So bleibt der Code übersichtlich und kann bei Fehlern besser instandgehalten werden.
+
+// Zuerst werden die Aktionstypen, für die eine Aktion erzeugt werden soll, importiert.
+import { PASSWORT_HINZUFUEGEN, PASSWORT_LOESCHEN, PASSWOERTER_FESTLEGEN, PASSWORT_AKTUALISIEREN } from './aktionsTypen'
+
+// Mit diesem Aktionserzeuger wird die Aktion zum Hinzufügen eines neuen Passwortes ausgeführt.
+// Dabei wird ein Passwort als Parameter genommen und am Ende auch zurückgegeben.
+export const passwortHinzufuegen = (passwort) => {
+    return {
+        type: PASSWORT_HINZUFUEGEN,
+        passwort
+    }
+}
+
+// Mit diesem Aktionserzeuger wird die Aktion zum Löschen eines Passwortes ausgeführt.
+// Dabei wird ein Passwort als Parameter genommen und am Ende auch zurückgegeben.
+export const passwortLoeschen = (passwort) => {
+    return {
+        type: PASSWORT_LOESCHEN,
+        passwort
+    }
+}
+
+// Mit diesem Aktionserzeuger wird die Aktion zum Festlegen der Passwörter ausgeführt.
+// Dabei werden mehrere Passwörter als Parameter genommen und am Ende auch zurückgegeben.
+export const passwoerterFestlegen = (passwoerter) => {
+    return {
+        type: PASSWOERTER_FESTLEGEN,
+        passwoerter
+    }
+}
+
+// Mit diesem Aktionserzeuger wird die Aktion zur Aktualisierung eines Passwortes ausgeführt.
+// Dabei wird ein Passwort als Parameter genommen und am Ende auch zurückgegeben.
+export const passwortAktualisieren = (passwort) => {
+    return {
+        type: PASSWORT_AKTUALISIEREN,
+        passwort
+    }
+}
+```
+
+ Dieser Code definiert verschiedene Build-Action-Funktionen für die Passwortverwaltung in Redux.
+In anderen Dateien definierte Aktionstypen werden zuerst importiert. Diese Aktionstypen definieren, welche Aktionen ausgeführt werden sollen.
+Dann werden verschiedene Aktionskonstruktoren definiert, die jeweils eine bestimmte Aktion ausführen. Jede Funktion hat einen Namen, der angibt, was sie tut.
+Die Addpassword-Funktion erstellt eine Aktion zum Hinzufügen eines neuen Passworts. Das Passwort wird als Parameter behandelt und in der generierten Aktion als Passwortattribut gespeichert.
+Die Funktion deletepassword erstellt die Aktion zum Löschen des Passworts. Das Passwort wird als Parameter behandelt und in der generierten Aktion als Passwortattribut gespeichert.
+Die Funktion setpasswords erstellt eine Aktion zum Festlegen mehrerer Passwörter. Das Passwort wird als Parameter behandelt und in der erstellten Aktion als Passwortattribut gespeichert.
+Die Funktion updatepassword erstellt eine Aktion zum Aktualisieren des Passworts. Das Passwort wird als Parameter behandelt und in der generierten Aktion als Passwortattribut gespeichert.
+Dieser Aktionsgenerator zentralisiert und vereinfacht die Redux-Passwortverwaltung, da Aktionstypen und Aktionsgeneratoren eine gemeinsame Schnittstelle zum Auslösen von Aktionen bieten. Anstatt Aktionen jedes Mal manuell zu erstellen, können Sie diese Aktionsgeneratoren verwenden, um Ihren Code sauberer und wartungsfreundlicher zu gestalten.
+      
+      
       
    <details>
    <summary><h3>Reduzierungen</h3></summary>
    ## Die Authentifizierung
       
+```javascript      
+import { AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN } from '../aktionsErzeuger/aktionsTypen'
+
+// Zuerst wird der Anfangszustand des Reduzierers definiert.
+const anfangsZustand = {
+    token: null
+}
+
+const reduzierer = (zustand = anfangsZustand, aktion) => {
+    // Da dieser Reduzierer sich nur um die Authentifizierung kümmert, wird überprüft, welche Aktion ausgeführt werden soll.
+    switch (aktion.type) {
+        // Wenn der Aktionstyp AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN lautet, wird ein neuer Zustand zurückgegeben, 
+        // bei dem das Token-Attribut auf das Token in der Aktion gesetzt wird.
+        // So wird das Token im Redux-Store aktualisiert.
+        case AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN:
+            return {
+                ...zustand,
+                token: aktion.token
+            }
+
+        // Wenn die Aktion "AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN" nicht erkannt wird, wird lediglich der aktuelle Zustand zurückgegeben.
+        default:
+            return zustand
+    }
+}
+
+// Zum Schluss wird der Reduzierer als Standard exportiert, sodass andere Module diesen importieren können.
+export default reduzierer
+```
+      
+Das Code-Snippet definiert einen Redux-Reduzierer, der für die Verwaltung des Authentifizierungstokens verantwortlich ist. Der Anfangszustand des Reduzierers enthält eine leere Token-Eigenschaft. Die Reduce-Funktion benötigt zwei Parameter: den aktuellen Zustand und die auszuführende Aktion. Wenn die Aktion vom Typ SET_AUTHENTICATIONTOKEN ist, wird ein neuer Status zurückgegeben, wobei die Tokeneigenschaft in der Aktion auf token gesetzt ist. Andernfalls wird der aktuelle Zustand zurückgegeben.
+Schließlich wird Reducer als Standardexport angezeigt, sodass andere Module es importieren und in Ihr Redux-Speicher-Setup integrieren können.
+      
    ## Das Modalfenster
+      ```javascript
+      import { OBERES_MODALFENSTER_ANZEIGEN, ZENTRIERTES_MODALFENSTER_ANZEIGEN, OBERES_MODALFENSTER_AUSBLENDEN, ZENTRIERTES_MODALFENSTER_AUSBLENDEN, SETZE_INHALT_FUER_OBERES_MODALFENSTER, SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER } from '../aktionsErzeuger/aktionsTypen'
+
+const anfangsZustand = {
+    oberesModalfenster: {
+        gezeigt: false,
+        titel: null,
+        inhalt: null,
+        buttons: null
+    },
+    zentriertesModalfenster: {
+        gezeigt: false,
+        titel: null,
+        inhalt: null,
+        buttons: null
+    }
+}
+
+const reduzierer = (zustand = anfangsZustand, aktion) => {
+
+    // In diesem Switch-Block werden die verschiedenen Aktionstypen behandelt.
+    switch (aktion.type) {
+        // Wenn der Aktionstyp OBERES_MODALFENSTER_ANZEIGEN lautet, wird ein neuer Zustand zurückgegeben, 
+        // bei dem das Attribut "gezeigt" von oberesModalfenster auf "true" gesetzt wird.
+        case OBERES_MODALFENSTER_ANZEIGEN:
+            return {
+                ...zustand,
+                oberesModalfenster: {
+                    ...zustand.oberesModalfenster,
+                    gezeigt: true
+                }
+            }
+
+        // Wenn der Aktionstyp OBERES_MODALFENSTER_AUSBLENDEN lautet, wird ein neuer Zustand zurückgegeben, 
+        // bei dem das Attribut "gezeigt" von oberesModalfenster auf "false" gesetzt wird.
+        case OBERES_MODALFENSTER_AUSBLENDEN:
+            return {
+                ...zustand,
+                oberesModalfenster: {
+                    ...zustand.oberesModalfenster,
+                    gezeigt: false
+                }
+            }
+
+        // Wenn der Aktionstyp SETZE_INHALT_FUER_OBERES_MODALFENSTER lautet, wird ein neuer Zustand zurückgegeben, 
+        // bei dem die Attribute "titel", "inhalt" und "buttons" von oberesModalfenster auf die entsprechenden Werte aus der Aktion gesetzt werden.
+        case SETZE_INHALT_FUER_OBERES_MODALFENSTER:
+            return {
+                ...zustand,
+                oberesModalfenster: {
+                    ...zustand.oberesModalfenster,
+                    titel: aktion.titel,
+                    inhalt: aktion.inhalt,
+                    buttons: aktion.buttons
+                }
+            }
+
+        // Wenn der Aktionstyp ZENTRIERTES_MODALFENSTER_ANZEIGEN lautet, wird ein neuer Zustand zurückgegeben, 
+        // bei dem das Attribut "gezeigt" von zentriertesModalfenster auf "true" gesetzt wird.
+        case ZENTRIERTES_MODALFENSTER_ANZEIGEN:
+            return {
+                ...zustand,
+                zentriertesModalfenster: {
+                    ...zustand.zentriertesModalfenster,
+                    gezeigt: true
+                }
+            }
+
+        // Wenn der Aktionstyp ZENTRIERTES_MODALFENSTER_ANZEIGEN lautet, wird ein neuer Zustand zurückgegeben, 
+        // bei dem das Attribut "gezeigt" von zentriertesModalfenster auf "true" gesetzt wird.
+        case ZENTRIERTES_MODALFENSTER_AUSBLENDEN:
+            return {
+                ...zustand,
+                zentriertesModalfenster: {
+                    ...zustand.zentriertesModalfenster,
+                    gezeigt: false
+                }
+            }
+
+        // Wenn der Aktionstyp SETZE_INHALT_FUER_OBERES_MODALFENSTER lautet, wird ein neuer Zustand zurückgegeben, 
+        // bei dem die Attribute "titel", "inhalt" und "buttons" von zentriertesModalfenster auf die entsprechenden Werte aus der Aktion gesetzt werden.
+        case SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER:
+            return {
+                ...zustand,
+                zentriertesModalfenster: {
+                    ...zustand.zentriertesModalfenster,
+                    titel: aktion.titel,
+                    inhalt: aktion.inhalt,
+                    buttons: aktion.buttons
+                }
+            }
+
+        // Wenn keiner der oben genannten Aktionstypen erkannt wird, wird der aktuelle Zustand zurückgegeben.
+        default:
+            return zustand
+    }
+}
+// Zum Schluss wird der Reduzierer als Standard exportiert, sodass andere Module diesen importieren können.
+export default reduzierer
+```
+      
+ Dieser Code definiert eine Funktion namens "reducer", die als Reducer-Funktion in einer Redux-Anwendung verwendet werden kann. Reducer ist eine Funktion, die den Status der Anwendung basierend auf der Aktion und dem aktuellen Status der Anwendung aktualisiert. Die Reducer-Funktion benötigt zwei Parameter: den aktuellen Status der Anwendung und die auszuführende Aktion. Beim ersten Aufruf der Funktion ist der Standardzustand "initialState". Reducer verarbeiten Aktionen mit Switch-Anweisungen basierend auf Aktionstypen. Für jeden Aktionstyp gibt es eine entsprechende Instanz in der switch-Anweisung, die den Status der Anwendung basierend auf dieser Aktion aktualisiert. Jede Instanz gibt einen neuen Zustand zurück, indem sie eine Kopie des vorherigen Zustands erstellt und dann nur die in der Aktion angegebenen Eigenschaften ändert.
+In diesem Fall hat der Zustand zwei Eigenschaften, „top modal“ und „center modal“, die jeweils ein Objekt mit den Eigenschaften „display“, „title“, „content“ und „buttons“ enthalten. Verschiedene Arten von Aktionen können diese Zustandseigenschaften ändern, z. B. das Ein- oder Ausblenden eines Modals oder das Aktualisieren seines Inhalts.
+Schließlich gibt die "Reduce"-Funktion einen neuen Zustand zurück, der durch die durchgeführten Aktionen erzeugt wurde.
       
    ## Die Passwörter 
+   ```javascript   
+   import { PASSWORT_HINZUFUEGEN, PASSWORT_LOESCHEN, PASSWORT_AKTUALISIEREN, PASSWOERTER_FESTLEGEN } from '../aktionsErzeuger/aktionsTypen'
+
+// Der anfangsState enthält nur eine leere Liste.
+const anfangsState = {
+    liste: []
+}
+
+// Der Reduzierer nimmt den aktuellen State (oder den anfangsState) und eine Aktion entgegen und gibt den neuen State zurück.
+const reduzierer = (state = anfangsState, aktion) => {
+    // In diesem Switch-Block werden die verschiedenen Aktionstypen behandelt.
+    switch (aktion.type) {
+
+        // Der Aktionstyp "PASSWOERTER_FESTLEGEN" setzt den gesamten State auf eine neue Liste von Passwörtern.
+        case PASSWOERTER_FESTLEGEN:
+            return {
+                ...state,
+                liste: aktion.passwoerter
+            }
+
+        // Der Aktionstyp "PASSWORT_HINZUFUEGEN" fügt der Liste ein neues Passwort hinzu.
+        case PASSWORT_HINZUFUEGEN:
+            return {
+                ...state,
+                liste: [...state.liste, aktion.passwort]
+            }
+
+        // Der Aktionstyp "PASSWORT_AKTUALISIEREN" aktualisiert ein vorhandenes Passwort in der Liste.
+        case PASSWORT_AKTUALISIEREN:
+            return {
+                ...state,
+                liste: state.liste.map(t => {
+                    if (t.id === aktion.passwort.id) {
+                        return aktion.passwort
+                    }
+                    return t
+                })
+            }
+
+        // Der Aktionstyp PASSWORT_LOESCHEN entfernt ein Passwort aus der Liste.
+        case PASSWORT_LOESCHEN:
+            return {
+                ...state,
+                liste: state.liste.filter(t => t.id !== aktion.passwort.id)
+            }
+
+        // Wenn keiner der oben genannten Aktionstypen aufgerufen wird, gibt der Reduzierer einfach den aktuellen state zurück.
+        default:
+            return state
+    }
+}
+
+// Zum Schluss wird der Reduzierer als Standard exportiert, sodass andere Module diesen importieren können.
+export default reduzierer
+```
+
       
    ## Der Reduxstore
-  
-      
+  ```javascript 
+  // Die beiden essentiellen Funktionen für Redux-Stores.
+import { createStore, combineReducers } from 'redux'
+
+// Die Reduzierer für authentifizierung, passwoerter und modalFenster werden importiert.
+import authentifizierung from './reduzierer/authentifizierung'
+import passwoerter from './reduzierer/passwoerter'
+import modalFenster from './reduzierer/modalFenster'
+
+// Mit "combineReducers" aus der Redux-Bibliothek können mehrere Reduzierer zu einem Hauptreduzierer zusammengefasst werden.
+// Somit kann dieser Hauptreduzierer nun die Authentifizierung, die Passwörter und die Modalfenster verwalten.
+const hauptReduzierer = combineReducers({
+    authentifizierung,
+    passwoerter,
+    modalFenster
+})
+
+// Mit der Funktion "speichernImLokalenSpeicher" kann der Zustand Zustand des Stores im lokalen Speicher des Browsers gespeichert werden.
+const speichernImLokalenSpeicher = (state) => {
+    try {
+        // Der Zustand wird in einen serialisierten JSON-String konvertiert.
+        const serialisierterZustand = JSON.stringify(state)
+        // Der serialisierte Zustand wird im lokalen Speicher des Browsers als "state" gespeichert.
+        localStorage.setItem('state', serialisierterZustand)
+    // Bei einem Fehler wird dieser in der Konsole ausgegeben.
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// Mit der Funktion "ausLokalemSpeicherLaden" kann der Zustand des Stores aus dem lokalen Speicher geladen werden.
+const ausLokalemSpeicherLaden = () => {
+    try {
+        // Der Zustand wird aus dem lokalen Speicher entnommen 
+        const serialisierterZustand = localStorage.getItem('state')
+        // und, wenn er nicht leer ist,
+        if (serialisierterZustand === null) return undefined
+        // in einen JSON-String serialisiert und dieser zurückgegeben.
+        return JSON.parse(serialisierterZustand)
+    // Bei einem Fehler wird dieser in der Konsole ausgegeben und die Funktion gibt "undefined" zurück.
+    } catch (error) {
+        console.log(error)
+        return undefined
+    }
+}
+
+// Der aktuelle Zustand des Stores wird aus dem lokalen Speicher geladen.
+const geladenerZustand = ausLokalemSpeicherLaden()
+
+// Mit der Funktion "reduxStore" kann ein Redux Store mit dem Hauptreduzierer und dem geladenen Zustand zu erstellen.
+const reduxStore = () => {
+    const store = createStore(
+        hauptReduzierer,
+        geladenerZustand
+    )
+    // Bei jeder Änderung des Zustandes wird der Store direkt im lokalen Speicher gesichert.
+    store.subscribe(() => speichernImLokalenSpeicher(store.getState()))
+    return store
+}
+
+// Der ReduxStore wird als Standardfunktion exportiert, sodass andere Module diesen importieren können.
+export default reduxStore
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+```
+
+Dieser Code definiert eine Redux-Speicherkonfiguration, die es anderen Modulen ermöglicht, den erstellten Speicher zu importieren und zu verwenden.
+Zunächst werden die benötigten Funktionen Redux, createStore und CombineReducers importiert. Dann werden die drei Reducer Authentifizierung, Passwort und Methode aus separaten Modulen importiert.
+Mit CombineReducers werden diese Reduzierer zu einem Hauptreduzierer namens mainReducer kombiniert. Es wird verwendet, um den Status des Repositorys zu verwalten.
+Dann folgen zwei Hilfsfunktionen saveInLocalMemory und LoadFromLocalMemory. Die erste Funktion speichert den Cache-Zustand im lokalen Speicher des Browsers, konvertiert den zwischengespeicherten Zustand in eine serialisierte JSON-Zeichenfolge und speichert ihn im Arbeitsspeicher. Die zweite Funktion lädt den Speicherzustand aus dem lokalen Speicher und kehrt zurück, falls er existiert. Der aktuelle Status des Speichers wird dann aus dem lokalen Speicher geladen, sofern verfügbar.
+Schließlich wird die reduxStore-Funktion definiert, um den Speicher zu erstellen. Die reduxStore-Funktion verwendet createStore, um einen Speicher mit dem Hauptreduzierer und dem aus dem lokalen Speicher geladenen Zustand zu erstellen. Der Event-Handler ist bei store.subscribe registriert, um den aktualisierten Status im lokalen Store zu speichern, wenn sich der Status des Stores ändert. Schließlich wird die reduxStore-Funktion als Standardfunktion exportiert, damit andere Module sie importieren und verwenden können.
       
       
    <hr>
