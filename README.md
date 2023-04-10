@@ -43,8 +43,19 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
       - [Die Reduzierungen](#die-reduzierungen)
       - [Das Modalfenster](#das-modalfenster)
       - [Der Reduxstore](#der-reduxstore)
-- [
-
+- [Das Backend](#das-backend)
+  - [Die Grundfunktionen](#die-grundfunktionen)
+      - [Das Abrufen der Daten](#das-abrufen-der-daten)
+      - [Die Funktionen der Datenbank(#die-funktionen-der-datenbank)
+      - [Die Authentifizierung](#die-authentifizierung)
+      - [Das Passwort](#das-passwort)
+      - [Die Vermittlung](#die-vermittlung)
+      - [Der Firestore](#der-firestore)
+      - [Die Verwaltung](#die-verwaltung)
+      - [Die Authentifizierung](#die-authentifizierung)
+      - [Das Passwort](#das-passwort)
+      - [Der Index](#der-imdex)
+      
 - [Authoren](#authoren)
 
 # Das Stundenprotokoll
