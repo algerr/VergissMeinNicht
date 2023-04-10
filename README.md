@@ -813,10 +813,40 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    ## Die Aktionstypen
    
-   ![carbon (23)](https://user-images.githubusercontent.com/111282979/230962347-d61d01f3-1859-49fe-b384-4376ff6a86b9.png)
-
-Dieser Code definiert die verschiedenen Aktionstypen in Redux, die verwendet werden, um Aktionen in Ihrer Anwendung eindeutig zu identifizieren. Jeder Aktionstyp ist eine Konstante, die dem Reducer als Schlüssel dient, um zu entscheiden, wie der Status der Anwendung aktualisiert werden soll. Hier ist beispielsweise der Aktionstyp SET_AUTHENTICATION_TOKEN, der zum Speichern des Authentifizierungstokens verwendet wird. Wenn eine Aktion ausgelöst wird, um das Authentifizierungstoken zu speichern, wird dieser Aktionstyp als Schlüssel für den Reduzierer verwendet, um zu entscheiden, wie der Status aktualisiert werden soll. Es gibt auch verschiedene Arten von Kennwortverwaltungsvorgängen, z. B. das Festlegen von Kennwörtern, das Hinzufügen, Aktualisieren und Löschen von Kennwörtern. Jeder dieser Aktionstypen ist ein Schlüssel für den Reduzierer, um die entsprechenden Änderungen im Anwendungszustand vorzunehmen. Schließlich gibt es auch verschiedene Aktionstypen für Mods, wie z. B. Anzeigen, Verbergen und Inhalte für Top- und Medium-Mods festlegen. Wiederum werden diese Arten von Aktionen als Schlüssel für den Reduzierer verwendet, um geeignete Änderungen am Zustand der Anwendung vorzunehmen. Es ist wichtig, dass diese Aktionstypen als dauerhaft definiert sind, um sicherzustellen, dass sie dauerhaft, leicht zugänglich und nicht versehentlich geändert werden können.
+   Aktionstypen in Redux dienen dazu, Aktionen zu definieren und zu identifizieren. Sie sind Konstanten und werden normalerweise in Strings definiert, die die Art der Aktion repräsentieren, die sie ausführen.
+   ```javascript
+   const AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN = "AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN"
+   ```
+      
+   Ein Aktionstyp bestimmt, welche Veränderung an Zuständen im Redux-Store vorgenommen werden soll. Die Verwendung von Aktionstypen trägt dazu bei, Aktionen eindeutig identifizieren, auszuführen und besser warten zu können, da der Code sehr an Übersichtlichkeit gewinnt.
    
+   <details>
+   <summary>Nähere Informationen</summary>
+      
+   ```javascript
+   // Hier wird ein Aktionstyp für die Speicherung des Tokens festgelegt.
+export const AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN = "AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN"
+
+// Hier werden die Aktionstypen für die Verwaltung der Passwörter hinzugefügt.
+export const PASSWOERTER_FESTLEGEN = "PASSWOERTER_FESTLEGEN"
+export const PASSWORT_HINZUFUEGEN = "PASSWORT_HINZUFUEGEN"
+export const PASSWORT_LOESCHEN = "PASSWORT_LOESCHEN"
+
+// Hier werden die Aktionstypen für die Modalfenster festgelegt.
+export const OBERES_MODALFENSTER_ANZEIGEN = "OBERES_MODALFENSTER_ANZEIGEN"
+export const OBERES_MODALFENSTER_AUSBLENDEN = "OBERES_MODALFENSTER_AUSBLENDEN"
+export const SETZE_INHALT_FUER_OBERES_MODALFENSTER = "SETZE_INHALT_FUER_OBERES_MODALFENSTER"
+
+export const ZENTRIERTES_MODALFENSTER_ANZEIGEN = "ZENTRIERTES_MODALFENSTER_ANZEIGEN"
+export const ZENTRIERTES_MODALFENSTER_AUSBLENDEN = "ZENTRIERTES_MODALFENSTER_AUSBLENDEN"
+export const SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER = "SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER" 
+   ```
+
+   In unserer Anwendung werden 11 verschiedene Aktionstypen festgelegt, die für die Authentifizierung und die Verwaltung von Passwörtern und Modalfenstern genutzt werden. Der Aktionstyp `AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN` beispielsweise identifiziert eine Aktion zur Speicherung des Authentifizierungstokens im Redux-Store. Der Aktionstyp ist wie ein Schlüssel für den Reduzierer, der genau für die Ausführung einer Aktion gemacht ist. 
+   Neben der Authentifizierung gibt es auch Aktionstypen zu Passwortverwaltungsvorgängen, z. B. dem Festlegen der Passwörter im Redux-State oder dem Hinzufügen und Löschen von Passwörtern. Schließlich gibt es auch verschiedene Aktionstypen für Modalfenster, wie z. B. das Anzeigen, Verbergen oder Inhalte-Setzen für obere und zentrierte Modalfenster. Wiederum werden diese Arten von Aktionen als Schlüssel für den Reduzierer verwendet, um geeignete Änderungen am Zustand der Anwendung vorzunehmen, die sich auf Modalfenster beziehen. Beispielsweise wird über den Aktionstypen `OBERES_MODALFENSTER_ANZEIGEN` dem Nutzer ein oberes Modalfenster angezeigt, in dem beispielsweise eine Fehlermeldung des Servers angezeigt wird. Es ist deshalb wichtig, dass Aktionstypen dauerhaft am gleichen Ort definiert sind, um sicherzustellen, dass sie dauerhaft zugänglich sind und nicht versehentlich geändert werden können.
+
+   </details>
+      
    ## Die Authentifizierung 
       
    ![carbon (25)](https://user-images.githubusercontent.com/111282979/230963058-7ebf965c-e9f9-41b3-afc5-d2b80922b558.png)
