@@ -22,7 +22,7 @@
     text-align: center;
 }
 
-#wrapper.toggled #leisten-wrapper {
+#wrapper.anzeigen #leisten-wrapper {
     margin-left: 0;
 }
 
@@ -34,7 +34,7 @@
         min-width: 0;
         width: 100%;
     }
-    #wrapper.toggled #leisten-wrapper {
+    #wrapper.anzeigen #leisten-wrapper {
         margin-left: -15rem;
     }
 }
