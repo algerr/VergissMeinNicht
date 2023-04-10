@@ -1192,14 +1192,6 @@ return store
 }
 // Der ReduxStore wird als Standardfunktion exportiert, sodass andere Module diesen importieren können.
 export default reduxStore
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
 ```
 
 Dieser Code definiert eine Redux-Speicherkonfiguration, die es anderen Modulen ermöglicht, den erstellten Speicher zu importieren und zu verwenden.
