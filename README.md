@@ -786,10 +786,10 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 
    <details>
    <summary><h2>Der Redux-Store</h2></summary>
-   ## Die Konfigurierung des Shops 
+  
    <hr>
    <details>
-   <summary><h3>Aktionen</h3></summary>
+   <summary><h3>Der Aktionserzeuger</h3></summary>
    
    ##Die Aktionstypen
    
@@ -806,23 +806,28 @@ Der Token wird dann als Parameter an die Funktion übergeben. Die Funktion gibt 
 Das Token wird dann als Datenpaket in die Aktivität eingebettet. Wenn der Token existiert, wird ihm das Wort „Bearer“ vorangestellt. Diese Auffüllung wird im Autorisierungsheader von HTTP-Anforderungen verwendet, um anzuzeigen, dass sich das Token im Schema des Inhabertokens befindet. Die Verwendung eines Bearer-Token-Schemas ermöglicht es dem Server, das Token einfach zu validieren, da es Teil der Autorisierung in der HTTP-Anforderung ist. Dies macht es einfacher und sicherer, die Authentifizierung in Ihrer Anwendung zu implementieren.
    
       
-   ## Die Items
+   ## Das Modal Fenster 
       
       
       
       
       
-   ## Die Modale
-   <hr>
-   </details>
+   ## Die Passwörter 
+   
       
    <details>
    <summary><h3>Reduzierungen</h3></summary>
    ## Die Authentifizierung
       
-   ## Die Items
+   ## Das Modalfenster
       
-   ## Die Modale 
+   ## Die Passwörter 
+      
+   ## Der Reduxstore
+  
+      
+      
+      
    <hr>
    </details>
 
