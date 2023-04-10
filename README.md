@@ -818,6 +818,15 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Um den Inhalt für ein oberes Modalfenster festzulegen wird eine Aktion vom Typ `"SETZE_INHALT_FUER_OBERES_MODALFENSTER"` erzeugt. Zusätzlich werden noch die wichtigen Daten, die den Inhalt des Modalfensters ausmachen, als Datenpaket übergeben.
       
    ```javascript
+   {
+      type: SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER,
+      titel, inhalt, buttons
+   }
+   ```
+      
+   Anstatt Aktionen jedoch immer manuell auszulösen, werden Funktionen als `Aktionserzeuger` definiert. Diese erzeugen dann bei jedem Aufrufen die definierte Aktion.
+      
+   ```javascript
    export const setzeInhaltFuerZentriertesModalfenster = (titel, inhalt, buttons) => {
       return {
          type: SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER,
@@ -826,6 +835,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    }
    ```
       
+   Das Datenpaket (`titel`,`inhalt`,`buttons`) wird als Parameter der Funktion behandelt und daraufhin in der Aktion übergeben. So kann in diesem Beispiel je nach Parameter ein zentriertes Modal mit unterschiedlichem Inhalt erzeugt werden.
       
    ## Die Aktionstypen
    
@@ -932,17 +942,11 @@ export const setzeInhaltFuerZentriertesModalfenster = (titel, inhalt, buttons) =
    Dann werden verschiedene Funktionen definiert, von denen jede eine Aktion zurückgibt, um ein bestimmtes Modalfenster zu öffnen, zu schließen oder den Inhalt eines Modalfensters einzustellen. Jede Funktion verwendet einen eindeutigen Aktionstyp, um sicherzustellen, dass die Aktion innerhalb der Redux-Anwendung eindeutig identifiziert werden kann. 
    Beispielsweise erzeugt die Funktion `oberesModalfensterAnzeigen` eine Aktion, die das obere Modalfenster mit dem Aktionstyp OBERES_MODALFENSTER_ANZEIGEN öffnet, bzw. anzeigt.   
       
-   ## Die Passwörter 
+   ## Die Verwaltung der Passwörter im Redux-Store
    
    ```javascript   
-    // In dieser Datei werden die Aktionserzeuger-Funktionen für die Verwaltung der Passwörter in Redux definiert.
-// Durch die Verwendung der Aktionserzeuger-Funktionen wird die Verwaltung der Modalfenster in Redux zentralisiert und vereinfacht,
-// da Aktionstypen und Aktionserzeuger eine gemeinsame Schnittstelle bereitstellen, um eine Aktion auszulösen.
-// Anstatt jedes Mal manuell Aktionen zu erstellen, können diese Aktionserzeuger genutzt werden.
-// So bleibt der Code übersichtlich und kann bei Fehlern besser instandgehalten werden.
-
-// Zuerst werden die Aktionstypen, für die eine Aktion erzeugt werden soll, importiert.
-import { PASSWORT_HINZUFUEGEN, PASSWORT_LOESCHEN, PASSWOERTER_FESTLEGEN, PASSWORT_AKTUALISIEREN } from './aktionsTypen'
+   // Zuerst werden die Aktionstypen, für die eine Aktion erzeugt werden soll, importiert.
+import { PASSWORT_HINZUFUEGEN, PASSWORT_LOESCHEN, PASSWOERTER_FESTLEGEN } from './aktionsTypen'
 
 // Mit diesem Aktionserzeuger wird die Aktion zum Hinzufügen eines neuen Passwortes ausgeführt.
 // Dabei wird ein Passwort als Parameter genommen und am Ende auch zurückgegeben.
@@ -970,25 +974,14 @@ export const passwoerterFestlegen = (passwoerter) => {
         passwoerter
     }
 }
-
-// Mit diesem Aktionserzeuger wird die Aktion zur Aktualisierung eines Passwortes ausgeführt.
-// Dabei wird ein Passwort als Parameter genommen und am Ende auch zurückgegeben.
-export const passwortAktualisieren = (passwort) => {
-    return {
-        type: PASSWORT_AKTUALISIEREN,
-        passwort
-    }
-}
 ```
 
- Dieser Code definiert verschiedene Build-Action-Funktionen für die Passwortverwaltung in Redux.
-In anderen Dateien definierte Aktionstypen werden zuerst importiert. Diese Aktionstypen definieren, welche Aktionen ausgeführt werden sollen.
-Dann werden verschiedene Aktionskonstruktoren definiert, die jeweils eine bestimmte Aktion ausführen. Jede Funktion hat einen Namen, der angibt, was sie tut.
-Die Addpassword-Funktion erstellt eine Aktion zum Hinzufügen eines neuen Passworts. Das Passwort wird als Parameter behandelt und in der generierten Aktion als Passwortattribut gespeichert.
-Die Funktion deletepassword erstellt die Aktion zum Löschen des Passworts. Das Passwort wird als Parameter behandelt und in der generierten Aktion als Passwortattribut gespeichert.
-Die Funktion setpasswords erstellt eine Aktion zum Festlegen mehrerer Passwörter. Das Passwort wird als Parameter behandelt und in der erstellten Aktion als Passwortattribut gespeichert.
-Die Funktion updatepassword erstellt eine Aktion zum Aktualisieren des Passworts. Das Passwort wird als Parameter behandelt und in der generierten Aktion als Passwortattribut gespeichert.
-Dieser Aktionsgenerator zentralisiert und vereinfacht die Redux-Passwortverwaltung, da Aktionstypen und Aktionsgeneratoren eine gemeinsame Schnittstelle zum Auslösen von Aktionen bieten. Anstatt Aktionen jedes Mal manuell zu erstellen, können Sie diese Aktionsgeneratoren verwenden, um Ihren Code sauberer und wartungsfreundlicher zu gestalten.
+   Wie bei der Verwaltung der Modalfenster werden auch hier Aktionserzeuger-Funktionen für die verschiedenen Operationen an den Passwörtern im Redux-Store definiert.
+   Die Aktionstypen werden zur Definition der Erzeuger importiert und als Typen der jeweiligen Aktionen gesetzt.
+   Diese Aktionstypen definieren, welche Aktionen ausgeführt werden sollen.
+   Die `passwortHinzufuegen`-Funktion erzeugt eine Aktion zum Hinzufügen eines neuen Passwortes. Das Passwort wird als Parameter der Funktion behandelt und in der erzeugten Aktion als Datenpaket übergeben.
+   Die Funktion `passwortLoeschen` erzeugt eine Aktion zum Löschen des Passwortes. Das Passwort wird als Parameter der Funktion behandelt und in der erzeugten Aktion als Datenpaket übergeben.
+Die Funktion `passwoerterFestlegen` erzeugt eine Aktion zum Festlegen der Passwörter im Redux-Store. Die Passwrter, die festgelegt werden sollen, werden als Parameter der Funktion behandelt und in der erzeugten Aktion als Datenpaket übergeben.
       
       
       
