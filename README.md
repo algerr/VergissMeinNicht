@@ -974,7 +974,7 @@ export const passwoerterFestlegen = (passwoerter) => {
         passwoerter
     }
 }
-```
+   ```
 
    Wie bei der Verwaltung der Modalfenster werden auch hier Aktionserzeuger-Funktionen für die verschiedenen Operationen an den Passwörtern im Redux-Store definiert.
    Die Aktionstypen werden zur Definition der Erzeuger importiert und als Typen der jeweiligen Aktionen gesetzt.
@@ -1001,7 +1001,7 @@ Die Funktion `passwoerterFestlegen` erzeugt eine Aktion zum Festlegen der Passw�
       
    ## Der Authentifizierungsreduzierer
       
-```javascript      
+   ```javascript      
 import { AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN } from '../aktionsErzeuger/aktionsTypen'
 
 // Zuerst wird der Anfangszustand des Reduzierers definiert.
@@ -1029,7 +1029,7 @@ const reduzierer = (zustand = anfangsZustand, aktion) => {
 
 // Zum Schluss wird der Reduzierer als Standard exportiert, sodass andere Module diesen importieren können.
 export default reduzierer
-```
+   ```
       
    Dieser Reduzierer kümmert sich nur um die Aktualisierung des Authentifizierungstokens im Redux-Store. Der Anfangszustand des Reduzierers enthält ein leeres Token als Eigenschaft. Die `reduzier`-Funktion benötigt zwei Parameter: den aktuellen Zustand und die auszuführende Aktion. 
    Da dieser Reduzierer nur bei einer Aktion vom Typ `AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN` aktiv werden soll, wird durch ein Switch-Statement überprüft, dass der Aktionstyp auch wirklich `AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN` ist.
@@ -1038,7 +1038,8 @@ export default reduzierer
    Schließlich wird der Reduzierer als Standardexport angezeigt, sodass andere Module ihn importieren können und so den Zustand des Authentifizierungstoken im Redux-State aktualisieren können.
       
    ## Das Modalfenster
-      ```javascript
+      
+   ```javascript
       import { OBERES_MODALFENSTER_ANZEIGEN, ZENTRIERTES_MODALFENSTER_ANZEIGEN, OBERES_MODALFENSTER_AUSBLENDEN, ZENTRIERTES_MODALFENSTER_AUSBLENDEN, SETZE_INHALT_FUER_OBERES_MODALFENSTER, SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER } from '../aktionsErzeuger/aktionsTypen'
 
 const anfangsZustand = {
@@ -1137,7 +1138,7 @@ const reduzierer = (zustand = anfangsZustand, aktion) => {
 }
 // Zum Schluss wird der Reduzierer als Standard exportiert, sodass andere Module diesen importieren können.
 export default reduzierer
-```
+   ```
       
    Wie beim Authentifizierungs-Reduzier wird auch hier ein Anfangszustand für die beiden Modalfenster definiert. Standardmäßig werden beide Modalfenster nicht angezeigt und besitzen keinerlei Inhalt. Die Reduzier-Funktion benötigt nun zwei Parameter: den aktuellen Status der Modalfenster und die auszuführende Aktion. 
    Um ohne viele `if`-Statements die unterschiedlichen Aktionen verarbeiten zu können, werden ein Switch-Statement verwendet und basierend auf den Aktionstypen Instanzen erzeugt, die je nach Aktion den Zustand aktualisieren. Jede Instanz gibt einen neuen Zustand zurück, indem sie den vorherigen Zustands verwendet und dann nur die in der Aktion angegebenen Eigenschaften ändert.
@@ -1145,6 +1146,7 @@ In diesem Fall hat der Zustand zwei Eigenschaften, „oberesModalfenster“ und 
 Schließlich gibt die "Reduzier"-Funktion einen neuen Zustand und ein oberes oder zentriertes Modalfenster zurück, die durch die durchgeführten Aktionen erzeugt wurden.
       
    ## Der Passwörter-Reduzierer
+      
    ```javascript   
    import { PASSWORT_HINZUFUEGEN, PASSWORT_LOESCHEN, PASSWOERTER_FESTLEGEN } from '../aktionsErzeuger/aktionsTypen'
 
