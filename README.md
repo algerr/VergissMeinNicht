@@ -799,7 +799,10 @@ exports.datenLoeschen = (datenbank, sammlung, id) => {
     return datenbank.collection(sammlung).doc(id).delete()
 }
 ```
-
+Dieser Code definiert Funktionen für die Interaktion mit der Firestore-Datenbank. Firestore ist eine dokumentbasierte NoSQL-Datenbank, die Daten in Dokumenten speichert, die in Sammlungen organisiert sind. Die Funktion „Daten hinzufügen“ dient zum Speichern neuer Daten in der Datenbank. Die Funktion muss mit der Firestore-Datenbank, der Sammlung, die die Daten enthält, und den Daten selbst als Parameter aufgerufen werden. Optional können Sie auch eine ID angeben, die das Dokument identifiziert. Wenn keine ID angegeben wird, wird automatisch eine zufällige ID generiert. Die readdata-Funktion wird verwendet, um Daten aus der Datenbank abzurufen. Die Funktion sollte mit der Firestore-Datenbank, der Sammlung und der ID des Dokuments aufgerufen werden, dessen Daten abgerufen werden. Die Funktion gibt Dokumentdaten im JSON-Format zurück.
+Die Funktion „Daten aktualisieren“ dient zum Aktualisieren der Daten in der Datenbank. Die Funktion muss mit der Firestore-Datenbank, der Sammlung, der ID des zu aktualisierenden Dokuments und den zu aktualisierenden Daten aufgerufen werden.
+Die Funktion „datenLoeschen“ dient zum Löschen von Dokumenten aus der Datenbank. Diese Funktion muss mit der Firestore-Datenbank, der Sammlung und der ID des zu löschenden Dokuments aufgerufen werden.
+Außerdem weist der Code darauf hin, dass zufällige IDs verwendet werden, um das Dokument auf den ersten Blick unkenntlich zu machen. Dies dient dem Schutz der Daten in der Datenbank.
 
       
      
