@@ -1299,9 +1299,9 @@ In dem folgenden Bild sind die Operationen in Codeform zu erkennen. Der angegebe
    <summary><h2>Grundfunktionen</h2></summary>
     
 ## Das Abrufen der Daten 
-  
-![carbon (18)](https://user-images.githubusercontent.com/111282979/230927660-e5e366b3-a736-4167-ab81-cc02ecd658bc.png)
- 
+   
+![carbon (26)](https://user-images.githubusercontent.com/111282979/230971038-ec3c4ff0-e080-436b-89e5-e60d6959f6e0.png)
+
 Es gibt zwei JavaScript-Funktionen, die exportiert werden können. Die erste Funktion, die GetuserData lautet, nimmt ein Benutzerobjekt als Parameter auf und gibt ein neues Objekt zurück, welches gespeicherte Benutzerdaten aus der Datenbank beinhaltet. Die zurückgegebenen Daten sind Benutzername, Passwort und die E-Mail-Adresse.
 Die zweite Funktion heißt passwordDataRetrieval und nimmt ein Passwortobjekt als Parameter. Diese Funktion gibt auch ein neues Objekt zurück, dass die gespeicherten Passwortdaten aus der Datenbank enthält. Dazu gehören Benutzername, Passwortbeschreibung, verschlüsseltes Passwort und Nonce. Allgemeinen handelt es sich bei diesen Funktionen um einfache JavaScript-Module, mit denen Daten aus einer Datenbank verarbeitet und abgerufen werden können.
 
