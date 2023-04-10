@@ -826,9 +826,60 @@ Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
 router.post(\'/\',Addpassword) definiert eine Route zum Hinzufügen eines Passworts und verwendet die HTTP-POST-Methode und den "/\"-Pfad. router.delete(\'/:passwordId\',passwordLoeschen) definiert eine Route zum Entfernen von Passwörtern basierend auf der ID und verwendet die HTTP-Methode DELETE sowie den Pfad \'/:passwordId\'. Die Passwort-ID wird als Parameter in der URL übergeben. router.get(\'/\',allpasswords) definiert eine Route zum Abrufen aller Passwörter und verwendet die HTTP GET-Methode und den Pfad "/\". 
 Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
 
+<details>
+   <summary><h2>Vermittlung</h2></summary>
    
-  
+## Das Überprüfen der Authentifizierung 
+   
+  ```javascript
+ // Importieren des 'jsonwebtoken'-Moduls für die Verarbeitung von JSON-Web-Token
+const jwt = require('jsonwebtoken')
 
+// Middleware für die Überprüfung der Autorisierung des Benutzers mit JWT
+module.exports = (req, res, next) => {
+
+    // Der Authorization-Headers wird aus der HTTP-Anfrage extrahiert.
+    const Authorization_Header = req.get('Authorization')
+
+    // Wenn kein Authorization-Header vorhanden ist, ist der Benutzer nicht authentifiziert
+    if (!Authorization_Header) {
+        req.authentifizierungsUeberpruefung = false
+        return next()
+    }
+
+    // Das Tokens wird aus dem Authorization-Header extrahiert.
+    const token = Authorization_Header.split(' ')[1]
+    if (!token || token === '') {
+        // Wenn kein Token vorhanden ist, ist der Benutzer nicht authentifiziert
+        req.authentifizierungsUeberpruefung = false
+        return next()
+    }
+
+    let entschluesseltesToken
+    try {
+        // Verifizieren des Tokens und entschluesseln der Daten (z.B. Benutzername)
+        entschluesseltesToken = jwt.verify(token, process.env.TOKEN_SECRET)
+    } catch (error) {
+        // Wenn das Verifizieren fehlschlägt, ist der Benutzer nicht authentifiziert.
+        req.authentifizierungsUeberpruefung = false
+        return next()
+    }
+
+    if(!entschluesseltesToken) {
+        // Wenn kein dekodiertes Token vorhanden ist, ist der Benutzer nicht authentifiziert.
+        req.authentifizierungsUeberpruefung = false
+        return next()
+    }
+
+    // Wenn alles erfolgreich war, ist der Benutzer authentifiziert und der Benutzername wird der Anfrage hinzugefügt.
+    req.authentifizierungsUeberpruefung = true
+    req.benutzername = entschluesseltesToken.benutzername
+    next()
+}
+```  
+Dieser Code definiert eine Middleware-Funktion zur Validierung der Benutzerautorisierung mithilfe von JSON Web Token (JWT) in der Node.js-Anwendung.
+Zunächst wird das Modul jsonwebtoken importiert, mit dem das JWT verarbeitet wird. Die Middleware wird als Funktion exportiert, die drei Parameter req, res und next akzeptiert. Diese Funktion extrahiert den Authorization-Header aus der HTTP-Anforderung und prüft, ob ein Token vorhanden ist. Wenn das Token fehlt, wird die Anfrage nicht authentifiziert und die nächste Middleware im Express-Stack wird aufgerufen.
+Ist ein Token vorhanden, wird dieser authentifiziert und die darin enthaltenen Daten entschlüsselt. Schlägt die Überprüfung fehl, gilt die Anfrage als nicht authentifiziert. Andernfalls wird der Benutzername aus dem entschlüsselten Token extrahiert und der Anfrage als Attribut hinzugefügt, bevor die nächste Middleware aufgerufen wird. Auf der Middleware-Seite wird die Eigenschaft „authentication check“ auf „true“ gesetzt, um anzuzeigen, dass die Anfrage authentifiziert wurde.
    
 
 
