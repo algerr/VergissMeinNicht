@@ -1889,15 +1889,6 @@ anwendung.use('/passwort', passwortRouter)
 
 // Die Express-Anwendung wird als Firebase Cloud Function exportiert, die auf HTTP-Anfragen reagiert.
 exports.backend = functions.https.onRequest(anwendung)
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
 ```
    
 Hier ist der Node.js-Code, der eine Express-App erstellt, die als Firebase Cloud-Funktion exportiert wird, um HTTP-Anforderungen zu verarbeiten. Die App verwendet das Firebase Functions-Modul, Cross-Origin Resource Sharing (CORS) und lädt Umgebungsvariablen mit dotenv. Die Proxy-Authentifizierung erfolgt über Authenticationscheck und der Datenbank-Firestore-Proxy über Firestore.
