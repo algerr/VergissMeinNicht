@@ -327,7 +327,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Das starke Passwort wird mit der Hilfsfunktion `passwortGenerieren` erstellt und daraufhin als Wert des Eingabefeldes für das neue Passwort gesetzt.
       
    ```javascript
-   // Wenn der Nutzer auf den "Speichern"-Button klickt, 
+      // Wenn der Nutzer auf den "Speichern"-Button klickt, 
    onSpeichern = async (e) => {
       // wird die browsereigene Standardaktion unterbrochen.
       e.preventDefault()
