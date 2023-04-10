@@ -898,6 +898,61 @@ Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
 router.post(\'/\',Addpassword) definiert eine Route zum Hinzufügen eines Passworts und verwendet die HTTP-POST-Methode und den "/\"-Pfad. router.delete(\'/:passwordId\',passwordLoeschen) definiert eine Route zum Entfernen von Passwörtern basierend auf der ID und verwendet die HTTP-Methode DELETE sowie den Pfad \'/:passwordId\'. Die Passwort-ID wird als Parameter in der URL übergeben. router.get(\'/\',allpasswords) definiert eine Route zum Abrufen aller Passwörter und verwendet die HTTP GET-Methode und den Pfad "/\". 
 Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
 
+<details>
+   <summary><h2>Vermittlung</h2></summary>
+   
+## Das Überprüfen der Authentifizierung 
+
+```javascript
+// Importieren des 'jsonwebtoken'-Moduls für die Verarbeitung von JSON-Web-Token
+const jwt = require('jsonwebtoken')
+
+// Middleware für die Überprüfung der Autorisierung des Benutzers mit JWT
+module.exports = (req, res, next) => {
+
+    // Der Authorization-Headers wird aus der HTTP-Anfrage extrahiert.
+    const Authorization_Header = req.get('Authorization')
+
+    // Wenn kein Authorization-Header vorhanden ist, ist der Benutzer nicht authentifiziert
+    if (!Authorization_Header) {
+        req.authentifizierungsUeberpruefung = false
+        return next()
+    }
+
+    // Das Tokens wird aus dem Authorization-Header extrahiert.
+    const token = Authorization_Header.split(' ')[1]
+    if (!token || token === '') {
+        // Wenn kein Token vorhanden ist, ist der Benutzer nicht authentifiziert
+        req.authentifizierungsUeberpruefung = false
+        return next()
+    }
+
+    let entschluesseltesToken
+    try {
+        // Verifizieren des Tokens und entschluesseln der Daten (z.B. Benutzername)
+        entschluesseltesToken = jwt.verify(token, process.env.TOKEN_SECRET)
+    } catch (error) {
+        // Wenn das Verifizieren fehlschlägt, ist der Benutzer nicht authentifiziert.
+        req.authentifizierungsUeberpruefung = false
+        return next()
+    }
+
+    if(!entschluesseltesToken) {
+        // Wenn kein dekodiertes Token vorhanden ist, ist der Benutzer nicht authentifiziert.
+        req.authentifizierungsUeberpruefung = false
+        return next()
+    }
+
+    // Wenn alles erfolgreich war, ist der Benutzer authentifiziert und der Benutzername wird der Anfrage hinzugefügt.
+    req.authentifizierungsUeberpruefung = true
+    req.benutzername = entschluesseltesToken.benutzername
+    next()
+}
+```
+Dieser Code definiert eine Middleware-Funktion in Node.js, die verwendet wird, um die Benutzerautorisierung mit einem JSON Web Token (JWT) zu überprüfen.
+Eine Middleware-Funktion wird häufig zwischen Anfrage und Antwort in der HTTP-Anfragekette eingefügt, um Benutzerberechtigungen zu überprüfen, bevor die Anfrage an den Hauptanwendungscode weitergeleitet wird. Zunächst extrahiert die Funktion den „Authorization“-Header aus der HTTP-Anforderung, die das JWT-Token enthält. Wenn der Header fehlt oder leer ist, wird der Benutzer als nicht authentifiziert markiert und der folgende Middleware- oder Hauptanwendungscode wird aufgerufen. Wenn ein Token vorhanden ist, wird das Token aus dem Header extrahiert und durch Entschlüsselung unter Verwendung des in der Umgebungsvariablen TOKEN_SECRET gespeicherten geheimen Schlüssels verifiziert. Wenn das Token ungültig ist oder die Entschlüsselung fehlschlägt, wird der Benutzer als nicht authentifiziert markiert und die folgende Middleware oder der folgende Hauptanwendungscode aufgerufen. Wenn das Token jedoch erfolgreich verifiziert und entschlüsselt wird, wird der Benutzer als authentifiziert markiert, indem „true“ an das Attribut „authentication“ in der Anforderung gesendet wird, und der Benutzername wird aus dem Token extrahiert und als Attribut „username“ verwendet. auf Anfrage. Dann wird die nächste Haupt-Middleware oder der Anwendungscode aufgerufen. Die Middleware-Funktion ist daher ein wichtiger Bestandteil des sicheren und autorisierten Webanwendungs-Stacks, da sie sicherstellt, dass nur autorisierte Benutzer auf die meisten Ressourcen oder Funktionen zugreifen können, die durch Validierung und Dekodierung des JWT-Tokens identifiziert werden.
+
+
    
   
 
