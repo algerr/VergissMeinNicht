@@ -1247,7 +1247,7 @@ console.log(error)
 // Der aktuelle Zustand des Stores wird aus dem lokalen Speicher geladen.
 const geladenerZustand = ausLokalemSpeicherLaden()
 
-// Mit der Funktion "reduxStore" kann ein Redux Store mit dem Hauptreduzierer und dem geladenen Zustand zu erstellen.
+// Mit der Funktion "reduxStore" kann ein Redux-Store mit dem Hauptreduzierer und dem geladenen Zustand erstellt werden.
 const reduxStore = () => {
 const store = createStore(
 hauptReduzierer,
@@ -1263,9 +1263,25 @@ export default reduxStore
 
    Nachdem alle Reduzierer mit Aktionen definiert und exportiert wurden, können diese nun zu einem großen `Hauptreduzierer` zusammengefasst werden und somit der Redux-Store verwaltet werden. So ist der Code übersichtlicher indem die Zustandsänderungen an einem Ort gehandhabt werden können. Dadurch werden keine zusätzlichen Abstraktionsschichten eingeführt und der Hauptreduzierer kann einfacher in die React-Anwendung integriert werden.
      
-   Mit CombineReducers werden diese Reduzierer zu einem Hauptreduzierer namens mainReducer kombiniert. Es wird verwendet, um den Status des Repositorys zu verwalten.
-Dann folgen zwei Hilfsfunktionen saveInLocalMemory und LoadFromLocalMemory. Die erste Funktion speichert den Cache-Zustand im lokalen Speicher des Browsers, konvertiert den zwischengespeicherten Zustand in eine serialisierte JSON-Zeichenfolge und speichert ihn im Arbeitsspeicher. Die zweite Funktion lädt den Speicherzustand aus dem lokalen Speicher und kehrt zurück, falls er existiert. Der aktuelle Status des Speichers wird dann aus dem lokalen Speicher geladen, sofern verfügbar.
-Schließlich wird die reduxStore-Funktion definiert, um den Speicher zu erstellen. Die reduxStore-Funktion verwendet createStore, um einen Speicher mit dem Hauptreduzierer und dem aus dem lokalen Speicher geladenen Zustand zu erstellen. Der Event-Handler ist bei store.subscribe registriert, um den aktualisierten Status im lokalen Store zu speichern, wenn sich der Status des Stores ändert. Schließlich wird die reduxStore-Funktion als Standardfunktion exportiert, damit andere Module sie importieren und verwenden können.
+   ```javascript
+   const hauptReduzierer = combineReducers({
+      authentifizierung,
+      passwoerter,
+      modalFenster
+   })
+   ```
+     
+   Mit der `combineReducers`-Methode werden die drei Reduzierer (authentifizierung, passwoerter, modalFenster) zu einem Hauptreduzierer kombiniert. 
+   
+   Daraufhin folgen zwei Funktionen, die den aktuellen Zustand (State) im lokalen Speicher speichern und aus dem lokalen Speicher laden können. Der Zustand wird dafür zuerst in einen serialisierten JSON-String konvertiert und daraufhin als Item `state` im lokalen Speicher des Browsers gespeichert.
+   
+   Wenn aus dem lokalen Speicher geladen werden soll, wird einfach dieses Item aus dem lokalen Speicher als `serialisierterZustand` gespeichert und daraufhin in ein JavaScript-Objekt konvertiert, das daraufhin zurückgegeben wird.
+   
+   Daraufhin wird der aktuelle Zustand in der Variablen `geladenerZustand` aus dem lokalen Speicher geladen.
+   
+  Schließlich wird die `reduxStore`-Funktion definiert, um den lokalen Speicher zu erstellen. Die `reduxStore`-Funktion verwendet die Redux-Methode `createStore`, um einen Speicher mit dem Hauptreduzierer und dem aus dem lokalen Speicher geladenen Zustand zu erstellen. 
+  Der Event-Handler ist bei `store.subscribe` registriert, um den aktualisierten Status im lokalen Speicher zu speichern, wenn sich der Zustand des Redux-Stores ändert. 
+  Schließlich wird die `reduxStore`-Funktion als Standardfunktion exportiert, damit andere Module sie importieren und verwenden können und sie in der `App.js` verwendet werden kann, um den lokalen Speicher der Webseite zu erstellen.
       
       
    <hr>
