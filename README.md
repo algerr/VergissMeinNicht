@@ -449,7 +449,6 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 
         )
     }
-   ```
    
    Die wichtigsten Eigenschaften der Komponente, die destrukturiert und als freie Variablen genutzt werden müssen, sind das Passwort, das gespeichert ist und das Masterpasswort, das dieses Passwort schützt. Dazu werden noch das verschlüsselte Passwort und der Sicherheitswert aus dem Passwort extrahiert und mit all den Eigenschaften das Passwort mit der Hilfsfunktion `entschluesseln` entschlüsselt.
    
@@ -493,11 +492,120 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
       
    ## Die Benutzerauthentifizierung
    
-   ## Das zentrierte Modalfenster
+   Da die Sicherheit beim Passwort Manager das A und O ist, haben wir eine zusätzliche Komponente definiert, die sich mit der Authentifizierung des Benutzers auseinandersetzt. Bevor ein Nutzer auf eine bestimmte Seite zugreifen kann wird dadurch immer zuerst überprüft, ob der Nutzer ausreichend authentifiziert ist.
+   Wenn das der Fall ist, wird er auf die gewünschte Seite weitergeleitet. Wenn nicht, wird er zur Anmeldung umgeleitet. 
    
-   ## Das obere Modalfenster
+   <details>
+   <summary>Nähere Informationen</summary>
    
-   ## Das Registrieren
+   Zur Authentifizierung wird in dieser Anwendung das Token verwendet. Somit wird dieses hier zuerst aus den Eigenschaften der Komponente destrukturiert, um es als freie Variable nutzen zu können. 
+   
+   ```javascript
+   const { token } = props
+   ```
+   
+   Daraufhin wird überprüft, ob ein Token vorhanden ist, also, ob das Token einen Wert hat, und ob dieses Token noch gültig ist. Wenn diese beiden Bedingungen erfüllt werden, wird die Route aufgerufen, die der Nutzer aufrufen wollte.
+   Ist der Nutzer nicht mit einem gültigen Token authentifiziert, wird er zur Anmeldung weitergeleitet.
+   
+   ```javascript
+   // Wenn ein Token vorhanden und nicht abgelaufen ist,
+   if (token && !istTokenAbgelaufen(token)) {
+      // wird die Route, die der Nutzer aufgerufen hat, angezeigt.
+      return (<Route {...props} />)
+   }
+
+   // Ansonsten wird der Nutzer zur Anmeldung weitergeleitet.
+   return (<Redirect to="/anmeldung" />)
+   ```
+   
+   
+   
+   </details>
+   
+   
+   ## Die Modalfenster
+   
+   Um dem Nutzer die wichtigsten aktuellen Informationen und Meldungen anzuzeigen, nutzen wir Dialogfenster, sogenannte `Modalfenster`. Diese haben wir in zwei Arten unterschieden. Es gibt die zentrierten Modalfenster, die beispielsweise beim Hinzufügen eines neuen Passwortes angezeigt werden und die oberen Modalfenster, worüber beispielsweise Fehlermeldungen angezeigt werden. Als Basis werden die Modale von React-Bootstrap verwendet, worüber dann die Modalfenster erstellt werden.
+   
+   <details>
+   <summary>Nähere Informationen</summary>
+   
+   Das zentrale Modalfenster ist für die Eingabe des Nutzers gedacht. Es besteht aus einem Titel, dem Inhalt, den Schaltflächen im Footer und dem Zustand, ob es gezeigt wird oder nicht. Darüber lässt sich das Öffnen und Schließen des Modalfensters regeln. 
+   
+   ```
+   const { titel, inhalt, buttons, gezeigt } = this.props
+        return (
+            // Die Modal-Komponente von Bootstrap wird als Grundlage genutzt, um das Modalfenster anzuzeigen.
+            <Modal show={gezeigt} onHide={this.fensterSchliessen} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{titel}</Modal.Title>
+                </Modal.Header>
+                {/* Der Inhalt des Modalfensters wird hinzugefügt. */}
+                <Modal.Body>{inhalt}</Modal.Body>
+                {/* Die Buttons des Modalfensters werden im Footer hinzugefügt. */}
+                <Modal.Footer>
+                    {
+                        // Falls "buttons" für das Modalfenster definiert sind, wird eine Schaltfläche für jeden Eintrag in "buttons" erzeugt.
+                        buttons ?
+                            buttons.map(b => {
+                                const { name, variant, onClick } = b
+                                // Falls der Name des Buttons "Schließen" lautet, wird das Modalfenster bei einem Klick, 
+                                mithilfe der Funktion "fensterSchliessen" geschlossen.
+                                if (name === "Schließen") {
+                                    return (
+                                        <Button variant={variant} onClick={this.fensterSchliessen} key={name}>
+                                            {name}
+                                        </Button>
+                                    )
+                                }
+
+                                // Ansonsten wird eine Schaltfläche mit dem entsprechenden Event-Handler hinzu.
+                                return (
+                                    <Button variant={variant} onClick={onClick}>
+                                        {name}
+                                    </Button>
+                                )
+                            })
+                            // Falls "buttons" nicht definiert ist, wird "null" zurückgegeben, um keine Schaltflächen anzuzeigen.
+                            : null
+                    }
+                </Modal.Footer>
+            </Modal>
+        )
+   ```
+   
+   Diese Eigenschaften werden dafür zuerst destrukturiert, um sie als freie Variablen verwenden zu können.
+   Daraufhin wird ein `Modal` von React-Bootstrap erstellt. Im Header dieses Models wird ein X auf der rechten Seite zum Schließen des Modalfensters eingefügt. Links davon befindet sich der Titel. Im Body des Modals wird der Inhalt gerendert.
+   Im Footer werden, falls Buttons vorhanden sind, diese als Button-Komponente gerendert. Dafür werden die Parameter `name`, also die Aufschrift des Buttons, `variant`, also die Variante des Buttons nach [Art von React-Bootstrap](https://react-bootstrap.github.io/components/buttons/) und der Event-Listener `onClick`, der beim Anklicken des Buttons eine Funktion ausführen kann, falls angegeben, übergeben. Sollte ein Button den Namen `Schließen` tragen, kann auch hierüber das Modalfenster geschlossen werden. Wenn keine Buttons definiert sind, werden mit `: null` keine Buttons angezeigt.
+   
+   ```javascript
+   fensterSchliessen = () => {
+        this.props.modalAusblenden()
+    }
+   ```
+   
+   Das Schließen bzw. Ausbleden des Modalfensters erfolgt über die Funktion `fensterSchliessen`. Diese ruft die Funktion `modalAusblenden` aus den Eigenschaften der Komponente auf. Auf diese Funktion wurde der Aktionserzeuger `zentriertesModalfensterAusblenden()` gemapped. 
+   Das bedeutet, dass durch das Aufrufen der Funktion `modalAusblenden` der Aktionserzeuger `zentriertesModalfensterAusblenden()` aufgerufen wird.
+   
+   ```javascript
+   // Mapping der Redux-Dispatch-Funktionen auf die Props-Objekte der Komponente.
+   const mapDispatchToProps = dispatch => {
+      return {
+         modalAusblenden: () => dispatch(zentriertesModalfensterAusblenden())
+      }
+   }
+   ```
+   
+   Beim oberen Modalfenster funktioniert das Erstellen auf die gleiche Art und Weise. 
+   Nur wird das React-Bootstrap Modal nicht `centered`, also zentriert gerendert, sondern einfach normal, oben am Seitenrand.
+   
+   ```javascript
+   <Modal show={gezeigt} onHide={this.fensterSchliessen} centered>
+   ```
+      
+   </details>
+
+
     
    ## Die Seitenleiste
    Die Seitenleiste lässt sich nach Wunsch ein- und ausblenden. Wenn diese eingeblendet ist, hat man die Option im Hauptfenster zu bleiben, welches den Namen              "Passwörter" trägt, oder man kann in das Fenster "Accounteinstellungen" wechseln. In den Accounteinstellungen sieht man zunächst einmal seinen festgelegten             Benutzernamen und seine Email mit der man sich im Vorhinein registriert hat. Darüber hinaus kann man in diesem Fenster entweder eine neue Email oder ein neues        Passwort festlegen, falls man etwas an seinen Anmeldedaten verändern möchte. Hierzu gibt es aber nun auch die Option seinen Account vollständig zu löschen, falls      man sich dazu entscheiden sollte.
