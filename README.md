@@ -675,10 +675,27 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Die Navigationsbar beinhaltet zwei Elemente. Auf der linken Seite befindet sich eine Schaltfläche, um die Seitenleiste ein- und auszuklappen. 
    Da das Anzeigen der Navigationsbar auf mobilen Geräten zu einer schlechten Benutzbarkeit der Webseite führt, werden auf diesen Geräten drei Striche in der oberen rechten Ecke angezeigt, um die Navigationsbar zu öffnen.
    Auf allen Geräten, die die Navigationsbar ohne Probleme anzeigen können, wird in der oberen rechten Ecke eine Schaltfläche zur Abmeldung angezeigt. Bei einem Klick auf diese wird der Nutzer zur Anmeldung weitergeleitet und die Funktion `onAbmelden` wird ausgeführt.
+   
+   ```javascript
+   componentDidMount = () => {
+      // Der Click-Event-Handler wird für das Element mit der ID "seitenleiste-toggle" registriert.
+      $("#seitenleiste-toggle").click(function (e) {
+         // Wenn das Element geklickt wird, wird das Standard-Click-Event verhindert.
+         e.preventDefault()
+         // Die toggleClass() Methode von jQuery wird aufgerufen, um das Element mit der ID "wrapper" ein- oder auszublenden.
+         // Wenn das Element die CSS-Klasse "toggled" trägt, wird sie entfernt. Ansonsten wird sie diesem hinzugefügt.
+         $("#wrapper").toggleClass("toggled")
+      })
+
+      // Wenn der Benutzer scrollt, passt diese Funktion die Position des Elements mit der ID "leisten-wrapper" an,
+      // um es immer sichtbar zu halten.
+      window.onscroll = () => {
+         $("#leisten-wrapper").css("top", window.pageYOffset)
+      }
+   }
+   ```
       
    
-   
-      Auf der rechten Seite befindet sich eine Schaltfläche zur Abmeldung.
       
    </details>
    
