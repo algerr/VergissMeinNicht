@@ -1377,36 +1377,37 @@ In dem folgenden Bild sind die Operationen in Codeform zu erkennen. Der angegebe
       
 #  Das Backend
 
+Im Backend findet die wahre Funktionalität hinter der schönen Fassade der Webseite statt. Anstatt um die schöne Darstellung eines Anmeldeformulars, kümmert man sich hier um die Verarbeitung der Anmeldungsanfrage, gleicht die eingegebenen Daten mit denen aus der Datenbank ab und gibt je nachdem, welches Ergebnis bei den unterschiedlichen Datenbank-Operationen herauskommt unterschiedliche Antworten auf die Anfragen aus dem Frontend.
+
+Das Backend ist eine Node.js Express Anwendung, die Google Cloud Funktion wie eine API funktioniert. Die App dient als HTTP-Endpunkt und reagiert auf Anfragen an verschiedene Endpunkte unterschiedlich.
+In den Grundfunktionen werden grundlegende Funktion zur Arbeit mit der Firestore-Datenbank definiert. In der Verwaltung werden unterschiedliche Funktionen definiert, die die Anfragen aus dem Frontend beantworten sollen.
+Diese Funktionen werden dann in den Routen unterschiedlichen Endpunkten und Anfragentypen zugeschrieben. Um eine Anmeldung durchzuführen, muss eine `POST`-Anfrage an die Route `/authentifizierung/anmeldung` mit dem Benutzernamen und Passwort des Nutzers gesendet werden. Wenn diese erfolgreich ist, wird ein Authentifizierungstoken zurückgegeben, wodurch der Nutzer sich anmelden kann.
+Die Überprüfung der Authentifizierung und die Verbindung zur Firestore-Datenbank, findet in der Vermittlung statt. 
+
 <details>
-   <summary><h2>Grundfunktionen</h2></summary>
+   <summary><h2>Die Grundfunktionen</h2></summary>
     
-## Das Abrufen der Daten 
+## Das Abrufen der Daten aus der Datenbank
    
 ![Abrufen der Daten](https://user-images.githubusercontent.com/65679099/230971735-e80fc53b-cfe7-4743-9566-795d8a02ad4c.png)
 
-Es gibt zwei JavaScript-Funktionen, die exportiert werden können. Die erste Funktion, die GetuserData lautet, nimmt ein Benutzerobjekt als Parameter auf und gibt ein neues Objekt zurück, welches gespeicherte Benutzerdaten aus der Datenbank beinhaltet. Die zurückgegebenen Daten sind Benutzername, Passwort und die E-Mail-Adresse.
-Die zweite Funktion heißt passwordDataRetrieval und nimmt ein Passwortobjekt als Parameter. Diese Funktion gibt auch ein neues Objekt zurück, dass die gespeicherten Passwortdaten aus der Datenbank enthält. Dazu gehören Benutzername, Passwortbeschreibung, verschlüsseltes Passwort und Nonce. Allgemeinen handelt es sich bei diesen Funktionen um einfache JavaScript-Module, mit denen Daten aus einer Datenbank verarbeitet und abgerufen werden können.
+Hier im Backend befinden wir uns nun stets in Datenbanknähe, wo häufig mit aktuellen Daten aus der Datenbank gearbeitet wird.
+Um diese Daten für JavaScript zugänglich zu machen, haben wir die beiden Funktionen `benutzerDatenAbrufen` und `passwortDatenAbrufen` definiert, die einen JSON-String des Benutzers oder Passwortes aus der Datenbank entgegennehmen und die einzelnen Felder aus der Firestore-Datenbank in ein neues Objekt konvertieren. Dieses Objekt beinhaltet beim Abrufen eines Benutzers die Daten: Benutzername, Passwort und die E-Mail-Adresse.
+Beim Abrufen der Passwortdaten wird ein Objekt mit: Benutzernamen, Beschreibung, verschlüsseltem Passwort und Sicherheitswert zurückgegeben. 
+Nun kann mit den Daten operiert werden.
 
-## Die Funktionen der Datenbank 
+## Eine kurze Einführung in Firestore
+
+Der Firestore ist eine dokumentenbasierte NoSQL-Datenbank, die von Googles Firebase kostenfrei zur Verfügung gestellt wird. Im Gegensatz zu einer SQL-Datenbank gibt es keine Tabellen oder Zeilen. Stattdessen werden die Daten in Dokumenten gespeichert, die in Sammlungen organisiert sind. 
+Jedes Dokument enthält eine Reihe von Schlüssel/Wertpaaren, sogenannten Feldern. In dieser Anwendung wurden zwei Sammlungen erstellt, in denen die Daten gespeichert werden. In der `Benutzer`-Sammlung werden alle registrierten Benutzer als Dokumente gespeichert. Jedes Dokument, also jeder Benutzer besitzt ein Feld für den Benutzername, ein Feld für das Passwort, das in verschlüsseltem Format gespeichert ist und ein Feld für die Emailadresse.
+In der `Passwoerter`-Sammlung werden die Passwörter als Dokumente gespeichert. Die Titel der Dokumente sind zufällig generierte IDs der Passwörter, damit diese nicht bei einem Blick auf die Datenbank direkt zuzuordnen sind. Jedes Dokument, also jedes Passwort besitzt ein Feld für die Beschreibung, ein Feld für das verschlüsselte Passwort, ein Feld für den Sicherheitswert und ein Feld für den Benutzernamen, zu dem das Passwort gehört. Tatsächlich ist es `nicht möglich, die Passwörter in der Datenbank auszulesen.` Um die verschlüsselten Passwörter zu entschlüsseln wird das passende Masterpasswort benötigt. Da dieses nicht in der Datenbank gespeichert wird und somit nur der Nutzer selbst kennt, ist dieser Passwortmanager einer der sichersten.
+Selbst wenn jemand Zugriff auf die Datenbank hätte, könnte er nicht die Passwörter entschlüsseln. Die Entschlüsselung findet komplett im Frontend statt.
+
+
+
+## Die Grundfunktionen in der Arbeit mit Datenbanken
+
 ```javascript      
-// fuer die Operationen in der Datenbank werden die Funktionen zum: Hinzufuegen, Lesen, Aktualisieren, Löschen.
-
-// ----------------------------------------------------------------------------------------------------------
-//                              Kurze Erklärung zur Funktionsweise von Firestore:
-//
-// Firestore ist eine dokumentenbasierte NoSQL-Datenbank. Im Gegensatz zu einer SQL-Datenbank gibt es keine Tabellen oder Zeilen. 
-// Stattdessen werden die Daten in Dokumenten gespeichert, die in Sammlungen organisiert sind. 
-// Jedes Dokument enthält eine Reihe von Schlüssel/Wertpaaren, sogenannten Feldern.
-//
-// ----------------------------------------------------------------------------------------------------------
-
-// Damit die einzelnen Dokumente (Benutzer und Passwörter) bei einem Blick auf die Firestore-Datenbank nicht direkt zuzuordnen sind, 
-// nutzen wir zufällige IDs, die die einzelnen Dokumente abrufbar und auf den ersten Blick unkenntlich machen.
-// Die einzelnen Dokumente (Benutzer und Passwörter) bestehen aus verschiedenen Feldern mit Werten.
-// Beispielsweise beinhaltet ein Dokument aus der Sammlung "Passwoerter" 
-// ein Feld "verschluesseltesPassword", welches das verschlüsselte Passwort beinhaltet.
-
-
 // Die Funktion zum Schreiben nimmt als Eingabe:
 // (Datenbank (datenbank), sammlung - zu der die Daten hinzugefuegt werden soll, die ID - die zur Identifizierung des Dokumentes.
 exports.datenHinzufuegen = (datenbank, sammlung, id, daten) => {
