@@ -1306,7 +1306,9 @@ Firestore bietet verschiedene Funktionen zum Schreiben, Lesen, Aktualisieren und
       
       
       
-#  Das Backend
+<details>
+   <summary><h1>Das Backend</h1></summary>
+   <hr>
 
 Im Backend findet die wahre Funktionalität hinter der schönen Fassade der Webseite statt. Anstatt um die schöne Darstellung eines Anmeldeformulars, kümmert man sich hier um die Verarbeitung der Anmeldungsanfrage, gleicht die eingegebenen Daten mit denen aus der Datenbank ab und gibt je nachdem, welches Ergebnis bei den unterschiedlichen Datenbank-Operationen herauskommt unterschiedliche Antworten auf die Anfragen aus dem Frontend.
 
@@ -1967,7 +1969,7 @@ Es gibt zwei Router, PasswordRouter und AuthenticationRouter, die Endpunkte bei 
 
 
 
-
+</details>
 <hr>
       
      
