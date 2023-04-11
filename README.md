@@ -1289,79 +1289,9 @@ export default reduxStore
 
 
 
-
-
-
-
-
-<details>
-   <summary><h1>Das Backend</h1></summary>
-
-## Die Anmeldung
-
-![Anmeldung](https://user-images.githubusercontent.com/65679099/230729167-a9b3ef5b-ee1a-45a5-8549-1713399c4bb7.png)
-
-Zunächst definiert die Funktion ein Joi-Objekt, indem sie die erforderlichen Felder (Benutzername und Passwort) angibt und validiert. Joi ist eine JavaScript-Validierungsbibliothek. Dadurch können Entwickler ein Schema für ein Objekt festlegen, das angibt, welche Eigenschaften vorhanden sein sollten, welche Datentypen erwartet werden können und welche Validierungsregeln für diese Eigenschaft gelten. Der Benutzername und das Passwort werden daraufhin aus dem Anforderungstext abgeleitet. Die Eingabe wird dann verifiziert, indem ein Joi-Objekt auf die Eingabe angewendet wird. Bei ungültiger Eingabe wird eine Fehlermeldung mit dem HTTP-Statuscode 400 zurückgegeben. Dann wird überprüft, ob der Benutzername in der Datenbank existiert. Andernfalls wird auch hier wieder eine Fehlermeldung mit dem HTTP-Statuscode 400 zurückgegeben. Wenn ein Benutzer in der Datenbank gefunden werden sollte, werden seine Daten analysiert, damit sichergestellt wird, dass sie korrekt formatiert sind. Das eingegebene Passwort wird dann mittels bcrypt.compareSync() mit dem vom Benutzer hinterlegten Passwort verglichen. Wenn das eingegebene Passwort korrekt ist, wird das JSON Web Token (JWT) mit den Anmeldeinformationen des Benutzers signiert und an den Client zurückgegeben. Wenn das Passwort falsch ist, wird eine HTTP 400-Fehlermeldung zurückgegeben.
-
-## Die Registrierung
-
-![Registrierung](https://user-images.githubusercontent.com/65679099/230729402-ec76d72a-d3f3-45ee-b3e2-818ef0221912.png)
-
-Dies ist die Funktion des Node.js/Express.js-Controllers, um neue Benutzer in der Anwendung zu registrieren.
-Zunächst definiert die Funktion ein Joi-Objekt, indem sie die erforderlichen Felder (Benutzername, Passwort und E-Mail-Adresse) angibt und validiert. Es wurde angegeben, dass der Wert für die E-Mail-Adresse eine gültige E-Mail-Adresse sein muss, aber auch leer gelassen werden kann.
-Der Benutzername, das Passwort und die E-Mail-Adresse werden dann aus dem Text der Anfrage extrahiert. Die Eingabe wird dann validiert, indem ein Joi-Objekt auf die Eingabe angewendet wird. Bei ungültiger Eingabe wird eine Fehlermeldung mit dem HTTP-Statuscode 400 zurückgegeben. Dann wird überprüft, ob der Benutzername bereits in der Datenbank existiert. In diesem Szenario wird eine Fehlermeldung mit dem HTTP-Statuscode 400 zurückgegeben. Wenn der Benutzername nicht existiert, wird die Funktion aufgerufen, die den neuen Benutzer in der Datenbank speichert. Passwörter werden verschlüsselt, bevor sie in der Datenbank gespeichert werden. Wenn das Speichern erfolgreich ist, wird eine Erfolgsmeldung mit dem HTTP-Statuscode 200 zurückgegeben.
-Dieser Code ist ein Beispiel für eine Implementierung einer einfachen Benutzerregistrierungsfunktion in Node.js/Express.js und enthält Verschlüsselungs- und Eingabevalidierungstechniken, um sicherzustellen, dass Benutzerdaten sicher in der Datenbank gespeichert werden. 
-
-## Die Aktualisierung der Emailadresse
-
-![EmailAktualisierung](https://user-images.githubusercontent.com/65679099/230729630-604b5636-b3fa-4318-8188-17826ab905a4.png)
-
-Die erste Funktion (emailAktualisieren) prüft zunächst, ob der Benutzer authentifiziert ist. In diesem Fall wird ein Joi-Test erstellt, um sicherzustellen, dass die Anfrage einen gültigen E-Mail-Adresswert enthält. Wenn die Anfrage gültig ist, wird die updatedata-Funktion aufgerufen, um die E-Mail-Adresse des Benutzers in der Datenbank zu aktualisieren. Dann wird ein neues JWT mit den aktualisierten Benutzerdetails erstellt und als Antwort an den Client gesendet. Die zweite Funktion 
-
-## Die Aktualisierung des Passwortes
-
-![PasswortAktualisierung](https://user-images.githubusercontent.com/65679099/230729893-7db48ed3-c70c-4ac5-8f58-c0bc999ed1dd.png)
-
-Dieser Code definiert drei Funktionen im Zusammenhang mit der Passwortverwaltung und der Benutzerauthentifizierung in der Webanwendung.
-Die Funktion "Passwort vergessen" ist noch nicht implementiert und gibt nur eine Meldung zurück, dass sie noch nicht implementiert ist. Die Funktion „Passwort zurücksetzen“ ist ebenfalls noch nicht implementiert und gibt eine ähnliche Meldung zurück.
-Die Funktion „Passwort ändern“ erfordert eine Benutzerauthentifizierung. Wenn der Benutzer nicht authentifiziert ist, wird eine Fehlermeldung zurückgegeben.
-Die Joi.object-Funktion definiert ein Schema, das die alten und neuen Passwörter des Benutzers enthält. Dann werden das alte und das neue Passwort aus dem Request-Objekt extrahiert und zur Authentifizierung in das Joi-Objekt eingefügt. Wenn der Test fehlschlägt, wird eine Fehlermeldung zurückgegeben. Dann wird versucht, den Benutzer aus der Datenbank auszulesen. Wenn der Benutzer nicht existiert, wird eine Fehlermeldung zurückgegeben. Wenn der Benutzer existiert, wird das alte eingegebene Passwort mit dem in der Datenbank gespeicherten Passwort verglichen. Wenn das Passwort korrekt ist, wird das Passwort in der Datenbank mit dem neu eingegebenen Passwort aktualisiert. Andernfalls wird eine Fehlermeldung zurückgegeben, dass das alte Passwort ungültig ist.
-
-## Das Löschen des Accounts
-
-![AccountLöschen](https://user-images.githubusercontent.com/65679099/230730365-a6f0345c-3583-4464-abb9-a73a998c4091.png)
-
-Dieser Code ist die Funktion zum Löschen des Benutzerkontos.
-Zunächst wird überprüft, ob der Benutzer authentifiziert ist. Andernfalls wird eine Fehlermeldung zurückgegeben.
-Anschließend wird eine Abfrage an die Firestore-Datenbank gesendet, um alle Passwörter abzurufen, die dem Benutzer gehören, dessen Konto gelöscht wird. Anschließend wird für jedes Dokument die Methode .delete() aufgerufen, um Einträge aus der Sammlung „Passwords“ zu entfernen.
-Die Funktion deleteata() wird dann aufgerufen, um den Benutzer aus der Sammlung "Benutzer" zu entfernen. Abschließend wird eine Erfolgsmeldung mit dem Statuscode 200 zurückgegeben.
-
-## Die Firebase-Cloudfunktion
-
-![carbon (16)](https://user-images.githubusercontent.com/111282979/230164283-da4cb773-0c5f-45ae-9f38-4d68c0e342b6.png)
-
-Diese Codezeile erstellt eine Firebase-Cloudfunktion, die als HTTP-Endpunkt dient. Die API wird ausgeführt, wenn auf einen bestimmten Endpunkt zugegriffen wird. functions.https.onRequest ist eine Firebase Cloud Function, die als HTTP-Request-Handler fungiert. app ist ein Express-Objekt, das Routen und Handler für API-Endpunkte enthält. Zusammen bilden sie die Cloud-Funktionalität von Firebase, die HTTP-Anforderungen an in der Anwendung definierte Routen und Handler umleitet.
-
-| Sammlungen (VergissMeinNicht) | Dokumente (Benutzer)  | Felder (guter_passant679)  |
-|---|---|---|
-| Benutzer |guter_passant679, <br />  AndreasNikita909, <br /> NXKITAVATA4BIRA2                                                                                          |benutzername: guter_passant679 ; <br /> email: guter_passant@gmail.com; <br /> passwort: HaMsterrad88 |
-
-|Sammlungen (VergissMeinNicht) | Dokumente (Passwort)  | Felder (Hbe83jdFrB4brk+Hdue38)  |
-|---|---|---|
-|Passwörter | Hu9dGerT47+lIKBez62bV, <br /> Hbe83jdFrB4brk+Hdue38, <br /> Zudl09ASv5FbnB7Uq9JbY, <br />  JkIol9u78Vbuehb7qwvGb| benutzername: guter_passant679; <br /> Beschreibung: Twitter; <br /> sicherheitswert: NOKDefo5HgBef34fRG579; <br /> verschüsseltes Passwort: EL09jd83mBn34U5newoWSSwmf51 |
-
-
-
 Firestore ist eine von Google entwickelte dokumentenorientierte NoSQL-Datenbank. Im Gegensatz zu relationalen Datenbanken (z. B. SQL-Datenbanken) hat Firestore keine Tabellen, Zeilen oder Spalten, stattdessen werden Daten in Dokumenten gespeichert, die in Sammlungen organisiert sind. Jedes Dokument enthält Felder und Werte, die als JSON-Objekt dargestellt werden. Dokumente in der Sammlung müssen keine festen Felder haben. Dokumente sind daher flexibler und skalierbarer als relationale Datenbanken.
 Firestore wurde für die Verwendung in Anwendungen entwickelt, die Daten in Echtzeit ändern, wie z. B. Chat-Anwendungen und Online-Spiele. Mit Firestore können Sie Daten in Echtzeit zwischen Ihrem Client (z. B. einem Mobilgerät oder Webbrowser) und Ihren Servern in der Cloud synchronisieren. Das bedeutet, dass Änderungen, die in einem Client vorgenommen werden, automatisch an alle anderen Clients weitergegeben werden, die mit derselben Datenquelle verbunden sind.
 Firestore bietet verschiedene Funktionen zum Schreiben, Lesen, Aktualisieren und Löschen von Daten. Firestore-Daten können einfach über APIs abgerufen und bearbeitet werden. Firestore bietet auch eine Abfragesprache, mit der Entwickler komplexe Abfragen ausführen können, um bestimmte Daten aus Sammlungen abzurufen. Firestore ist Teil der Firebase-Plattform von Google und lässt sich problemlos in andere Firebase-Dienste wie Authentifizierung, Cloud-Messaging und Cloud-Funktionen integrieren. Firestore ist auch auf der Google Cloud Platform (GCP) verfügbar. Das bedeutet, dass es sich nahtlos in Anwendungen integrieren lässt, die auf der GCP gehostet werden.
-
-![carbon (17)](https://user-images.githubusercontent.com/111282979/230663349-6f15f7f9-8909-43fb-8b54-ae5ad715564b.png)
-
-In dem folgenden Bild sind die Operationen in Codeform zu erkennen. Der angegebene Code demonstriert die Fähigkeit, Daten in Firestore zu schreiben, zu lesen, zu aktualisieren und zu löschen. Die adddata-Funktion fügt der Sammlung Daten hinzu und kann die ID des Dokuments festlegen oder automatisch eine zufällige ID generieren. Die readdata-Funktion liest Daten aus einem Dokument mit einer bestimmten ID innerhalb einer Sammlung. Die updatedata-Funktion aktualisiert die Daten im Dokument mit der angegebenen ID in der Sammlung. Die Funktion „deletedata“ löscht Daten aus einem Dokument mit einer bestimmten ID in einer Sammlung.
-
-</details>
-<hr>
 
 
 
@@ -1403,7 +1333,13 @@ Jedes Dokument enthält eine Reihe von Schlüssel/Wertpaaren, sogenannten Felder
 In der `Passwoerter`-Sammlung werden die Passwörter als Dokumente gespeichert. Die Titel der Dokumente sind zufällig generierte IDs der Passwörter, damit diese nicht bei einem Blick auf die Datenbank direkt zuzuordnen sind. Jedes Dokument, also jedes Passwort besitzt ein Feld für die Beschreibung, ein Feld für das verschlüsselte Passwort, ein Feld für den Sicherheitswert und ein Feld für den Benutzernamen, zu dem das Passwort gehört. Tatsächlich ist es `nicht möglich, die Passwörter in der Datenbank auszulesen.` Um die verschlüsselten Passwörter zu entschlüsseln wird das passende Masterpasswort benötigt. Da dieses nicht in der Datenbank gespeichert wird und somit nur der Nutzer selbst kennt, ist dieser Passwortmanager einer der sichersten.
 Selbst wenn jemand Zugriff auf die Datenbank hätte, könnte er nicht die Passwörter entschlüsseln. Die Entschlüsselung findet komplett im Frontend statt.
 
+| Sammlungen (VergissMeinNicht) | Dokumente (Benutzer)  | Felder (guter_passant679)  |
+|---|---|---|
+| Benutzer |guter_passant679, <br />  AndreasNikita909, <br /> NXKITAVATA4BIRA2                                                                                          |benutzername: guter_passant679 ; <br /> email: guter_passant@gmail.com; <br /> passwort: HaMsterrad88 |
 
+|Sammlungen (VergissMeinNicht) | Dokumente (Passwort)  | Felder (Hbe83jdFrB4brk+Hdue38)  |
+|---|---|---|
+|Passwörter | Hu9dGerT47+lIKBez62bV, <br /> Hbe83jdFrB4brk+Hdue38, <br /> Zudl09ASv5FbnB7Uq9JbY, <br />  JkIol9u78Vbuehb7qwvGb| benutzername: guter_passant679; <br /> Beschreibung: Twitter; <br /> sicherheitswert: NOKDefo5HgBef34fRG579; <br /> verschüsseltes Passwort: EL09jd83mBn34U5newoWSSwmf51 |
 
 ## Die Grundfunktionen für die Arbeit mit Firestore
 
@@ -1541,20 +1477,34 @@ Wenn ein Token vorhanden ist, wird das Token aus dem Header extrahiert und durch
 Wenn das Token jedoch erfolgreich verifiziert und entschlüsselt wird, ist der Benutzer authentifiziert und das Attribut der Anfrage `req.authentifizierungsUeberpruefung` wird auf `true` gesetzt. Zusätzlich wird der Benutzername aus dem Token extrahiert und als Attribut `req.benutzername` der Anfrage hinzugefügt. Daraufhin wird der nächste Code oder die nächste Vermittlungsfunktion aufgerufen. 
 Deshalb ist die Vermittlungsfunktion ein wichtiger Bestandteil des sicheren und authentifizierten Webanwendungs-Stacks, da sie sicherstellt, dass nur authentifizierte Benutzer auf die bestimmte Funktionen zugreifen können, die durch Validierung und Dekodierung des JWT-Tokens identifiziert werden.
    
-## Die Initialisierung des Firestores
+## Die Verbindung mit dem Firestore
    
    ![carbon (22)](https://user-images.githubusercontent.com/111282979/230939931-4bb35db0-94e4-42e8-b889-490689298a2c.png)
 
-Dieser Code definiert die Middleware-Funktionalität für Express-Anwendungen, um sicherzustellen, dass alle ausgehenden HTTP-Antworten mit bestimmten HTTP-Headern gekennzeichnet sind. Diese Header sind nützlich, um Sicherheits- und Datenschutzprobleme zu vermeiden. Zunächst werden einige Konstanten definiert, die die Namen der Header enthalten, die in die HTTP-Antworten eingefügt werden sollen.
-Dann wird die Middleware-Funktion definiert. Es benötigt drei Argumente: das Anforderungsobjekt (req), das Antwortobjekt (res) und die nächste Zwischenfunktion (next).
-Die Header werden dann zu den Middleware-Funktionen hinzugefügt, indem die entsprechenden Methoden für das Response-Objekt (res) aufgerufen werden. Zunächst wird der X-Content-Type-Options-Header auf nosniff gesetzt, um zu verhindern, dass der Browser Dateien mit dem falschen MIME-Typ interpretiert.
-Dann wird der Header \'X-Frame-Options\' auf \'DENY\' gesetzt, um Clickjacking zu verhindern. Der Header der Inhaltssicherheitsrichtlinie ist auf eine Richtlinie festgelegt, die nur HTTPS-Verbindungen zulässt und XSS-Angriffe verhindert.
-Schließlich wird der Header \'X-XSS-Protection\' auf \'1 gesetzt; mode=block\' ist so eingestellt, dass XSS-Angriffe blockiert werden. Die nächste (nächste) Middleware-Funktion wird dann aufgerufen, um die Anforderung an die nächste Middleware-Funktion oder Route weiterzuleiten.
+Die Vermittlungsfunktion ermöglicht, durch das Erzeugen einer Firestore-Instanz, den nachfolgenden Routen oder Vermittlungsfunktionen auf die Firestore-Datenbank zuzugreifen und Operationen daran durchzuführen. Dafür wird das Firebase Admin-SDK-Modul importiert und durch `admin.initializeApp()` initialisiert. Dadurch wird eine Verbindung zum Firebase-Projekt hergestellt werden.
 
-<details>
-   <summary><h2>Verwaltung</h2></summary>
+```javascript
+const firestore_datenbank = admin.firestore() 
+```
    
- ## Die Authentifizierung
+Daraufhin wird eine Firestore-Instanz erzeugt und `firestore_datenbank` zugewiesen. Über diese Variable kann auf die Datenbank zugegriffen werden.
+In der Vermittlungsfunktion wird dem Anfrageobjekt `req` die Firestore-Instanz hinzugefügt.
+   
+```javascript
+req.firestore = firestore
+```
+
+Dadurch können in den nachfolgenden Routen oder Vermittlungsfunktionen auf die Firestore-Datenbank zugegriffen werden. Daraufhin wird die der nächste Code oder die nächste Vermittlungsfunktion angehängt und die Anfrage kann weiterverarbeitet werden.
+   
+<details>
+   <summary><h2>Die Verwaltung</h2></summary>
+   
+Die Verwaltung ist der wichtigste Teil im Backend. Hier werden die Funktionen zur Authentifizierungs- und Passwortverwaltung definiert, wodurch Aktionen wie die Anmeldung oder das Hinzufügen eines neuen Passwortes durchgeführt werden können. 
+   
+<details>
+   <summary><h3>Die Authentifizierungsverwaltung</h3></summary>
+ 
+   ## Die Registrierung
    
  ```javascript  
  // Joi ist die perfekte Wahl für das Festlegen von Schemata/Formaten, denen Daten folgen sollen
