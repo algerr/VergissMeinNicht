@@ -801,7 +801,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
       
    ## Der Server 
     
-    
+    Der bereitgestellte Code ist ein JavaScript-Modul, das verschiedene Funktionen zur Kommunikation mit dem Server über HTTP-Anforderungen enthält. Es ermöglicht dem     Benutzer, sich mit Benutzername und Passwort anzumelden, das Passwort vom Server abzurufen und die Serverantwort als JSON-Objekt zu behandeln. Dieser Code ist         wichtig für die sichere Kommunikation mit dem Server und um Benutzern den Zugriff auf sichere Ressourcen zu ermöglichen, während ihre Anmeldeinformationen             geschützt bleiben.
     
    ## Das Token
    
