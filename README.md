@@ -800,8 +800,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Die Verschlüsselung seiner aufgelisteten Passwörter erfolgt genau dann, wenn das festgelegte Passwort nicht mehr eingegeben ist. Die eigentlichen Passwörter werden    dann verschlüsselt, indem an der Stelle des Passworts die Nachricht "Passwort ist verschlüsselt", auftritt. Wenn man das Masterpasswort wieder in das Eingabefeld      einfügt, dann werden wieder automatisch die aufgelisteten Passwörter entschlüsselt.
       
    ## Der Server 
-    
-   Der bereitgestellte Code ist ein JavaScript-Modul, das verschiedene Funktionen zur Kommunikation mit dem Server über HTTP-Anforderungen beinhaltet. Es ermöglicht      unserem Benutzer, sich mit Benutzername und Passwort anzumelden, das Passwort vom Server abzurufen und die Serverantwort als JSON-Objekt zu behandeln. Dieser Code    ist somit wichtig, um die sichere Kommunikation mit dem Server und um Benutzern den Zugriff auf sichere Ressourcen zu ermöglichen, während ihre                        Anmeldeinformationen geschützt bleiben.
+ 
+   Der bereitgestellte Code ist ein JavaScript-Modul, das verschiedene Funktionen zur Kommunikation mit dem Server über HTTP-Anforderungen beinhaltet. Es ermöglicht      unserem Benutzer, sich mit Benutzername und Passwort anzumelden, das Passwort vom Server abzurufen und die Serverantwort als JSON-Objekt zu behandeln. Dieser          Code ist somit wichtig, um die sichere Kommunikation mit dem Server und um Benutzern den Zugriff auf sichere Ressourcen zu ermöglichen, während ihre                  Anmeldeinformationen geschützt bleiben.
     
    ## Das Token
    
