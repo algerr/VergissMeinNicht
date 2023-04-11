@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
     // Dem Anfragebjekt wird die Firestore-Instanz hinzugefügt, 
     // um auf die Firestore-Datenbank zugreifen zu können.
     req.firestore = firestore
-    // Die 
+    // Der nächste Code oder die nächste Vermittlungsfunktion wird aufgerufen.
     return next()
 }
 
