@@ -1538,9 +1538,10 @@ Diese Vermittlungsfunktion wird verwendet, um die Benutzerauthentifizierung mit 
 Die Funktion wird zwischen Anfrage und Antwort in der HTTP-Anfragekette eingefügt, um die Benutzerberechtigungen zu überprüfen, bevor die Anfrage an den Router weitergeleitet wird. 
 Zunächst wird der Authorization-Header aus der HTTP-Anforderung, der das JWT enthält, extrahiert. Wenn der Header fehlt oder leer ist, ist der Benutzer nicht authentifiziert und die Anfrage wird weiterverarbeitet. 
 Wenn ein Token vorhanden ist, wird das Token aus dem Header extrahiert und durch die Entschlüsselung unter Verwendung des unter TOKEN_SECRET gespeicherten geheimen Schlüssels verifiziert. Wenn das Token ungültig ist oder die Entschlüsselung fehlschlägt, zählt der Benutzer als nicht authentifiziert und die Anfrage wird weiterverarbeitet. 
-Wenn das Token jedoch erfolgreich verifiziert und entschlüsselt wird, ist  „true“ an das Attribut „authentication“ in der Anforderung gesendet wird, und der Benutzername wird aus dem Token extrahiert und als Attribut „username“ verwendet. auf Anfrage. Dann wird die nächste Haupt-Middleware oder der Anwendungscode aufgerufen. Die Middleware-Funktion ist daher ein wichtiger Bestandteil des sicheren und autorisierten Webanwendungs-Stacks, da sie sicherstellt, dass nur autorisierte Benutzer auf die meisten Ressourcen oder Funktionen zugreifen können, die durch Validierung und Dekodierung des JWT-Tokens identifiziert werden.
+Wenn das Token jedoch erfolgreich verifiziert und entschlüsselt wird, ist der Benutzer authentifiziert und das Attribut der Anfrage `req.authentifizierungsUeberpruefung` wird auf `true` gesetzt. Zusätzlich wird der Benutzername aus dem Token extrahiert und als Attribut `req.benutzername` der Anfrage hinzugefügt. Daraufhin wird der nächste Code oder die nächste Vermittlungsfunktion aufgerufen. 
+Deshalb ist die Vermittlungsfunktion ein wichtiger Bestandteil des sicheren und authentifizierten Webanwendungs-Stacks, da sie sicherstellt, dass nur authentifizierte Benutzer auf die bestimmte Funktionen zugreifen können, die durch Validierung und Dekodierung des JWT-Tokens identifiziert werden.
    
-## Der Firestore
+## Die Initialisierung des Firestores
    
    ![carbon (22)](https://user-images.githubusercontent.com/111282979/230939931-4bb35db0-94e4-42e8-b889-490689298a2c.png)
 
