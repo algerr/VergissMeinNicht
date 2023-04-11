@@ -800,8 +800,12 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Die Verschlüsselung seiner aufgelisteten Passwörter erfolgt genau dann, wenn das festgelegte Passwort nicht mehr eingegeben ist. Die eigentlichen Passwörter werden    dann verschlüsselt, indem an der Stelle des Passworts die Nachricht "Passwort ist verschlüsselt", auftritt. Wenn man das Masterpasswort wieder in das Eingabefeld      einfügt, dann werden wieder automatisch die aufgelisteten Passwörter entschlüsselt.
       
    ## Der Server 
-      
-   ## Das Token 
+    
+    
+    
+   ## Das Token
+   
+   Das Token ist dazu da, um die Nachrichten, die der Nutzer als Anfrage zu unsererem Server sendet, zu entschlüsseln, indem der Token die Nachricht in kleinere Teile    zerlegt und dabei das Wichtigste dabei rausfiltert. Gleichzeitig hilft das Token dabei zu überprüfen, ob eine Nachricht noch gültig ist oder ob diese bereits          abgelaufen ist und insofern keine Relevanz mehr hat.
    <hr>
    </details>
   
