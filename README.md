@@ -1298,8 +1298,9 @@ Firestore bietet verschiedene Funktionen zum Schreiben, Lesen, Aktualisieren und
       
       
 </details>
-      
-   </details>  
+</details>
+</details>
+</details>  
       
       
       
