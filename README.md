@@ -1316,6 +1316,8 @@ Das Backend ist eine Node.js Express Anwendung, die Google Cloud Funktion wie ei
 In den Grundfunktionen werden grundlegende Funktion zur Arbeit mit der Firestore-Datenbank definiert. In der Verwaltung werden unterschiedliche Funktionen definiert, die die Anfragen aus dem Frontend beantworten sollen.
 Diese Funktionen werden dann in den Routen unterschiedlichen Endpunkten und Anfragentypen zugeschrieben. Um eine Anmeldung durchzuführen, muss eine `POST`-Anfrage an die Route `/authentifizierung/anmeldung` mit dem Benutzernamen und Passwort des Nutzers gesendet werden. Wenn diese erfolgreich ist, wird ein Authentifizierungstoken zurückgegeben, wodurch der Nutzer sich anmelden kann.
 Die Überprüfung der Authentifizierung und die Verbindung zur Firestore-Datenbank, findet in der Vermittlung statt. 
+Um eine weitere Stufe der Sicherheit zu gewährleisten, wird eine Umgebungsvariable `TOKEN_SCHLUESSEL` in der `.env`-Datei festgelegt. Ohne diesen geheimen Schlüssel können Tokens weder erstellt noch entschlüsselt werden. So ist es, ohne diesen Schlüssel zu kennen, nicht möglich, mit den Tokens im Frontend etwas anfangen, bzw. daraus ableiten zu können. 
+Während die Authentifizierung des Tokens nur im Backend stattfindet, findet die Entschlüsselung der Passwörter mit dem Masterpasswort nur im Frontend statt. Das Masterpasswort wird **nicht gespeichert**. Dadurch ist es nicht möglich, die Passwörter aus der Datenbank auslesen zu können, ohne das Masterpasswort zu kennen, mit dem jedes Passwort verschlüsselt wurde.
 
 <details>
    <summary><h2>Die Grundfunktionen</h2></summary>
@@ -1406,7 +1408,7 @@ Für jede Funktion wird eine HTTP-POST-Methode mit dem entsprechenden Pfad defin
 Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
 Sobald dieser in der Anwendung importiert und definiert ist, 
    
-## Das Passwort
+## Der Passwortrouter
    
  ![carbon (20)](https://user-images.githubusercontent.com/111282979/230936231-742f79dd-7c69-4407-bdf6-1ca340854c13.png)
    
@@ -1507,25 +1509,18 @@ Die Verwaltung ist der wichtigste Teil im Backend. Hier werden die Funktionen zu
 <details>
    <summary><h3>Die Authentifizierungsverwaltung</h3></summary>
  
+   Die Authentifizierungsverwaltungsfunktion behandeln alle Anfragen, die sich mit dem Benutzerkonto befassen. Von der Anmeldung, über die Emailaktualisierung bis hin zum Löschen des Accounts, wird alles hier verwaltet.
+   Dafür werden drei Module importiert, die für die essenziell sind. Mit [Joi](https://joi.dev/) lassen sich Schemata und Formate festlegen, in denen Daten in Javascript validiert werden. Dadurch ist es direkt möglich, Anfragen, die nicht dem festgelegten Format entsprechen, abzufangen, wodurch Fehler im Server verhindert werden.
+   Für unsere Tokens nutzen wir [JSON-Web-Tokens (JWT)](https://jwt.io/), da diese von sich aus bereits digitale Signaturen und Vershlüsselungen verwenden, um die Authentizität der Daten zu gewährleisten. So kann sichergestellt werden, dass die Daten nur von dieser vertrauenswürdigen Quelle stammen und nicht von Dritten manipuliert wurden.
+   Es werden auch keine Zustände gespeichert, da alle notwendigen Informationen im Token selbst enthalten sind.
+   Zudem sind JWT kompakte Strings, die einfach in HTTP-Headern eingebettet werden können. So sind sich leicht zu übertragen und verarbeiten.
+   Für die Verschlüsselung nutzen wir die [Bcrypt-Hashfunktion](https://www.npmjs.com/package/bcryptjs). Diese zeichnet sich durch ein langsames Hashing-Verfahren aus, das besonders Brute-Forcing von Passwörtern erschweren soll. Jedem Passwort-Hash wirt ein Salt, eine zufällige Zeichenkette, hinzugefügt, um die Wiederholung des Hashes zu verhindern.
+   Bcrypt Passwörter sind somit sehr schwer zu cracken und deshalb in unserem Fall, als Passwortschützer Nr. 1, genau die richtige Wahl.
+ 
    ## Die Registrierung
    
- ```javascript  
- // Joi ist die perfekte Wahl für das Festlegen von Schemata/Formaten, denen Daten folgen sollen
-// und der Validierung dieser.
-const Joi = require('@hapi/joi')
-// Zur Authentifizierung werden Jsonwebtokens (JWT) 
-const jwt = require('jsonwebtoken')
-// und für die Verschlüsselung die Bcrypt-Hashfunktion verwendet.
-// Dafür wird die Javascript-Implementierung "bcryptjs" verwendet.
-const bcrypt = require('bcryptjs')
-
-// Die Grundfunktionen zur Arbeit mit Datenbanken werden importiert,
-const { datenLesen, datenHinzufuegen, datenAktualisieren, datenLoeschen } = require('../Grundfunktionen/datenbankFunktionen')
-
-const { benutzerDatenAbrufen } = require('../Grundfunktionen/datenAbrufen')
-
-// Für die Registrierung wird das Format (benutzername, passwort, email) vorgegeben, in dem die Daten eingegeben werden müssen.
-exports.registrierung = async (req, res) => {
+ ```javascript
+ exports.registrierung = async (req, res) => {
     const Format = Joi.object({
         benutzername: Joi.string().required(),
         passwort: Joi.string().required(),
@@ -1570,8 +1565,18 @@ exports.registrierung = async (req, res) => {
         message: `Der Benutzer ${benutzername} wurde erfolgreich registriert!`
     })
 }
+```
 
-// Für die Anmeldung wird das Format (benutzername, passwort) vorgegeben, in der die Daten eingegeben werden müssen.
+Eine Anfrage zur Registrierung muss im Format (benutzername, passwort, email) eintreffen. Dieses Format ist zwingend, was durch die Joi-Methode `required()` ausgedrückt. Benutzername, Passwort und Email werden aus dem Message-Body der Anfrage entnommen und als freie Variablen gespeichert.
+Daraufhin wird überprüft, ob diese Daten dem vorgegebenen Format entsprechen. Wenn dies nicht der Fall ist, wird der Status 0 und die Fehlermeldung zurückgegeben.
+Wenn das Format jedoch stimmt, wird in der Firestore-Datenbank nach dem eingegebenen Benutzernamen gesucht. Falls dieser bereits existiert, wird eine Fehlermeldung zurückgegeben, dass der Benutzer bereits existiere.
+Wenn der Benutzer noch nicht existiert, wird in der Sammlung `Benutzer` in der Datenbank ein neuer Benutzer, bzw. neues Dokument angelegt. Die ID des Dokuments ist der Benutzername und als Felder werden: Der Benutzername, die Emailadresse und das der Passwort-Hash hinzugefügt.
+Das Passwort wird mit einem zufälligen, 12-stelligen Salt gehashed.
+Wenn die Registrierung des Nutzers erfolgreich war, wird dies durch den Status 1 und eine Erfolgsmeldung zurückgegeben.
+ 
+## Die Anmeldung
+ 
+```javascript
 exports.anmeldung = async (req, res) => {
     const Format = Joi.object({
         benutzername: Joi.string().required(),
@@ -1623,6 +1628,30 @@ exports.anmeldung = async (req, res) => {
         })
     }
 }
+```
+
+Bei der Anmeldung wird das Format (Benutzername, Passwort) festgelegt, in dem die Anfrage erfolgen muss. Benutzername und Passwort werden aus dem Message-Body der Anfrage entnommen und das Format wird validiert. Bei einem Fehler wird der Status 0 und die Fehlermeldung zurückgegeben.
+Wenn das Format stimmt, wird überprüft, ob der eingegebene Benutzername in der Datenbank existiert. Wenn nicht, wird ebenfalls ein Status 0 und eine Fehlermeldung, dass der Benutzer ja nicht existiere, zurückgegeben.
+Wenn der Benutzername jedoch in der Datenbank auffindbar ist, werden die gespeicherten Daten abgerufen und über `bcrypt.compareSync()` das Passwort mit dem Passworthash verglichen. Wenn das eingegebene Passwort mit dem gespeicherten aus der Datenbank übereinstimmt, wird ein JWT aus dem Benutzernamen, der Email und dem geheimen Schlüssel mit einer Gültigkeit von einer Stunde generiert. Dieses wird daraufhin mit dem Status 1 zusammen zurückgegeben. So kann sich der Nutzer daraufhin im Frontend anmelden, bzw. authentifizieren.
+Wenn das eingegebene Passwort nicht mit dem gespeicherten aus der Datenbank übereinstimmt, wird der Status 0 und die Fehlermeldung, dass das Passwort inkorrekt sei, zurückgegeben.
+
+```javascript
+ // Joi ist die perfekte Wahl für das Festlegen von Schemata/Formaten, denen Daten folgen sollen
+// und der Validierung dieser.
+const Joi = require('@hapi/joi')
+// Zur Authentifizierung werden Jsonwebtokens (JWT) 
+const jwt = require('jsonwebtoken')
+// und für die Verschlüsselung die Bcrypt-Hashfunktion verwendet.
+// Dafür wird die Javascript-Implementierung "bcryptjs" verwendet.
+const bcrypt = require('bcryptjs')
+
+// Die Grundfunktionen zur Arbeit mit Datenbanken werden importiert,
+const { datenLesen, datenHinzufuegen, datenAktualisieren, datenLoeschen } = require('../Grundfunktionen/datenbankFunktionen')
+
+const { benutzerDatenAbrufen } = require('../Grundfunktionen/datenAbrufen')
+
+// Für die Anmeldung wird das Format (benutzername, passwort) vorgegeben, in der die Daten eingegeben werden müssen.
+
 
 // Der Benutzer soll auch die Möglichkeit haben, sein Passwort aktualisieren zu können.
 exports.passwortAktualisieren = async (req, res) => {
