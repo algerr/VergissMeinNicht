@@ -1405,11 +1405,16 @@ Selbst wenn jemand Zugriff auf die Datenbank hätte, könnte er nicht die Passw�
 
 
 
-## Die Grundfunktionen in der Arbeit mit Datenbanken
+## Die Grundfunktionen für die Arbeit mit Firestore
 
+Um mit der Firestore-Datenbank kommunizieren und Operationen durchführen zu können, werden Funktionen zum Lesen, Hinzufügen, Aktualisieren und Löschen von Daten aus der Datenbank definiert. 
+
+<details>
+<summary>Nähere Informationen</summary>
+   
 ```javascript      
 // Die Funktion zum Schreiben nimmt als Eingabe:
-// (Datenbank (datenbank), sammlung - zu der die Daten hinzugefuegt werden soll, die ID - die zur Identifizierung des Dokumentes.
+// (Datenbank (datenbank), sammlung - zu der die Daten hinzugefuegt werden soll, die ID - die zur Identifizierung des Dokumentes dient.
 exports.datenHinzufuegen = (datenbank, sammlung, id, daten) => {
     // Wenn keine ID angegeben wird, wird automatisch ein zufälliger Key als Id erstellt.
     if (id === null) {
@@ -1436,28 +1441,42 @@ exports.datenLoeschen = (datenbank, sammlung, id) => {
     return datenbank.collection(sammlung).doc(id).delete()
 }
 ```
-Dieser Code definiert Funktionen für die Interaktion mit der Firestore-Datenbank. Firestore ist eine dokumentbasierte NoSQL-Datenbank, die Daten in Dokumenten speichert, die in Sammlungen organisiert sind. Die Funktion „Daten hinzufügen“ dient zum Speichern neuer Daten in der Datenbank. Die Funktion muss mit der Firestore-Datenbank, der Sammlung, die die Daten enthält, und den Daten selbst als Parameter aufgerufen werden. Optional können Sie auch eine ID angeben, die das Dokument identifiziert. Wenn keine ID angegeben wird, wird automatisch eine zufällige ID generiert. Die readdata-Funktion wird verwendet, um Daten aus der Datenbank abzurufen. Die Funktion sollte mit der Firestore-Datenbank, der Sammlung und der ID des Dokuments aufgerufen werden, dessen Daten abgerufen werden. Die Funktion gibt Dokumentdaten im JSON-Format zurück.
-Die Funktion „Daten aktualisieren“ dient zum Aktualisieren der Daten in der Datenbank. Die Funktion muss mit der Firestore-Datenbank, der Sammlung, der ID des zu aktualisierenden Dokuments und den zu aktualisierenden Daten aufgerufen werden.
-Die Funktion „datenLoeschen“ dient zum Löschen von Dokumenten aus der Datenbank. Diese Funktion muss mit der Firestore-Datenbank, der Sammlung und der ID des zu löschenden Dokuments aufgerufen werden.
-Außerdem weist der Code darauf hin, dass zufällige IDs verwendet werden, um das Dokument auf den ersten Blick unkenntlich zu machen. Dies dient dem Schutz der Daten in der Datenbank.
+   
+Die Funktion `datenHinzufuegen` dient zum Speichern neuer Daten in der Datenbank. Die Funktion muss mit der Firestore-Datenbank, der Sammlung, die die Daten enthält, und den Daten selbst als Parameter aufgerufen werden. Optional auch eine ID angegeben werden, die das Dokument identifiziert. Wenn keine ID angegeben wird, wird automatisch eine zufällige ID generiert. Die `datenLesen`-Funktion wird verwendet, um Daten aus der Datenbank abzurufen. Die Funktion sollte mit der Firestore-Datenbank, der Sammlung und der ID des Dokuments aufgerufen werden, dessen Daten abgerufen werden. 
+Die Dokumentendaten werden im JSON-Format zurückgegeben.
+Die Funktion `datenAktualisieren` dient zum Aktualisieren der Daten in der Datenbank. Die Funktion muss mit der Firestore-Datenbank, der Sammlung, der ID des zu aktualisierenden Dokuments und den zu aktualisierenden Daten aufgerufen werden. Daraufhin werden die Daten des Dokuments überschrieben.
+Die Funktion „datenLoeschen“ dient zum Löschen von Dokumenten aus der Datenbank. Diese Funktion muss mit der Firestore-Datenbank, der Sammlung und der ID des zu löschenden Dokuments aufgerufen werden. Daraufhin wird das Dokument unwiderruflich gelöscht.
+  
+</details>
    
 <details>
    <summary><h2>Router</h2></summary>
 
-## Die Authentifizierung 
+Die Routing-Funktionalität spielt im Backend eine große Rolle. Durch sie ist es möglich verschiedene Routen aufzustellen, die unterschiedliche HTTP-Anfragen verarbeiten. Für das Erstellen der Router wird das Express Framework für Node.js verwendet. Mit Express können HTTP-Anfragen und -Antworten effizient verarbeitet werden und zur Automatisierung Routen definiert werden.
+Routen sind Pfade, die in der URL angegeben werden, wie beispielsweise `/anmeldung` oder `/registrierung` und definieren, welche Funktionen oder Aktionen aufgerufen werden sollen, wenn eine Anfrage auf diesem Pfad erfolgt.
+Router ermöglichen eine Definition dieser Routen und die Weiterleitung eingehender Anfragen an die entsprechenden Funktionen und Aktionen.
+   
+## Der Authentifizierungsrouter
    
  ![carbon (19)](https://user-images.githubusercontent.com/111282979/230934221-4e84eb06-a465-4486-ae88-603e2294bc50.png)
    
-Dieser Code ist Teil der Node.js-Anwendung und für die Implementierung der Routing-Funktionalität verantwortlich. Das Express-Modul wird importiert, um einen Router zu erstellen, der verschiedene Routen für HTTP-Anforderungen an die Anwendung verwaltet. Authentifizierungsverwaltungsfunktionen wie Anmeldung, Registrierung, Kennwortaktualisierung, Kontolöschung und E-Mail-Aktualisierung werden ebenfalls eingegeben.
-Dann werden Routen definiert, indem Verwaltungsfunktionen mit HTTP-Methoden und -Pfads verknüpft werden. Hier wird für jede Funktion eine HTTP-POST-Methode mit dem entsprechenden Pfad definiert, auf den die Anwendung antworten soll.
+Authentifizierungsverwaltungsfunktionen wie Anmeldung, Registrierung, Passwortaktualisierung, Kontolöschung und E-Mail-Aktualisierung werden eingegeben.
+Dann werden Routen definiert, indem Verwaltungsfunktionen mit HTTP-Methoden und -Pfaden verknüpft werden.
+Die Funktion `anmeldung` wird mit dem Pfad `/anmeldung` und der HTTP-POST-Methode verknüpft. Um diese Funktion aufzurufen muss also eine POST Anfrage an `/authentifizierung/anmeldung` gesendet werden.
+Für jede Funktion wird eine HTTP-POST-Methode mit dem entsprechenden Pfad definiert, auf den die Anwendung antworten soll.
 Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
+Sobald dieser in der Anwendung importiert und definiert ist, 
    
 ## Das Passwort
    
  ![carbon (20)](https://user-images.githubusercontent.com/111282979/230936231-742f79dd-7c69-4407-bdf6-1ca340854c13.png)
    
- Dieser Code erstellt ein Router-Objekt mit dem Express-Modul. Router werden verwendet, um verschiedene Routen in Express zu definieren und sie Verwaltungsfunktionen zuzuordnen. Die Verwaltungsfunktionen für die verschiedenen Routen werden aus \'../Management/password.js\' importiert und sind addpassword, deletepassword und allpasswords. Diese Funktionen sind für das Hinzufügen, Entfernen und Extrahieren von Passwörtern aus der Datenbank verantwortlich. Routen werden definiert, indem geeignete Controller-Funktionen an HTTP-Methoden und -Pfade gebunden werden. 
-router.post(\'/\',Addpassword) definiert eine Route zum Hinzufügen eines Passworts und verwendet die HTTP-POST-Methode und den "/\"-Pfad. router.delete(\'/:passwordId\',passwordLoeschen) definiert eine Route zum Entfernen von Passwörtern basierend auf der ID und verwendet die HTTP-Methode DELETE sowie den Pfad \'/:passwordId\'. Die Passwort-ID wird als Parameter in der URL übergeben. router.get(\'/\',allpasswords) definiert eine Route zum Abrufen aller Passwörter und verwendet die HTTP GET-Methode und den Pfad "/\". 
+ Die Verwaltungsfunktionen werden aus der Verwaltung importiert. Diese Funktionen sind für das Hinzufügen, Entfernen und Extrahieren von Passwörtern aus der Datenbank verantwortlich.
+Für das Hinzufügen eines Passwortes wird der Standardpfad `/` mit der Funktion `passwortHinzufuegen` und der HTTP-POST-Methode verknüpft.
+Für das Löschen eines Passwortes wird ebenfalss der Standardpfad `/` verwendet. Dieser wird jedoch mit der Funktion `passwortLoeschen` und der HTTP-DELETE-Methode verknüpft.
+So kann ein Passwort hinzugefügt werden, wenn eine POST-Anfrage mit dem Passwort an den Standardpfad `/` gesendet wird und ein Passwort gelöscht werden, wenn eine DELETE-Anfrage mit der ID des zu löschenden Passwortes an den Standardpfad `/` gesendet wird. Die Passwort-ID wird als Parameter in der URL übergeben. 
+Um alle Passwörter abzurufen, sodass diese im Frontend in der Passwörter-Tabelle angezeigt werden, muss an den Standardpfad `/` eine GET-Anfrage gesendet werden.
+Mit dem Standardpfad `/` und der HTTP-GET-Methode ist die Funktion `allePasswoerter` verknüpft.
 Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
 
 <details>
