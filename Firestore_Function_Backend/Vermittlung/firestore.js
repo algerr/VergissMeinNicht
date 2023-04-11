@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
     return next()
 }
 
-// Diese Middleware-Funktion verbindet die Express-Anwendung mit der Firestore-Datenbank. 
+// Diese Vermittlungsfunktion verbindet die Express-Anwendung mit der Firestore-Datenbank. 
 // Sie wird aufgerufen, wenn eine Anfrage an die Anwendung gestellt wird und
 // fügt der Anfrage ein Objekt mit einer Referenz auf die Firestore-Instanz hinzu. 
 // Dadurch können andere Routen und Vermittlungsfunktionen auf die Firestore-Datenbank zugreifen und Dokumente lesen oder schreiben.
