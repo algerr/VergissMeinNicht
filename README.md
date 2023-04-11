@@ -1482,7 +1482,10 @@ Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
 <details>
    <summary><h2>Vermittlung</h2></summary>
    
-## Das Überprüfen der Authentifizierung 
+   Die Vermittlung, auch bekannt als Middleware, spielt in der Verwendung von Express und Node.js eine wichtige Rolle. Funktionen in der Vermittlung werden im Ablauf der Express-Anwedung dazu verwendet, um HTTP-Anfragen und -Antworten zu verarbeiten, bevor sie an die entsprechenden Routen weitergeleitet werden.
+   Die Vermittlung bietet eine flexible Möglichkeit, die Anfrage- und Antwortobjekte in Express zu manipulieren und erweiterte Funktionalitäten hinzuzufügen.
+   
+## Die Überprüfung der Authentifizierung 
 
 ```javascript
 // Importieren des 'jsonwebtoken'-Moduls für die Verarbeitung von JSON-Web-Token
@@ -1530,8 +1533,12 @@ module.exports = (req, res, next) => {
     next()
 }
 ```
-Dieser Code definiert eine Middleware-Funktion in Node.js, die verwendet wird, um die Benutzerautorisierung mit einem JSON Web Token (JWT) zu überprüfen.
-Eine Middleware-Funktion wird häufig zwischen Anfrage und Antwort in der HTTP-Anfragekette eingefügt, um Benutzerberechtigungen zu überprüfen, bevor die Anfrage an den Hauptanwendungscode weitergeleitet wird. Zunächst extrahiert die Funktion den „Authorization“-Header aus der HTTP-Anforderung, die das JWT-Token enthält. Wenn der Header fehlt oder leer ist, wird der Benutzer als nicht authentifiziert markiert und der folgende Middleware- oder Hauptanwendungscode wird aufgerufen. Wenn ein Token vorhanden ist, wird das Token aus dem Header extrahiert und durch Entschlüsselung unter Verwendung des in der Umgebungsvariablen TOKEN_SECRET gespeicherten geheimen Schlüssels verifiziert. Wenn das Token ungültig ist oder die Entschlüsselung fehlschlägt, wird der Benutzer als nicht authentifiziert markiert und die folgende Middleware oder der folgende Hauptanwendungscode aufgerufen. Wenn das Token jedoch erfolgreich verifiziert und entschlüsselt wird, wird der Benutzer als authentifiziert markiert, indem „true“ an das Attribut „authentication“ in der Anforderung gesendet wird, und der Benutzername wird aus dem Token extrahiert und als Attribut „username“ verwendet. auf Anfrage. Dann wird die nächste Haupt-Middleware oder der Anwendungscode aufgerufen. Die Middleware-Funktion ist daher ein wichtiger Bestandteil des sicheren und autorisierten Webanwendungs-Stacks, da sie sicherstellt, dass nur autorisierte Benutzer auf die meisten Ressourcen oder Funktionen zugreifen können, die durch Validierung und Dekodierung des JWT-Tokens identifiziert werden.
+   
+Diese Vermittlungsfunktion wird verwendet, um die Benutzerauthentifizierung mit einem JSON-Web-Token (JWT) zu überprüfen.
+Die Funktion wird zwischen Anfrage und Antwort in der HTTP-Anfragekette eingefügt, um die Benutzerberechtigungen zu überprüfen, bevor die Anfrage an den Router weitergeleitet wird. 
+Zunächst wird der Authorization-Header aus der HTTP-Anforderung, der das JWT enthält, extrahiert. Wenn der Header fehlt oder leer ist, ist der Benutzer nicht authentifiziert und die Anfrage wird weiterverarbeitet. 
+Wenn ein Token vorhanden ist, wird das Token aus dem Header extrahiert und durch die Entschlüsselung unter Verwendung des unter TOKEN_SECRET gespeicherten geheimen Schlüssels verifiziert. Wenn das Token ungültig ist oder die Entschlüsselung fehlschlägt, zählt der Benutzer als nicht authentifiziert und die Anfrage wird weiterverarbeitet. 
+Wenn das Token jedoch erfolgreich verifiziert und entschlüsselt wird, ist  „true“ an das Attribut „authentication“ in der Anforderung gesendet wird, und der Benutzername wird aus dem Token extrahiert und als Attribut „username“ verwendet. auf Anfrage. Dann wird die nächste Haupt-Middleware oder der Anwendungscode aufgerufen. Die Middleware-Funktion ist daher ein wichtiger Bestandteil des sicheren und autorisierten Webanwendungs-Stacks, da sie sicherstellt, dass nur autorisierte Benutzer auf die meisten Ressourcen oder Funktionen zugreifen können, die durch Validierung und Dekodierung des JWT-Tokens identifiziert werden.
    
 ## Der Firestore
    
