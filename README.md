@@ -1639,30 +1639,14 @@ Wenn das Format stimmt, wird überprüft, ob der eingegebene Benutzername in der
 Wenn der Benutzername jedoch in der Datenbank auffindbar ist, werden die gespeicherten Daten abgerufen und über `bcrypt.compareSync()` das Passwort mit dem Passworthash verglichen. Wenn das eingegebene Passwort mit dem gespeicherten aus der Datenbank übereinstimmt, wird ein JWT aus dem Benutzernamen, der Email und dem geheimen Schlüssel mit einer Gültigkeit von einer Stunde generiert. Dieses wird daraufhin mit dem Status 1 zusammen zurückgegeben. So kann sich der Nutzer daraufhin im Frontend anmelden, bzw. authentifizieren.
 Wenn das eingegebene Passwort nicht mit dem gespeicherten aus der Datenbank übereinstimmt, wird der Status 0 und die Fehlermeldung, dass das Passwort inkorrekt sei, zurückgegeben.
 
+## Die Aktualisierung des Passwortes
+
 ```javascript
- // Joi ist die perfekte Wahl für das Festlegen von Schemata/Formaten, denen Daten folgen sollen
-// und der Validierung dieser.
-const Joi = require('@hapi/joi')
-// Zur Authentifizierung werden Jsonwebtokens (JWT) 
-const jwt = require('jsonwebtoken')
-// und für die Verschlüsselung die Bcrypt-Hashfunktion verwendet.
-// Dafür wird die Javascript-Implementierung "bcryptjs" verwendet.
-const bcrypt = require('bcryptjs')
-
-// Die Grundfunktionen zur Arbeit mit Datenbanken werden importiert,
-const { datenLesen, datenHinzufuegen, datenAktualisieren, datenLoeschen } = require('../Grundfunktionen/datenbankFunktionen')
-
-const { benutzerDatenAbrufen } = require('../Grundfunktionen/datenAbrufen')
-
-// Für die Anmeldung wird das Format (benutzername, passwort) vorgegeben, in der die Daten eingegeben werden müssen.
-
-
-// Der Benutzer soll auch die Möglichkeit haben, sein Passwort aktualisieren zu können.
 exports.passwortAktualisieren = async (req, res) => {
-    // Dafuer ist erstmal wichtig, dass der Benutzer in dem Moment autorisiert ist.
+    // Dafuer ist erstmal wichtig, dass der Benutzer in dem Moment authentifiziert ist.
     // Wie die Autorisierungsabfrage "authentifizierungsUeberpruefung" genau funktioniert, wird in "../Vermittlung/authentifizierungsUeberpruefung" erklärt.
     if (!req.authentifizierungsUeberpruefung) {
-        return res.status(400).send({ status: 0, message: "Nicht autorisiert." })
+        return res.status(400).send({ status: 0, message: "Nicht authentifiziert." })
     }
 
     // Um das Passwort zu aktualisieren, kann nicht, wie bei der Email, einfach das neue eingegeben werden.
@@ -1693,10 +1677,10 @@ exports.passwortAktualisieren = async (req, res) => {
     }
 
     // Die in der Datenbank gespeicherten Daten des Benutzers werden abgerufen.
-    const user = benutzerDatenAbrufen(u.data())
+    const benutzer = benutzerDatenAbrufen(b.data())
 
     // Daraufhin wird das alte Passwort mit dem aus der Datenbank verglichen.
-    if (bcrypt.compareSync(altesPasswort, user.passwort)) {
+    if (bcrypt.compareSync(altesPasswort, benutzer.passwort)) {
         // Wenn die beiden gleich sind, wird eine wird das neue Passwort in der Datenbank gespeichert.
         await datenAktualisieren(req.firestore, 'benutzer', req.benutzername, { passwort: bcrypt.hashSync(neuesPasswort, 12) })
 
@@ -1707,8 +1691,18 @@ exports.passwortAktualisieren = async (req, res) => {
         return res.status(400).send({ status: 0, message: `Das ist nicht das alte Passwort!`, })
     }
 }
+```
 
-// Der Benutzer soll auch die Möglichkeit haben, seine Email aktualisieren zu können.
+Der Service, den wir dem Nutzer bieten, bestimmt, welche Einstellung dieser gegenüberer unserem Passwort Manager hat. Somit ist es selbstverstädnlich, dass jeder die Möglichkeit haben sollte, das Passwort seines Accounts beliebig oft ändern zu können. In der Funktion zur Aktualisierung des Passwortes hier in der Verwaltung wird dafür zuerst sichergestellt, dass der Benutzer authentifiziert ist. Wenn die Authentifizierung nicht bestätigt werden kann, wird der Status 0 und eine Fehlermeldung, dass der Nutzer nicht authentifiziert sei, zurückgegeben.
+Das Format, in dem die Anfrage erfolgen muss, besteht aus dem alten Passwort und dem neuen Passwort.
+Wenn das Format durch die Daten aus dem Message-Body validiert werden kann, wird sichergestellt, dass der Benutzer in der Datenbank existiert.
+Sollte das Format der Anfrage nicht stimmen oder der Benutzer nicht existieren, werden auch hier jeweilige Fehlermeldungen und Status 0 zurückgegeben.
+Wenn also nun das Format stimmt und der Benutzer existiert, werden die Daten des Benutzers abgerufen und das eingegebene alte Passwort mit dem aus der Datenbank verglichen. Bei Übereinstimmung, wird das alte Passwort in der Datenbank mit dem neuen überschrieben und der Status 1 zurückgegeben.
+Sollten das alte Passwort aus der Anfrage nicht mit dem aus der Datenbank übereinstimmen, werden der Status 0 und die Fehlermeldung, dass das eingegebene alte Passwort inkorrekt sei, zurückgegeben.
+
+## Die Aktualisierung des Passwortes
+
+```javascript
 exports.emailAktualisieren = async (req, res) => {
     // Dafuer ist erstmal wichtig, dass der Benutzer in dem Moment autorisiert ist.
     // Wie die Autorisierungsabfrage "authentifizierungsUeberpruefung" genau funktioniert, wird in "../Vermittlung/authentifizierungsUeberpruefung" erklärt.
@@ -1738,14 +1732,21 @@ exports.emailAktualisieren = async (req, res) => {
     // Dem Nutzer wird ein neues Token zurückgegeben und der Status auf 1 gesetzt.
     return res.status(200).send({ status: 1, token })
 }
+```
 
-// Der Benutzer soll gewiss auch seinen Account löschen können.
+Die Aktualisierung der Emailadresse läuft ähnlich wie die des Passwortes ab. Hierbei muss keine alte Emailadresse in der Anfrage übergeben werden, da die aktuelle Emailadresse sowieso in den Accounteinstellungen angezeigt wird. Wenn der Benutzer authentifiziert ist, beinhaltet das Format lediglich eine gültige Emailadresse oder einen leeren String, da der Nutzer seine Emailadresse nur zur Registrierung und danach nicht mehr zwingend angeben muss.
+Sollte die Anfrage nicht dem angegebenen Format entsprechen, wird der Status 0 und die Fehlermeldung zurückgegeben. Ansonsten wird die gespeicherte Emailadresse in der Datenbank mit der neuen überschrieben und ein neues Token erzeugt, da sich dieses aus Benutzernamen, Email und dem geheimen Schlüssel zusammensetzt. 
+Dieses neue Token wird gemeinsam mit dem Status 1 zurückgegeben.
+
+## Den Account löschen
+
+```javascript
 exports.accountLoeschen = async (req, res) => {
     
     // Dafür muss auf jeden Fall sichergestellt werden, dass der Benutzer authentifiziert ist.
     if (!req.authentifizierungsUeberpruefung) {
         // Wenn dies nicht der Fall ist, wird eine Fehlermeldung zurückgegeben.
-        return res.status(400).send({ status: 0, message: "Nicht autorisiert!" })
+        return res.status(400).send({ status: 0, message: "Nicht authentifiziert!" })
     }
 
     // Wenn der Nutzer jedoch authentifiziert ist, diese Aktion auszuführen, werden zuerst alle Passwörter gelöscht, die auf den
@@ -1766,16 +1767,13 @@ exports.accountLoeschen = async (req, res) => {
 }
 ```
 
-Dieser Code implementiert RESTful-API-Endpunkte für die Benutzerauthentifizierung mit Node.js und Firestore als Datenbanken.
-Zunächst werden drei Node.js-Module für die Arbeit mit der Datenbank sowie für die Authentifizierung und Verschlüsselung importiert: @hapi/joi für die Datenvalidierung, jsonwebtoken für die Generierung von JSON-Web-Token für die Authentifizierung und bcryptjs für die Passwortverschlüsselung. Anschließend werden die grundlegenden Firestore-Datenbankfunktionen importiert, die zum Ausführen von CRUD-Vorgängen in der Firestore-Datenbank erforderlich sind.
-Die Registrierungsfunktion ist für den Benutzerregistrierungsprozess verantwortlich. Definiert ein Format-Objekt, das das erforderliche Format für Benutzereingaben angibt (Benutzername, Kennwort und E-Mail-Adresse). Die Eingabe wird dann aus dem Anforderungstext extrahiert und für das angegebene Format validiert. Wenn die Validierung fehlschlägt, wird eine Antwort mit dem Statuscode 400 zurückgegeben und eine Fehlermeldung gesendet, die den Benutzer darüber informiert, dass er falsche Daten eingegeben hat.
-Anschließend wird überprüft, ob der angegebene Benutzername in der Datenbank vorhanden ist. In diesem Fall wird eine Fehlermeldung zurückgegeben und die Registrierung abgebrochen.
-Wenn der Benutzername noch nicht in der Datenbank existiert, wird ein neuer Benutzer mit den eingegebenen Daten (einschließlich des gehashten Passworts) zur Firestore-Datenbank hinzugefügt und eine Erfolgsmeldung zurückgegeben. Die Login-Funktion ist für den Benutzer-Login-Prozess verantwortlich. Es definiert auch ein Format-Objekt, das das erforderliche Benutzernamen- und Kennwortformat angibt und überprüft, ob die Benutzereingabe diesem Format entspricht. Schlägt die Authentifizierung fehl, wird eine 400-Status-Fehlermeldung zurückgegeben und die Anmeldung abgebrochen.
-Anschließend wird die Firestore-Datenbank nach dem angegebenen Benutzernamen durchsucht. Existiert der Benutzername nicht in der Datenbank, wird eine Fehlermeldung zurückgegeben und die Anmeldung abgebrochen.
-Wenn der Benutzername in der Datenbank gefunden wird, wird das eingegebene Passwort mit dem gehashten Passwort in der Datenbank verglichen. Wenn sie übereinstimmen, kann das generierte und zurückgegebene JSON-Web-Token als Authentifizierungstoken verwendet werden. Stimmen sie nicht überein, wird eine Fehlermeldung zurückgegeben und die Anmeldung abgebrochen.
+Wenn der Nutzer, aus welchem Grund auch immer, seinen Account löschen möchte, bieten wir ihm auch hierfür die Möglichkeit. Wenn der Benutzer authentifiziert ist, werden alle Passwörter, die unter seinem Benutzernamen in der Datenbank gespeichert sind, unwiderrufbar gelöscht und daraufhin auch der Benutzer aus der Datenbank entfernt.
+Als Antwort wird der Status 1 zurückgegeben, wodurch signalisiert wird, dass der Account und alle damit verbundenen Passwörter erfolgreich aus der Datenbank gelöscht wurden.
 
-   
-## Das Passwort
+</details>
+
+<details>
+   <summary><h3>Die Passwortverwaltung</h3></summary>
    
  ```javascript   
 // Import der Joi-Library für die Validierung von Anfragen
