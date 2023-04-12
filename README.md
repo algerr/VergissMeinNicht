@@ -2011,9 +2011,17 @@ anwendung.use('/passwort', passwortRouter)
 // Die Express-Anwendung wird als Firebase Cloud Function exportiert, die auf HTTP-Anfragen reagiert.
 exports.backend = functions.https.onRequest(anwendung)
 ```
-   
-Hier ist der Node.js-Code, der eine Express-App erstellt, die als Firebase Cloud-Funktion exportiert wird, um HTTP-Anforderungen zu verarbeiten. Die App verwendet das Firebase Functions-Modul, Cross-Origin Resource Sharing (CORS) und lädt Umgebungsvariablen mit dotenv. Die Proxy-Authentifizierung erfolgt über Authenticationscheck und der Datenbank-Firestore-Proxy über Firestore.
-Es gibt zwei Router, PasswordRouter und AuthenticationRouter, die Endpunkte bei /password und /authentication verwenden. Die Anwendung verwendet JSON als Datenformat und die CORS-Einstellung ist auf „origin: true“ gesetzt, um den Zugriff von anderen Quellen zu ermöglichen. Schließlich wird die Express-App als Firebase-Cloudfunktion exportiert, die auf HTTP-Anfragen antwortet.
+
+Nun sind alle Funktionen, Routen und Schritte der Bearbeitung der Anfragen definiert und festgelegt.
+Das Backend ist somit fertig und muss nur noch als Express-App erstellt werden, damit es als Google Cloud-Funktion exportiert werden kann.
+Die Anwendung verwendet das Firebase Functions-Modul, Cross-Origin Resource Sharing (CORS) und lädt Umgebungsvariablen mit dotenv. 
+So ist auch sichergestellt, dass auf den geheimen Schlüssel, zum Erstellen der Tokens zugegriffen werden kann.
+Die Authentifizierungsüberprüfung die Firestore-Datenbank werden auch.
+Die beiden Router, Passwortrouter und Authentifizierungsrouter werden an den Endpunkten bei /passwort und /authentifizierung verwendet. 
+Um sich sich anzumelden, muss somit eine Anfrage an `/authentifizierung/anmeldung` erfolgen.
+Als Datenformat wird JSON verwendet und die CORS-Einstellung ist auf `origin: true` gesetzt, um den Zugriff von anderen Domänen aus zu erlauben.
+Ohne diese Einstellung wäre ein Zugriff auf die Anwendung vom Frontend aus gar nicht möglich.
+Schließlich kann die Express-App als Firebase-Cloudfunktion exportiert, die auf HTTP-Anfragen antwortet.
    
   
 
