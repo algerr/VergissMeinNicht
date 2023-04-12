@@ -1933,20 +1933,6 @@ Sollten die Benutzernamen der Anfrage und des Passwortes aus der Datenbank nicht
 ## Das Abrufen aller Passwörter
    
 ```javascript
-// Import der Joi-Library für die Validierung von Anfragen
-const Joi = require('@hapi/joi')
-
-// Import von Hilfsfunktionen für die Verarbeitung von Daten und Datenbankzugriffe
-const { passwortDatenAbrufen } = require('../Grundfunktionen/datenAbrufen')
-const { datenHinzufuegen, datenLesen, datenLoeschen } = require('../Grundfnktionen/datenbankFuntkionen')
-
-// Definierung einer Exportfunktion für das Hinzufügen von Passwörtern
-
-
-// Definition der Exportfunktion für das Löschen von Passwörtern
-
-
-// Diese Funktion gibt alle Passwörter des aktuellen Benutzers zurück.
 exports.allePasswoerter = async (req, res) => {
     // Prüfen, ob der Benutzer authentifiziert ist.
     if (!req.authentifizierungsUeberpruefung) {
@@ -1975,37 +1961,13 @@ exports.allePasswoerter = async (req, res) => {
         passwoerter: passwoerterArray
     })
 }
-
-// Validierung des Benutzernamens
-const validierungPasswortBenutzername = async (req, id) => {
-    // Der Variablen p wird das Passwort zur angegebenen Id zugeordnet.
-    let p = await datenLesen(req.firestore, 'passwoerter', id)
-
-    // Wenn das Passwort nicht existiert, wird "false" zurückgegeben.
-    if (!p.exists) {
-        return false
-    }
-
-
-    // Ansonsten werden die gespeicherten Daten des Passwortes ausgegeben
-    let passwort = passwortDatenAbrufen(p.data()) // parse item data
-
-    // und validiert, ob der Benutzername, der im Passwort gespeichert ist, dem Benutzernamen, der in der Anfrage übergeben wurde, entspricht.
-    if (passwort.benutzername !== req.benutzername) {
-        return false
-    }
-    return true
-}
 ```  
 
-   Der Code enthält die allpasswords-Funktion, die alle Passwörter eines bestimmten Benutzers aus der Datenbank abruft und sie als Antwort zurückgibt.
-Die Funktionalität beginnt mit der Benutzerauthentifizierung, um unbefugten Zugriff zu verhindern. Wenn der Benutzer nicht authentifiziert ist, wird eine Fehlermeldung zurückgegeben und die Funktion beendet.
-Dann wird eine Abfrage an die Datenbank gesendet, um alle Passwörter des Benutzers zu erhalten. Dazu wird die in der Datei functions.js der Datenbank definierte Datenlesefunktion verwendet.
-Wenn die Anfrage erfolgreich ist, wird das Passwort zurückgegeben, um die Anfrage zu erfüllen. Wenn jedoch ein Fehler auftritt, wird eine Fehlermeldung zurückgegeben.
-Die Antwort auf die Anfrage enthält eine Statusmeldung, die anzeigt, ob die Anfrage erfolgreich war, und eine Liste aller Benutzerpasswörter. Jedes Passwortobjekt enthält die ID, die Beschreibung, das verschlüsselte Passwort und den Sicherheitswert.
-Dies ist eine grundlegende Funktion, die Sie in einer Passwort-Manager-Anwendung verwenden können.
-   
-## Der Index
+Damit alle gespeicherten Passwörter des Benutzers im Frontend in der Passwörter-Tabelle angezeigt werden können, müssen diese aus der Datenbank abgerufen werden.
+Darum kümmert sich diese Passwortverwaltungsfunktion. Wenn sichergestellt ist, dass der Nutzer authentifiziert ist, werden alle Passwörter des Benutzers aus der Datenbank abgerufen. In einem leeren `passwoerterArray` werden die Passwörter als Objekte mitsamt ihrer ID gespeichert.
+Daraufhin wird der Status 1 und der `passwoerterArray` zurückgegeben.
+
+</details>
    
 ```javascript    
    // Importieren der benötigten Module
@@ -2048,15 +2010,6 @@ anwendung.use('/passwort', passwortRouter)
 
 // Die Express-Anwendung wird als Firebase Cloud Function exportiert, die auf HTTP-Anfragen reagiert.
 exports.backend = functions.https.onRequest(anwendung)
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
 ```
    
 Hier ist der Node.js-Code, der eine Express-App erstellt, die als Firebase Cloud-Funktion exportiert wird, um HTTP-Anforderungen zu verarbeiten. Die App verwendet das Firebase Functions-Modul, Cross-Origin Resource Sharing (CORS) und lädt Umgebungsvariablen mit dotenv. Die Proxy-Authentifizierung erfolgt über Authenticationscheck und der Datenbank-Firestore-Proxy über Firestore.
