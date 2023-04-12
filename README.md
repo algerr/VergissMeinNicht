@@ -1513,7 +1513,7 @@ Die Verwaltung ist der wichtigste Teil im Backend. Hier werden die Funktionen zu
 <details>
    <summary><h3>Die Authentifizierungsverwaltung</h3></summary>
  
-   Die Authentifizierungsverwaltungsfunktion behandeln alle Anfragen, die sich mit dem Benutzerkonto befassen. Von der Anmeldung, über die Emailaktualisierung bis hin zum Löschen des Accounts, wird alles hier verwaltet.
+   Die Authentifizierungsverwaltungsfunktionen behandeln alle Anfragen, die sich mit dem Benutzerkonto befassen. Von der Anmeldung, über die Emailaktualisierung bis hin zum Löschen des Accounts, wird alles hier verwaltet.
    Dafür werden drei Module importiert, die für die essenziell sind. Mit [Joi](https://joi.dev/) lassen sich Schemata und Formate festlegen, in denen Daten in Javascript validiert werden. Dadurch ist es direkt möglich, Anfragen, die nicht dem festgelegten Format entsprechen, abzufangen, wodurch Fehler im Server verhindert werden.
    Für unsere Tokens nutzen wir [JSON-Web-Tokens (JWT)](https://jwt.io/), da diese von sich aus bereits digitale Signaturen und Vershlüsselungen verwenden, um die Authentizität der Daten zu gewährleisten. So kann sichergestellt werden, dass die Daten nur von dieser vertrauenswürdigen Quelle stammen und nicht von Dritten manipuliert wurden.
    Es werden auch keine Zustände gespeichert, da alle notwendigen Informationen im Token selbst enthalten sind.
@@ -1775,15 +1775,13 @@ Als Antwort wird der Status 1 zurückgegeben, wodurch signalisiert wird, dass de
 <details>
    <summary><h3>Die Passwortverwaltung</h3></summary>
    
- ```javascript   
-// Import der Joi-Library für die Validierung von Anfragen
-const Joi = require('@hapi/joi')
-
-// Import von Hilfsfunktionen für die Verarbeitung von Daten und Datenbankzugriffe
-const { passwortDatenAbrufen } = require('../Grundfunktionen/datenAbrufen')
-const { datenHinzufuegen, datenLesen, datenLoeschen } = require('../Grundfnktionen/datenbankFuntkionen')
-
-// Definierung einer Exportfunktion für das Hinzufügen von Passwörtern
+   Die Passwortverwaltungsfunktionen behandeln alle Anfragen, die sich mit den Passwörtern eines Benutzers befassen. Vom Abrufen aller Passwörter, über das Hinzufügen bis hin zum Löschen eines Passwortes, wird alles hier verwaltet.
+   Anders als bei der Authentifizierungsverwaltung wird hier lediglich [Joi](https://joi.dev/) genutzt, um die benötigten Formate festzulegen, in denen Daten in Javascript validiert werden. Da keine Operationen am Benutzer durchgeführt werden, wird weder mit JWT noch mit Bcrypt gearbeitet.
+   Für die Verarbeitung werden lediglich die standardmäßigen Datenbankfunktionen und die Funktion zum Abrufen der Passwortdaten aus der Datenbank importiert.
+   
+## Das Hinzufügen eines Passwortes
+   
+```javascript 
 exports.passwortHinzufuegen = async (req, res) => {
     // Überprüfung, ob der Nutzer authentifiziert ist, um unbefugten Zugriff zu verhindern
     if (!req.authentifizierungsUeberpruefung) {
@@ -1829,9 +1827,22 @@ exports.passwortHinzufuegen = async (req, res) => {
         },
         message: "Passwort erfolgreich gespeichert!"
     })
-}
+}  
+```
+   
+Um ein Passwort der Datenbank hinzuzufügen, werden, nachdem sichergestellt wurde, dass der Nutzer authentifiziert ist, drei Eingaben erwartet, die im Format festgelegt sind. Es wird eine Beschreibung des Passwortes, das mit dem Masterpasswort verschlüsselte Passwort und ein Sicherheitswert benötigt.
+Wenn das Format mit der Anfrage übereinstimmt, werden die Daten der Sammlung `passwoerter` in der Datenbank hinzugefügt.
 
-// Definition der Exportfunktion für das Löschen von Passwörtern
+```javascript
+const passwort = await datenHinzufuegen(req.firestore, 'passwoerter', null, { beschreibung, verschluesseltesPasswort, sicherheitswert, benutzername: req.benutzername })   
+```
+
+Als ID des Dokuments wird `null` eingegeben. Dadurch generiert Firestore automatisch eine zufällige Zeichenkette, die als ID des Dokuments, bzw. des Passwortes genommen wird. Dadurch sind die Passwörter bei einem Blick auf die Datenbank nicht ihren Benutzern oder Beschreibungen zuzuordnen. Zudem kann die ID auch nicht auf Basis der Passwortdaten erraten werden.
+Als Antwort wird der Status 1 und ein Passwortobjekt, bestehend aus: Id, Beschreibung, verschlüsseltem Passwort, Sicherheitswert und Benutzernamen zurückgegeben. Dazu auch noch eine Erfolgsmeldung, dass das Passwort erfolgreich gespeichert wurde. 
+   
+## Ein Passwort löschen
+   
+```javascript
 exports.passwortLoeschen = async (req, res) => {
     // Zuerst wird überprüft, ob der Nutzer autorisiert ist.
     // Wenn das nicht der Fall ist, wird ein Status 400 gesendet.
@@ -1879,6 +1890,61 @@ exports.passwortLoeschen = async (req, res) => {
         message: "Passwort erfolgreich gelöscht!"
     })
 }
+```
+   
+Wenn nun ein Passwort gelöscht werden soll, kann auf die zufällig generierte Passwort-ID zurückgegriffen werden. Da diese zufällig und einzigartig ist, muss die Anfrage lediglich diese ID enthalten. 
+   
+Allerdings wird nicht einfach die ID in der Anfrage gelöscht, da bisher durch `authentifizierungsUeberpruefung` lediglich überpüft wurde, ob der Benutzer ein gültiges Token besitzt und somit authentifiziert ist.
+Da ein Nutzer aber keine Passwörter anderer Nutzer löschen darf, wird noch überpüft, ob das Passwort überhaupt dem Benutzer gehört, der es gerne löschen würde.
+   
+```javascript
+const validierungPasswortBenutzername = async (req, id) => {
+    // Der Variablen p wird das Passwort zur angegebenen Id zugeordnet.
+    let p = await datenLesen(req.firestore, 'passwoerter', id)
+
+    // Wenn das Passwort nicht existiert, wird "false" zurückgegeben.
+    if (!p.exists) {
+        return false
+    }
+
+
+    // Ansonsten werden die gespeicherten Daten des Passwortes ausgegeben
+    let passwort = passwortDatenAbrufen(p.data()) // parse item data
+
+    // und validiert, ob der Benutzername, der im Passwort gespeichert ist, dem Benutzernamen, der in der Anfrage übergeben wurde, entspricht.
+    if (passwort.benutzername !== req.benutzername) {
+        return false
+    }
+    return true
+}
+```
+
+Dazu wird die Funktion `validierungPasswortBenutzername` definiert, die eine Anfrage und eine Id als Parameter nimmt. Zuerst wird sichergestellt, dass das Passwort, dessen ID in der Anfrage steht, überhaupt in der Datenbank existiert. Wenn nicht, wird `false` zurückgegeben und das Passwort kann nicht gelöscht werden.
+Wenn es jedoch existiert, werden die Daten des Passwortes abgerufen und der Benutzername, der unter dem Passwort in der Datenbank gespeichert ist, mit dem Benutzernamen, von dem die Anfrage zum Löschen stammt, verglichen. Wenn der Benutzername gleich ist, wird `true` zurückgegeben und das Passwort wird gelöscht.
+
+```javascript
+await datenLoeschen(req.firestore, 'passwoerter', passwortId)
+```
+Daraufhin wird der Status 1 und eine Erfolgsmeldung zurückgegeben.
+   
+Sollten die Benutzernamen der Anfrage und des Passwortes aus der Datenbank nicht übereinstimmen, gibt die Funktion `validierungPasswortBenutzername` `false` zurück und das Passwort kann nicht gelöscht werden.
+   
+   
+## Das Abrufen aller Passwörter
+   
+```javascript
+// Import der Joi-Library für die Validierung von Anfragen
+const Joi = require('@hapi/joi')
+
+// Import von Hilfsfunktionen für die Verarbeitung von Daten und Datenbankzugriffe
+const { passwortDatenAbrufen } = require('../Grundfunktionen/datenAbrufen')
+const { datenHinzufuegen, datenLesen, datenLoeschen } = require('../Grundfnktionen/datenbankFuntkionen')
+
+// Definierung einer Exportfunktion für das Hinzufügen von Passwörtern
+
+
+// Definition der Exportfunktion für das Löschen von Passwörtern
+
 
 // Diese Funktion gibt alle Passwörter des aktuellen Benutzers zurück.
 exports.allePasswoerter = async (req, res) => {
