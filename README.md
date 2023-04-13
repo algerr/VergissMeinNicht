@@ -224,7 +224,9 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    
    Zusammenfassend lässt sich sagen, dass die Startseite der Ausgangspunkt der Anwendung ist. Egal, wo der Nutzer hin möchte, er kann das Ziel von der Startseite aus erreichen.
 </details>
-         
+
+   
+   
 <details>
 <summary><h2>Der Passwort Manager</h2></summary>
       
@@ -232,6 +234,8 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    Grob kann er in zwei Bereiche eingeteilt werden. Auf der linken Seite findet die Eingabe statt. Das Masterpasswort wird eingegeben und neue Passwörter werden hinzugefügt. Auf der rechten Seite ist die Passwörter-Tabelle, in der alle Passwörter des Nutzers angezeigt werden und kopiert, angezeigt oder gelöscht werden können.
    Die einzelnen Teilbereiche sind in unterschiedliche Komponente gegliedert, die dann im Passwort Manager gerendert werden.
 
+<details>
+<summary>Nähere Informationen</summary>
    
    ![Linke_seite_state](https://user-images.githubusercontent.com/65679099/230801148-fc0c7626-d469-4b6f-9c4a-65762b374980.png)
       
@@ -262,7 +266,7 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    Um die Entschlüsselung des Passwortes zu verwalten, wird in der `Passwort`-Spalte der Tabelle die Komponente `PasswortAnzeigen` gerendert, die sich damit befasst.
    Für den Inhalt der Tabelle werden alle Passwörter im `statePasswoerter`-Array auf die Tabelle gemapped. Dadurch entsteht ein neuer Array, in dem jedes Element aus einem Array mit der Beschreibung des Passwortes und der `PasswortAnzeige`-Komponente, die sich, wie bereits gesagt, um das Anzeigen des Passwortes in der `Passwort`-Spalte der Tabelle kümmert. Für diese Komponente wird das Passwort `{p}` und das Masterpasswort, mit dem es erstellt wurde als Parameter übergeben.
       
-
+</details>
       
       
       
@@ -410,8 +414,8 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    ![image](https://user-images.githubusercontent.com/65679099/231805555-6ce8c65e-cc0b-4b5f-8942-1b527586b46b.png)
    Entschlüsselte Passwörter
     
-   <details>
-      <summary>Nähere Informationen</summary>
+<details>
+<summary>Nähere Informationen</summary>
    
    Auch in dieser Komponente wird mit Zustandsvariablen gearbeitet. 
       
@@ -462,8 +466,8 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
             </React.Fragment>
 
         )
-    }
-   
+   }
+   ```
    Die wichtigsten Eigenschaften der Komponente, die destrukturiert und als freie Variablen genutzt werden müssen, sind das Passwort, das gespeichert ist und das Masterpasswort, das dieses Passwort schützt. Dazu werden noch das verschlüsselte Passwort und der Sicherheitswert aus dem Passwort extrahiert und mit all den Eigenschaften das Passwort mit der Hilfsfunktion `entschluesseln` entschlüsselt.
    
   Da sich die Darstellung der Passwortanzeige in einer Tabellenspalte befindet, beeinträchtigt ein Container hier wieder sehr das Design, weshalb auf eine React.Fragment-Komponente zurückgegriffen wird. 
