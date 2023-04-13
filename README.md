@@ -1257,15 +1257,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(EmailAktualisieren)
             authentifizierungsTokenFestlegen(null)
             history.push("/anmeldung")
             oberesModalfensterAusblenden()
-            setzeInhaltFuerOberesModalfenster("Vielen Dank", "Danke sehr, dass Du VergissMeinNicht genutzt hast!",
-            [{ name: "Schließen", variant: "primary"} ])
-            oberesModalfensterAnzeigen()
         }
     }
    ```
    
    Hier wird eine Anfrage zum Löschen des Accounts mit dem Token des Nutzers an den Server geschickt. Wenn dieser einen Fehler zurückgibt, wird die Fehlermeldung dem Nutzer in einem oberen Modalfenster angezeigt. Sollte jedoch der Status 1 zurückgegeben werden, wurde der Account und alle Passwörter, die unter dessen Benutzernamen gespeichert waren, gelöscht.
-   Das Token des Nutzers wird entfernt und er wird zur Anmeldung weitergeleitet. In einem letzten oberen Modalfenster bedanken wir uns ganz herzlich beim Nutzer dafür, dass er VergissMeinNicht genutzt hat. 
+   Das Token des Nutzers wird entfernt und er wird zur Anmeldung weitergeleitet. Wir danken dem Nutzer, dass er VergissMeinNicht genutzt hat.
       
    ```javascript
    const mapStateToProps = state => {
@@ -1303,16 +1300,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
 
    <details>
    <summary><h2>Die Hilfsfunktionen</h2></summary>
+      
+   Hilfsfunktionen dienen dazu, Prozesse der Verschlüsselung von Tokens oder Passwörtern oder der Kommunikation mit dem Server zu verwalten.
+   So können diese Funktionen in den Komponenten einfach aufgerufen werden und müssen nicht jedes Mal manuell definiert werden.
+   Der Code gewinnt an Übersichtlichkeit und Fehler sind einfacher zu identifizieren.
+      
+   ## Das Token
+   
+   Das Token ist dazu da, um die Nachrichten, die der Nutzer als Anfrage zu unsererem Server sendet, zu entschlüsseln, indem der Token die Nachricht in kleinere Teile    zerlegt und dabei das Wichtigste dabei rausfiltert. Gleichzeitig hilft das Token dabei zu überprüfen, ob eine Nachricht noch gültig ist oder ob diese bereits          abgelaufen ist und insofern keine Relevanz mehr hat.
+      
    ## Die Verschlüsselung
+      
    Die Verschlüsselung seiner aufgelisteten Passwörter erfolgt genau dann, wenn das festgelegte Passwort nicht mehr eingegeben ist. Die eigentlichen Passwörter werden    dann verschlüsselt, indem an der Stelle des Passworts die Nachricht "Passwort ist verschlüsselt", auftritt. Wenn man das Masterpasswort wieder in das Eingabefeld      einfügt, dann werden wieder automatisch die aufgelisteten Passwörter entschlüsselt.
       
    ## Der Server 
  
    Der bereitgestellte Code ist ein JavaScript-Modul, das verschiedene Funktionen zur Kommunikation mit dem Server über HTTP-Anforderungen beinhaltet. Es ermöglicht      unserem Benutzer, sich mit Benutzername und Passwort anzumelden, das Passwort vom Server abzurufen und die Serverantwort als JSON-Objekt zu behandeln. Dieser          Code ist somit wichtig, um die sichere Kommunikation mit dem Server und um Benutzern den Zugriff auf sichere Ressourcen zu ermöglichen, während ihre                  Anmeldeinformationen geschützt bleiben.
-    
-   ## Das Token
-   
-   Das Token ist dazu da, um die Nachrichten, die der Nutzer als Anfrage zu unsererem Server sendet, zu entschlüsseln, indem der Token die Nachricht in kleinere Teile    zerlegt und dabei das Wichtigste dabei rausfiltert. Gleichzeitig hilft das Token dabei zu überprüfen, ob eine Nachricht noch gültig ist oder ob diese bereits          abgelaufen ist und insofern keine Relevanz mehr hat.
+      
    <hr>
    </details>
   
