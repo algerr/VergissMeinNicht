@@ -116,14 +116,11 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 
 
 
-<details>
-   <summary><h1>Das Frontend</h1></summary>
-   <hr>
+<h1>Das Frontend</h1>
 
    Das Frontend ist die Fassade der Anwendung. Die Webseite, auf der der Nutzer sich anmeldet, auf der er Nutzer interagiert und auf der er seine Passwörter ansieht, hinzufügt oder 
    
-   <details>
-      <summary><h2>Die Komponenten</h2></summary>
+   <h2>Die Komponenten</h2>
 
    ## Die Anmeldung
       
@@ -164,21 +161,14 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Der Zustand von 'eingabeAbgeschickt' wird wieder auf 'false' gesetzt und der Nutzer kann erneut versuchen, sich anzumelden.
    Sollte der Nutzer es jedoch gar nicht erst geschafft haben, überhaupt beide Eingabefelder auszufüllen, wird er durch ein oberes Modalfenster daran erinnert und auch hier der Zustand von 'eingabeAbgeschickt' auf 'false' gesetzt.
       
-   
-   
-   
-   
-   
-      </details>
+
       
    ## Die Registrierung
       
    Um den Passwortmanager überhaupt verwenden zu können, muss man sich zuerst einen Account erstellen. Um sich zu registrieren werden drei Eingaben des Nutzers benötigt. Eine gültige Emailadresse, einen Benutzernamen, der noch nicht in der Datenbank existiert und ein Passwort. Da es dem Nutzer selbst überlassen ist, wie sicher er sein Accountpasswort gestalten möchte, haben wir keine Anforderungen an dieses, wie beispielsweise eine Mindestlänge. Wenn die Registrierung erfolgreich ist, wird man zur Anmeldung weitergeleitet, wo man sich direkt mit seinem frisch registrierten Account anmelden kann.
    
    ![image](https://user-images.githubusercontent.com/65679099/231804199-4c5ac2c9-4de7-49d5-a0a0-b0a0e512452b.png)
-      
-      <details>
-         <summary>Nähere Informationen</summary>
+   
    
    Wie bereits bei der Anmeldung wird durch die `componentDidMount()`-Methode direkt beim Rendern der Registrierung überprüft, ob noch ein gültiges Token im Browser des Nutzers gespeichert ist. Wenn dies der Fall ist, wird er automatisch auf die Startseite weitergeleitet.
    Auch wird wieder ein Zustandsboolean `eingabeAbgeschickt` verwendet, um Bedingungen aufzustellen, wie beispielsweise das Anzeigen der `Registrieren`-Schaltfläche oder des Lade-Spinners. 
