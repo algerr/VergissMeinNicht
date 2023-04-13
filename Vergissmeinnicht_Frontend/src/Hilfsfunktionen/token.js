@@ -13,7 +13,7 @@ export const tokenEntschluesseln = (token) => {
 export const istTokenAbgelaufen = (token) => {
     // Die Entschlüsselungsfunktion wird aufgerufen, um das Ablaufdatum des Tokens zu extrahieren.
     const tokenAblaufdatum = tokenEntschluesseln(token).exp
-    // Die aktuelle Zeit wird in die numerische Zeit umgewandelt und kann dann mit dem Ablaufdatum des Tokens verglichen werden.
+    // Die aktuelle Zeit wird in einen Zeitstempel umgewandelt und kann dann mit dem Ablaufdatum des Tokens verglichen werden.
     const aktuelleZeit = Math.round((new Date()).getTime() / 1000)
     // Wenn die aktuelle Zeit größer, als das Ablaufdatum des Tokens, ist dieses abgelaufen und ein "true" wird zurückgegeben.
     return aktuelleZeit > tokenAblaufdatum
