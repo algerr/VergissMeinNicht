@@ -130,6 +130,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Sollte der Nutzer jedoch noch keinen Account bei VergissMeinNicht besitzen, wird ihm die Möglichkeit geboten, über einen Klick auf die Schaltfläche `Registrieren`      zur Registrierung zu gelangen und sich dort einen Account anlegen zu können.
    Wenn der Nutzer sowohl seinen Benutzernamen, als auch sein Passwort richtig eingegeben hat, wird er auf die Startseite des Passwortmanagers weitergeleitet.
    
+   ![image](https://user-images.githubusercontent.com/65679099/231805887-b9224815-2de3-4588-9dbd-0d6458fa6df3.png)
+      
    <details>
    <summary>Nähere Informationen</summary>
    
