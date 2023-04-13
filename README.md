@@ -115,12 +115,16 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 
 
 
+
+
+
 <details>
    <summary><h1>Das Frontend</h1></summary>
 
    Das Frontend ist die Fassade der Anwendung. Die Webseite, auf der der Nutzer sich anmeldet, auf der er Nutzer interagiert und auf der er seine Passwörter ansieht, hinzufügt oder 
    
-   <h2>Die Komponenten</h2>
+   <details>
+      <summary><h2>Die Komponenten</h2></summary>
 
    ## Die Anmeldung
       
@@ -2054,6 +2058,7 @@ Firestore ist eine von Google entwickelte dokumentenorientierte NoSQL-Datenbank.
 Firestore wurde für die Verwendung in Anwendungen entwickelt, die Daten in Echtzeit ändern, wie z. B. Chat-Anwendungen und Online-Spiele. Mit Firestore können Sie Daten in Echtzeit zwischen Ihrem Client (z. B. einem Mobilgerät oder Webbrowser) und Ihren Servern in der Cloud synchronisieren. Das bedeutet, dass Änderungen, die in einem Client vorgenommen werden, automatisch an alle anderen Clients weitergegeben werden, die mit derselben Datenquelle verbunden sind.
 Firestore bietet verschiedene Funktionen zum Schreiben, Lesen, Aktualisieren und Löschen von Daten. Firestore-Daten können einfach über APIs abgerufen und bearbeitet werden. Firestore bietet auch eine Abfragesprache, mit der Entwickler komplexe Abfragen ausführen können, um bestimmte Daten aus Sammlungen abzurufen. Firestore ist Teil der Firebase-Plattform von Google und lässt sich problemlos in andere Firebase-Dienste wie Authentifizierung, Cloud-Messaging und Cloud-Funktionen integrieren. Firestore ist auch auf der Google Cloud Platform (GCP) verfügbar. Das bedeutet, dass es sich nahtlos in Anwendungen integrieren lässt, die auf der GCP gehostet werden.
 
+   </details>
 </details>
       
       
