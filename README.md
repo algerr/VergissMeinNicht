@@ -1023,8 +1023,51 @@ export default connect(mapStateToProps, mapDispatchToProps)(PasswortAendern)
    <details>
       <summary>Nähere Informationen</summary>
       
+   Hier wird ebenfalls der Zustandsboolean `ladesymbol` verwendet, der auch schon bei der Aktualisierung des Passwortes Verwendung fand.
    
-      
+   ```javascript
+   componentDidMount = () => {
+        // Die Variable "bisherigeEmail" wird als Prop an die Komponente übergeben
+        const { bisherigeEmail } = this.props
+        // und legt den Text im Eingabefeld fest.
+        // Die bisherige Emailadresse steht als Text im Eingabefeld.
+        this.email.value = bisherigeEmail
+   }
+   ```
+   
+   Da bei der Aktualisierung der Emailadresse im Eingabefeld bereits die aktuelle Emailadresse steht, wird diese `bisherigeEmail`, sobald die Komponente in den DOM eingefügt wurde, aus den Eigenschaften der Komponente entnommen und die Eingabe des Eingabefeldes auf die `bisherigeEmail` gesetzt.
+   
+   ```javascript
+   render() {
+        // Die ladesymbol-Variable wird aus dem aktuellen Zustand ausgelesen.
+        const { ladesymbol } = this.state   
+        // Der Inhalt der Komponente wird als HTML-Code zurückgegeben.     
+        return (
+            <Form>
+                <Form.Group controlId="email">
+                    <Form.Label>Email</Form.Label>
+                    {/* Das Eingabefeld für die E-Mail-Adresse wird definiert und mit der Referenz this.email verknüpft */}
+                    <Form.Control type="text" placeholder="Email" ref={elem => this.email = elem} />
+                    <Form.Text className="text-muted">
+                        Eine leere Eingabe wird auch genehmigt.
+                    </Form.Text>
+                </Form.Group>
+                {/* Entweder wird ein Ladesymbol oder ein Button zum Speichern der Änderungen angezeigt, je nachdem ob das ladesymbol true oder false ist */}
+                {
+                    ladesymbol ? <Spinner animation="border" /> : <Button variant="primary" type="submit" onClick={this.onSpeichern}>Speichern</Button>
+                }
+            </Form>
+        )
+   }
+   ```
+   
+   Das Eingabeformular für die Aktualisierung der Emailadresse besteht aus einer Formulargruppe, in der sich das Eingabefeld für die Emailadresse und das Label `Email` befinden.
+   Unter dem Eingabefeld befindet sich ein kleiner ausgegrauter Text, der besagt, dass eine leere Eingabe ebenfalls genehmigt wird.
+   Je nach Zustand des Zustandsbooleans, wird bei `true` ein Lade-Spinner und bei `false` die Schaltfläche zum Speichern der neuen Emailadresse gerendert.
+   Das Eingabefeld wird durch ein `ref`-Objekt zur Eigenschaft der Komponente. 
+               
+   
+               
    </details>
                
    
