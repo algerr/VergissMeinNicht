@@ -903,6 +903,62 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <summary><h2>Die Accounteinstellungen</h2></summary>
    
    Unsere Anwendung besteht nicht nur aus dem Passwort Manager, auch wenn darauf der Hauptfokus gerichtet ist. Der Nutzer kann in der Seitenleiste auch in die Accounteinstellungen gehen und dort sowohl seinen Benutzernamen und die aktuelle Emailadresse ansehen, als auch Änderungen an Emailadresse und Passwort vornehmen. Wenn der Nutzer möchte, kann er auch seinen Account löschen.
+   
+   <details>
+      <summary>Nähere Informationen</summary>
+      
+      ```javascript
+      render() {
+        // Die Variable "token" wird aus den Props des Komponenten gelesen.
+        const { token } = this.props
+        // Das entschlüsselte Token wird aus dem "token" Wert erstellt.
+        const entschluesseltesToken = tokenEntschluesseln(token)
+        // Der Body der Komponente wird als HTML-Code zurückgegeben.
+        return (
+            <Container style={{ maxWidth: "100%" }}>
+                <Row>
+                    {/* Die Überschrift der Accounteinstellungen wird angezeigt. */}
+                    <h1 className="mt-4">Accounteinstellungen</h1>
+                </Row>
+                <Row>
+                    {/* Benutzername und Emailadresse werden auf der linken Seite angezeigt. */}
+                    <Col>
+                        <ListGroup variant="flush">
+                            <ListGroup.Item>Benutzername: <strong>{entschluesseltesToken.benutzername || "Kein Benutzername gefunden"}</strong></ListGroup.Item>
+                            <ListGroup.Item>Email: <strong>{entschluesseltesToken.email || "Keine Emailadresse angegeben"}</strong></ListGroup.Item>
+                        </ListGroup>
+                    </Col>
+
+                    {/* Die Aktionen, die der Benutzer ausführen kann, werden auf der rechten Seite angezeigt */}
+                    <Col>
+                        <ListGroup>
+                            {/* Der Button zum Aktualisieren der Email-Adresse wird angezeigt. */}
+                            <ListGroup.Item action onClick={this.onEmailAktualisieren}>Email aktualisieren</ListGroup.Item>
+                            {/* Der Button zum Ändern des Passworts wird angezeigt. */}
+                            <ListGroup.Item action onClick={this.onPasswortAendern} >Passwort ändern</ListGroup.Item>
+                            {/* Der Button zum Löschen des Accounts wird in rot angezeigt, damit der Nutzer die Ernsthaftigkeit der Lage begreift. */}
+                            <ListGroup.Item action variant="danger" onClick={this.onAccountloeschen} >Account löschen</ListGroup.Item>
+                        </ListGroup>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    }
+      ```
+   
+   Die Accounteinstellungen sind in verschiedene Zeilen (Rows) und Spalten (Columns) eingeteilt.
+   In der ersten Zeile wird der Titel `Accounteinstellungen` gerendert.
+   Die zweite Zeile besteht aus zwei Spalten. Auf der linken Seite kann der Nutzer seinen Benutzernamen und seine Emailadresse ansehen.
+      
+   ![image](https://user-images.githubusercontent.com/65679099/231766649-62e82f3d-c734-44ce-a531-60a1ebf3881b.png)
+      
+   In einer [`List Group`](https://getbootstrap.com/docs/5.0/components/list-group/) werden die beiden Informationen untereinander angezeigt.
+   Die Variante [`Flush`](https://getbootstrap.com/docs/5.0/components/list-group/#flush) sorgt dafür, dass alle Ränder, bis auf den zwischen den beiden, entfernt werden. Um den Benutzernamen und die Emailadresse des Nutzers anzeigen zu können, wird das Token entschlüsselt. Wenn kein Benutzername oder keine Emailadresse aus Token entschlüsselt werden können, wird ein alternativer Text angezeigt.
+      
+   Auf der rechten Seite werden, ebenfalls in einer `List Group` die drei Aktionen angezeigt, die der Benutzer bezüglich seines Accounts ausführen.
+   Es können die Emailadresse und das Passwort des Accounts aktualisiert oder der Account gelöscht werden.
+   
+   ![image](https://user-images.githubusercontent.com/65679099/231766694-0a979aa0-f500-4b26-8a99-9b4ed0f94cfd.png)
       
    ## Die Aktualisierung des Passwortes
       
@@ -1132,8 +1188,115 @@ export default connect(mapStateToProps, mapDispatchToProps)(EmailAktualisieren)
             
    </details>
                
-   Da diese beiden Komponenten nun definiert sind
-               
+   Da diese beiden Komponenten nun definiert und exportiert sind, kann in den Accounteinstellungen darauf zugegriffen werden.
+   Bei einem Klick auf die Schaltfläche zur Aktualisierung der Emailadresse wird die Funktion `onEmailAktualisieren` aufgerufen.
+      
+   ```javascript
+   onEmailAktualisieren = () => {
+        const { setzeInhaltFuerZentriertesModalfenster, zentriertesModalfensterAnzeigen, token } = this.props
+        const entschluesseltesToken = tokenEntschluesseln(token)
+
+        setzeInhaltFuerZentriertesModalfenster(
+            "Email aktualisieren",
+            <EmailAktualisieren bisherigeEmail={entschluesseltesToken.email || ""} />,
+            [{ name: "Schließen", variant: "primary" }]
+        )
+        zentriertesModalfensterAnzeigen()
+   }
+   ```
+   
+   Ein zentriertes Modalfenster mit dem Titel `Email aktualisieren` wird geöffnet und in diesem die Komponente `EmailAktualisieren` aufgerufen. Als bisherige Email, die als Platzhalter im Eingabefeld steht, wird die aus dem Token entschlüsselte Emailadresse genommen.
+      
+   Bei einem Klick auf die Schaltfläche zur Aktualisierung des Passwortes wird die Funktion `onPasswortAendern` aufgerufen.
+   
+   ```javascript
+   onPasswortAendern = () => {
+        const { setzeInhaltFuerZentriertesModalfenster, zentriertesModalfensterAnzeigen } = this.props
+
+        setzeInhaltFuerZentriertesModalfenster(
+            "Passwort ändern",
+            <PasswortAendern />,
+            [{ name: "Schließen", variant: "primary" }]
+        )
+        zentriertesModalfensterAnzeigen()
+   }
+   ```
+
+   Auch hier wird ein zentriertes Modalfenster mit dem Titel `Passwort ändern` geöffnet, in dem die Komponente `PasswortAendern` aufgerufen wird.
+   
+   Wenn der Nutzer auf die Schaltfläche zum Löschen des Accounts klickt, wird zuerst die Funktion `onAccountLoeschen` aufgerufen.
+      
+   ```javascript
+   onAccountloeschen = () => {
+        const { setzeInhaltFuerOberesModalfenster, oberesModalfensterAnzeigen } = this.props
+
+        setzeInhaltFuerOberesModalfenster("Achtung", "Alle Daten werden gelöscht! Möchtest du wirklich fortfahren?",
+            // Durch die rote Farbe (variant: "danger") wird der Nutzer nochmal auf die Ernsthaftigkeit der Lage hingewiesen.
+            [{ name: "Ja", variant: "danger", onClick: this.onAccountLoeschenFinal  }, { name: "Schließen", variant: "secondary"} ])
+        oberesModalfensterAnzeigen()
+   }
+   ```
+   
+   Hier wird sichergestellt, dass der Nutzer sich wirklich im Klaren ist, dass er seinen Account löschen möchte.
+   In einem oberen Modalfenster mit dem Titel `Achtung` wird der Nutzer nochmal auf die Ernsthaftigkeit der Lage hingewiesen.
+   Wenn er sich dazu entschließt, auf die rote Schaltfläche `Ja` zu klicken, wird die finale Funktion `onAccountLoeschenFinal` aufgerufen.
+      
+   ```javascript
+   onAccountLoeschenFinal = async () => {
+        // Die Eigenschaften von props werden destrukturiert und sind somit separate Variablen.
+        // Somit wird der Präfix "this.props" nicht benötigt.
+        const { token, history, setzeInhaltFuerOberesModalfenster, oberesModalfensterAnzeigen, authentifizierungsTokenFestlegen, oberesModalfensterAusblenden } = this.props
+        // Diese Funktion löscht den Account des Nutzers auf dem Server und gibt ein Objekt mit einem Fehler oder dem Status zurück.
+        const accountLoeschung = await accountVomServerLoeschen(token)
+        // Wenn es einen Fehler beim Löschvorgan des Acconts gibt, wird dieser in einem modalen Fenster angezeigt.
+        if (accountLoeschung.error) {
+            setzeInhaltFuerOberesModalfenster("Fehler", accountLoeschung.error, [{ name: "Schließen", variant: "primary" }])
+            oberesModalfensterAnzeigen()
+        // Wenn der Account erfolgreich gelöscht wurde, wird der Nutzer ausgeloggt und zum Anmeldeformular weitergeleitet.
+        } else if (accountLoeschung.status) {
+            authentifizierungsTokenFestlegen(null)
+            history.push("/anmeldung")
+            oberesModalfensterAusblenden()
+            setzeInhaltFuerOberesModalfenster("Vielen Dank", "Danke sehr, dass Du VergissMeinNicht genutzt hast!",
+            [{ name: "Schließen", variant: "primary"} ])
+            oberesModalfensterAnzeigen()
+        }
+    }
+   ```
+   
+   Hier wird eine Anfrage zum Löschen des Accounts mit dem Token des Nutzers an den Server geschickt. Wenn dieser einen Fehler zurückgibt, wird die Fehlermeldung dem Nutzer in einem oberen Modalfenster angezeigt. Sollte jedoch der Status 1 zurückgegeben werden, wurde der Account und alle Passwörter, die unter dessen Benutzernamen gespeichert waren, gelöscht.
+   Das Token des Nutzers wird entfernt und er wird zur Anmeldung weitergeleitet. In einem letzten oberen Modalfenster bedanken wir uns ganz herzlich beim Nutzer dafür, dass er VergissMeinNicht genutzt hat. 
+      
+   ```javascript
+   const mapStateToProps = state => {
+    return {
+        token: state.authentifizierung.token
+    }
+}
+
+// mapDispatchToProps ist eine Funktion, die das Dispatch-Objekt aus dem Store erhält und eine Funktionen-Mapping auf den Component-Props definiert.
+// In diesem Fall werden verschiedene Aktionen-Dispatcher definiert, die als Props an den Component weitergegeben werden.
+const mapDispatchToProps = dispatch => {
+    return {
+        setzeInhaltFuerZentriertesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerZentriertesModalfenster(titel, inhalt, buttons)),
+        zentriertesModalfensterAnzeigen: () => dispatch(zentriertesModalfensterAnzeigen()),
+        setzeInhaltFuerOberesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerOberesModalfenster(titel, inhalt, buttons)),
+        oberesModalfensterAnzeigen: () => dispatch(oberesModalfensterAnzeigen()),
+        oberesModalfensterAusblenden: () => dispatch(oberesModalfensterAusblenden()),
+        authentifizierungsTokenFestlegen: (token) => dispatch(authentifizierungsTokenFestlegen(token))
+    }
+}
+
+// Der "Accounteinstellungen"-Komponent wird mit dem Redux Store verbunden und mit den oben definierten mapStateToProps und mapDispatchToProps Funktionen verknüpft.
+// Mit withRouter wird der Komponent auch mit dem React Router verbunden, um Zugriff auf den Router-Props (z.B. "history") zu erhalten.
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEinstellungen))
+   ```
+   
+   Aus dem Redux-Store wird der aktuelle Zustand des Tokens als `token` an die Eigenschaften der Komponente übergeben. 
+   Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Festlegen des Tokens an die Eigenschaften der Komponente übergeben.
+   Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
+   So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einem erfolgreichen Löschen des Accounts entfernen.
+      
    <hr>
    </details>
    
