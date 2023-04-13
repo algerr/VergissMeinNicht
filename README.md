@@ -210,18 +210,10 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Auch hierbei wird der Zustandsboolean `eingabeAbgeschickt` auf `false` gesetzt, da der Nutzer erneut versuchen muss, sich zu registrieren.
    Im Groben und Ganzen ähneln sich Anmeldung und Registrierung im Frontend. Bei der Registrierung wird zusätzlich noch eine Emailadresse benötigt, aber der eigentliche Unterschied besteht darin, was der Server im Backend mit der Anfrage macht.
    
-
-   
-      
-      </details>
-   
    
    ## Die Startseite
    
    Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nutzer zu jedem Detail unserer Seite. Wenn der Nutzer nach der Anmeldung auf die Startseite gelangt, befindet er sich direkt beim Passwortmanager. Dieser nimmt den Großteil des Bildschirms ein und wird umrandet von einer [Seitenleiste](#die-seitenleiste) und der der Seitenleiste angeschlossenen Navigationsbar. Der Nutzer kann sich über die Schaltfläche am oberen rechten Rand abmelden oder über die Seitenleiste zu den Accounteinstellungen gelangen. Hier auf der Startseite hat man die volle Kontrolle.
-   
-      <details>
-         <summary>Nähere Informationen</summary>
    
    ![componentDidMount](https://user-images.githubusercontent.com/65679099/230800107-d27b8aed-36da-4e40-8c46-0df638f94b47.png)
    
@@ -232,22 +224,13 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Zuerst wird auf der Startseite die Seitenleiste gerendert, da diese die angezeigte Seite einschließt. Durch das Switch-Statement wird, je nachdem, welche Route geöffnet wird, der PasswortManager oder die Accounteinstellungen gerendert. Standardmäßig, wenn die Standardseite aufgerufen wird, wird auf den PasswortManager umgeleitet. Wenn kein passender Pfad gefunden wird, wird auf die Error 404 Seite weitergeleitet, die hier an anderer Stelle erklärt wird.
    
    Zusammenfassend lässt sich sagen, dass die Startseite der Ausgangspunkt der Anwendung ist. Egal, wo der Nutzer hin möchte, er kann das Ziel von der Startseite aus erreichen.
-   
-      </details>
-   
-      
-      
-      
-      
-      <details>
-   <summary><h2>Der Passwort Manager</h2></summary>
+
+<h2>Der Passwort Manager</h2>
       
    Der Passwort Manager ist die Anwendung, bzw. der Service, den wir mit Vergissmeinnicht unseren Nutzern anbieten. Er ist einfach zu verstehen und übersichtlich.
    Grob kann er in zwei Bereiche eingeteilt werden. Auf der linken Seite findet die Eingabe statt. Das Masterpasswort wird eingegeben und neue Passwörter werden hinzugefügt. Auf der rechten Seite ist die Passwörter-Tabelle, in der alle Passwörter des Nutzers angezeigt werden und kopiert, angezeigt oder gelöscht werden können.
    Die einzelnen Teilbereiche sind in unterschiedliche Komponente gegliedert, die dann im Passwort Manager gerendert werden.
-      
-         <details>
-            <summary>Nähere Informationen</summary>
+
    
    ![Linke_seite_state](https://user-images.githubusercontent.com/65679099/230801148-fc0c7626-d469-4b6f-9c4a-65762b374980.png)
       
@@ -278,9 +261,6 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Um die Entschlüsselung des Passwortes zu verwalten, wird in der `Passwort`-Spalte der Tabelle die Komponente `PasswortAnzeigen` gerendert, die sich damit befasst.
    Für den Inhalt der Tabelle werden alle Passwörter im `statePasswoerter`-Array auf die Tabelle gemapped. Dadurch entsteht ein neuer Array, in dem jedes Element aus einem Array mit der Beschreibung des Passwortes und der `PasswortAnzeige`-Komponente, die sich, wie bereits gesagt, um das Anzeigen des Passwortes in der `Passwort`-Spalte der Tabelle kümmert. Für diese Komponente wird das Passwort `{p}` und das Masterpasswort, mit dem es erstellt wurde als Parameter übergeben.
       
-            </details>
-         </details>
-      
 
       
       
@@ -291,9 +271,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Dieser Bereich befindet sich auf der linken Seite des Passwort Managers. Hier wird das Masterpasswort eingegeben, welches die Passwörter schützt, indem es mit diesen zusammen verschlüsselt wird. Zudem kann über die Schaltfläche [`Neues Passwort hinzufügen`](#ein-neues-passwort-hinzufuegen) ein neues Passwort hinzugefügt werden. Unter dem Eingabefeld für das Masterpasswort befindet sich zudem eine kleine Erklärung, wie das Masterpasswort funktioniert.
     
    ![image](https://user-images.githubusercontent.com/65679099/231804498-66ff1b5a-00bd-4742-9537-03a64f941758.png)
-      
-         <details>
-            <summary>Nähere Informationen</summary>
+ 
       
    ![Funktionen](https://user-images.githubusercontent.com/65679099/230803233-47e33e23-e347-413a-b68d-df7752e97c10.png)
 
@@ -311,10 +289,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Am Ende des Eingabebereiches folgt noch die Schaltfläche zum Hinzufügen neuer Passwörter. Über den Event-Listener `onClick` wird bei einem Klick auf diese Schaltfläche die Funktion `onPasswortHinzufuegen` ausgeführt, die, wie oben bereits erklärt ein Modalfenster öffnet, in dem ein neues Passwort hinzugefügt werden kann.
    
       
-      
-      
-      
-         </details>
+
    
    
    ## Ein neues Passwort hinzufügen
@@ -329,8 +304,6 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Sollte der Nutzer damit nicht zufrieden sein, kann er beliebig oft das Symbol erneut anklicken, um weitere Vorschläge für starke Passwörter zu generieren.
    Wenn alles eingegeben ist, wird das Passwort einfach über die Schaltfläche `Speichern` gespeichert und in der Tabelle an oberster Stelle angezeigt.
       
-         <details>
-            <summary>Nähere Informationen</summary>
       
    Wie in allen Formularen wird auch hier ein Zustandsboolean `laedt` genutzt, um ein bedingtes Rendern des Lade-Spinners oder der `Speichern`-Schaltfläche zu ermöglichen. 
    ```javascript
@@ -420,7 +393,6 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Nun beginnt der Speicherungsprozess des Passwortes. Dafür muss zuerst sichergestellt werden, dass sowohl das Masterpasswort, als auch das Passwort das gespeichert werden soll und die Beschreibung dessen eingegeben wurden. Wenn nicht, wird ein oberes Modalfenster angezeigt, dass den Nutzer darauf hinweist. Wenn jedoch alle Bedingungen erfüllt sind, wird das Passwort zuerst mit dem Masterpasswort gemeinsam, mithilfe der Hilsfunktion `verschluesseln`, verschlüsselt und daraufhin eine Anfrage zum Speichern des Passwortes an den Server geschickt. 
    Sollte der Server einen Fehler zurückgeben, wird dieser dem Nutzer in einem oberen Modalfenster angezeigt. Sollte kein Fehler auftreten und einfach das Passwort zurückgegeben werden, wird dieses im Redux-Store gespeichert, das Modalfenster zum Hinzufügen eines neuen Passwortes ausgeblendet und das neue Passwort in der Tabelle angezeigt. Zum Schluss wird noch der Zustandsboolean `laedt` auf `false` gesetzt, da die Aktion abgeschlossen ist.
       
-         </details>
    
    
    ## Die Passwortanzeige
@@ -433,8 +405,6 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    ![image](https://user-images.githubusercontent.com/65679099/231805555-6ce8c65e-cc0b-4b5f-8942-1b527586b46b.png)
    Entschlüsselte Passwörter
       
-         <details>
-            <summary>Nähere Informationen</summary>
    
    Auch in dieser Komponente wird mit Zustandsvariablen gearbeitet. 
       
@@ -521,19 +491,14 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Sollte alles funktioniert haben, wird das Passwort auch aus dem Redux-Store und somit aus der Tabelle gelöscht und kann nicht wiederhergestellt werden.
    
       
-         </details>
          
       
-   <hr>
-      </details>
       
    ## Die Benutzerauthentifizierung
    
    Da die Sicherheit beim Passwort Manager das A und O ist, haben wir eine zusätzliche Komponente definiert, die sich mit der Authentifizierung des Benutzers auseinandersetzt. Bevor ein Nutzer auf eine bestimmte Seite zugreifen kann wird dadurch immer zuerst überprüft, ob der Nutzer ausreichend authentifiziert ist.
    Wenn das der Fall ist, wird er auf die gewünschte Seite weitergeleitet. Wenn nicht, wird er zur Anmeldung umgeleitet. 
    
-   <details>
-   <summary>Nähere Informationen</summary>
    
    Zur Authentifizierung wird in dieser Anwendung das Token verwendet. Somit wird dieses hier zuerst aus den Eigenschaften der Komponente destrukturiert, um es als freie Variable nutzen zu können. 
    
@@ -557,15 +522,11 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    
    
-   </details>
-   
    
    ## Die Modalfenster
    
    Um dem Nutzer die wichtigsten aktuellen Informationen und Meldungen anzuzeigen, nutzen wir Dialogfenster, sogenannte `Modalfenster`. Diese haben wir in zwei Arten unterschieden. Es gibt die zentrierten Modalfenster, die beispielsweise beim Hinzufügen eines neuen Passwortes angezeigt werden und die oberen Modalfenster, worüber beispielsweise Fehlermeldungen angezeigt werden. Als Basis werden die Modale von React-Bootstrap verwendet, worüber dann die Modalfenster erstellt werden.
    
-   <details>
-   <summary>Nähere Informationen</summary>
    
    Das zentrale Modalfenster ist für die Eingabe des Nutzers gedacht. Es besteht aus einem Titel, dem Inhalt, den Schaltflächen im Footer und dem Zustand, ob es gezeigt wird oder nicht. Darüber lässt sich das Öffnen und Schließen des Modalfensters regeln. 
    
@@ -654,16 +615,12 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    }
    ```
       
-      
-   </details>
 
 
     
    ## Die Seitenleiste
    Die Seitenleiste lässt sich nach Wunsch ein- und ausblenden. Wenn diese eingeblendet ist, hat man die Option im Hauptfenster zu bleiben, welches den Namen              "Passwörter" trägt, oder man kann in das Fenster "Accounteinstellungen" wechseln. In den Accounteinstellungen sieht man zunächst einmal seinen festgelegten             Benutzernamen und seine Email mit der man sich im Vorhinein registriert hat. Darüber hinaus kann man in diesem Fenster entweder eine neue Email oder ein neues        Passwort festlegen, falls man etwas an seinen Anmeldedaten verändern möchte. Hierzu gibt es aber nun auch die Option seinen Account vollständig zu löschen, falls      man sich dazu entscheiden sollte.
-   
-   <details>
-   <summary>Nähere Informationen</summary>
+
       
    Die Seitenleiste umfasst sowohl die Leiste am linken Bildschirmrand, als auch die Navigationsbar am oberen Bildschirmrand. 
       
@@ -785,15 +742,13 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Mit `mapDispatchToProps` werden zwei Methoden `authentifizierungsTokenFestlegen` und `passwoerterFestlegen` zurückgegeben, die die gleichnamigen Aktionserzeuger aufrufen, die als Argumente `token` bzw. `data` nehmen.
    Um das Token und diese Aktionserzeuger-Funktionen als Eigenschaften an die Seitenleisten-Komponente zu übergeben, wird die Komponente durch die beiden Funktionen mit dem Redux-Store verbunden.
       
-   </details>
+
    
    ## Die Tabelle
    In der Tabelle werden die gespeicherten Passwörter des Nutzers zusammen mit den zugehörigen Beschreibungen aufgelistet, sodass diese gut zuzuordnen sind. 
    Standardmäßig sind alle Passwörter in der Tabelle verschlüsselt. So versichern wir den zweiten Authentifizierungsschritt, neben der Anmeldung, um die Passwörter des Nutzers zu schützen. Sobald das Masterpasswort eingegeben ist, werden die Passwörter entschlüsselt. Sie können kopiert, angesehen und gelöscht werden.
    Die Tabelle bietet beliebig viele Seiten für Nutzer, die mehr Passwörter speichern, als auf eine Seite passen. Zudem kann auch über die Suchleiste oben rechts über der Tabelle nach einem Passwort spezifisch gesucht werden.
     
-   <details>
-   <summary>Nähere Informationen</summary>
       
    Die Tabelle wird mithilfe der jQuery-Erweiterung [`DataTables`](https://datatables.net/) erstellt. Durch die `componentDidMount`-Funktion wird, sobald die Komponente gerendert wird, die Tabelle initialisiert. 
       
@@ -901,8 +856,6 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    Gerendert wird eine HTML-Tabelle mit den Überschriften und dem Inhalt, die als Eigenschaften an die Komponente übergeben wurden. Wenn keine Überschriften oder kein Inhalt übergeben wurden, wird eine Fehlermeldung gerendert. Die Tabellenzeilen werden aus dem `inhalt`-Array generiert, wobei für jede Zeile eine separate `tr`-Komponente erstellt wird und die Zellen mit den entsprechenden Daten aus dem `tr`-Array als `td`-Tags gerendert werden. 
    
-   <details>
-      <summary>Erklärung zu `tr` und `td`</summary>
       
    `tr` und `td` werden als `Table Row` (Tabellenzeile) und `Table Data` (Tabellendaten) verwendet. Sie beziehen sich auf HTML-Elemente, die verwendet werden, um Tabellen in HTML-Dokumenten zu erstellen. Das "tr"-Element wird verwendet, um eine Tabellenzeile zu definieren und zu erstellen. Eine Tabellenzeile besteht normalerweise aus mehreren "td"-Elementen, die die einzelnen Zellen in der Zeile darstellen. Das "td"-Element hingegen wird verwendet, um eine Tabellendatenzelle innerhalb einer Tabellenzeile zu definieren. Es enthält normalerweise den eigentlichen Inhalt, der in der Zelle angezeigt werden soll, wie Text, Bilder oder andere HTML-Elemente. "td"-Elemente werden normalerweise innerhalb von "tr"-Elementen verwendet, um die Zellen in einer Tabellenzeile zu erstellen.
    Die gemeinsame Darstellung der beiden Elemente ermöglicht eine Tabelle mit mehreren Zeilen und Spalten. Sie können mit CSS gestaltet werden und mit JavaScript manipuliert werden, um dynamische, interaktive Tabellen zu erstellen.   
@@ -910,16 +863,10 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
       
    Die `Tabelle`-Komponente wird schließlich als Standardexport exportiert, um beispielsweise beim Passwort Manager importiert und dort zur Darstellung der Passwörter verwendet zu werden.
       
-   </details>
    
-   
-   <details>
-   <summary><h2>Die Accounteinstellungen</h2></summary>
    
    Unsere Anwendung besteht nicht nur aus dem Passwort Manager, auch wenn darauf der Hauptfokus gerichtet ist. Der Nutzer kann in der Seitenleiste auch in die Accounteinstellungen gehen und dort sowohl seinen Benutzernamen und die aktuelle Emailadresse ansehen, als auch Änderungen an Emailadresse und Passwort vornehmen. Wenn der Nutzer möchte, kann er auch seinen Account löschen.
    
-   <details>
-      <summary>Nähere Informationen</summary>
       
       ```javascript
       render() {
@@ -979,8 +926,6 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Um sein Passwort zu aktualisieren, müssen sowohl das neue als auch das alte Passwort eingegeben werden. Dadurch, dass der Nutzer sein altes Passwort eingeben muss, können Dritte, die sich unerlaubten Zugang zu einem Account gewährt haben, nicht einfach das Passwort ändern, ohne das alte zu kennen. 
    Es ist eine weitere Sicherheitsfunktion, um unsere Nutzer vor Dritten zu schützen. Wenn das alte und neue Passwort eingegeben sind, kann das Ganze über die Schaltfläche `Speichern` bestätigt werden.
       
-   <details>
-      <summary>Nähere Informationen</summary>
       
    Wie bei allen Eingabeformularen, wird auch hier ein Zustandsboolean `ladesymbol` genutzt, um bestimmen zu können, ob noch die Eingabe erfolgt, oder bereits gespeichert wird. 
    
@@ -1084,14 +1029,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(PasswortAendern)
    Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
    So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einer erfolgreichen Aktualisierung des Passwortes entfernen.
                    
-   </details>
       
    ## Die Aktualisierung der Emailadresse 
    Um seine Emailadresse zu ändern, muss der Nutzer lediglich eine neue Emailadresse eingeben und seine Eingabe über die Schaltfläche `Speichern` bestätigen. 
    Eine leere Eingabe ist auch möglich, da wir die Nutzer nur bei der Registrierung dazu verpflichten, eine Emailadresse einzugeben. Danach gibt jeder Nutzer freiwillig seine Emailadresse an.
                
-   <details>
-      <summary>Nähere Informationen</summary>
       
    Hier wird ebenfalls der Zustandsboolean `ladesymbol` verwendet, der auch schon bei der Aktualisierung des Passwortes Verwendung fand.
    
@@ -1199,8 +1141,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(EmailAktualisieren)
    Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
    So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einer erfolgreichen Aktualisierung der Emailadresse aktualisieren.
 
-            
-   </details>
                
    Da diese beiden Komponenten nun definiert und exportiert sind, kann in den Accounteinstellungen darauf zugegriffen werden.
    Bei einem Klick auf die Schaltfläche zur Aktualisierung der Emailadresse wird die Funktion `onEmailAktualisieren` aufgerufen.
@@ -1308,13 +1248,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
    So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einem erfolgreichen Löschen des Accounts entfernen.
    
-   </details>
-   <hr>
-   </details>
-   
 
-   <details>
-   <summary><h2>Die Hilfsfunktionen</h2></summary>
+   <h2>Die Hilfsfunktionen</h2>
       
    Hilfsfunktionen dienen dazu, Prozesse der Verschlüsselung von Tokens oder Passwörtern oder der Kommunikation mit dem Server zu verwalten.
    So können diese Funktionen in den Komponenten einfach aufgerufen werden und müssen nicht jedes Mal manuell definiert werden.
@@ -1324,8 +1259,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    
    JSON-Web-Tokens (JWT) sind unser Mittel zur Authentifizierung. In einem Token sind Benutzername und Emailadresse eines Nutzers gespeichert und können entschlüsselt werden. Jedes Token hat eine zeitlich begrenzte Gültigkeit von (häufig) einer Stunde. So muss ein Nutzer sich nicht jedes Mal anmelden, wenn er die Seite neu lädt. Das Token ist im Redux-Store gespeichert und dient, solange es gültig ist, als Authentifikator, sodass der Nutzer direkt auf die Startseite weitergeleitet wird.
       
-   <details>
-      <summary>Nähere Informationen</summary>
    
    ## Die Entschlüsselung des Tokens
    
@@ -1360,15 +1293,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    Das Token wird zuerst durch die eben definierte Funktion entschlüsselt und das Ablaufdatum abgerufen.
    Dieses wird mit der aktuellen Zeit verglichen. Die Zeit wird hier als Zeitstempel (ISO 8601) angegeben. Je weiter in der Zeit, desto höher der Zeitstempelwert.
    So können die aktuelle Zeit und die Ablaufzeit des Tokens verglichen werden. Wenn die aktuelle Zeit größer ist, als die Ablaufzeit des Tokens, ist das Token nicht mehr gültig.
-      
-   </details>
    
    ## Der Server 
  
    Da wir durch unsere Google Cloud-Function einen Server haben, der sich um die Anfragen aus dem Frontend kümmert, brauchen wir festgelegte Funktionen, die in jeder Komponente aufgerufen werden können, um eine sichere Kommunikation mit dem Server zu ermöglichen. Diese Funktionen sind nach HTTP-Methode und Inhalt unterschiedlich.
    
-   <details>
-      <summary>Nähere Informationen</summary>
    
    Als Basis wird die URL zum Server festgehalten, damit diese nicht in jeder Funktion manuell eingetragen werden muss.
 
@@ -1568,15 +1497,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    Sollte der Server den Status 0 zurückgegeben haben, wird die Fehlermeldung zurückgegeben.
    Wenn es einen Fehler bei der Anfrage gab, wird eine Fehlermeldung zurückgegeben.
    
-   </details>    
       
    ## Die Verschlüsselung
       
    Die Verschlüsselung bietet einen Schutz für die Passwörter des Nutzers. Zur Verschlüsselung werden die Kryptographie-Bibliothek [`tweetnacl`](https://tweetnacl.cr.yp.to/) und Base64, da beim JWT auch mit Base64 gearbeitet wird.
    Für die Ver- und Entschlüsselung in und aus UTF-8 werden die Funktionen [`encodeUTF8` und `decodeUTF8`](https://gist.github.com/felvieira/b2b3cfec78f0c353c3beac6db151ba1e) vom Github-Nutzer [`felvieira`](https://github.com/felvieira) verwendet.
    
-   <details>
-      <summary>Nähere Informationen</summary>
 
    Für die Base64 Ver- und Entschlüsselung werden die Funktionen `base64Verschluesselung` und `base64Entschluesselung` definiert.
       
@@ -1660,22 +1586,13 @@ export const base64Entschluesselung = (str) => Base64.toByteArray(str)
 
    Beim Hinzufügen eines neuen Passwortes, hat der Nutzer die Möglichkeit, automatisch ein starkes Passwort für sich generieren zu lassen. Diese Generierung erfolgt durch die Funktion `nacl.randomBytes()`. Hier werden 24 zufällige Bytes generiert, die daraufhin in eine Base64-kodierte Zeichenfolge umgewandelt werden. Diese Base64-kodierte Zeichenfolge wird als zufälliges Passwort von der Funktion zurückgegeben.
       
-   </details>
-      
-   <hr>
-   </details>
-  
-
-   <details>
-   <summary><h2>Der Redux-Store</h2></summary>
+   <h2>Der Redux-Store</h2>
   
    Der Redux-Store ist wie ein zentrales Lagerhaus für den Zustand einer React-Anwendung. Statt den Zustand in verschiedenen Komponenten zu verwalten, wird der Zustand im Redux-Store gespeichert und von den Komponenten aus gelesen oder in den Store geschrieben. Der Redux-Store ist ein unveränderlicher Zustand, das bedeutet, dass er nicht direkt geändert werden kann. Stattdessen werden Änderungen am Zustand durch Aktionen ausgelöst, die von den Komponenten ausgelöst und an den Store gesendet werden. Der Redux-Store ermöglicht eine klare Trennung von Zustand und Darstellung in der Anwendung. Komponenten können den aktuellen Zustand aus dem Store lesen und auf Änderungen reagieren, indem sie sich erneut rendern. Wenn Komponenten den Zustand ändern müssen, senden sie eine Aktion an den Store, der den Zustand aktualisiert und allen abhängigen Komponenten die neuen Daten bereitstellt.
       
    Insgesamt erleichtert der Redux-Store die Verwaltung des Zustands in React-Anwendungen, indem er eine zentrale Datenquelle für den gesamten Zustand der Anwendung bereitstellt und die Veränderungen am Zustand durch Aktionen koordiniert.
       
-   <hr>
-   <details>
-   <summary><h3>Die Aktionserzeuger</h3></summary>
+   <h3>Die Aktionserzeuger</h3>
    
    Um die Zustände im Redux-Store zu verändern werden sogenannte Aktionen genutzt. Aktionen sind JavaScript-Objekte, die eine Art von Veränderung im Redux-Store repräsentieren. Sie sind die einzige Möglichkeit, Daten im Redux-Store zu aktualisieren. Eine Aktion besteht aus einem Aktionstyp, der beschreibt, was für eine Veränderung im Redux-Store stattfinden soll und auch den Namen der Aktion angibt. Zusätzlich kann in der Aktion noch ein `Datenpaket` (Payload) übergeben werden, das die Aktualisierung im Store präzise beschreibt.
       
@@ -1710,8 +1627,6 @@ export const base64Entschluesselung = (str) => Base64.toByteArray(str)
       
    Ein Aktionstyp bestimmt, welche Veränderung an Zuständen im Redux-Store vorgenommen werden soll. Die Verwendung von Aktionstypen trägt dazu bei, Aktionen eindeutig identifizieren, auszuführen und besser warten zu können, da der Code sehr an Übersichtlichkeit gewinnt.
    
-   <details>
-   <summary>Nähere Informationen</summary>
       
    ```javascript
    // Hier wird ein Aktionstyp für die Speicherung des Tokens festgelegt.
@@ -1735,7 +1650,6 @@ export const SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER = "SETZE_INHALT_FUER_ZEN
    In unserer Anwendung werden 11 verschiedene Aktionstypen festgelegt, die für die Authentifizierung und die Verwaltung von Passwörtern und Modalfenstern genutzt werden. Der Aktionstyp `AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN` beispielsweise identifiziert eine Aktion zur Speicherung des Authentifizierungstokens im Redux-Store. Der Aktionstyp ist wie ein Schlüssel für den Reduzierer, der genau für die Ausführung einer Aktion gemacht ist. 
    Neben der Authentifizierung gibt es auch Aktionstypen zu Passwortverwaltungsvorgängen, z. B. dem Festlegen der Passwörter im Redux-State oder dem Hinzufügen und Löschen von Passwörtern. Schließlich gibt es auch verschiedene Aktionstypen für Modalfenster, wie z. B. das Anzeigen, Verbergen oder Inhalte-Setzen für obere und zentrierte Modalfenster. Wiederum werden diese Arten von Aktionen als Schlüssel für den Reduzierer verwendet, um geeignete Änderungen am Zustand der Anwendung vorzunehmen, die sich auf Modalfenster beziehen. Beispielsweise wird über den Aktionstypen `OBERES_MODALFENSTER_ANZEIGEN` dem Nutzer ein oberes Modalfenster angezeigt, in dem beispielsweise eine Fehlermeldung des Servers angezeigt wird. Es ist deshalb wichtig, dass Aktionstypen dauerhaft am gleichen Ort definiert sind, um sicherzustellen, dass sie dauerhaft zugänglich sind und nicht versehentlich geändert werden können.
 
-   </details>
       
    ## Die Authentifizierung 
       
@@ -1848,9 +1762,7 @@ export const passwoerterFestlegen = (passwoerter) => {
 Die Funktion `passwoerterFestlegen` erzeugt eine Aktion zum Festlegen der Passwörter im Redux-Store. Die Passwrter, die festgelegt werden sollen, werden als Parameter der Funktion behandelt und in der erzeugten Aktion als Datenpaket übergeben.
       
       
-      
-   <details>
-   <summary><h3>Die Reduzierer</h3></summary>
+   <h3>Die Reduzierer</h3>
       
    Reduzierer sind Funktionen, die den Zustand eines Redux-Stores verwalten und diesen mit Aktionsobjekten aktualisieren.
    Sie erhalten den aktuellen Zustand des Redux-Stores und eine Aktion als Parameter und geben einen neuen Zustand zurück.
@@ -2148,31 +2060,18 @@ export default reduxStore
   Schließlich wird die `reduxStore`-Funktion als Standardfunktion exportiert, damit andere Module sie importieren und verwenden können und sie in der `App.js` verwendet werden kann, um den lokalen Speicher der Webseite zu erstellen.
       
       
-   <hr>
-   </details>
-
-
 
 Firestore ist eine von Google entwickelte dokumentenorientierte NoSQL-Datenbank. Im Gegensatz zu relationalen Datenbanken (z. B. SQL-Datenbanken) hat Firestore keine Tabellen, Zeilen oder Spalten, stattdessen werden Daten in Dokumenten gespeichert, die in Sammlungen organisiert sind. Jedes Dokument enthält Felder und Werte, die als JSON-Objekt dargestellt werden. Dokumente in der Sammlung müssen keine festen Felder haben. Dokumente sind daher flexibler und skalierbarer als relationale Datenbanken.
 Firestore wurde für die Verwendung in Anwendungen entwickelt, die Daten in Echtzeit ändern, wie z. B. Chat-Anwendungen und Online-Spiele. Mit Firestore können Sie Daten in Echtzeit zwischen Ihrem Client (z. B. einem Mobilgerät oder Webbrowser) und Ihren Servern in der Cloud synchronisieren. Das bedeutet, dass Änderungen, die in einem Client vorgenommen werden, automatisch an alle anderen Clients weitergegeben werden, die mit derselben Datenquelle verbunden sind.
 Firestore bietet verschiedene Funktionen zum Schreiben, Lesen, Aktualisieren und Löschen von Daten. Firestore-Daten können einfach über APIs abgerufen und bearbeitet werden. Firestore bietet auch eine Abfragesprache, mit der Entwickler komplexe Abfragen ausführen können, um bestimmte Daten aus Sammlungen abzurufen. Firestore ist Teil der Firebase-Plattform von Google und lässt sich problemlos in andere Firebase-Dienste wie Authentifizierung, Cloud-Messaging und Cloud-Funktionen integrieren. Firestore ist auch auf der Google Cloud Platform (GCP) verfügbar. Das bedeutet, dass es sich nahtlos in Anwendungen integrieren lässt, die auf der GCP gehostet werden.
 
 
-
-      
-      
-</details>
-</details>
-</details>
-</details>  
       
       
       
       
       
-<details>
-   <summary><h1>Das Backend</h1></summary>
-   <hr>
+<h1>Das Backend</h1>
 
 Im Backend findet die wahre Funktionalität hinter der schönen Fassade der Webseite statt. Anstatt um die schöne Darstellung eines Anmeldeformulars, kümmert man sich hier um die Verarbeitung der Anmeldungsanfrage, gleicht die eingegebenen Daten mit denen aus der Datenbank ab und gibt je nachdem, welches Ergebnis bei den unterschiedlichen Datenbank-Operationen herauskommt unterschiedliche Antworten auf die Anfragen aus dem Frontend.
 
@@ -2183,8 +2082,9 @@ Die Überprüfung der Authentifizierung und die Verbindung zur Firestore-Datenba
 Um eine weitere Stufe der Sicherheit zu gewährleisten, wird eine Umgebungsvariable `TOKEN_SCHLUESSEL` in der `.env`-Datei festgelegt. Ohne diesen geheimen Schlüssel können Tokens weder erstellt noch entschlüsselt werden. So ist es, ohne diesen Schlüssel zu kennen, nicht möglich, mit den Tokens im Frontend etwas anfangen, bzw. daraus ableiten zu können. 
 Während die Authentifizierung des Tokens nur im Backend stattfindet, findet die Entschlüsselung der Passwörter mit dem Masterpasswort nur im Frontend statt. Das Masterpasswort wird **nicht gespeichert**. Dadurch ist es nicht möglich, die Passwörter aus der Datenbank auslesen zu können, ohne das Masterpasswort zu kennen, mit dem jedes Passwort verschlüsselt wurde.
 
-<details>
-   <summary><h2>Die Grundfunktionen</h2></summary>
+
+
+   <h2>Die Grundfunktionen</h2>
     
 ## Das Abrufen der Daten aus der Datenbank
    
@@ -2214,8 +2114,7 @@ Selbst wenn jemand Zugriff auf die Datenbank hätte, könnte er nicht die Passw�
 
 Um mit der Firestore-Datenbank kommunizieren und Operationen durchführen zu können, werden Funktionen zum Lesen, Hinzufügen, Aktualisieren und Löschen von Daten aus der Datenbank definiert. 
 
-<details>
-<summary>Nähere Informationen</summary>
+
    
 ```javascript      
 // Die Funktion zum Schreiben nimmt als Eingabe:
@@ -2252,10 +2151,9 @@ Die Dokumentendaten werden im JSON-Format zurückgegeben.
 Die Funktion `datenAktualisieren` dient zum Aktualisieren der Daten in der Datenbank. Die Funktion muss mit der Firestore-Datenbank, der Sammlung, der ID des zu aktualisierenden Dokuments und den zu aktualisierenden Daten aufgerufen werden. Daraufhin werden die Daten des Dokuments überschrieben.
 Die Funktion „datenLoeschen“ dient zum Löschen von Dokumenten aus der Datenbank. Diese Funktion muss mit der Firestore-Datenbank, der Sammlung und der ID des zu löschenden Dokuments aufgerufen werden. Daraufhin wird das Dokument unwiderruflich gelöscht.
   
-</details>
    
-<details>
-   <summary><h2>Router</h2></summary>
+   
+   <h2>Router</h2>
 
 Die Routing-Funktionalität spielt im Backend eine große Rolle. Durch sie ist es möglich verschiedene Routen aufzustellen, die unterschiedliche HTTP-Anfragen verarbeiten. Für das Erstellen der Router wird das Express Framework für Node.js verwendet. Mit Express können HTTP-Anfragen und -Antworten effizient verarbeitet werden und zur Automatisierung Routen definiert werden.
 Routen sind Pfade, die in der URL angegeben werden, wie beispielsweise `/anmeldung` oder `/registrierung` und definieren, welche Funktionen oder Aktionen aufgerufen werden sollen, wenn eine Anfrage auf diesem Pfad erfolgt.
@@ -2284,8 +2182,8 @@ Um alle Passwörter abzurufen, sodass diese im Frontend in der Passwörter-Tabel
 Mit dem Standardpfad `/` und der HTTP-GET-Methode ist die Funktion `allePasswoerter` verknüpft.
 Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
 
-<details>
-   <summary><h2>Vermittlung</h2></summary>
+
+   <h2>Vermittlung</h2>
    
    Die Vermittlung, auch bekannt als Middleware, spielt in der Verwendung von Express und Node.js eine wichtige Rolle. Funktionen in der Vermittlung werden im Ablauf der Express-Anwedung dazu verwendet, um HTTP-Anfragen und -Antworten zu verarbeiten, bevor sie an die entsprechenden Routen weitergeleitet werden.
    Die Vermittlung bietet eine flexible Möglichkeit, die Anfrage- und Antwortobjekte in Express zu manipulieren und erweiterte Funktionalitäten hinzuzufügen.
@@ -2365,13 +2263,15 @@ req.firestore = firestore
 
 Dadurch können in den nachfolgenden Routen oder Vermittlungsfunktionen auf die Firestore-Datenbank zugegriffen werden. Daraufhin wird die der nächste Code oder die nächste Vermittlungsfunktion angehängt und die Anfrage kann weiterverarbeitet werden.
    
-<details>
-   <summary><h2>Die Verwaltung</h2></summary>
+   
+   
+   <h2>Die Verwaltung</h2>
    
 Die Verwaltung ist der wichtigste Teil im Backend. Hier werden die Funktionen zur Authentifizierungs- und Passwortverwaltung definiert, wodurch Aktionen wie die Anmeldung oder das Hinzufügen eines neuen Passwortes durchgeführt werden können. 
    
-<details>
-   <summary><h3>Die Authentifizierungsverwaltung</h3></summary>
+   
+   
+   <h3>Die Authentifizierungsverwaltung</h3>
  
    Die Authentifizierungsverwaltungsfunktionen behandeln alle Anfragen, die sich mit dem Benutzerkonto befassen. Von der Anmeldung, über die Emailaktualisierung bis hin zum Löschen des Accounts, wird alles hier verwaltet.
    Dafür werden drei Module importiert, die für die essenziell sind. Mit [Joi](https://joi.dev/) lassen sich Schemata und Formate festlegen, in denen Daten in Javascript validiert werden. Dadurch ist es direkt möglich, Anfragen, die nicht dem festgelegten Format entsprechen, abzufangen, wodurch Fehler im Server verhindert werden.
@@ -2630,10 +2530,8 @@ exports.accountLoeschen = async (req, res) => {
 Wenn der Nutzer, aus welchem Grund auch immer, seinen Account löschen möchte, bieten wir ihm auch hierfür die Möglichkeit. Wenn der Benutzer authentifiziert ist, werden alle Passwörter, die unter seinem Benutzernamen in der Datenbank gespeichert sind, unwiderrufbar gelöscht und daraufhin auch der Benutzer aus der Datenbank entfernt.
 Als Antwort wird der Status 1 zurückgegeben, wodurch signalisiert wird, dass der Account und alle damit verbundenen Passwörter erfolgreich aus der Datenbank gelöscht wurden.
 
-</details>
 
-<details>
-   <summary><h3>Die Passwortverwaltung</h3></summary>
+   <h3>Die Passwortverwaltung</h3>
    
    Die Passwortverwaltungsfunktionen behandeln alle Anfragen, die sich mit den Passwörtern eines Benutzers befassen. Vom Abrufen aller Passwörter, über das Hinzufügen bis hin zum Löschen eines Passwortes, wird alles hier verwaltet.
    Anders als bei der Authentifizierungsverwaltung wird hier lediglich [Joi](https://joi.dev/) genutzt, um die benötigten Formate festzulegen, in denen Daten in Javascript validiert werden. Da keine Operationen am Benutzer durchgeführt werden, wird weder mit JWT noch mit Bcrypt gearbeitet.
@@ -2826,8 +2724,8 @@ exports.allePasswoerter = async (req, res) => {
 Damit alle gespeicherten Passwörter des Benutzers im Frontend in der Passwörter-Tabelle angezeigt werden können, müssen diese aus der Datenbank abgerufen werden.
 Darum kümmert sich diese Passwortverwaltungsfunktion. Wenn sichergestellt ist, dass der Nutzer authentifiziert ist, werden alle Passwörter des Benutzers aus der Datenbank abgerufen. In einem leeren `passwoerterArray` werden die Passwörter als Objekte mitsamt ihrer ID gespeichert.
 Daraufhin wird der Status 1 und der `passwoerterArray` zurückgegeben.
-
-</details>
+   
+   
    
 ```javascript    
    // Importieren der benötigten Module
@@ -2885,10 +2783,6 @@ Schließlich kann die Express-App als Firebase-Cloudfunktion exportiert, die auf
    
   
 
-
-
-</details>
-<hr>
       
      
     
