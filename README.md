@@ -1241,8 +1241,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
    So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einem erfolgreichen Löschen des Accounts entfernen.
    
-
-   <h2>Die Hilfsfunktionen</h2>
+   </details>
+   
+   <details>
+      <summary><h2>Die Hilfsfunktionen</h2></summary>
       
    Hilfsfunktionen dienen dazu, Prozesse der Verschlüsselung von Tokens oder Passwörtern oder der Kommunikation mit dem Server zu verwalten.
    So können diese Funktionen in den Komponenten einfach aufgerufen werden und müssen nicht jedes Mal manuell definiert werden.
@@ -1578,8 +1580,10 @@ export const base64Entschluesselung = (str) => Base64.toByteArray(str)
    ```
 
    Beim Hinzufügen eines neuen Passwortes, hat der Nutzer die Möglichkeit, automatisch ein starkes Passwort für sich generieren zu lassen. Diese Generierung erfolgt durch die Funktion `nacl.randomBytes()`. Hier werden 24 zufällige Bytes generiert, die daraufhin in eine Base64-kodierte Zeichenfolge umgewandelt werden. Diese Base64-kodierte Zeichenfolge wird als zufälliges Passwort von der Funktion zurückgegeben.
-      
-   <h2>Der Redux-Store</h2>
+   </details>   
+   
+   <details>
+      <summary><h2>Der Redux-Store</h2></summary>
   
    Der Redux-Store ist wie ein zentrales Lagerhaus für den Zustand einer React-Anwendung. Statt den Zustand in verschiedenen Komponenten zu verwalten, wird der Zustand im Redux-Store gespeichert und von den Komponenten aus gelesen oder in den Store geschrieben. Der Redux-Store ist ein unveränderlicher Zustand, das bedeutet, dass er nicht direkt geändert werden kann. Stattdessen werden Änderungen am Zustand durch Aktionen ausgelöst, die von den Komponenten ausgelöst und an den Store gesendet werden. Der Redux-Store ermöglicht eine klare Trennung von Zustand und Darstellung in der Anwendung. Komponenten können den aktuellen Zustand aus dem Store lesen und auf Änderungen reagieren, indem sie sich erneut rendern. Wenn Komponenten den Zustand ändern müssen, senden sie eine Aktion an den Store, der den Zustand aktualisiert und allen abhängigen Komponenten die neuen Daten bereitstellt.
       
@@ -1917,47 +1921,67 @@ Schließlich gibt die "Reduzier"-Funktion einen neuen Zustand und ein oberes ode
    ## Der Passwörter-Reduzierer
       
    ```javascript   
-   import { PASSWORT_HINZUFUEGEN, PASSWORT_LOESCHEN, PASSWOERTER_FESTLEGEN } from '../aktionsErzeuger/aktionsTypen'
+   // Die beiden essentiellen Funktionen für Redux-Stores.
+import { createStore, combineReducers } from 'redux'
 
-// Der anfangsZustand enthält nur eine leere Liste.
-const anfangsZustand = {
-    liste: []
-}
+// Die Reduzierer für authentifizierung, passwoerter und modalFenster werden importiert.
+import authentifizierung from './reduzierer/authentifizierung'
+import passwoerter from './reduzierer/passwoerter'
+import modalFenster from './reduzierer/modalFenster'
 
-// Der Reduzierer nimmt den aktuellen Zustand (oder den anfangsZustand) und eine Aktion entgegen und gibt den neuen Zustand zurück.
-const reduzierer = (zustand = anfangsZustand, aktion) => {
-    // In diesem Switch-Block werden die verschiedenen Aktionstypen behandelt.
-    switch (aktion.type) {
+// Mit "combineReducers" aus der Redux-Bibliothek können mehrere Reduzierer zu einem Hauptreduzierer zusammengefasst werden.
+// Somit kann dieser Hauptreduzierer nun die Authentifizierung, die Passwörter und die Modalfenster verwalten.
+const hauptReduzierer = combineReducers({
+    authentifizierung,
+    passwoerter,
+    modalFenster
+})
 
-        // Der Aktionstyp "PASSWOERTER_FESTLEGEN" setzt den gesamten State auf eine neue Liste von Passwörtern.
-        case PASSWOERTER_FESTLEGEN:
-            return {
-                ...zustand,
-                liste: aktion.passwoerter
-            }
-
-        // Der Aktionstyp "PASSWORT_HINZUFUEGEN" fügt der Liste ein neues Passwort hinzu.
-        case PASSWORT_HINZUFUEGEN:
-            return {
-                ...zustand,
-                liste: [...zustand.liste, aktion.passwort]
-            }
-
-        // Der Aktionstyp PASSWORT_LOESCHEN entfernt ein Passwort aus der Liste.
-        case PASSWORT_LOESCHEN:
-            return {
-                ...zustand,
-                liste: zustand.liste.filter(t => t.id !== aktion.passwort.id)
-            }
-
-        // Wenn keiner der oben genannten Aktionstypen aufgerufen wird, gibt der Reduzierer einfach den aktuellen Zustand zurück.
-        default:
-            return zustand
+// Mit der Funktion "speichernImLokalenSpeicher" kann der Zustand Zustand des Stores im lokalen Speicher des Browsers gespeichert werden.
+const speichernImLokalenSpeicher = (state) => {
+    try {
+        // Der Zustand wird in einen serialisierten JSON-String konvertiert.
+        const serialisierterZustand = JSON.stringify(state)
+        // Der serialisierte Zustand wird im lokalen Speicher des Browsers als "state" gespeichert.
+        localStorage.setItem('state', serialisierterZustand)
+    // Bei einem Fehler wird dieser in der Konsole ausgegeben.
+    } catch (error) {
+        console.log(error)
     }
 }
 
-// Zum Schluss wird der Reduzierer als Standard exportiert, sodass andere Module diesen importieren können.
-export default reduzierer
+// Mit der Funktion "ausLokalemSpeicherLaden" kann der Zustand des Stores aus dem lokalen Speicher geladen werden.
+const ausLokalemSpeicherLaden = () => {
+    try {
+        // Der Zustand wird aus dem lokalen Speicher entnommen 
+        const serialisierterZustand = localStorage.getItem('state')
+        // und, wenn er nicht leer ist,
+        if (serialisierterZustand === null) return undefined
+        // in einen JSON-String serialisiert und dieser zurückgegeben.
+        return JSON.parse(serialisierterZustand)
+    // Bei einem Fehler wird dieser in der Konsole ausgegeben und die Funktion gibt "undefined" zurück.
+    } catch (error) {
+        console.log(error)
+        return undefined
+    }
+}
+
+// Der aktuelle Zustand des Stores wird aus dem lokalen Speicher geladen.
+const geladenerZustand = ausLokalemSpeicherLaden()
+
+// Mit der Funktion "reduxStore" kann ein Redux Store mit dem Hauptreduzierer und dem geladenen Zustand zu erstellen.
+const reduxStore = () => {
+    const store = createStore(
+        hauptReduzierer,
+        geladenerZustand
+    )
+    // Bei jeder Änderung des Zustandes wird der Store direkt im lokalen Speicher gesichert.
+    store.subscribe(() => speichernImLokalenSpeicher(store.getState()))
+    return store
+}
+
+// Der ReduxStore wird als Standardfunktion exportiert, sodass andere Module diesen importieren können.
+export default reduxStore
 ```
       
    Beim Passwörter-Reduzierer besteht der Anfangszustand aus einer leeren Liste, in der die Passwörter im Redux-Store gespeichert werden.
