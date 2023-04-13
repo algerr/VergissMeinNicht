@@ -849,7 +849,6 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
       
    `tr` und `td` werden als `Table Row` (Tabellenzeile) und `Table Data` (Tabellendaten) verwendet. Sie beziehen sich auf HTML-Elemente, die verwendet werden, um Tabellen in HTML-Dokumenten zu erstellen. Das "tr"-Element wird verwendet, um eine Tabellenzeile zu definieren und zu erstellen. Eine Tabellenzeile besteht normalerweise aus mehreren "td"-Elementen, die die einzelnen Zellen in der Zeile darstellen. Das "td"-Element hingegen wird verwendet, um eine Tabellendatenzelle innerhalb einer Tabellenzeile zu definieren. Es enthält normalerweise den eigentlichen Inhalt, der in der Zelle angezeigt werden soll, wie Text, Bilder oder andere HTML-Elemente. "td"-Elemente werden normalerweise innerhalb von "tr"-Elementen verwendet, um die Zellen in einer Tabellenzeile zu erstellen.
    Die gemeinsame Darstellung der beiden Elemente ermöglicht eine Tabelle mit mehreren Zeilen und Spalten. Sie können mit CSS gestaltet werden und mit JavaScript manipuliert werden, um dynamische, interaktive Tabellen zu erstellen.   
-   </details>
       
    Die `Tabelle`-Komponente wird schließlich als Standardexport exportiert, um beispielsweise beim Passwort Manager importiert und dort zur Darstellung der Passwörter verwendet zu werden.
       
