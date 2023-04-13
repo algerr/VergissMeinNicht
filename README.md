@@ -890,7 +890,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <details>
       <summary>Erklärung zu `tr` und `td`</summary>
       
-   `tr` und `td` werden als `Table Row` (Tabellenzeile) und `Table Data`(Tabellendaten) verwendet. Sie beziehen sich auf HTML-Elemente, die verwendet werden, um Tabellen in HTML-Dokumenten zu erstellen. Das "tr"-Element wird verwendet, um eine Tabellenzeile zu definieren und zu erstellen. Eine Tabellenzeile besteht normalerweise aus mehreren "td"-Elementen, die die einzelnen Zellen in der Zeile darstellen. Das "td"-Element hingegen wird verwendet, um eine Tabellendatenzelle innerhalb einer Tabellenzeile zu definieren. Es enthält normalerweise den eigentlichen Inhalt, der in der Zelle angezeigt werden soll, wie Text, Bilder oder andere HTML-Elemente. "td"-Elemente werden normalerweise innerhalb von "tr"-Elementen verwendet, um die Zellen in einer Tabellenzeile zu erstellen.
+   `tr` und `td` werden als `Table Row` (Tabellenzeile) und `Table Data` (Tabellendaten) verwendet. Sie beziehen sich auf HTML-Elemente, die verwendet werden, um Tabellen in HTML-Dokumenten zu erstellen. Das "tr"-Element wird verwendet, um eine Tabellenzeile zu definieren und zu erstellen. Eine Tabellenzeile besteht normalerweise aus mehreren "td"-Elementen, die die einzelnen Zellen in der Zeile darstellen. Das "td"-Element hingegen wird verwendet, um eine Tabellendatenzelle innerhalb einer Tabellenzeile zu definieren. Es enthält normalerweise den eigentlichen Inhalt, der in der Zelle angezeigt werden soll, wie Text, Bilder oder andere HTML-Elemente. "td"-Elemente werden normalerweise innerhalb von "tr"-Elementen verwendet, um die Zellen in einer Tabellenzeile zu erstellen.
    Die gemeinsame Darstellung der beiden Elemente ermöglicht eine Tabelle mit mehreren Zeilen und Spalten. Sie können mit CSS gestaltet werden und mit JavaScript manipuliert werden, um dynamische, interaktive Tabellen zu erstellen.   
    </details>
       
@@ -900,11 +900,135 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    
    <details>
-   <summary><h3>Die Accounteinstellungen</h3></summary>
-   ## Die Passwortänderung
-   Um sein Passwort zu ändern, muss man in dem dazugehörigen Fenster sein altes Passwort eingeben und das neue Passwort, welches von dem Moment an gelten soll. Wir      haben uns dazu entschieden, dass die Benutzer ihr altes Passwort eingeben sollen, damit z.B. Fremde die sich unerlaubten Zugang zu einem Account gewährt haben        nicht einfach das Passwort ändern können, ohne das alte Passwort einzugeben, um  somit dem eigentlichen Benutzer durch die Veränderung des Passworts seinen Account    zu stehlen. Es ist also wenn man so möchte eine weitere Sicherheitsfunktion, um unsere Benutzer vor Dritten zu schützen. Wenn man dann anschließend das alte und      neue Passwort eingegeben hat, bestätigt man das Ganze, indem man auf das Feld "Speichern" drückt. 
+   <summary><h2>Die Accounteinstellungen</h2></summary>
+   
+   Unsere Anwendung besteht nicht nur aus dem Passwort Manager, auch wenn darauf der Hauptfokus gerichtet ist. Der Nutzer kann in der Seitenleiste auch in die Accounteinstellungen gehen und dort sowohl seinen Benutzernamen und die aktuelle Emailadresse ansehen, als auch Änderungen an Emailadresse und Passwort vornehmen. Wenn der Nutzer möchte, kann er auch seinen Account löschen.
+      
+   ## Die Aktualisierung des Passwortes
+      
+   Um sein Passwort zu aktualisieren, müssen sowohl das neue als auch das alte Passwort eingegeben werden. Dadurch, dass der Nutzer sein altes Passwort eingeben muss, können Dritte, die sich unerlaubten Zugang zu einem Account gewährt haben, nicht einfach das Passwort ändern, ohne das alte zu kennen. 
+   Es ist eine weitere Sicherheitsfunktion, um unsere Nutzer vor Dritten zu schützen. Wenn das alte und neue Passwort eingegeben sind, kann das Ganze über die Schaltfläche `Speichern` bestätigt werden.
+      
+   <details>
+      <summary>Nähere Informationen</summary>
+      
+   Wie bei allen Eingabeformularen, wird auch hier ein Zustandsboolean `ladesymbol` genutzt, um bestimmen zu können, ob noch die Eingabe erfolgt, oder bereits gespeichert wird. 
+   
+   ```javascript
+   render() {
+        // State des Ladesymbols aus dem Komponentenstate extrahieren.
+        const { ladesymbol } = this.state
+        // Der Inhalt der Komponente wird als HTML-Code zurückgegeben.
+        return (
+            <Form>
+                {/* Eingabefeld für das alte Passwort */}
+                <Form.Group controlId="altesPasswort">
+                    <Form.Label>Altes Passwort</Form.Label>
+                    {/* Eingabefeld für das alte Passwort mit einem Referenz-Callback zum Speichern des Eingabefeld-Elements im Komponentenstate */}
+                    <Form.Control type="password" placeholder="Altes Passwort" ref={elem => this.altesPasswort = elem} />
+                </Form.Group>
+                {/* Eingabefeld für das neue Passwort */}
+                <Form.Group controlId="neuesPasswort">
+                    <Form.Label>Neues Passwort</Form.Label>
+                    {/* Eingabefeld für das neue Passwort mit einem Referenz-Callback zum Speichern des Eingabefeld-Elements im Komponentenstate */}
+                    <Form.Control type="password" placeholder="Neues Passwort" ref={elem => this.neuesPasswort = elem} />
+                </Form.Group>
+                {/* Je nach State des Ladesymbols, wird entweder ein Ladesymbol (true) oder der Speichern-Button (false) gerendert. */}
+                {/* Dies nennt sich bedingtes Rendering. */}
+                {
+                    ladesymbol ? <Spinner animation="border" /> : <Button variant="primary" type="submit" onClick={this.onSpeichern}>Speichern</Button>
+                }
+            </Form>
+        )
+    }
+   ```
+   
+   Das Formular besteht aus zwei Formulargruppen. In der ersten Gruppe befindet sich das Eingabefeld für das alte Passwort, zusammen mit einem Label `Altes Passwort` über dem Eingabefeld. Die zweite Formulargruppe ist identisch zur ersten, nur dient diese zur Eingabe des neuen Passwortes. Je nach Zustand des Zustandsbooleans, wird bei `true` ein Lade-Spinner und bei `false` die Schaltfläche zum Speichern des neuen Passwortes gerendert.
+   Die Eingabefelder werden durch ein `ref`-Objekt zu Eigenschaften der Komponente.
+                   
+   ```javascript
+   onSpeichern = async (e) => {
+        // wird die browsereigene, standardmäßige Sendung des Formulars verhindert.
+        e.preventDefault()
+        const { ladesymbol } = this.state
+        if (ladesymbol) return
+        // Der Ladesymbol-State wird auf "true" gesetzt, da der Nutzer, den Button angeklickt hat.
+        this.setState({ ladesymbol: true })
+        const { token, setzeInhaltFuerOberesModalfenster, oberesModalfensterAnzeigen, authentifizierungsTokenFestlegen, zentriertesModalfensterAusblenden } = this.props
+        const PasswortAenderung = await passwortAendern(token, this.altesPasswort.value, this.neuesPasswort.value)
+        if (PasswortAenderung.error) {
+            setzeInhaltFuerOberesModalfenster("Fehler", PasswortAenderung.error,
+                [{ name: "Schließen", variant: "primary" }])
+            oberesModalfensterAnzeigen()
+        } else if (PasswortAenderung.status) {
+            setzeInhaltFuerOberesModalfenster("Erfolgreiche Passwortänderung", "Das Passwort wurde erfolgreich geändert!",
+                [{ name: "Schließen", variant: "primary" }])
+            oberesModalfensterAnzeigen()
+            // Nach einer Passwortänderung soll der Nutzer sich wieder neu anmelden.
+            // Dadurch merkt er sich gleich das neue Passwort besser.
+            authentifizierungsTokenFestlegen(null)
+        }
+        // Daraufhin verschwindet das modale Fenster und der State des Ladesymbols wird wieder standardmäßig auf "false"
+        // gesetzt, um nicht ausversehen Änderungen in der Datenbank vorzunehmen, auch wenn das durch die zusätzlichen Sicherheits-
+        // vorkehrungen sehr unwahrscheinlich ist.
+        zentriertesModalfensterAusblenden()
+        this.setState({ ladesymbol: false })
+   }
+   ```
+   
+   Wenn der Nutzer nach der Eingabe des alten und neuen Passwortes auf die Schaltfläche `Speichern` klickt, wird zuerst die browsereigene, standardmäßige Sendung des Formulars verhindert. Daraufhin wird der Zustandsboolean, wenn er noch nicht auf `true` gesetzt ist, auf `true` gesetzt, da die Speicherung des Passwortes nun lädt.
+   Das Token und die Aktionserzeuger-Funktionen für die Verwaltung von Modalfenstern werden aus den Eigenschaften der Komponente extrahiert, um frei genutzt werden zu können. Daraufhin wird eine Anfrage zur Aktualisierung des Passwortes mit dem Token, dem alten und dem neuen Passwort an den Server geschickt.
+   Wenn ein Fehler zurückgegeben wird, wird dieser in einem oberen Modalfenster angezeigt.
+   Wenn der Server jedoch den Status 1 zurückgibt, gibt es eine Erfolgsmeldung im oberen Modalfenster. 
+   Damit der Nutzer sich das neue Passwort gleich besser einprägen kann, wird das Token entfernt, sodass er sich neu anmelden muss.
+   Das Fenster zur Aktualisierung des Passwortes wird ausgeblendet und der Zustandsboolean `ladesymbol` wird wieder zurück auf `false` gesetzt.
+   
+   ```javascript
+   // mapStateToProps verbindet den Redux-Store des Browsers mit den Props dieses Komponenten.
+// Das Objekt, welches zurückgegeben wird, hat die Form: {Prop-Name: Store-State}
+// Da es sich in diesem
+const mapStateToProps = state => {
+    return {
+        token: state.authentifizierung.token
+    }
+}
+
+// mapDispatchToProps verbindet das Redux-Store mit den Aktionserzeugern des Stores.
+// Das Objekt, welches zurückgegeben wird, hat die Form: {Action-Creator-Name: dispatch(Action)}
+const mapDispatchToProps = dispatch => {
+    return {
+        zentriertesModalfensterAusblenden: () => dispatch(zentriertesModalfensterAusblenden()),
+        setzeInhaltFuerOberesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerOberesModalfenster(titel, inhalt, buttons)),
+        oberesModalfensterAnzeigen: () => dispatch(oberesModalfensterAnzeigen()),
+        authentifizierungsTokenFestlegen: (token) => dispatch(authentifizierungsTokenFestlegen(token))
+    }
+}
+
+
+// Der HOK (Higher-Order Komponent) 'connect' verbindet den Redux-Store mit dem Komponenten 'PasswortAendern'.
+// Der Store-State und die Aktionserzeuger werden als Props an den Komponenten weitergegeben.
+export default connect(mapStateToProps, mapDispatchToProps)(PasswortAendern)             
+   ```
+   
+   Aus dem Redux-Store wird das Token als Eigenschaft an die Komponente übergeben. Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Festlegen des Tokens als Eigenschaften an die Komponente übergeben.
+   Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
+   So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einer erfolgreichen Aktualisierung des Passwortes entfernen.
+                   
+   </details>
+      
    ## Die Aktualisierung der Emailadresse 
-   Um seine Emailadresse zu ändern muss man lediglich eine neue Emailadresse in das dafür vorgesehene Feld eingeben und sein Eingabe durch das Feld "Speichern"            bestätigen. Dieses Feld lässt sich bei den Accounteinstellungen wiederfinden.
+   Um seine Emailadresse zu ändern, muss der Nutzer lediglich eine neue Emailadresse eingeben und seine Eingabe über die Schaltfläche `Speichern` bestätigen. 
+   Eine leere Eingabe ist auch möglich, da wir die Nutzer nur bei der Registrierung dazu verpflichten, eine Emailadresse einzugeben. Danach gibt jeder Nutzer freiwillig seine Emailadresse an.
+               
+   <details>
+      <summary>Nähere Informationen</summary>
+      
+   
+      
+   </details>
+               
+   
+               
    <hr>
    </details>
    
