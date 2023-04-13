@@ -118,7 +118,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 
 
 
-<h1>Das Frontend</h1>
+<details>
+<summary><h1>Das Frontend</h1></summary>
 
    Das Frontend ist die Fassade der Anwendung. Die Webseite, auf der der Nutzer sich anmeldet, auf der er Nutzer interagiert und auf der er seine Passwörter ansieht, hinzufügt oder 
    
@@ -1549,7 +1550,7 @@ JSON-Web-Tokens (JWT) sind unser Mittel zur Authentifizierung. In einem Token si
    Für die Ver- und Entschlüsselung in und aus UTF-8 werden die Funktionen [`encodeUTF8` und `decodeUTF8`](https://gist.github.com/felvieira/b2b3cfec78f0c353c3beac6db151ba1e) vom Github-Nutzer [`felvieira`](https://github.com/felvieira) verwendet.
    
 <details>
-<summary>Nähere Informationen
+<summary>Nähere Informationen</summary>
 
    Für die Base64 Ver- und Entschlüsselung werden die Funktionen `base64Verschluesselung` und `base64Entschluesselung` definiert.
       
@@ -2053,7 +2054,6 @@ export default reduxStore
    Wenn die Passwörter für die Liste festgelegt werden sollen, wird einfach die Liste mit den Passwörtern aus der Aktion zurückgegeben.
 
 </details>
-</details>
 
       
    ```javascript 
@@ -2148,6 +2148,7 @@ Firestore wurde für die Verwendung in Anwendungen entwickelt, die Daten in Echt
 Firestore bietet verschiedene Funktionen zum Schreiben, Lesen, Aktualisieren und Löschen von Daten. Firestore-Daten können einfach über APIs abgerufen und bearbeitet werden. Firestore bietet auch eine Abfragesprache, mit der Entwickler komplexe Abfragen ausführen können, um bestimmte Daten aus Sammlungen abzurufen. Firestore ist Teil der Firebase-Plattform von Google und lässt sich problemlos in andere Firebase-Dienste wie Authentifizierung, Cloud-Messaging und Cloud-Funktionen integrieren. Firestore ist auch auf der Google Cloud Platform (GCP) verfügbar. Das bedeutet, dass es sich nahtlos in Anwendungen integrieren lässt, die auf der GCP gehostet werden.
 
 </details>
+</details>
       
       
       
@@ -2166,7 +2167,8 @@ Während die Authentifizierung des Tokens nur im Backend stattfindet, findet die
 
 
 
-   <h2>Die Grundfunktionen</h2>
+<details>
+<summary><h2>Die Grundfunktionen</h2></summary>
     
 ## Das Abrufen der Daten aus der Datenbank
    
@@ -2196,7 +2198,8 @@ Selbst wenn jemand Zugriff auf die Datenbank hätte, könnte er nicht die Passw�
 
 Um mit der Firestore-Datenbank kommunizieren und Operationen durchführen zu können, werden Funktionen zum Lesen, Hinzufügen, Aktualisieren und Löschen von Daten aus der Datenbank definiert. 
 
-
+<details>
+<summary>Nähere Informationen</summary>
    
 ```javascript      
 // Die Funktion zum Schreiben nimmt als Eingabe:
@@ -2233,9 +2236,11 @@ Die Dokumentendaten werden im JSON-Format zurückgegeben.
 Die Funktion `datenAktualisieren` dient zum Aktualisieren der Daten in der Datenbank. Die Funktion muss mit der Firestore-Datenbank, der Sammlung, der ID des zu aktualisierenden Dokuments und den zu aktualisierenden Daten aufgerufen werden. Daraufhin werden die Daten des Dokuments überschrieben.
 Die Funktion „datenLoeschen“ dient zum Löschen von Dokumenten aus der Datenbank. Diese Funktion muss mit der Firestore-Datenbank, der Sammlung und der ID des zu löschenden Dokuments aufgerufen werden. Daraufhin wird das Dokument unwiderruflich gelöscht.
   
+</details>  
+</details>   
    
-   
-   <h2>Router</h2>
+<details>
+<summary><h2>Router</h2></summary>
 
 Die Routing-Funktionalität spielt im Backend eine große Rolle. Durch sie ist es möglich verschiedene Routen aufzustellen, die unterschiedliche HTTP-Anfragen verarbeiten. Für das Erstellen der Router wird das Express Framework für Node.js verwendet. Mit Express können HTTP-Anfragen und -Antworten effizient verarbeitet werden und zur Automatisierung Routen definiert werden.
 Routen sind Pfade, die in der URL angegeben werden, wie beispielsweise `/anmeldung` oder `/registrierung` und definieren, welche Funktionen oder Aktionen aufgerufen werden sollen, wenn eine Anfrage auf diesem Pfad erfolgt.
@@ -2264,8 +2269,10 @@ Um alle Passwörter abzurufen, sodass diese im Frontend in der Passwörter-Tabel
 Mit dem Standardpfad `/` und der HTTP-GET-Methode ist die Funktion `allePasswoerter` verknüpft.
 Schließlich wird der Router zur Verwendung in der Hauptanwendung exportiert.
 
+</details>
 
-   <h2>Vermittlung</h2>
+<details>
+<summary><h2>Vermittlung</h2></summary>
    
    Die Vermittlung, auch bekannt als Middleware, spielt in der Verwendung von Express und Node.js eine wichtige Rolle. Funktionen in der Vermittlung werden im Ablauf der Express-Anwedung dazu verwendet, um HTTP-Anfragen und -Antworten zu verarbeiten, bevor sie an die entsprechenden Routen weitergeleitet werden.
    Die Vermittlung bietet eine flexible Möglichkeit, die Anfrage- und Antwortobjekte in Express zu manipulieren und erweiterte Funktionalitäten hinzuzufügen.
@@ -2345,15 +2352,15 @@ req.firestore = firestore
 
 Dadurch können in den nachfolgenden Routen oder Vermittlungsfunktionen auf die Firestore-Datenbank zugegriffen werden. Daraufhin wird die der nächste Code oder die nächste Vermittlungsfunktion angehängt und die Anfrage kann weiterverarbeitet werden.
    
-   
-   
-   <h2>Die Verwaltung</h2>
+</details>   
+
+<details>
+<summary><h2>Die Verwaltung</h2></summary>
    
 Die Verwaltung ist der wichtigste Teil im Backend. Hier werden die Funktionen zur Authentifizierungs- und Passwortverwaltung definiert, wodurch Aktionen wie die Anmeldung oder das Hinzufügen eines neuen Passwortes durchgeführt werden können. 
    
-   
-   
-   <h3>Die Authentifizierungsverwaltung</h3>
+<details>
+<summary><h3>Die Authentifizierungsverwaltung</h3></summary>
  
    Die Authentifizierungsverwaltungsfunktionen behandeln alle Anfragen, die sich mit dem Benutzerkonto befassen. Von der Anmeldung, über die Emailaktualisierung bis hin zum Löschen des Accounts, wird alles hier verwaltet.
    Dafür werden drei Module importiert, die für die essenziell sind. Mit [Joi](https://joi.dev/) lassen sich Schemata und Formate festlegen, in denen Daten in Javascript validiert werden. Dadurch ist es direkt möglich, Anfragen, die nicht dem festgelegten Format entsprechen, abzufangen, wodurch Fehler im Server verhindert werden.
@@ -2612,8 +2619,10 @@ exports.accountLoeschen = async (req, res) => {
 Wenn der Nutzer, aus welchem Grund auch immer, seinen Account löschen möchte, bieten wir ihm auch hierfür die Möglichkeit. Wenn der Benutzer authentifiziert ist, werden alle Passwörter, die unter seinem Benutzernamen in der Datenbank gespeichert sind, unwiderrufbar gelöscht und daraufhin auch der Benutzer aus der Datenbank entfernt.
 Als Antwort wird der Status 1 zurückgegeben, wodurch signalisiert wird, dass der Account und alle damit verbundenen Passwörter erfolgreich aus der Datenbank gelöscht wurden.
 
+</details>
 
-   <h3>Die Passwortverwaltung</h3>
+<details>
+<summary><h3>Die Passwortverwaltung</h3></summary>
    
    Die Passwortverwaltungsfunktionen behandeln alle Anfragen, die sich mit den Passwörtern eines Benutzers befassen. Vom Abrufen aller Passwörter, über das Hinzufügen bis hin zum Löschen eines Passwortes, wird alles hier verwaltet.
    Anders als bei der Authentifizierungsverwaltung wird hier lediglich [Joi](https://joi.dev/) genutzt, um die benötigten Formate festzulegen, in denen Daten in Javascript validiert werden. Da keine Operationen am Benutzer durchgeführt werden, wird weder mit JWT noch mit Bcrypt gearbeitet.
@@ -2807,7 +2816,8 @@ Damit alle gespeicherten Passwörter des Benutzers im Frontend in der Passwörte
 Darum kümmert sich diese Passwortverwaltungsfunktion. Wenn sichergestellt ist, dass der Nutzer authentifiziert ist, werden alle Passwörter des Benutzers aus der Datenbank abgerufen. In einem leeren `passwoerterArray` werden die Passwörter als Objekte mitsamt ihrer ID gespeichert.
 Daraufhin wird der Status 1 und der `passwoerterArray` zurückgegeben.
    
-   
+</details>  
+</details> 
    
 ```javascript    
    // Importieren der benötigten Module
