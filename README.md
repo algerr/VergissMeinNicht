@@ -510,7 +510,9 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    
    Da die Sicherheit beim Passwort Manager das A und O ist, haben wir eine zusätzliche Komponente definiert, die sich mit der Authentifizierung des Benutzers auseinandersetzt. Bevor ein Nutzer auf eine bestimmte Seite zugreifen kann wird dadurch immer zuerst überprüft, ob der Nutzer ausreichend authentifiziert ist.
    Wenn das der Fall ist, wird er auf die gewünschte Seite weitergeleitet. Wenn nicht, wird er zur Anmeldung umgeleitet. 
-   
+  
+<details>
+<summary>Nähere Informationen</summary>
    
    Zur Authentifizierung wird in dieser Anwendung das Token verwendet. Somit wird dieses hier zuerst aus den Eigenschaften der Komponente destrukturiert, um es als freie Variable nutzen zu können. 
    
@@ -532,15 +534,18 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    return (<Redirect to="/anmeldung" />)
    ```
    
-   
+</details>   
    
    
    ## Die Modalfenster
    
    Um dem Nutzer die wichtigsten aktuellen Informationen und Meldungen anzuzeigen, nutzen wir Dialogfenster, sogenannte `Modalfenster`. Diese haben wir in zwei Arten unterschieden. Es gibt die zentrierten Modalfenster, die beispielsweise beim Hinzufügen eines neuen Passwortes angezeigt werden und die oberen Modalfenster, worüber beispielsweise Fehlermeldungen angezeigt werden. Als Basis werden die Modale von React-Bootstrap verwendet, worüber dann die Modalfenster erstellt werden.
+
+<details>
+<summary>Nähere Informationen</summary>
+
    
-   
-   Das zentrale Modalfenster ist für die Eingabe des Nutzers gedacht. Es besteht aus einem Titel, dem Inhalt, den Schaltflächen im Footer und dem Zustand, ob es gezeigt wird oder nicht. Darüber lässt sich das Öffnen und Schließen des Modalfensters regeln. 
+   Das zentrierte Modalfenster ist für die Eingabe des Nutzers gedacht. Es besteht aus einem Titel, dem Inhalt, den Schaltflächen im Footer und dem Zustand, ob es gezeigt wird oder nicht. Darüber lässt sich das Öffnen und Schließen des Modalfensters regeln. 
    
    ```javascript
    const { titel, inhalt, buttons, gezeigt } = this.props
@@ -610,7 +615,7 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    Nur wird das React-Bootstrap Modal nicht `centered`, also zentriert gerendert, sondern einfach normal, oben am Seitenrand.
    
    ```javascript
-   <Modal show={gezeigt} onHide={this.fensterSchliessen} centered>
+   <Modal show={gezeigt} onHide={this.fensterSchliessen}>
    ```
       
    Durch die Verbindung zum Redux-Store können die State-Variablen aus dem Redux-Store auf die Eigenschaften der Komponente gemapped werden. So kann immer das aktuelle Modalfenster gerendert werden.
@@ -627,12 +632,15 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    }
    ```
       
-
+</details>
 
     
-   ## Die Seitenleiste
-   Die Seitenleiste lässt sich nach Wunsch ein- und ausblenden. Wenn diese eingeblendet ist, hat man die Option im Hauptfenster zu bleiben, welches den Namen              "Passwörter" trägt, oder man kann in das Fenster "Accounteinstellungen" wechseln. In den Accounteinstellungen sieht man zunächst einmal seinen festgelegten             Benutzernamen und seine Email mit der man sich im Vorhinein registriert hat. Darüber hinaus kann man in diesem Fenster entweder eine neue Email oder ein neues        Passwort festlegen, falls man etwas an seinen Anmeldedaten verändern möchte. Hierzu gibt es aber nun auch die Option seinen Account vollständig zu löschen, falls      man sich dazu entscheiden sollte.
+## Die Seitenleiste
+   
+Die Seitenleiste lässt sich nach Wunsch ein- und ausblenden. Wenn diese eingeblendet ist, hat man die Option im Hauptfenster zu bleiben, welches den Namen              "Passwörter" trägt, oder man kann in das Fenster "Accounteinstellungen" wechseln. In den Accounteinstellungen sieht man zunächst einmal seinen festgelegten             Benutzernamen und seine Email mit der man sich im Vorhinein registriert hat. Darüber hinaus kann man in diesem Fenster entweder eine neue Email oder ein neues        Passwort festlegen, falls man etwas an seinen Anmeldedaten verändern möchte. Hierzu gibt es aber nun auch die Option seinen Account vollständig zu löschen, falls      man sich dazu entscheiden sollte.
 
+<details>
+<summary>Nähere Informationen</summary>
       
    Die Seitenleiste umfasst sowohl die Leiste am linken Bildschirmrand, als auch die Navigationsbar am oberen Bildschirmrand. 
       
@@ -754,13 +762,15 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    Mit `mapDispatchToProps` werden zwei Methoden `authentifizierungsTokenFestlegen` und `passwoerterFestlegen` zurückgegeben, die die gleichnamigen Aktionserzeuger aufrufen, die als Argumente `token` bzw. `data` nehmen.
    Um das Token und diese Aktionserzeuger-Funktionen als Eigenschaften an die Seitenleisten-Komponente zu übergeben, wird die Komponente durch die beiden Funktionen mit dem Redux-Store verbunden.
       
-
+</details>
    
    ## Die Tabelle
    In der Tabelle werden die gespeicherten Passwörter des Nutzers zusammen mit den zugehörigen Beschreibungen aufgelistet, sodass diese gut zuzuordnen sind. 
    Standardmäßig sind alle Passwörter in der Tabelle verschlüsselt. So versichern wir den zweiten Authentifizierungsschritt, neben der Anmeldung, um die Passwörter des Nutzers zu schützen. Sobald das Masterpasswort eingegeben ist, werden die Passwörter entschlüsselt. Sie können kopiert, angesehen und gelöscht werden.
    Die Tabelle bietet beliebig viele Seiten für Nutzer, die mehr Passwörter speichern, als auf eine Seite passen. Zudem kann auch über die Suchleiste oben rechts über der Tabelle nach einem Passwort spezifisch gesucht werden.
-    
+
+<details>
+<summary>Nähere Informationen</summary>
       
    Die Tabelle wird mithilfe der jQuery-Erweiterung [`DataTables`](https://datatables.net/) erstellt. Durch die `componentDidMount`-Funktion wird, sobald die Komponente gerendert wird, die Tabelle initialisiert. 
       
@@ -868,16 +878,24 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    
    Gerendert wird eine HTML-Tabelle mit den Überschriften und dem Inhalt, die als Eigenschaften an die Komponente übergeben wurden. Wenn keine Überschriften oder kein Inhalt übergeben wurden, wird eine Fehlermeldung gerendert. Die Tabellenzeilen werden aus dem `inhalt`-Array generiert, wobei für jede Zeile eine separate `tr`-Komponente erstellt wird und die Zellen mit den entsprechenden Daten aus dem `tr`-Array als `td`-Tags gerendert werden. 
    
+<details>
+<summary>Nähere Informationen</summary
       
    `tr` und `td` werden als `Table Row` (Tabellenzeile) und `Table Data` (Tabellendaten) verwendet. Sie beziehen sich auf HTML-Elemente, die verwendet werden, um Tabellen in HTML-Dokumenten zu erstellen. Das "tr"-Element wird verwendet, um eine Tabellenzeile zu definieren und zu erstellen. Eine Tabellenzeile besteht normalerweise aus mehreren "td"-Elementen, die die einzelnen Zellen in der Zeile darstellen. Das "td"-Element hingegen wird verwendet, um eine Tabellendatenzelle innerhalb einer Tabellenzeile zu definieren. Es enthält normalerweise den eigentlichen Inhalt, der in der Zelle angezeigt werden soll, wie Text, Bilder oder andere HTML-Elemente. "td"-Elemente werden normalerweise innerhalb von "tr"-Elementen verwendet, um die Zellen in einer Tabellenzeile zu erstellen.
    Die gemeinsame Darstellung der beiden Elemente ermöglicht eine Tabelle mit mehreren Zeilen und Spalten. Sie können mit CSS gestaltet werden und mit JavaScript manipuliert werden, um dynamische, interaktive Tabellen zu erstellen.   
+
+</details>
       
    Die `Tabelle`-Komponente wird schließlich als Standardexport exportiert, um beispielsweise beim Passwort Manager importiert und dort zur Darstellung der Passwörter verwendet zu werden.
-      
+</details>
    
+<details>
+<summary><h2>Die Accounteinstellungen</h2></summary>   
    
-   Unsere Anwendung besteht nicht nur aus dem Passwort Manager, auch wenn darauf der Hauptfokus gerichtet ist. Der Nutzer kann in der Seitenleiste auch in die Accounteinstellungen gehen und dort sowohl seinen Benutzernamen und die aktuelle Emailadresse ansehen, als auch Änderungen an Emailadresse und Passwort vornehmen. Wenn der Nutzer möchte, kann er auch seinen Account löschen.
-   
+Unsere Anwendung besteht nicht nur aus dem Passwort Manager, auch wenn darauf der Hauptfokus gerichtet ist. Der Nutzer kann in der Seitenleiste auch in die Accounteinstellungen gehen und dort sowohl seinen Benutzernamen und die aktuelle Emailadresse ansehen, als auch Änderungen an Emailadresse und Passwort vornehmen. Wenn der Nutzer möchte, kann er auch seinen Account löschen.
+
+<details>
+<summary>Nähere Informationen</summary>   
       
       ```javascript
       render() {
@@ -931,14 +949,18 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    Es können die Emailadresse und das Passwort des Accounts aktualisiert oder der Account gelöscht werden.
    
    ![image](https://user-images.githubusercontent.com/65679099/231766694-0a979aa0-f500-4b26-8a99-9b4ed0f94cfd.png)
+
+</details>
       
-   ## Die Aktualisierung des Passwortes
+## Die Aktualisierung des Passwortes
       
-   Um sein Passwort zu aktualisieren, müssen sowohl das neue als auch das alte Passwort eingegeben werden. Dadurch, dass der Nutzer sein altes Passwort eingeben muss, können Dritte, die sich unerlaubten Zugang zu einem Account gewährt haben, nicht einfach das Passwort ändern, ohne das alte zu kennen. 
-   Es ist eine weitere Sicherheitsfunktion, um unsere Nutzer vor Dritten zu schützen. Wenn das alte und neue Passwort eingegeben sind, kann das Ganze über die Schaltfläche `Speichern` bestätigt werden.
+Um sein Passwort zu aktualisieren, müssen sowohl das neue als auch das alte Passwort eingegeben werden. Dadurch, dass der Nutzer sein altes Passwort eingeben muss, können Dritte, die sich unerlaubten Zugang zu einem Account gewährt haben, nicht einfach das Passwort ändern, ohne das alte zu kennen. 
+Es ist eine weitere Sicherheitsfunktion, um unsere Nutzer vor Dritten zu schützen. Wenn das alte und neue Passwort eingegeben sind, kann das Ganze über die Schaltfläche `Speichern` bestätigt werden.
+ 
+<details>
+<summary>Nähere Informationen</summary>     
       
-      
-   Wie bei allen Eingabeformularen, wird auch hier ein Zustandsboolean `ladesymbol` genutzt, um bestimmen zu können, ob noch die Eingabe erfolgt, oder bereits gespeichert wird. 
+Wie bei allen Eingabeformularen, wird auch hier ein Zustandsboolean `ladesymbol` genutzt, um bestimmen zu können, ob noch die Eingabe erfolgt, oder bereits gespeichert wird. 
    
    ```javascript
    render() {
@@ -1039,14 +1061,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(PasswortAendern)
    Aus dem Redux-Store wird der aktuelle Zustand des Tokens als `token` an die Eigenschaften der Komponente übergeben. Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Festlegen des Tokens an die Eigenschaften der Komponente übergeben.
    Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
    So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einer erfolgreichen Aktualisierung des Passwortes entfernen.
-                   
+
+</details>                   
       
-   ## Die Aktualisierung der Emailadresse 
-   Um seine Emailadresse zu ändern, muss der Nutzer lediglich eine neue Emailadresse eingeben und seine Eingabe über die Schaltfläche `Speichern` bestätigen. 
-   Eine leere Eingabe ist auch möglich, da wir die Nutzer nur bei der Registrierung dazu verpflichten, eine Emailadresse einzugeben. Danach gibt jeder Nutzer freiwillig seine Emailadresse an.
-               
+## Die Aktualisierung der Emailadresse 
+Um seine Emailadresse zu ändern, muss der Nutzer lediglich eine neue Emailadresse eingeben und seine Eingabe über die Schaltfläche `Speichern` bestätigen. 
+Eine leere Eingabe ist auch möglich, da wir die Nutzer nur bei der Registrierung dazu verpflichten, eine Emailadresse einzugeben. Danach gibt jeder Nutzer freiwillig seine Emailadresse an.
+
+<details>
+<summary>Nähere Informationen</summary>
       
-   Hier wird ebenfalls der Zustandsboolean `ladesymbol` verwendet, der auch schon bei der Aktualisierung des Passwortes Verwendung fand.
+Hier wird ebenfalls der Zustandsboolean `ladesymbol` verwendet, der auch schon bei der Aktualisierung des Passwortes Verwendung fand.
    
    ```javascript
    componentDidMount = () => {
@@ -1058,7 +1083,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(PasswortAendern)
    }
    ```
    
-   Da bei der Aktualisierung der Emailadresse im Eingabefeld bereits die aktuelle Emailadresse steht, wird diese `bisherigeEmail`, sobald die Komponente in den DOM eingefügt wurde, aus den Eigenschaften der Komponente entnommen und die Eingabe des Eingabefeldes auf die `bisherigeEmail` gesetzt.
+Da bei der Aktualisierung der Emailadresse im Eingabefeld bereits die aktuelle Emailadresse steht, wird diese `bisherigeEmail`, sobald die Komponente in den DOM eingefügt wurde, aus den Eigenschaften der Komponente entnommen und die Eingabe des Eingabefeldes auf die `bisherigeEmail` gesetzt.
    
    ```javascript
    render() {
@@ -1151,6 +1176,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(EmailAktualisieren)
    Aus dem Redux-Store wird der aktuelle Zustand des Tokens als `token` an die Eigenschaften der Komponente übergeben. Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Festlegen des Tokens an die Eigenschaften der Komponente übergeben.
    Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
    So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einer erfolgreichen Aktualisierung der Emailadresse aktualisieren.
+
+</details>
 
                
    Da diese beiden Komponenten nun definiert und exportiert sind, kann in den Accounteinstellungen darauf zugegriffen werden.
@@ -1259,21 +1286,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
    So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einem erfolgreichen Löschen des Accounts entfernen.
    
-   </details>
+</details>
+</details>
    
-   <details>
-      <summary><h2>Die Hilfsfunktionen</h2></summary>
+<details>
+<summary><h2>Die Hilfsfunktionen</h2></summary>
       
-   Hilfsfunktionen dienen dazu, Prozesse der Verschlüsselung von Tokens oder Passwörtern oder der Kommunikation mit dem Server zu verwalten.
-   So können diese Funktionen in den Komponenten einfach aufgerufen werden und müssen nicht jedes Mal manuell definiert werden.
-   Der Code gewinnt an Übersichtlichkeit und Fehler sind einfacher zu identifizieren.
+Hilfsfunktionen dienen dazu, Prozesse der Verschlüsselung von Tokens oder Passwörtern oder der Kommunikation mit dem Server zu verwalten.
+So können diese Funktionen in den Komponenten einfach aufgerufen werden und müssen nicht jedes Mal manuell definiert werden.
+Der Code gewinnt an Übersichtlichkeit und Fehler sind einfacher zu identifizieren.
       
-   ## Das Token
+## Das Token
    
-   JSON-Web-Tokens (JWT) sind unser Mittel zur Authentifizierung. In einem Token sind Benutzername und Emailadresse eines Nutzers gespeichert und können entschlüsselt werden. Jedes Token hat eine zeitlich begrenzte Gültigkeit von (häufig) einer Stunde. So muss ein Nutzer sich nicht jedes Mal anmelden, wenn er die Seite neu lädt. Das Token ist im Redux-Store gespeichert und dient, solange es gültig ist, als Authentifikator, sodass der Nutzer direkt auf die Startseite weitergeleitet wird.
+JSON-Web-Tokens (JWT) sind unser Mittel zur Authentifizierung. In einem Token sind Benutzername und Emailadresse eines Nutzers gespeichert und können entschlüsselt werden. Jedes Token hat eine zeitlich begrenzte Gültigkeit von (häufig) einer Stunde. So muss ein Nutzer sich nicht jedes Mal anmelden, wenn er die Seite neu lädt. Das Token ist im Redux-Store gespeichert und dient, solange es gültig ist, als Authentifikator, sodass der Nutzer direkt auf die Startseite weitergeleitet wird.
       
    
-   ## Die Entschlüsselung des Tokens
+## Die Entschlüsselung des Tokens
    
    ```javascript
    export const tokenEntschluesseln = (token) => {
@@ -1307,10 +1335,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    Dieses wird mit der aktuellen Zeit verglichen. Die Zeit wird hier als Zeitstempel (ISO 8601) angegeben. Je weiter in der Zeit, desto höher der Zeitstempelwert.
    So können die aktuelle Zeit und die Ablaufzeit des Tokens verglichen werden. Wenn die aktuelle Zeit größer ist, als die Ablaufzeit des Tokens, ist das Token nicht mehr gültig.
    
-   ## Der Server 
+## Der Server 
  
    Da wir durch unsere Google Cloud-Function einen Server haben, der sich um die Anfragen aus dem Frontend kümmert, brauchen wir festgelegte Funktionen, die in jeder Komponente aufgerufen werden können, um eine sichere Kommunikation mit dem Server zu ermöglichen. Diese Funktionen sind nach HTTP-Methode und Inhalt unterschiedlich.
    
+<details>
+<summary>Nähere Informationen</summary>
    
    Als Basis wird die URL zum Server festgehalten, damit diese nicht in jeder Funktion manuell eingetragen werden muss.
 
@@ -1396,7 +1426,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    Sollte der Server den Status 0 zurückgegeben haben, wird die Fehlermeldung zurückgegeben.
    Wenn es einen Fehler bei der Anfrage gab, wird eine Fehlermeldung zurückgegeben.
 
-   ## Die Aktualisierung der Emailadresse
+</details>
+
+## Die Aktualisierung der Emailadresse
    
    ```javascript
    export const emailAktualisieren = async (token, email) => {
@@ -1434,7 +1466,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    Sollte der Server den Status 0 zurückgegeben haben, wird die Fehlermeldung zurückgegeben.
    Wenn es einen Fehler bei der Anfrage gab, wird eine Fehlermeldung zurückgegeben.
 
-   ## Die Aktualisierung des Passwortes
+## Die Aktualisierung des Passwortes
 
    ```javascript
    export const passwortAendern = async (token, altesPasswort, neuesPasswort) => {
@@ -1472,7 +1504,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    Sollte der Server den Status 0 zurückgegeben haben, wird die Fehlermeldung zurückgegeben.
    Wenn es einen Fehler bei der Anfrage gab, wird eine Fehlermeldung zurückgegeben.
       
-   ## Den Account löschen
+## Den Account löschen
       
    ```javascript
    export const accountVomServerLoeschen = async (token) => {
@@ -1511,11 +1543,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    Wenn es einen Fehler bei der Anfrage gab, wird eine Fehlermeldung zurückgegeben.
    
       
-   ## Die Verschlüsselung
+## Die Ver- und Entschlüsselung
       
    Die Verschlüsselung bietet einen Schutz für die Passwörter des Nutzers. Zur Verschlüsselung werden die Kryptographie-Bibliothek [`tweetnacl`](https://tweetnacl.cr.yp.to/) und Base64, da beim JWT auch mit Base64 gearbeitet wird.
    Für die Ver- und Entschlüsselung in und aus UTF-8 werden die Funktionen [`encodeUTF8` und `decodeUTF8`](https://gist.github.com/felvieira/b2b3cfec78f0c353c3beac6db151ba1e) vom Github-Nutzer [`felvieira`](https://github.com/felvieira) verwendet.
    
+<details>
+<summary>Nähere Informationen
 
    Für die Base64 Ver- und Entschlüsselung werden die Funktionen `base64Verschluesselung` und `base64Entschluesselung` definiert.
       
@@ -1528,8 +1562,10 @@ export const base64Entschluesselung = (str) => Base64.toByteArray(str)
    ```
       
    Hierdurch kann ein Uint8Array in eine Base64-kodierte Zeichenfolge entschlüsselt werden und auch andersherum.
+
+</details>
       
-   ## Die Verschlüsselung
+## Die Verschlüsselung
 
    ```javascript
    export const verschluesseln = (schluessel, datenString) => {
@@ -1556,7 +1592,7 @@ export const base64Entschluesselung = (str) => Base64.toByteArray(str)
    Nun können die Daten mit der Funktion `nacl.box.after()` die zuvor dekodierten Daten, der generierte Sicherheitswert und der erweiterte Schlüssel-Array verschlüsselt werden. Der Rückgabewert ist ein Byte-Array mit den verschlüsselten Daten. Nun werden die mit NaCl verschlüsselten Daten und der Sicherheitswert noch Base64 verschlüsselt. Die verschlüsselten Daten und der Sicherheitswert werden in einem JSON-Objekt zurückgegeben. 
    Dieses Objekt enthält zwei Eigenschaften: `verschluesselteDaten` und `sicherheitswert`.
 
-   ## Die Entschlüsselung
+## Die Entschlüsselung
 
    ```javascript
    export const entschluesseln = (schluessel, datenStringBase64, sicherheitswertBase64) => {
@@ -1584,11 +1620,11 @@ export const base64Entschluesselung = (str) => Base64.toByteArray(str)
 }
    ```
     
-   Die Funktion nimmt einen Schlüssel, einen Base64-Datenstring und einen Base64-Sicherheitswert als Parameter entgegen. Zuerst werden die Daten und der Sicherheitswert aus Base64 dekodiert. Daraufhin wird der Schlüssel wird mit der Funktion `decodeUTF8()` in einen Byte-Array umgewandelt, um ihn mit dem Datenstring und Sicherheitswert in Byte-Array-Form verwenden zu können. 
+Die Funktion nimmt einen Schlüssel, einen Base64-Datenstring und einen Base64-Sicherheitswert als Parameter entgegen. Zuerst werden die Daten und der Sicherheitswert aus Base64 dekodiert. Daraufhin wird der Schlüssel wird mit der Funktion `decodeUTF8()` in einen Byte-Array umgewandelt, um ihn mit dem Datenstring und Sicherheitswert in Byte-Array-Form verwenden zu können. 
    Der Schlüssel-Array wird wieder auf die feste Länge von 32 Bytes erweitert, die als Standardlänge für NaCl verwendet wird. Falls der übergebene Schlüssel weniger als 32 Byte lang ist, wird er am Anfang des Arrays platziert und mit Nullen aufgefüllt.
    Nun können die Daten mit der Funktion `nacl.box.open.after()` die zuvor verschlüsselten Daten, der generierte Sicherheitswert und der erweiterte Schlüssel-Array entschlüsselt werden. Der Rückgabewert ist eine UTF-8-Zeichenfolge mit den verschlüsselten Daten. So kann ein Passwort aus der Datenbank mit Masterpasswort als Schlüssel und Sicherheitswert entschlüsselt werden und dann im Klartext in der Tabelle angezeigt werden.
       
-   ## Die Generierung eines starken Passwortes
+## Die Generierung eines starken Passwortes
 
    ```javascript
    export const passwortGenerieren = (length = 24) => {
@@ -1600,17 +1636,21 @@ export const base64Entschluesselung = (str) => Base64.toByteArray(str)
    Beim Hinzufügen eines neuen Passwortes, hat der Nutzer die Möglichkeit, automatisch ein starkes Passwort für sich generieren zu lassen. Diese Generierung erfolgt durch die Funktion `nacl.randomBytes()`. Hier werden 24 zufällige Bytes generiert, die daraufhin in eine Base64-kodierte Zeichenfolge umgewandelt werden. Diese Base64-kodierte Zeichenfolge wird als zufälliges Passwort von der Funktion zurückgegeben.
    </details>   
    
-   <details>
-      <summary><h2>Der Redux-Store</h2></summary>
+<details>
+<summary><h2>Der Redux-Store</h2></summary>
   
-   Der Redux-Store ist wie ein zentrales Lagerhaus für den Zustand einer React-Anwendung. Statt den Zustand in verschiedenen Komponenten zu verwalten, wird der Zustand im Redux-Store gespeichert und von den Komponenten aus gelesen oder in den Store geschrieben. Der Redux-Store ist ein unveränderlicher Zustand, das bedeutet, dass er nicht direkt geändert werden kann. Stattdessen werden Änderungen am Zustand durch Aktionen ausgelöst, die von den Komponenten ausgelöst und an den Store gesendet werden. Der Redux-Store ermöglicht eine klare Trennung von Zustand und Darstellung in der Anwendung. Komponenten können den aktuellen Zustand aus dem Store lesen und auf Änderungen reagieren, indem sie sich erneut rendern. Wenn Komponenten den Zustand ändern müssen, senden sie eine Aktion an den Store, der den Zustand aktualisiert und allen abhängigen Komponenten die neuen Daten bereitstellt.
+Der Redux-Store ist wie ein zentrales Lagerhaus für den Zustand einer React-Anwendung. Statt den Zustand in verschiedenen Komponenten zu verwalten, wird der Zustand im Redux-Store gespeichert und von den Komponenten aus gelesen oder in den Store geschrieben. Der Redux-Store ist ein unveränderlicher Zustand, das bedeutet, dass er nicht direkt geändert werden kann. Stattdessen werden Änderungen am Zustand durch Aktionen ausgelöst, die von den Komponenten ausgelöst und an den Store gesendet werden. Der Redux-Store ermöglicht eine klare Trennung von Zustand und Darstellung in der Anwendung. Komponenten können den aktuellen Zustand aus dem Store lesen und auf Änderungen reagieren, indem sie sich erneut rendern. Wenn Komponenten den Zustand ändern müssen, senden sie eine Aktion an den Store, der den Zustand aktualisiert und allen abhängigen Komponenten die neuen Daten bereitstellt.
       
    Insgesamt erleichtert der Redux-Store die Verwaltung des Zustands in React-Anwendungen, indem er eine zentrale Datenquelle für den gesamten Zustand der Anwendung bereitstellt und die Veränderungen am Zustand durch Aktionen koordiniert.
       
-   <h3>Die Aktionserzeuger</h3>
+<details>
+<summary><h3>Die Aktionserzeuger</h3></summary>
    
    Um die Zustände im Redux-Store zu verändern werden sogenannte Aktionen genutzt. Aktionen sind JavaScript-Objekte, die eine Art von Veränderung im Redux-Store repräsentieren. Sie sind die einzige Möglichkeit, Daten im Redux-Store zu aktualisieren. Eine Aktion besteht aus einem Aktionstyp, der beschreibt, was für eine Veränderung im Redux-Store stattfinden soll und auch den Namen der Aktion angibt. Zusätzlich kann in der Aktion noch ein `Datenpaket` (Payload) übergeben werden, das die Aktualisierung im Store präzise beschreibt.
-      
+    
+<details>
+<summary>Nähere Informationen</summary>
+   
    Um den Inhalt für ein oberes Modalfenster festzulegen wird eine Aktion vom Typ `"SETZE_INHALT_FUER_OBERES_MODALFENSTER"` erzeugt. Zusätzlich werden noch die wichtigen Daten, die den Inhalt des Modalfensters ausmachen, als Datenpaket übergeben.
       
    ```javascript
@@ -1665,8 +1705,9 @@ export const SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER = "SETZE_INHALT_FUER_ZEN
    In unserer Anwendung werden 11 verschiedene Aktionstypen festgelegt, die für die Authentifizierung und die Verwaltung von Passwörtern und Modalfenstern genutzt werden. Der Aktionstyp `AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN` beispielsweise identifiziert eine Aktion zur Speicherung des Authentifizierungstokens im Redux-Store. Der Aktionstyp ist wie ein Schlüssel für den Reduzierer, der genau für die Ausführung einer Aktion gemacht ist. 
    Neben der Authentifizierung gibt es auch Aktionstypen zu Passwortverwaltungsvorgängen, z. B. dem Festlegen der Passwörter im Redux-State oder dem Hinzufügen und Löschen von Passwörtern. Schließlich gibt es auch verschiedene Aktionstypen für Modalfenster, wie z. B. das Anzeigen, Verbergen oder Inhalte-Setzen für obere und zentrierte Modalfenster. Wiederum werden diese Arten von Aktionen als Schlüssel für den Reduzierer verwendet, um geeignete Änderungen am Zustand der Anwendung vorzunehmen, die sich auf Modalfenster beziehen. Beispielsweise wird über den Aktionstypen `OBERES_MODALFENSTER_ANZEIGEN` dem Nutzer ein oberes Modalfenster angezeigt, in dem beispielsweise eine Fehlermeldung des Servers angezeigt wird. Es ist deshalb wichtig, dass Aktionstypen dauerhaft am gleichen Ort definiert sind, um sicherzustellen, dass sie dauerhaft zugänglich sind und nicht versehentlich geändert werden können.
 
+</details>
       
-   ## Die Authentifizierung 
+## Die Authentifizierung 
       
    ![carbon (25)](https://user-images.githubusercontent.com/111282979/230963058-7ebf965c-e9f9-41b3-afc5-d2b80922b558.png)
 
@@ -1677,7 +1718,7 @@ Das Token wird dann als Datenpaket in der Aktion übergeben und im Redux-Store g
       
    
       
-   ## Die Steuerung der Modalfenster 
+## Die Steuerung der Modalfenster 
    ```javascript 
    
 // Zuerst werden die Aktionstypen, für die eine Aktion erzeugt werden soll, importiert.
@@ -1776,8 +1817,11 @@ export const passwoerterFestlegen = (passwoerter) => {
    Die Funktion `passwortLoeschen` erzeugt eine Aktion zum Löschen des Passwortes. Das Passwort wird als Parameter der Funktion behandelt und in der erzeugten Aktion als Datenpaket übergeben.
 Die Funktion `passwoerterFestlegen` erzeugt eine Aktion zum Festlegen der Passwörter im Redux-Store. Die Passwrter, die festgelegt werden sollen, werden als Parameter der Funktion behandelt und in der erzeugten Aktion als Datenpaket übergeben.
       
-      
-   <h3>Die Reduzierer</h3>
+</details>  
+   
+   
+<details>
+<summary><h3>Die Reduzierer</h3></summary>
       
    Reduzierer sind Funktionen, die den Zustand eines Redux-Stores verwalten und diesen mit Aktionsobjekten aktualisieren.
    Sie erhalten den aktuellen Zustand des Redux-Stores und eine Aktion als Parameter und geben einen neuen Zustand zurück.
@@ -1790,7 +1834,7 @@ Die Funktion `passwoerterFestlegen` erzeugt eine Aktion zum Festlegen der Passw�
       
    In unserer Anwendung nutzen wir drei Reduzierer für die `Authentifizierung`, die `Passwörter` und die `Modalfenster`.
       
-   ## Der Authentifizierungsreduzierer
+## Der Authentifizierungsreduzierer
       
    ```javascript      
 import { AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN } from '../aktionsErzeuger/aktionsTypen'
@@ -1936,7 +1980,7 @@ export default reduzierer
 In diesem Fall hat der Zustand zwei Eigenschaften, „oberesModalfenster“ und „zentriertesModalfenster“. Verschiedene Arten von Aktionen können diese Zustandseigenschaften ändern, z. B. das Ein- oder Ausblenden eines Modals oder das Aktualisieren seines Inhalts.
 Schließlich gibt die "Reduzier"-Funktion einen neuen Zustand und ein oberes oder zentriertes Modalfenster zurück, die durch die durchgeführten Aktionen erzeugt wurden.
       
-   ## Der Passwörter-Reduzierer
+## Der Passwörter-Reduzierer
       
    ```javascript   
    // Die beiden essentiellen Funktionen für Redux-Stores.
@@ -2007,6 +2051,9 @@ export default reduxStore
    Wenn ein Passwort hinzugefügt werden soll, wird der neue Zustand und der Zustand der Liste gemeinsam mit dem Passwort aus der Aktion hinten angehängt, zurückgegeben.
    Beim Löschen eines Passwortes wird ein Zustand der Liste zurückgegeben, in dem das Passwort mit der gewünschten Id entfernt wird.
    Wenn die Passwörter für die Liste festgelegt werden sollen, wird einfach die Liste mit den Passwörtern aus der Aktion zurückgegeben.
+
+</details>
+</details>
 
       
    ```javascript 
