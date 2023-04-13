@@ -1293,7 +1293,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Festlegen des Tokens an die Eigenschaften der Komponente übergeben.
    Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
    So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einem erfolgreichen Löschen des Accounts entfernen.
-      
+   
+   </details>
    <hr>
    </details>
    
@@ -1307,7 +1308,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
       
    ## Das Token
    
-   Das Token ist dazu da, um die Nachrichten, die der Nutzer als Anfrage zu unsererem Server sendet, zu entschlüsseln, indem der Token die Nachricht in kleinere Teile    zerlegt und dabei das Wichtigste dabei rausfiltert. Gleichzeitig hilft das Token dabei zu überprüfen, ob eine Nachricht noch gültig ist oder ob diese bereits          abgelaufen ist und insofern keine Relevanz mehr hat.
+   Das Token ist unser Mittel zur Authentifizierung mittels Verschlüsselung. In ihm sind Benutzername und Emailadresse eines Nutzers gespeichert und können entschlüsselt werden.. Gleichzeitig hilft das Token dabei zu überprüfen, ob eine Nachricht noch gültig ist oder ob diese bereits          abgelaufen ist und insofern keine Relevanz mehr hat. 
       
    ## Die Verschlüsselung
       
