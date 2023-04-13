@@ -774,12 +774,127 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    </details>
    
    ## Die Tabelle
-   In der Tabelle werden die Passwörter mit den zugehörigen Beschreibungen aufgelistet, sodass man diese einsehen kann. Wenn das Masterpasswort eingegeben ist und        seine Passwörter in dem Moment in der Tabelle nicht verschlüsselt sind, kann man jeweils ein Passwort ansehen und es gegebenfalls kopieren, um es dann anschließend    wo man es auch immer haben möchte, einzufügen. Sobald das Masterpasswort wieder ausgetragen ist, zeigt die Tabelle die festgelegt Passwörter nicht mehr an, sondern    folgende Nachricht:"Das Passwort ist verschlüsselt"
+   In der Tabelle werden die gespeicherten Passwörter des Nutzers zusammen mit den zugehörigen Beschreibungen aufgelistet, sodass diese gut zuzuordnen sind. 
+   Standardmäßig sind alle Passwörter in der Tabelle verschlüsselt. So versichern wir den zweiten Authentifizierungsschritt, neben der Anmeldung, um die Passwörter des Nutzers zu schützen. Sobald das Masterpasswort eingegeben ist, werden die Passwörter entschlüsselt. Sie können kopiert, angesehen und gelöscht werden.
+   Die Tabelle bietet beliebig viele Seiten für Nutzer, die mehr Passwörter speichern, als auf eine Seite passen. Zudem kann auch über die Suchleiste oben rechts über der Tabelle nach einem Passwort spezifisch gesucht werden.
     
    <details>
    <summary>Nähere Informationen</summary>
       
+   Die Tabelle wird mithilfe der jQuery-Erweiterung [`DataTables`](https://datatables.net/) erstellt. Durch die `componentDidMount`-Funktion wird, sobald die Komponente gerendert wird, die Tabelle initialisiert. 
+      
+   ```javascript
+   componentDidMount = () => {
+        // wird die Tabelle initialisiert.
+        const { tabellenId } = this.props
+        // Wenn eine Id für die Tabelle übergeben wird, wird der DataTable mit dieser Id erzeugt.
+        if (tabellenId) {
+            this.table = $('#' + tabellenId).DataTable()
+            $('.dataTables_length').addClass('bs-select')
+        // Wenn keine TabellenId festgelegt wird, wird eine Tabelle mit dem Standardwert "dtBasicExample" erzeugt.
+        } else {
+            this.table = $('#dtBasicExample').DataTable()
+            $('.dataTables_length').addClass('bs-select')
+        }
+   }
+   ```
    
+   Wenn eine `tabellenId` übergeben wird, wird das `DataTables-Plugin` auf dem DOM-Element mit dieser `tabellenId` initialisiert. Dazu wird mit Hilfe von jQuery das DOM-Element mit der entsprechenden Id ausgewählt `("$('#' + tabellenId)")` und die `DataTable()`-Methode darauf aufgerufen, um die Tabelle mit dieser Id durch das `DataTables-Plugin` zu initialisieren.
+      
+   ```javascript
+   componentWillUpdate = () => {
+        // Um eine Aktualisierung zu ermöglichen, wird die alte Tabelle zerstört.
+        this.table.destroy()
+    }
+   ```
+      
+   Bevor die Komponente aktualisiert wird, beispielsweise, wenn ein neues Passwort hinzugefügt wird, wird die alte Tabelle zuerst zerstört, um die Aktualisierung zu ermöglichen.
+      
+   ```javascript
+   componentDidUpdate = () => {
+        // Eine neue, aktualisierte Tabelle wird initialisiert.
+        const { tabellenId } = this.props
+        // Wenn eine Id für die Tabelle übergeben wird, wird der DataTable mit dieser Id erzeugt.
+        if (tabellenId) {
+            this.table = $('#' + tabellenId).DataTable()
+            $('.dataTables_length').addClass('bs-select')
+        // Wenn keine TabellenId festgelegt wird, wird eine Tabelle mit dem Standardwert "dtBasicExample" erzeugt.
+        } else {
+            this.table = $('#dtBasicExample').DataTable()
+            $('.dataTables_length').addClass('bs-select')
+        }
+    }
+   ```
+    
+   Nachdem die Komponente aktualisiert wurde, wird eine neue, aktualisierte Tabelle initialisiert.
+   
+   ```javascript
+   componentWillUnmount = () => {
+        // Hier wird die Tabelle zerstört.
+        this.table.destroy()
+   }
+   ```
+      
+   Wenn die Komponente aus dem DOM entfernt wurde, wird die Tabelle zerstört.
+      
+   ```javascript
+   render() {
+        // Wenn die Komponente initialisiert wird, müssen Überschriften, Inhalt und TabellenId übergeben werden.
+        const { ueberschriften, inhalt, tabellenId } = this.props
+
+        // Wenn keine Überschriften oder kein Inhalt übergeben wurden, wird eine Fehlermeldung gerendert
+        if (!ueberschriften || !inhalt) {
+            return (
+                // Entsteht eine Fehlermeldung.
+                <h3>Tabellenfehler: Keine Überschriften oder Inhalt gefunden.</h3>
+            )
+        }
+
+        return (
+            // Die Tabelle wird mit dem HTML-Tag <table> erstellt.
+            // Dabei wird die tabellenId, falls angegeben, als id übergeben.
+            <table id={tabellenId || "dtBasicExample"} className="table table-striped table-bordered">
+                <thead>
+                    {/* In der Kopfzeile der Tabelle wird jede Spalte als separate <th>-Zelle erstellt.*/}
+                    <tr>
+                        {/* Der Inhalt jeder Zelle wird durch das "ueberschriften"-Prop definiert. (Bspw. werden in Passwoerter.js die Überschriften: Beschreibung und Passwort) als prop gesetzt. */}
+                        {
+                            ueberschriften.map(ue => <th className="th-sm">{ue}</th>)
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                
+                    {   // Die "tbody"-Komponente ist für den Inhalt der Tabelle verantwortlich.
+                        
+                        // Für jede Tabellenzeile im 'inhalt'-Array,
+                        inhalt.map(tr => {
+                            // wenn eine Tabellenzeile vorhanden ist,
+                            if (tr) {
+                                // wird eine Tabellenzeile gerendert, die die Tabellenzellen in 'td'-Elemente aufteilt.
+                                return (
+                                    <tr>
+                                        {tr.map(td => <td>{td}</td>)}
+                                    </tr>
+                                )
+                            }
+                        })
+                    }
+                </tbody>
+            </table>
+        )
+   ```
+   
+   Gerendert wird eine HTML-Tabelle mit den Überschriften und dem Inhalt, die als Eigenschaften an die Komponente übergeben wurden. Wenn keine Überschriften oder kein Inhalt übergeben wurden, wird eine Fehlermeldung gerendert. Die Tabellenzeilen werden aus dem `inhalt`-Array generiert, wobei für jede Zeile eine separate `tr`-Komponente erstellt wird und die Zellen mit den entsprechenden Daten aus dem `tr`-Array als `td`-Tags gerendert werden. 
+   
+   <details>
+      <summary>Erklärung zu `tr` und `td`</summary>
+      
+      `tr` und `td` werden als `Table Row` (Tabellenzeile) und `Table Data`(Tabellendaten) verwendet. Sie beziehen sich auf HTML-Elemente, die verwendet werden, um Tabellen in HTML-Dokumenten zu erstellen. Das "tr"-Element wird verwendet, um eine Tabellenzeile zu definieren und zu erstellen. Eine Tabellenzeile besteht normalerweise aus mehreren "td"-Elementen, die die einzelnen Zellen in der Zeile darstellen. Das "td"-Element hingegen wird verwendet, um eine Tabellendatenzelle innerhalb einer Tabellenzeile zu definieren. Es enthält normalerweise den eigentlichen Inhalt, der in der Zelle angezeigt werden soll, wie Text, Bilder oder andere HTML-Elemente. "td"-Elemente werden normalerweise innerhalb von "tr"-Elementen verwendet, um die Zellen in einer Tabellenzeile zu erstellen.
+      Die gemeinsame Darstellung der beiden Elemente ermöglicht eine Tabelle mit mehreren Zeilen und Spalten. Sie können mit CSS gestaltet werden und mit JavaScript manipuliert werden, um dynamische, interaktive Tabellen zu erstellen.   
+   </details>
+      
+   Die `Tabelle`-Komponente wird schließlich als Standardexport exportiert, um beispielsweise beim Passwort Manager importiert und dort zur Darstellung der Passwörter verwendet zu werden.
       
    </details>
    
