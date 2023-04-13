@@ -31,33 +31,41 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
       - [Die Seitenleiste](#die-seitenleiste)
       - [Die Tabelle](#die-tabelle)
       - [Die Accounteinstellungen](#die-accounteinstellungen)
+      - [Die Aktualisierung des Passwortes](#die-aktualisierung-des-passwortes)
+      - [Die Aktualisierung der Emailadresse](#die-aktualisierung-der-emailadresse)
    - [Die Hilfsfunktionen](#die-hilsfunktionen)
       - [Die Verschlüsselung](#die-verschlüsselung)
       - [Der Server](#der-server)
       - [Das Token](#das-token)
+      - [Die Generierung eines starken Passwortes](#die-generierung-eines-starken-passwortes)
    - [Der Redux-Store](#der-redux-store)
          - [Der Aktionserzeuger](#der-aktionserzeuger)
          - [Die Aktionstypen](#die-aktionstypen)
          - [Die Authentifizierung](#die-authentifizierung)
          - [Die Steuerung der Modalfenster](#die-steuerung-der-modalfenster)
-         - [Die Verwaltung der Passwörter](#die-verwaltung-der-passwörter)
+         - [Die Verwaltung der Passwörter im Redux-Store](#die-verwaltung-der-passwörter-im-redux-store)
       - [Die Reduzierer](#die-reduzierer)
-         - [Die Authentifizierung](#die-authentifizierung)
+         - [Der Authentifizierungsreduzierer](#der-authentifizierungsreduzierer)
          - [Das Modalfenster](#das-modalfenster) 
-         - [Die Passwörter](#die-passwörter)
+         - [Der Passwörter-Reduzierer](#der-passwörter-reduzierer)
 - [Das Backend](#das-backend)
   - [Die Grundfunktionen](#die-grundfunktionen)
       - [Das Abrufen der Daten](#das-abrufen-der-daten)
-      - [Die Funktionen der Datenbank](#die-funktionen-der-datenbank)
-      - [Die Authentifizierung](#die-authentifizierung)
-      - [Das Passwort](#das-passwort)
+      - [Eine kurze Einführung in Firestore](#eine-kurze-einführung-in-firestore)
+      - [Die Grundfunktionen für die Arbeit mit Firestore](#die-grundfunktionen-für-die-arbeit-mit-firestore)
+      - [Router](#router)
+      - [Der Authentifizierungsrouter](#der-authentifizierungsrouter)
+      - [Der Passwortrouter](#der-passwortrouter)
       - [Die Vermittlung](#die-vermittlung)
-      - [Der Firestore](#der-firestore)
+      - [Die Überprüfung der Authentifizierung](#die-überprüfung-der-authentifizierung)
+      - [Die Verbindung mit dem Firestore](#die-verbindung-mit-dem-firestore)
       - [Die Verwaltung](#die-verwaltung)
-      - [Die Authentifizierung](#die-authentifizierung)
-      - [Das Passwort](#das-passwort)
-      - [Der Index](#der-imdex)
-      
+      - [Die Authentifizierungsverwaltung](#die-authentifizierungsverwaltung)
+      - [Die Registrierung](#die-registrierung)
+      - [Die Anmeldung](#die-anmeldung)
+      - [Die Aktualisierung des Passwortes](#die-aktualisierung-des-passwortes)
+      - [Den Account löschen](#den-account-loeschen)
+      - [Die Passwortverwaltung](#die-passwortverwaltung)
 - [Authoren](#authoren)
 
 # Das Stundenprotokoll
@@ -2875,19 +2883,16 @@ Schließlich kann die Express-App als Firebase-Cloudfunktion exportiert, die auf
    
 </details> 
 
-
-<details>
-<summary><h1>Die Reflexion</h1></summary>   
+# Reflexion      
  
 Während unseres Projekts haben wir wertvolle Lektionen gelernt, die uns nicht nur in der Informatik, sondern auch in vielen anderen Lebensbereichen von großem Nutzen sein werden. Eine der ersten Herausforderungen, der wir uns stellen mussten, war ein effektives Zeitmanagement. In einem Umfeld mit knappen Fristen war es entscheidend, unsere Aufgaben sorgfältig zu planen und zu priorisieren, um unsere Zeit optimal zu nutzen und unsere Ziele zu erreichen. Durch die Beherrschung dieser Fähigkeit konnten wir unsere Produktivität steigern und das Projekt erfolgreich abschließen.
 
-Eine eigene Full-Stack Anwendung zu planen und entwickeln
-Ein weiterer wichtiger Aspekt unseres Projekts war die Arbeit mit verschiedenen Programmen wie Adobe Photoshop und Adobe After Effects. Um qualitativ hochwertige Designs und Animationen zu erstellen, mussten wir uns schnell mit diesen Tools vertraut machen und neue Fähigkeiten erlernen. Durch ständiges Üben und Testen verbesserten wir unsere Fähigkeiten und sind nun in der Lage, professionelle Grafiken und Animationen zu erstellen. Diese Fähigkeiten haben nicht nur unser technisches Wissen erweitert, sondern auch unser Selbstvertrauen gestärkt.
+Ein weiterer wichtiger Aspekt unseres Projekts war die Arbeit mit verschiedenen Programmen wie Adobe Photoshop und Adobe After Effects. Um qualitativ hochwertige Designs und Animationen zu erstellen, mussten wir uns schnell mit diesen Tools vertraut machen und neue Fähigkeiten erlernen. Durch die aktive Teilnahme an Schulungen und Übungen konnten wir unser Wissen und unsere Fähigkeiten im Umgang mit diesen Programmen erweitern. Durch ständiges Üben und Testen verbesserten wir unsere Fähigkeiten und sind nun in der Lage, professionelle Grafiken und Animationen zu erstellen. Diese Fähigkeiten haben nicht nur unser technisches Wissen erweitert, sondern auch unser Selbstvertrauen gestärkt.
 Eine weitere Herausforderung war, dass wir oft isoliert arbeiten mussten, was unsere organisatorischen Fähigkeiten auf die Probe stellte. Wir haben jedoch gelernt, wie man eine effektive Kommunikation und Koordination innerhalb des Teams aufrechterhält, um sicherzustellen, dass alle an einem Strang ziehen und die Arbeit fristgerecht erledigt wird. Wir haben Kommunikations- und Projektmanagementwerkzeuge eingesetzt, um unsere Zusammenarbeit zu verbessern und unsere Ziele erfolgreich zu erreichen.
 Die Reflexion unserer Erfahrungen in diesem Projekt hat unsere Fähigkeit zur Selbstreflexion gestärkt. Wir haben gelernt, dass es wichtig ist, offen für neue Herausforderungen zu sein und bereit, in verschiedene Fähigkeiten zu investieren, um in Projekten erfolgreich zu sein. Unsere Fähigkeit, effektiv mit verschiedenen Programmen zu arbeiten, unsere Programmierkenntnisse zu erweitern und unsere organisatorischen Fähigkeiten zu verbessern, wird uns in unserem zukünftigen Berufs- und Privatleben von großem Nutzen sein.
 
 Wir sind stolz auf das, was wir erreicht haben und fühlen uns nun besser für zukünftige Projekte gerüstet, da wir unsere Fähigkeiten und Kenntnisse in vielen verschiedenen Bereichen verbessert haben. Die Herausforderungen haben uns als Team zusammengeschweißt und gezeigt, dass wir gemeinsam Großes erreichen können. Wir sind zuversichtlich, dass die Erfahrungen und Fähigkeiten, die wir in diesem Projekt gesammelt haben, uns bei vielen zukünftigen Herausforderungen helfen werden und wir diese mit Bravour meistern werden.
-</details> 
+
 
 
 
