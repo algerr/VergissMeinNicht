@@ -1,11 +1,11 @@
-// Backend (Server) URL
-const Backend = "https://us-central1-forgetmynot-2f796.cloudfunctions.net/backend"
+// Server (Backend) URL
+const Server = "https://us-central1-forgetmynot-2f796.cloudfunctions.net/backend"
 
 // In der Anmelde-Funktion werden Benutzername und Passwort geprüft.
 export const anmeldung = async (benutzername, passwort) => {
     try {
         // POST-Anfrage wird an den Anmeldungs-Endpunkt des Servers gesendet.
-        const ergebnis = await fetch(Backend + "/authentifizierung/anmeldung", {
+        const ergebnis = await fetch(Server + "/authentifizierung/anmeldung", {
             method: "post",
             headers: {
                 'Accept': 'application/json',
@@ -34,7 +34,7 @@ export const anmeldung = async (benutzername, passwort) => {
 export const passwoerterAbrufen = async (token) => {
     try {
         // Eine GET-Anfrage wird an den Passwort-Endpunkt des Servers gesendet.
-        const ergebnis = await fetch(Backend + "/passwort", {
+        const ergebnis = await fetch(Server + "/passwort", {
             method: "get",
             headers: {
                 'Authorization': token
@@ -60,7 +60,7 @@ export const passwoerterAbrufen = async (token) => {
 // Mit dieser Funktion kann ein Passwort zum Server hinzugefügt werden.
 export const passwortZumServerHinzufuegen = async (token, beschreibung, verschluesseltesPasswort, sicherheitswert) => {
     try {
-        const ergebnis = await fetch(Backend + "/passwort", {
+        const ergebnis = await fetch(Server + "/passwort", {
             // POST-Anfrage wird an den Passwort-Endpunkt des Server gesendet.
             method: "post",
             headers: {
@@ -89,7 +89,7 @@ export const passwortZumServerHinzufuegen = async (token, beschreibung, verschlu
 // Mit dieser Funktion wird ein Passwort vom Server gelöscht.
 export const passwortVomServerLoeschen = async (token, passwortId) => {
     try {
-        const ergebnis = await fetch(Backend + `/passwort/${passwortId}`, {
+        const ergebnis = await fetch(Server + `/passwort/${passwortId}`, {
             // Eine DELETE-Anfrage wird mit der PasswortId an den Passwort-Endpunkt des Servers gesendet.
             method: "delete",
             headers: {
@@ -118,7 +118,7 @@ export const passwortVomServerLoeschen = async (token, passwortId) => {
 // Mit dieser Funktion kann sich ein Benutzer registrieren.
 export const accountRegistrieren = async (benutzername, passwort, email) => {
     try {
-        const ergebnis = await fetch(Backend + "/authentifizierung/registrierung", {
+        const ergebnis = await fetch(Server + "/authentifizierung/registrierung", {
             // Eine POST-Anfrage wird an den Registrierungs-Endpunkt des Servers gesendet.
             method: "post",
             headers: {
@@ -149,7 +149,7 @@ export const accountRegistrieren = async (benutzername, passwort, email) => {
 // Mit dieser Funktion kann die Email eines Accounts aktualisiert werden.
 export const emailAktualisieren = async (token, email) => {
     try {
-        const ergebnis = await fetch(Backend + "/authentifizierung/emailAktualisieren", {
+        const ergebnis = await fetch(Server + "/authentifizierung/emailAktualisieren", {
             // Eine POST-Anfrage wird an den Emailaktualisierungs-Endpunkt des Servers gesendet.
             method: "post",
             headers: {
@@ -178,7 +178,7 @@ export const emailAktualisieren = async (token, email) => {
 // Mit dieser Funktion kann das Passwort eines Accounts geändert werden.
 export const passwortAendern = async (token, altesPasswort, neuesPasswort) => {
     try {
-        const ergebnis = await fetch(Backend + "/authentifizierung/passwortAendern", {
+        const ergebnis = await fetch(Server + "/authentifizierung/passwortAendern", {
             // Eine POST-Anfrage wird an den PasswortÄnderungs-Endpunkt des Servers gesendet.
             method: "post",
             headers: {
@@ -207,7 +207,7 @@ export const passwortAendern = async (token, altesPasswort, neuesPasswort) => {
 // Mit dieser Funktion kann ein Account vom Server gelöscht werden.
 export const accountVomServerLoeschen = async (token) => {
     try {
-        const ergebnis = await fetch(Backend + "/authentifizierung/accountLoeschen", {
+        const ergebnis = await fetch(Server + "/authentifizierung/accountLoeschen", {
             // Eine POST-Anfrage wird an den AccountLöschen-Endpunkt des Servers gesendet.
             method: "post",
             headers: {
