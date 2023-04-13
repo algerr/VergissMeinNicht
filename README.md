@@ -976,7 +976,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    }
    ```
    
-   Wenn der Nutzer nach der Eingabe des alten und neuen Passwortes auf die Schaltfläche `Speichern` klickt, wird zuerst die browsereigene, standardmäßige Sendung des Formulars verhindert. Daraufhin wird der Zustandsboolean, wenn er noch nicht auf `true` gesetzt ist, auf `true` gesetzt, da die Speicherung des Passwortes nun lädt.
+   Wenn der Nutzer nach der Eingabe des alten und neuen Passwortes auf die Schaltfläche `Speichern` klickt, wird zuerst die browsereigene, standardmäßige Sendung des Formulars verhindert. Daraufhin wird der Zustandsboolean `ladesymbol`, wenn er noch nicht auf `true` gesetzt ist, auf `true` gesetzt, da die Speicherung des Passwortes nun lädt.
    Das Token und die Aktionserzeuger-Funktionen für die Verwaltung von Modalfenstern werden aus den Eigenschaften der Komponente extrahiert, um frei genutzt werden zu können. Daraufhin wird eine Anfrage zur Aktualisierung des Passwortes mit dem Token, dem alten und dem neuen Passwort an den Server geschickt.
    Wenn ein Fehler zurückgegeben wird, wird dieser in einem oberen Modalfenster angezeigt.
    Wenn der Server jedoch den Status 1 zurückgibt, gibt es eine Erfolgsmeldung im oberen Modalfenster. 
@@ -1010,7 +1010,7 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(PasswortAendern)             
    ```
    
-   Aus dem Redux-Store wird das Token als Eigenschaft an die Komponente übergeben. Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Festlegen des Tokens als Eigenschaften an die Komponente übergeben.
+   Aus dem Redux-Store wird der aktuelle Zustand des Tokens als `token` an die Eigenschaften der Komponente übergeben. Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Festlegen des Tokens an die Eigenschaften der Komponente übergeben.
    Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
    So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einer erfolgreichen Aktualisierung des Passwortes entfernen.
                    
@@ -1066,11 +1066,73 @@ export default connect(mapStateToProps, mapDispatchToProps)(PasswortAendern)
    Je nach Zustand des Zustandsbooleans, wird bei `true` ein Lade-Spinner und bei `false` die Schaltfläche zum Speichern der neuen Emailadresse gerendert.
    Das Eingabefeld wird durch ein `ref`-Objekt zur Eigenschaft der Komponente. 
                
+   ```javascript
+   onSpeichern = async (e) => {
+        // wird die browsereigene, standardmäßige Sendung des Formulars verhindert.
+        e.preventDefault()
+        const { ladesymbol } = this.state
+        // Wenn "ladesymbol" auf "true" gesetzt ist, wird die Funktion beendet.
+        if (ladesymbol) return
+        // Der State des Ladesymbols wird auf "true" gesetzt, da die Emailadresse nun aktualisiert wird.
+        this.setState({ ladesymbol: true })
+        // Die Props und werden extrahiert und als einzelne Variablen gespeichert, damit sie direkt verwendet werden können.
+        // Statt "this.props.token" kann nun einfach "token" geschrieben werden
+        const { token, setzeInhaltFuerOberesModalfenster, oberesModalfensterAnzeigen, authentifizierungsTokenFestlegen, zentriertesModalfensterAusblenden } = this.props
+        // Token und aktualisierte Emailadresse werden an den Server geschickt.
+        const EmailAktualisierung = await emailAktualisieren(token, this.email.value)
+        // Wenn ein Fehler auftritt,
+        if (EmailAktualisierung.error) {
+            // wird dieser dem Nutzer in einem modalen Fenster gezeigt.
+            setzeInhaltFuerOberesModalfenster("Fehler", EmailAktualisierung.error, [{ name: "Schließen", variant: "primary" }])
+            oberesModalfensterAnzeigen()
+        // Wenn die E-Mail-Adresse erfolgreich aktualisiert wurde, wird das neue Token gespeichert.
+        } else if (EmailAktualisierung.token) {
+            authentifizierungsTokenFestlegen(EmailAktualisierung.token)
+        }
+        // Zum Schluss wird das modale Fenster geschlossen und der State vom "ladesymbol" auf "false" gesetzt.
+        zentriertesModalfensterAusblenden()
+        this.setState({ ladesymbol: false })
+    }
+   ```
    
-               
+   Wenn der Nutzer, nachdem er eine Emailadresse seiner Wahl eingegeben hat, auf die Schaltfläche zur Speicherung der neuen Emailadresse klickt, wird zuerst die browsereigene, standardmäßige Sendung des Formulars verhindert. Daraufhin wird der Zustandsboolean `ladesymbol`, wenn er noch nicht auf `true` gesetzt ist, auf `true` gesetzt, da die Speicherung der Emailadresse nun lädt.
+   Das Token und die Aktionserzeuger-Funktionen für die Verwaltung von Modalfenstern werden aus den Eigenschaften der Komponente extrahiert, um frei genutzt werden zu können. Daraufhin wird eine Anfrage zur Aktualisierung der Emailadresse mit dem Token und der eingegebenen neuen Emailadresse an den Server geschickt.
+   Wenn ein Fehler zurückgegeben wird, wird dieser in einem oberen Modalfenster angezeigt.
+   Wenn der Server jedoch ein neues Token zurückgibt, wird dieses im Redux-Store gespeichert und das Modalfenster zur Aktualisierung der Emailadresse ausgeblendet.
+   Da sich das Token auch aus der Emailadresse zusammensetzt, ist diese Aktualisierung des Tokens nötig.
+   Der Zustandsboolean `ladesymbol` wird wieder zurück auf `false` gesetzt.
+   
+   ```javascript
+   const mapStateToProps = state => {
+    return {
+        token: state.authentifizierung.token
+    }
+}
+
+// Das mapDispatchToProps-Objekt enthält Funktionen, mit denen das Modul Aktionen auslösen kann.
+const mapDispatchToProps = dispatch => {
+    return {
+        // Dadurch können die Aktionen: zentriertesModalfensterAusblenden, setzeInhaltFuerOberesModalfenster, oberesModalfensterAnzeigen, authentifizierungsTokenFestlegen ausgeführt werden.
+        zentriertesModalfensterAusblenden: () => dispatch(zentriertesModalfensterAusblenden()),
+        setzeInhaltFuerOberesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerOberesModalfenster(titel, inhalt, buttons)),
+        oberesModalfensterAnzeigen: () => dispatch(oberesModalfensterAnzeigen()),
+        authentifizierungsTokenFestlegen: (token) => dispatch(authentifizierungsTokenFestlegen(token))
+    }
+}
+
+// Der HOK (Higher-Order Komponent) 'connect' verbindet den Redux-Store mit dem Komponenten.
+// Dieser kann auf den Redux-Store zugreifen und seine Daten ändern, indem er die entsprechenden Aktionen auslöst.
+export default connect(mapStateToProps, mapDispatchToProps)(EmailAktualisieren)
+   ```
+   
+   Aus dem Redux-Store wird der aktuelle Zustand des Tokens als `token` an die Eigenschaften der Komponente übergeben. Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Festlegen des Tokens an die Eigenschaften der Komponente übergeben.
+   Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
+   So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einer erfolgreichen Aktualisierung der Emailadresse aktualisieren.
+
+            
    </details>
                
-   
+   Da diese beiden Komponenten nun definiert sind
                
    <hr>
    </details>
