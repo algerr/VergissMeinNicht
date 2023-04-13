@@ -120,6 +120,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    <summary><h1>Das Frontend</h1></summary>
    <hr>
 
+   Das Frontend ist die Fassade der Anwendung. Die Webseite, auf der der Nutzer sich anmeldet, auf der er Nutzer interagiert und auf der er seine Passwörter ansieht, hinzufügt oder 
+   
    <details>
    <summary><h2>Die Komponenten</h2></summary>
 
