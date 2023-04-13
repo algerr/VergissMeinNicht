@@ -115,8 +115,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 
 
 
-
-<h1>Das Frontend</h1>
+<details>
+   <summary><h1>Das Frontend</h1></summary>
 
    Das Frontend ist die Fassade der Anwendung. Die Webseite, auf der der Nutzer sich anmeldet, auf der er Nutzer interagiert und auf der er seine Passwörter ansieht, hinzufügt oder 
    
@@ -2055,13 +2055,13 @@ Firestore ist eine von Google entwickelte dokumentenorientierte NoSQL-Datenbank.
 Firestore wurde für die Verwendung in Anwendungen entwickelt, die Daten in Echtzeit ändern, wie z. B. Chat-Anwendungen und Online-Spiele. Mit Firestore können Sie Daten in Echtzeit zwischen Ihrem Client (z. B. einem Mobilgerät oder Webbrowser) und Ihren Servern in der Cloud synchronisieren. Das bedeutet, dass Änderungen, die in einem Client vorgenommen werden, automatisch an alle anderen Clients weitergegeben werden, die mit derselben Datenquelle verbunden sind.
 Firestore bietet verschiedene Funktionen zum Schreiben, Lesen, Aktualisieren und Löschen von Daten. Firestore-Daten können einfach über APIs abgerufen und bearbeitet werden. Firestore bietet auch eine Abfragesprache, mit der Entwickler komplexe Abfragen ausführen können, um bestimmte Daten aus Sammlungen abzurufen. Firestore ist Teil der Firebase-Plattform von Google und lässt sich problemlos in andere Firebase-Dienste wie Authentifizierung, Cloud-Messaging und Cloud-Funktionen integrieren. Firestore ist auch auf der Google Cloud Platform (GCP) verfügbar. Das bedeutet, dass es sich nahtlos in Anwendungen integrieren lässt, die auf der GCP gehostet werden.
 
-
+</details>
       
       
       
       
-      
-<h1>Das Backend</h1>
+<details>
+   <summary><h1>Das Backend</h1></summary>
 
 Im Backend findet die wahre Funktionalität hinter der schönen Fassade der Webseite statt. Anstatt um die schöne Darstellung eines Anmeldeformulars, kümmert man sich hier um die Verarbeitung der Anmeldungsanfrage, gleicht die eingegebenen Daten mit denen aus der Datenbank ab und gibt je nachdem, welches Ergebnis bei den unterschiedlichen Datenbank-Operationen herauskommt unterschiedliche Antworten auf die Anfragen aus dem Frontend.
 
@@ -2779,6 +2779,7 @@ Das Projekt hat uns viele unterschiedliche Dinge gelehrt, aus denen wir in der Z
 Während unseres gesamten Projekts haben wir uns mit verschiedenen Aspekten unserer Arbeit befasst und unsere Fähigkeiten in verschiedenen Bereichen verfeinert. Eines der ersten Probleme, auf die wir stießen, war effektives Zeitmanagement. Da wir oft unter engen Fristen arbeiten müssen, ist ein besseres Zeitmanagement unerlässlich, um produktiv zu bleiben und unsere Ziele zu erreichen. Wir haben gelernt, unsere Aufgaben sorgfältig zu planen und zu priorisieren, um unsere Zeit so effizient wie möglich zu nutzen. Ein weiterer wichtiger Bereich unseres Projekts ist die Arbeit mit verschiedenen Programmen wie Adobe Photoshop und Adobe After Effects. Wir mussten uns schnell an diese Tools gewöhnen und neue Fähigkeiten erlernen, um hochwertige Designs und Animationen zu erstellen. Wir nehmen aktiv an Schulungsprogrammen und Übungen teil, um unser Wissen und unsere Fähigkeiten mit diesen Programmen zu erweitern. Durch ständiges Üben und Testen haben wir unsere Fähigkeiten verbessert und können jetzt professionelle Grafiken und Animationen erstellen. Darüber hinaus haben wir auch an node.js gearbeitet und das Design mit CSS verbessert. Als Team haben wir uns gemeinsam in diese Bereiche vertieft, um unsere Kenntnisse und Fähigkeiten in diesen technischen Bereichen zu erweitern. Wir haben Online-Ressourcen, Bücher und Tutorials genutzt, um unser Wissen über node.js und CSS zu vertiefen, und diese Technologien erfolgreich in unser Projekt integriert. Diese Erfahrung erweitert nicht nur unser Wissen, sondern stärkt auch unser Selbstvertrauen. Ein weiteres Problem ist, dass wir oft isoliert arbeiten müssen, was unser Organisationstalent auf die Probe stellt. Wir haben gelernt, effektiv zu kommunizieren und unsere Aufgaben so zu koordinieren, dass alle im Team auf einer Wellenlänge sind und die Arbeit pünktlich erledigen. Wir haben Kommunikations- und Projektmanagement-Tools verwendet, um uns zu vernetzen und zusammenzuarbeiten, um unsere Ziele zu erreichen.
 Insgesamt hat diese Erfahrung unsere Fähigkeit zur Selbstreflexion gestärkt. Wir haben gelernt, dass es wichtig ist, offen für neue Herausforderungen zu sein und bereit zu sein, in verschiedene Fähigkeiten zu investieren, um im Projekt erfolgreich zu sein. Wir haben gelernt, effektiv mit einer Vielzahl von Programmen zu arbeiten, unsere Programmierkenntnisse zu erweitern und unsere organisatorischen Fähigkeiten zu verbessern. Wir sind stolz auf das, was wir erreicht haben, und fühlen uns jetzt für zukünftige Projekte besser gerüstet, da wir unsere Fähigkeiten und Kenntnisse in vielen verschiedenen Bereichen verbessert haben. Die Herausforderungen, vor denen wir stehen, haben uns als Team zusammengeschweißt und zeigen, dass wir gemeinsam Großes erreichen können. Wir glauben, dass die in diesem Projekt erworbenen Fähigkeiten und Erfahrungen in unserem Berufs- und Privatleben nützlich sein werden.
 
+</details>
 
 
 
