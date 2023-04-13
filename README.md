@@ -1558,7 +1558,95 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
       
    ## Die Verschlüsselung
       
-   Die Verschlüsselung seiner aufgelisteten Passwörter erfolgt genau dann, wenn das festgelegte Passwort nicht mehr eingegeben ist. Die eigentlichen Passwörter werden    dann verschlüsselt, indem an der Stelle des Passworts die Nachricht "Passwort ist verschlüsselt", auftritt. Wenn man das Masterpasswort wieder in das Eingabefeld      einfügt, dann werden wieder automatisch die aufgelisteten Passwörter entschlüsselt.
+   Die Verschlüsselung bietet einen Schutz für die Passwörter des Nutzers. Zur Verschlüsselung werden die Kryptographie-Bibliothek [`tweetnacl`](https://tweetnacl.cr.yp.to/) und Base64, da beim JWT auch mit Base64 gearbeitet wird.
+   Für die Ver- und Entschlüsselung in und aus UTF-8 werden die Funktionen [`encodeUTF8` und `decodeUTF8`](https://gist.github.com/felvieira/b2b3cfec78f0c353c3beac6db151ba1e) vom Github-Nutzer [`felvieira`](https://github.com/felvieira) verwendet.
+   
+   <details>
+      <summary>Nähere Informationen</summary>
+
+   Für die Base64 Ver- und Entschlüsselung werden die Funktionen `base64Verschluesselung` und `base64Entschluesselung` definiert.
+      
+   ```javascript
+   // Diese Funktion nimmt einen Uint8Array entgegen und gibt eine Base64-kodierte Zeichenfolge zurück.
+export const base64Verschluesselung = (data) => Base64.fromByteArray(data)
+
+// Diese Funktion nimmt eine Base64-kodierte Zeichenfolge entgegen und gibt einen Uint8Array zurück.
+export const base64Entschluesselung = (str) => Base64.toByteArray(str)
+   ```
+      
+   Hierdurch kann ein Uint8Array in eine Base64-kodierte Zeichenfolge entschlüsselt werden und auch andersherum.
+      
+   ## Die Verschlüsselung
+
+   ```javascript
+   export const verschluesseln = (schluessel, datenString) => {
+    // Die Daten aus dem Datenstring werden in einen Byte-Array umgewandelt.
+    const datenDecodiert = new Uint8Array(decodeUTF8(datenString))
+    // Ein zufälliger Sicherheitswert wird erzeugt.
+    const sicherheitswert = nacl.randomBytes(24)
+
+    // Der Sicherheitswert wird aus einem String in einen Byte-Array umgewandelt.
+    const schluesselDecodiert = decodeUTF8(schluessel)
+    // Der Schlüssel-Array wird auf 32 Byte erweitert.
+    const schluesselBytes = new Uint8Array(32)
+    schluesselBytes.set(schluesselDecodiert, 0)
+
+    const datenVerschluesselt = nacl.box.after(datenDecodiert, sicherheitswert, schluesselBytes)
+
+    return { verschluesselteDaten: base64Verschluesselung(datenVerschluesselt), sicherheitswert: base64Verschluesselung(sicherheitswert) }
+}
+   ```
+
+   Die Funktion nimmt einen Schlüssel und einen Datenstring als Parameter entgegen. Die Daten werden aus dem Datenstring in einen Byte-Array umgewandelt.
+   Dazu wird ein zufälliger Sicherheitswert erzeugt, der nicht zu erraten oder herzuleiten ist. Hierbei handelt es sich um einen kryptografisch sicheren Zufallswert, der als sogenannter Nonce oder Initialisierungsvektor in der Verschlüsselung verwendet wird, um die Sicherheit der verschlüsselten Daten zu erhöhen.
+   Der übergebene Schlüssel, der als String vorliegt, wird mit der Funktion `decodeUTF8()` in einen Byte-Array umgewandelt, um ihn mit dem Datenstring in Byte-Array-Form verwenden zu können. Der Schlüssel-Array wird auf eine feste Länge von 32 Bytes erweitert, die als Standardlänge für NaCl verwendet wird. Falls der übergebene Schlüssel weniger als 32 Byte lang ist, wird er am Anfang des Arrays platziert und mit Nullen aufgefüllt.
+   Nun können die Daten mit der Funktion `nacl.box.after()` die zuvor dekodierten Daten, der generierte Sicherheitswert und der erweiterte Schlüssel-Array verschlüsselt werden. Der Rückgabewert ist ein Byte-Array mit den verschlüsselten Daten. Nun werden die mit NaCl verschlüsselten Daten und der Sicherheitswert noch Base64 verschlüsselt. Die verschlüsselten Daten und der Sicherheitswert werden in einem JSON-Objekt zurückgegeben. 
+   Dieses Objekt enthält zwei Eigenschaften: `verschluesselteDaten` und `sicherheitswert`.
+
+   ## Die Entschlüsselung
+
+   ```javascript
+   export const entschluesseln = (schluessel, datenStringBase64, sicherheitswertBase64) => {
+    try {
+        // Decodierung der Datenzeichenfolge aus Base64 in einen Uint8Array.
+        const datenDecodiert = new Uint8Array(base64Entschluesselung(datenStringBase64))
+
+        // Decodierung der sicherheitswert aus Base64 in einen Uint8Array.
+        const sicherheitswertDecodiert = new Uint8Array(base64Entschluesselung(sicherheitswertBase64))
+
+        // Dekodieren des Schlüssels von UTF-8 zu einem Uint8Array.
+        const schluesselDecodiert = decodeUTF8(schluessel)
+        const schluesselBytes = new Uint8Array(32)
+        schluesselBytes.set(schluesselDecodiert, 0)
+
+        // Entschlüsseln der Daten mit Hilfe von NaCl und Rückgabe als UTF-8-Zeichenfolge.
+        const datenEntschluesselt = nacl.box.open.after(datenDecodiert, sicherheitswertDecodiert, schluesselBytes)
+
+        return {entschluesselt: encodeUTF8(datenEntschluesselt)}
+    // Wenn es einen Fehler bei der Entschlüsselung gibt, wird ein Fehlerobjekt zurückgegeben.
+    } catch (error) {
+        return {error: 1}
+    }
+
+}
+   ```
+    
+   Die Funktion nimmt einen Schlüssel, einen Base64-Datenstring und einen Base64-Sicherheitswert als Parameter entgegen. Zuerst werden die Daten und der Sicherheitswert aus Base64 dekodiert. Daraufhin wird der Schlüssel wird mit der Funktion `decodeUTF8()` in einen Byte-Array umgewandelt, um ihn mit dem Datenstring und Sicherheitswert in Byte-Array-Form verwenden zu können. 
+   Der Schlüssel-Array wird wieder auf die feste Länge von 32 Bytes erweitert, die als Standardlänge für NaCl verwendet wird. Falls der übergebene Schlüssel weniger als 32 Byte lang ist, wird er am Anfang des Arrays platziert und mit Nullen aufgefüllt.
+   Nun können die Daten mit der Funktion `nacl.box.open.after()` die zuvor verschlüsselten Daten, der generierte Sicherheitswert und der erweiterte Schlüssel-Array entschlüsselt werden. Der Rückgabewert ist eine UTF-8-Zeichenfolge mit den verschlüsselten Daten. So kann ein Passwort aus der Datenbank mit Masterpasswort als Schlüssel und Sicherheitswert entschlüsselt werden und dann im Klartext in der Tabelle angezeigt werden.
+      
+   ## Die Generierung eines starken Passwortes
+
+   ```javascript
+   export const passwortGenerieren = (length = 24) => {
+    const zufaelligeZeichenfolge = nacl.randomBytes(length)
+    return base64Verschluesselung(zufaelligeZeichenfolge)
+}
+   ```
+
+   Beim Hinzufügen eines neuen Passwortes, hat der Nutzer die Möglichkeit, automatisch ein starkes Passwort für sich generieren zu lassen. Diese Generierung erfolgt durch die Funktion `nacl.randomBytes()`. Hier werden 24 zufällige Bytes generiert, die daraufhin in eine Base64-kodierte Zeichenfolge umgewandelt werden. Diese Base64-kodierte Zeichenfolge wird als zufälliges Passwort von der Funktion zurückgegeben.
+      
+   </details>
       
    <hr>
    </details>
@@ -1567,6 +1655,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
    <details>
    <summary><h2>Der Redux-Store</h2></summary>
   
+   Der Redux-Store ist wie ein zentrales Lagerhaus für den Zustand einer React-Anwendung. Statt den Zustand in verschiedenen Komponenten zu verwalten, wird der Zustand im Redux-Store gespeichert und von den Komponenten aus gelesen oder in den Store geschrieben. Der Redux-Store ist ein unveränderlicher Zustand, das bedeutet, dass er nicht direkt geändert werden kann. Stattdessen werden Änderungen am Zustand durch Aktionen ausgelöst, die von den Komponenten ausgelöst und an den Store gesendet werden. Der Redux-Store ermöglicht eine klare Trennung von Zustand und Darstellung in der Anwendung. Komponenten können den aktuellen Zustand aus dem Store lesen und auf Änderungen reagieren, indem sie sich erneut rendern. Wenn Komponenten den Zustand ändern müssen, senden sie eine Aktion an den Store, der den Zustand aktualisiert und allen abhängigen Komponenten die neuen Daten bereitstellt.
+      
+   Insgesamt erleichtert der Redux-Store die Verwaltung des Zustands in React-Anwendungen, indem er eine zentrale Datenquelle für den gesamten Zustand der Anwendung bereitstellt und die Veränderungen am Zustand durch Aktionen koordiniert.
+      
    <hr>
    <details>
    <summary><h3>Die Aktionserzeuger</h3></summary>
