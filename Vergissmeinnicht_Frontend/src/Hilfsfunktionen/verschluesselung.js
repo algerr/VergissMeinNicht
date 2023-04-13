@@ -19,7 +19,7 @@ export const verschluesseln = (schluessel, datenString) => {
 
     const datenVerschluesselt = nacl.box.after(datenDecodiert, sicherheitswert, schluesselBytes)
 
-    return { encryptedData: base64Verschluesselung(datenVerschluesselt), sicherheitswert: base64Verschluesselung(sicherheitswert) }
+    return { verschluesselteDaten: base64Verschluesselung(datenVerschluesselt), sicherheitswert: base64Verschluesselung(sicherheitswert) }
 }
 
 // Eine mit NaCl verschlüsselte Datenzeichenfolge wird mithilfe eines Schlüssels und einem Sicherheitswert.
