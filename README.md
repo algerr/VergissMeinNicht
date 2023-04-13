@@ -1308,15 +1308,257 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountEi
       
    ## Das Token
    
-   Das Token ist unser Mittel zur Authentifizierung mittels Verschlüsselung. In ihm sind Benutzername und Emailadresse eines Nutzers gespeichert und können entschlüsselt werden.. Gleichzeitig hilft das Token dabei zu überprüfen, ob eine Nachricht noch gültig ist oder ob diese bereits          abgelaufen ist und insofern keine Relevanz mehr hat. 
+   JSON-Web-Tokens (JWT) sind unser Mittel zur Authentifizierung. In einem Token sind Benutzername und Emailadresse eines Nutzers gespeichert und können entschlüsselt werden. Jedes Token hat eine zeitlich begrenzte Gültigkeit von (häufig) einer Stunde. So muss ein Nutzer sich nicht jedes Mal anmelden, wenn er die Seite neu lädt. Das Token ist im Redux-Store gespeichert und dient, solange es gültig ist, als Authentifikator, sodass der Nutzer direkt auf die Startseite weitergeleitet wird.
+      
+   <details>
+      <summary>Nähere Informationen</summary>
+   
+   ## Die Entschlüsselung des Tokens
+   
+   ```javascript
+   export const tokenEntschluesseln = (token) => {
+    // Der zweite Teil des Tokens, das Payload, ist ein Base64-codierter JSON-String.
+    const base64Url = token.split('.')[1]
+    // Der JSON-String wird extrahiert.
+    const base64 = base64Url.replace('-', '+').replace('_', '/')
+    // und das darin enthaltene JSON-Objekt dekodiert zurückgegeben.
+    return JSON.parse(window.atob(base64))
+   }
+   ```
+      
+   JWTs bestehen aus drei Teilen, die durch Punkte getrennt sind: Header, Payload und Signatur. Im Code wird das Datenpaket (Payload), der zweite Teil des Tokens, extrahiert und entschlüsselt, um auf die enthaltenen Informationen zuzugreifen. Der Payload ist ein Base64-codierter JSON-String, daher wird zuerst die Base64-URL-Kodierung in Base64-Kodierung umgewandelt, indem die Zeichen `-` und `_` in `+` bzw. `/` umgewandelt werden. Daraufhin wird der Base64-kodierte String mit der JavaScript-Funktion `window.atob()` decodiert, um das darin enthaltene JSON-Objekt zu erhalten. Dieses JSON-Objekt wird dann mit `JSON.parse()` in ein JavaScript-Objekt umgewandelt und zurückgegeben.
+      
+   So kann das Datenpaket entschlüsselt werden, um beispielsweise in den Accounteinstellungen auf Benutzername und Emailadresse zuzugreifen.
+   
+   Da die Gültigkeit des Tokens ebenso wichtig ist, wie der Inhalt, wird auch eine Funktion definiert, die prüft, ob das Token bereits abgelaufen ist.
+      
+   ```javascript
+   export const istTokenAbgelaufen = (token) => {
+    // Die Entschlüsselungsfunktion wird aufgerufen, um das Ablaufdatum des Tokens zu extrahieren.
+    const tokenAblaufdatum = tokenEntschluesseln(token).exp
+    // Die aktuelle Zeit wird in einen Zeitstempel umgewandelt und kann dann mit dem Ablaufdatum des Tokens verglichen werden.
+    const aktuelleZeit = Math.round((new Date()).getTime() / 1000)
+    // Wenn die aktuelle Zeit größer, als das Ablaufdatum des Tokens, ist dieses abgelaufen und ein "true" wird zurückgegeben.
+    return aktuelleZeit > tokenAblaufdatum
+   }
+   ```
+   
+   Das Token wird zuerst durch die eben definierte Funktion entschlüsselt und das Ablaufdatum abgerufen.
+   Dieses wird mit der aktuellen Zeit verglichen. Die Zeit wird hier als Zeitstempel (ISO 8601) angegeben. Je weiter in der Zeit, desto höher der Zeitstempelwert.
+   So können die aktuelle Zeit und die Ablaufzeit des Tokens verglichen werden. Wenn die aktuelle Zeit größer ist, als die Ablaufzeit des Tokens, ist das Token nicht mehr gültig.
+      
+   </details>
+   
+   ## Der Server 
+ 
+   Da wir durch unsere Google Cloud-Function einen Server haben, der sich um die Anfragen aus dem Frontend kümmert, brauchen wir festgelegte Funktionen, die in jeder Komponente aufgerufen werden können, um eine sichere Kommunikation mit dem Server zu ermöglichen. Diese Funktionen sind nach HTTP-Methode und Inhalt unterschiedlich.
+   
+   <details>
+      <summary>Nähere Informationen</summary>
+   
+   Als Basis wird die URL zum Server festgehalten, damit diese nicht in jeder Funktion manuell eingetragen werden muss.
+
+   ```javascript
+   const Server = "https://us-central1-forgetmynot-2f796.cloudfunctions.net/backend"
+   ```
+      
+   ## Die Anmeldung
+   
+   ```javascript
+   export const anmeldung = async (benutzername, passwort) => {
+    try {
+        // POST-Anfrage wird an den Anmeldungs-Endpunkt des Servers gesendet.
+        const ergebnis = await fetch(Server + "/authentifizierung/anmeldung", {
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ benutzername, passwort })
+        })
+
+        // Da der Server mit als Format JSON verwendet, wird die Serverantwort als JSON-Objekt empfangen.
+        const serverAntwort = await ergebnis.json()
+
+        // Wenn der Server den Status "1" zurückgibt, wird das Token zurückgegeben.
+        if (serverAntwort.status === 1) {
+            return { token: serverAntwort.token }
+        }
+
+        // Wenn der Benutzername und das Passwort falsch sind, wird eine Fehlermeldung zurückgegeben.
+        return { error: serverAntwort.message }
+    } catch (error) {
+        // Wenn es einen Fehler bei der Ausführung der Funktion gibt, wird eine Fehlermeldung zurückgegeben.
+        return { error: "Fehler beim Einloggen!" }
+    }
+}
+   ```
+   
+   Für die Anmeldung müssen Benutzername und Passwort als Parameter der Funktion übergeben werden. Daraufhin wird eine POST-Anfrage mit den beiden Parametern als JSON-String im Message-Body an den Anmelde-Endpunkt des Servers gesendet.
+   Die Antwort des Servers wird als JSON-Objekt empfangen.
+   Wenn der Server den Status 1 zurückgegeben hat, gibt die Funktion das Token zurück, das sie vom Server erhalten hat. Damit kann der nutzer sich nun anmelden.
+   Sollte der Server den Status 0 zurückgegeben haben, wird die Fehlermeldung zurückgegeben.
+   Wenn es einen Fehler bei der Anfrage gab, wird eine Fehlermeldung zurückgegeben.
+   
+   ## Die Registrierung
+      
+   ```javascript
+   export const accountRegistrieren = async (benutzername, passwort, email) => {
+    try {
+        const ergebnis = await fetch(Server + "/authentifizierung/registrierung", {
+            // Eine POST-Anfrage wird an den Registrierungs-Endpunkt des Servers gesendet.
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                benutzername, passwort, email
+            })
+        })
+
+        // Da der Server mit als Format JSON verwendet, wird die Serverantwort als JSON-Objekt empfangen.
+        const serverAntwort = await ergebnis.json()
+
+        // Wenn der Server den Status "1" zurückgibt, wird der Status "true" zurückgegeben. (Der Account wurde erfolgreich registriert)
+        if (serverAntwort.status === 1) {
+            return { status: true }
+        }
+
+        // Wenn die Serverantwort negativ ist, wird eine Fehlermeldung zurückgegeben.
+        return { error: serverAntwort.message }
+    } catch (error) {
+        // Wenn es einen Fehler bei der Ausführung der Funktion gibt, wird eine Fehlermeldung zurückgegeben.
+        return { error: "Fehler bei der Registrierung!" }
+    }
+}
+   ``` 
+
+   Für die Registrierung müssen Benutzername, Passwort und Email als Parameter der Funktion übergeben werden. Daraufhin wird eine POST-Anfrage mit den Parametern als JSON-String im Message-Body an den Registrierungs-Endpunkt des Servers gesendet.
+   Die Antwort des Servers wird als JSON-Objekt empfangen.
+   Wenn der Server den Status 1 zurückgegeben hat, war die Registrierung erfolgreich und die die Funktion gibt den Status `true` zurück. Dadurch wird der Nutzer dann zur Anmeldung weitergeleitet und eine Erfolgsnachricht angezeigt.
+   Sollte der Server den Status 0 zurückgegeben haben, wird die Fehlermeldung zurückgegeben.
+   Wenn es einen Fehler bei der Anfrage gab, wird eine Fehlermeldung zurückgegeben.
+
+   ## Die Aktualisierung der Emailadresse
+   
+   ```javascript
+   export const emailAktualisieren = async (token, email) => {
+    try {
+        const ergebnis = await fetch(Server + "/authentifizierung/emailAktualisieren", {
+            // Eine POST-Anfrage wird an den Emailaktualisierungs-Endpunkt des Servers gesendet.
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify({ email })
+        })
+
+        // Da der Server mit als Format JSON verwendet, wird die Serverantwort als JSON-Objekt empfangen.
+        const serverAntwort = await ergebnis.json()
+
+        if (serverAntwort.status === 1) {
+            return { token: serverAntwort.token }
+        }
+
+        // Wenn die Serverantwort negativ ist, wird eine Fehlermeldung zurückgegeben.
+        return { error: serverAntwort.message }
+    } catch (error) {
+        // Wenn es einen Fehler bei der Ausführung der Funktion gibt, wird eine Fehlermeldung zurückgegeben.
+        return { error: "Fehler bei der Aktualisierung der Emailadresse!" }
+    }
+}
+   ```
+
+   Für die Aktualisierung des Passwortes müssen das Token und die neue Emailadresse als Parameter der Funktion übergeben werden. Daraufhin wird eine POST-Anfrage mit den beiden Parametern als JSON-String im Message-Body an den Email-Aktualisierungs-Endpunkt des Servers gesendet.
+   Die Antwort des Servers wird als JSON-Objekt empfangen.
+   Wenn der Server den Status 1 zurückgegeben hat, gibt die Funktion das Token zurück, das sie vom Server erhalten hat. So ist der Nutzer auch mit der neuen Emailadresse noch authentifiziert.
+   Sollte der Server den Status 0 zurückgegeben haben, wird die Fehlermeldung zurückgegeben.
+   Wenn es einen Fehler bei der Anfrage gab, wird eine Fehlermeldung zurückgegeben.
+
+   ## Die Aktualisierung des Passwortes
+
+   ```javascript
+   export const passwortAendern = async (token, altesPasswort, neuesPasswort) => {
+    try {
+        const ergebnis = await fetch(Server + "/authentifizierung/passwortAendern", {
+            // Eine POST-Anfrage wird an den PasswortÄnderungs-Endpunkt des Servers gesendet.
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify({ altesPasswort, neuesPasswort })
+        })
+
+        // Da der Server mit als Format JSON verwendet, wird die Serverantwort als JSON-Objekt empfangen.
+        const serverAntwort = await ergebnis.json()
+
+        if (serverAntwort.status === 1) {
+            return { status: true }
+        }
+
+        // Wenn die Serverantwort negativ ist, wird eine Fehlermeldung zurückgegeben.
+        return { error: serverAntwort.message }
+    } catch (error) {
+        // Wenn es einen Fehler bei der Ausführung der Funktion gibt, wird eine Fehlermeldung zurückgegeben.
+        return { error: "Fehler beim Ändern des Passwortes!" }
+    }
+}
+   ```
+
+   Für die Aktualisierung des Passwortes müssen das Token, das alte und das neue Passwort als Parameter der Funktion übergeben werden. Daraufhin wird eine POST-Anfrage mit den beiden Parametern als JSON-String im Message-Body an den Passwort-Änderungs-Endpunkt des Servers gesendet.
+   Die Antwort des Servers wird als JSON-Objekt empfangen.
+   Wenn der Server den Status 1 zurückgegeben hat, wurde das Passwort erfolgreich geändert und die die Funktion gibt den Status `true` zurück. Dadurch wird der Nutzer dann zur Anmeldung weitergeleitet und eine Erfolgsnachricht angezeigt.
+   Sollte der Server den Status 0 zurückgegeben haben, wird die Fehlermeldung zurückgegeben.
+   Wenn es einen Fehler bei der Anfrage gab, wird eine Fehlermeldung zurückgegeben.
+      
+   ## Den Account löschen
+      
+   ```javascript
+   export const accountVomServerLoeschen = async (token) => {
+    try {
+        const ergebnis = await fetch(Server + "/authentifizierung/accountLoeschen", {
+            // Eine POST-Anfrage wird an den AccountLöschen-Endpunkt des Servers gesendet.
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        })
+
+        // Da der Server mit als Format JSON verwendet, wird die Serverantwort als JSON-Objekt empfangen.
+        const serverAntwort = await ergebnis.json()
+
+        // Wenn der Server den Status "1" zurückgibt, wird der Status "true" zurückgegeben. (Der Account wurde erfolgreich gelöscht)
+        if (serverAntwort.status === 1) {
+            return { status: true }
+        }
+
+        // Wenn die Serverantwort negativ ist, wird eine Fehlermeldung zurückgegeben.
+        return { error: serverAntwort.message }
+    } catch (error) {
+        // Wenn es einen Fehler bei der Ausführung der Funktion gibt, wird eine Fehlermeldung zurückgegeben.
+        return { error: "Fehler beim Löschen des Accounts!" }
+    }
+}
+   ``` 
+   
+   Um den Account zu löschen, muss das Token als Parameter der Funktion übergeben werden. Daraufhin wird eine POST-Anfrage mit diesem Parameter als JSON-String im Message-Body an den Account-Löschen-Endpunkt des Servers gesendet.
+   Die Antwort des Servers wird als JSON-Objekt empfangen.
+   Wenn der Server den Status 1 zurückgegeben hat, wurde der Account erfolgreich gelöscht und die die Funktion gibt den Status `true` zurück. Dadurch wird der Nutzer dann zur Anmeldung weitergeleitet und eine Erfolgsnachricht angezeigt.
+   Sollte der Server den Status 0 zurückgegeben haben, wird die Fehlermeldung zurückgegeben.
+   Wenn es einen Fehler bei der Anfrage gab, wird eine Fehlermeldung zurückgegeben.
+   
+   </details>    
       
    ## Die Verschlüsselung
       
    Die Verschlüsselung seiner aufgelisteten Passwörter erfolgt genau dann, wenn das festgelegte Passwort nicht mehr eingegeben ist. Die eigentlichen Passwörter werden    dann verschlüsselt, indem an der Stelle des Passworts die Nachricht "Passwort ist verschlüsselt", auftritt. Wenn man das Masterpasswort wieder in das Eingabefeld      einfügt, dann werden wieder automatisch die aufgelisteten Passwörter entschlüsselt.
-      
-   ## Der Server 
- 
-   Der bereitgestellte Code ist ein JavaScript-Modul, das verschiedene Funktionen zur Kommunikation mit dem Server über HTTP-Anforderungen beinhaltet. Es ermöglicht      unserem Benutzer, sich mit Benutzername und Passwort anzumelden, das Passwort vom Server abzurufen und die Serverantwort als JSON-Objekt zu behandeln. Dieser          Code ist somit wichtig, um die sichere Kommunikation mit dem Server und um Benutzern den Zugriff auf sichere Ressourcen zu ermöglichen, während ihre                  Anmeldeinformationen geschützt bleiben.
       
    <hr>
    </details>
