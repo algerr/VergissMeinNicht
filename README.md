@@ -170,6 +170,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    ## Die Registrierung
       
    Um den Passwortmanager überhaupt verwenden zu können, muss man sich zuerst einen Account erstellen. Um sich zu registrieren werden drei Eingaben des Nutzers benötigt. Eine gültige Emailadresse, einen Benutzernamen, der noch nicht in der Datenbank existiert und ein Passwort. Da es dem Nutzer selbst überlassen ist, wie sicher er sein Accountpasswort gestalten möchte, haben wir keine Anforderungen an dieses, wie beispielsweise eine Mindestlänge. Wenn die Registrierung erfolgreich ist, wird man zur Anmeldung weitergeleitet, wo man sich direkt mit seinem frisch registrierten Account anmelden kann.
+   
+   ![image](https://user-images.githubusercontent.com/65679099/231804199-4c5ac2c9-4de7-49d5-a0a0-b0a0e512452b.png)
       
    <details>
    <summary>Nähere Informationen</summary>
@@ -283,6 +285,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    ## Der Eingabebereich
       
    Dieser Bereich befindet sich auf der linken Seite des Passwort Managers. Hier wird das Masterpasswort eingegeben, welches die Passwörter schützt, indem es mit diesen zusammen verschlüsselt wird. Zudem kann über die Schaltfläche [`Neues Passwort hinzufügen`](#ein-neues-passwort-hinzufuegen) ein neues Passwort hinzugefügt werden. Unter dem Eingabefeld für das Masterpasswort befindet sich zudem eine kleine Erklärung, wie das Masterpasswort funktioniert.
+    
+   ![image](https://user-images.githubusercontent.com/65679099/231804498-66ff1b5a-00bd-4742-9537-03a64f941758.png)
       
    <details>
    <summary>Nähere Informationen</summary>
@@ -418,6 +422,12 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    ## Die Passwortanzeige
    
    Um die Passwörter zu schützen, wird sichergestellt, dass sie dem Nutzer nur angezeigt werden, wenn das Masterpasswort vollständig eingegeben ist. Wenn dies nicht der Fall ist, wird ein Passworttext "●●●●●●●●●●●●●●●●●●●●●●" angezeigt, der das Passwort maskiert. Neben dem Passwort gibt es drei Schaltflächen, um das Passwort zu kopieren, anzuzeigen und zu löschen. Solange das Passwort nicht durch die Eingabe des Masterpasswortes entschlüsselt ist, kann das Passwort nicht kopiert und nicht angezeigt werden. Zudem ist der Hintergrund des Passworttextes rot und wird erst bei korrekter Eingabe des Masterpasswortes grün.
+   
+   ![image](https://user-images.githubusercontent.com/65679099/231805387-8f927fe1-8396-4028-9480-54238bd55a92.png)
+   Verschlüsselte Passwörter
+    
+   ![image](https://user-images.githubusercontent.com/65679099/231805555-6ce8c65e-cc0b-4b5f-8942-1b527586b46b.png)
+   Entschlüsselte Passwörter
       
    <details>
    <summary>Nähere Informationen</summary>
