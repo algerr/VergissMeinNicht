@@ -2897,7 +2897,7 @@ Wir sind stolz auf das, was wir erreicht haben und fühlen uns nun besser für z
 
 
 
-## Authoren
+## Autoren
 
 - [Laurenz Brause](https://www.github.com/algerr)
 - [Daniel Pauli](https://github.com/daniel10011011)
