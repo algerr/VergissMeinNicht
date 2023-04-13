@@ -134,8 +134,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    ![image](https://user-images.githubusercontent.com/65679099/231805887-b9224815-2de3-4588-9dbd-0d6458fa6df3.png)
       
-   <details>
-   <summary>Nähere Informationen</summary>
+      <details>
+         <summary>Nähere Informationen</summary>
    
    ![componentDidMount](https://user-images.githubusercontent.com/65679099/230749640-bcc1e7dd-0ed2-4aac-bf2c-01a738bd1719.png)
       
@@ -169,7 +169,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    
    
-   </details>
+      </details>
       
    ## Die Registrierung
       
@@ -177,8 +177,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    ![image](https://user-images.githubusercontent.com/65679099/231804199-4c5ac2c9-4de7-49d5-a0a0-b0a0e512452b.png)
       
-   <details>
-   <summary>Nähere Informationen</summary>
+      <details>
+         <summary>Nähere Informationen</summary>
    
    Wie bereits bei der Anmeldung wird durch die `componentDidMount()`-Methode direkt beim Rendern der Registrierung überprüft, ob noch ein gültiges Token im Browser des Nutzers gespeichert ist. Wenn dies der Fall ist, wird er automatisch auf die Startseite weitergeleitet.
    Auch wird wieder ein Zustandsboolean `eingabeAbgeschickt` verwendet, um Bedingungen aufzustellen, wie beispielsweise das Anzeigen der `Registrieren`-Schaltfläche oder des Lade-Spinners. 
@@ -213,15 +213,15 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
 
    
       
-   </details>
+      </details>
    
    
    ## Die Startseite
    
    Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nutzer zu jedem Detail unserer Seite. Wenn der Nutzer nach der Anmeldung auf die Startseite gelangt, befindet er sich direkt beim Passwortmanager. Dieser nimmt den Großteil des Bildschirms ein und wird umrandet von einer [Seitenleiste](#die-seitenleiste) und der der Seitenleiste angeschlossenen Navigationsbar. Der Nutzer kann sich über die Schaltfläche am oberen rechten Rand abmelden oder über die Seitenleiste zu den Accounteinstellungen gelangen. Hier auf der Startseite hat man die volle Kontrolle.
    
-   <details>
-   <summary>Nähere Informationen</summary>
+      <details>
+         <summary>Nähere Informationen</summary>
    
    ![componentDidMount](https://user-images.githubusercontent.com/65679099/230800107-d27b8aed-36da-4e40-8c46-0df638f94b47.png)
    
@@ -233,21 +233,21 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    
    Zusammenfassend lässt sich sagen, dass die Startseite der Ausgangspunkt der Anwendung ist. Egal, wo der Nutzer hin möchte, er kann das Ziel von der Startseite aus erreichen.
    
-   </details>
+      </details>
    
       
       
       
       
-   <details>
+      <details>
    <summary><h2>Der Passwort Manager</h2></summary>
       
    Der Passwort Manager ist die Anwendung, bzw. der Service, den wir mit Vergissmeinnicht unseren Nutzern anbieten. Er ist einfach zu verstehen und übersichtlich.
    Grob kann er in zwei Bereiche eingeteilt werden. Auf der linken Seite findet die Eingabe statt. Das Masterpasswort wird eingegeben und neue Passwörter werden hinzugefügt. Auf der rechten Seite ist die Passwörter-Tabelle, in der alle Passwörter des Nutzers angezeigt werden und kopiert, angezeigt oder gelöscht werden können.
    Die einzelnen Teilbereiche sind in unterschiedliche Komponente gegliedert, die dann im Passwort Manager gerendert werden.
       
-   <details>
-   <summary>Nähere Informationen</summary>
+         <details>
+            <summary>Nähere Informationen</summary>
    
    ![Linke_seite_state](https://user-images.githubusercontent.com/65679099/230801148-fc0c7626-d469-4b6f-9c4a-65762b374980.png)
       
@@ -278,8 +278,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Um die Entschlüsselung des Passwortes zu verwalten, wird in der `Passwort`-Spalte der Tabelle die Komponente `PasswortAnzeigen` gerendert, die sich damit befasst.
    Für den Inhalt der Tabelle werden alle Passwörter im `statePasswoerter`-Array auf die Tabelle gemapped. Dadurch entsteht ein neuer Array, in dem jedes Element aus einem Array mit der Beschreibung des Passwortes und der `PasswortAnzeige`-Komponente, die sich, wie bereits gesagt, um das Anzeigen des Passwortes in der `Passwort`-Spalte der Tabelle kümmert. Für diese Komponente wird das Passwort `{p}` und das Masterpasswort, mit dem es erstellt wurde als Parameter übergeben.
       
-   </details>
-   </details>
+            </details>
+         </details>
       
 
       
@@ -292,8 +292,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
     
    ![image](https://user-images.githubusercontent.com/65679099/231804498-66ff1b5a-00bd-4742-9537-03a64f941758.png)
       
-   <details>
-   <summary>Nähere Informationen</summary>
+         <details>
+            <summary>Nähere Informationen</summary>
       
    ![Funktionen](https://user-images.githubusercontent.com/65679099/230803233-47e33e23-e347-413a-b68d-df7752e97c10.png)
 
@@ -314,8 +314,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
       
       
       
-   </details>
-      
+         </details>
+   
    
    ## Ein neues Passwort hinzufügen
       
@@ -329,8 +329,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Sollte der Nutzer damit nicht zufrieden sein, kann er beliebig oft das Symbol erneut anklicken, um weitere Vorschläge für starke Passwörter zu generieren.
    Wenn alles eingegeben ist, wird das Passwort einfach über die Schaltfläche `Speichern` gespeichert und in der Tabelle an oberster Stelle angezeigt.
       
-   <details>
-   <summary>Nähere Informationen</summary>
+         <details>
+            <summary>Nähere Informationen</summary>
       
    Wie in allen Formularen wird auch hier ein Zustandsboolean `laedt` genutzt, um ein bedingtes Rendern des Lade-Spinners oder der `Speichern`-Schaltfläche zu ermöglichen. 
    ```javascript
@@ -420,7 +420,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Nun beginnt der Speicherungsprozess des Passwortes. Dafür muss zuerst sichergestellt werden, dass sowohl das Masterpasswort, als auch das Passwort das gespeichert werden soll und die Beschreibung dessen eingegeben wurden. Wenn nicht, wird ein oberes Modalfenster angezeigt, dass den Nutzer darauf hinweist. Wenn jedoch alle Bedingungen erfüllt sind, wird das Passwort zuerst mit dem Masterpasswort gemeinsam, mithilfe der Hilsfunktion `verschluesseln`, verschlüsselt und daraufhin eine Anfrage zum Speichern des Passwortes an den Server geschickt. 
    Sollte der Server einen Fehler zurückgeben, wird dieser dem Nutzer in einem oberen Modalfenster angezeigt. Sollte kein Fehler auftreten und einfach das Passwort zurückgegeben werden, wird dieses im Redux-Store gespeichert, das Modalfenster zum Hinzufügen eines neuen Passwortes ausgeblendet und das neue Passwort in der Tabelle angezeigt. Zum Schluss wird noch der Zustandsboolean `laedt` auf `false` gesetzt, da die Aktion abgeschlossen ist.
       
-   </details>
+         </details>
    
    
    ## Die Passwortanzeige
@@ -433,8 +433,8 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    ![image](https://user-images.githubusercontent.com/65679099/231805555-6ce8c65e-cc0b-4b5f-8942-1b527586b46b.png)
    Entschlüsselte Passwörter
       
-   <details>
-   <summary>Nähere Informationen</summary>
+         <details>
+            <summary>Nähere Informationen</summary>
    
    Auch in dieser Komponente wird mit Zustandsvariablen gearbeitet. 
       
@@ -521,11 +521,11 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Sollte alles funktioniert haben, wird das Passwort auch aus dem Redux-Store und somit aus der Tabelle gelöscht und kann nicht wiederhergestellt werden.
    
       
-   </details>
+         </details>
          
       
    <hr>
-   </details>
+      </details>
       
    ## Die Benutzerauthentifizierung
    
