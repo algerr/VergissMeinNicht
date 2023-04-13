@@ -2875,16 +2875,19 @@ Schließlich kann die Express-App als Firebase-Cloudfunktion exportiert, die auf
    
 </details> 
 
-# Reflexion      
+
+<details>
+<summary><h1>Die Reflexion</h1></summary>   
  
 Während unseres Projekts haben wir wertvolle Lektionen gelernt, die uns nicht nur in der Informatik, sondern auch in vielen anderen Lebensbereichen von großem Nutzen sein werden. Eine der ersten Herausforderungen, der wir uns stellen mussten, war ein effektives Zeitmanagement. In einem Umfeld mit knappen Fristen war es entscheidend, unsere Aufgaben sorgfältig zu planen und zu priorisieren, um unsere Zeit optimal zu nutzen und unsere Ziele zu erreichen. Durch die Beherrschung dieser Fähigkeit konnten wir unsere Produktivität steigern und das Projekt erfolgreich abschließen.
 
-Ein weiterer wichtiger Aspekt unseres Projekts war die Arbeit mit verschiedenen Programmen wie Adobe Photoshop und Adobe After Effects. Um qualitativ hochwertige Designs und Animationen zu erstellen, mussten wir uns schnell mit diesen Tools vertraut machen und neue Fähigkeiten erlernen. Durch die aktive Teilnahme an Schulungen und Übungen konnten wir unser Wissen und unsere Fähigkeiten im Umgang mit diesen Programmen erweitern. Durch ständiges Üben und Testen verbesserten wir unsere Fähigkeiten und sind nun in der Lage, professionelle Grafiken und Animationen zu erstellen. Diese Fähigkeiten haben nicht nur unser technisches Wissen erweitert, sondern auch unser Selbstvertrauen gestärkt.
+Eine eigene Full-Stack Anwendung zu planen und entwickeln
+Ein weiterer wichtiger Aspekt unseres Projekts war die Arbeit mit verschiedenen Programmen wie Adobe Photoshop und Adobe After Effects. Um qualitativ hochwertige Designs und Animationen zu erstellen, mussten wir uns schnell mit diesen Tools vertraut machen und neue Fähigkeiten erlernen. Durch ständiges Üben und Testen verbesserten wir unsere Fähigkeiten und sind nun in der Lage, professionelle Grafiken und Animationen zu erstellen. Diese Fähigkeiten haben nicht nur unser technisches Wissen erweitert, sondern auch unser Selbstvertrauen gestärkt.
 Eine weitere Herausforderung war, dass wir oft isoliert arbeiten mussten, was unsere organisatorischen Fähigkeiten auf die Probe stellte. Wir haben jedoch gelernt, wie man eine effektive Kommunikation und Koordination innerhalb des Teams aufrechterhält, um sicherzustellen, dass alle an einem Strang ziehen und die Arbeit fristgerecht erledigt wird. Wir haben Kommunikations- und Projektmanagementwerkzeuge eingesetzt, um unsere Zusammenarbeit zu verbessern und unsere Ziele erfolgreich zu erreichen.
 Die Reflexion unserer Erfahrungen in diesem Projekt hat unsere Fähigkeit zur Selbstreflexion gestärkt. Wir haben gelernt, dass es wichtig ist, offen für neue Herausforderungen zu sein und bereit, in verschiedene Fähigkeiten zu investieren, um in Projekten erfolgreich zu sein. Unsere Fähigkeit, effektiv mit verschiedenen Programmen zu arbeiten, unsere Programmierkenntnisse zu erweitern und unsere organisatorischen Fähigkeiten zu verbessern, wird uns in unserem zukünftigen Berufs- und Privatleben von großem Nutzen sein.
 
 Wir sind stolz auf das, was wir erreicht haben und fühlen uns nun besser für zukünftige Projekte gerüstet, da wir unsere Fähigkeiten und Kenntnisse in vielen verschiedenen Bereichen verbessert haben. Die Herausforderungen haben uns als Team zusammengeschweißt und gezeigt, dass wir gemeinsam Großes erreichen können. Wir sind zuversichtlich, dass die Erfahrungen und Fähigkeiten, die wir in diesem Projekt gesammelt haben, uns bei vielen zukünftigen Herausforderungen helfen werden und wir diese mit Bravour meistern werden.
-
+</details> 
 
 
 
