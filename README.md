@@ -123,7 +123,7 @@ Um nochmal genau zu erläutern, wie sich die 2FA-Authetifizierung von unserem Ko
    Das Frontend ist die Fassade der Anwendung. Die Webseite, auf der der Nutzer sich anmeldet, auf der er Nutzer interagiert und auf der er seine Passwörter ansieht, hinzufügt oder 
    
    <details>
-   <summary><h2>Die Komponenten</h2></summary>
+      <summary><h2>Die Komponenten</h2></summary>
 
    ## Die Anmeldung
       
