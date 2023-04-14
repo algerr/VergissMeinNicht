@@ -118,7 +118,6 @@ Um den Unterschied zwischen der 2FA-Authentifizierung und unserem Konzept noch e
 
 
 </details>
-<hr>
 
 
 
