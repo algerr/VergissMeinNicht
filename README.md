@@ -2883,7 +2883,8 @@ Schließlich kann die Express-App als Firebase-Cloudfunktion exportiert, die auf
    
 </details> 
 
-# Reflexion      
+<details>
+<summary><h1>Reflexion<h1></summary>
  
 Während unseres Projekts haben wir wertvolle Lektionen gelernt, die uns nicht nur in der Informatik, sondern auch in vielen anderen Lebensbereichen von großem Nutzen sein werden. Eine der ersten Herausforderungen, der wir uns stellen mussten, war ein effektives Zeitmanagement. In einem Umfeld mit knappen Fristen war es entscheidend, unsere Aufgaben sorgfältig zu planen und zu priorisieren, um unsere Zeit optimal zu nutzen und unsere Ziele zu erreichen. Durch die Beherrschung dieser Fähigkeit konnten wir unsere Produktivität steigern und das Projekt erfolgreich abschließen.
 
@@ -2893,7 +2894,7 @@ Die Reflexion unserer Erfahrungen in diesem Projekt hat unsere Fähigkeit zur Se
 
 Wir sind stolz auf das, was wir erreicht haben und fühlen uns nun besser für zukünftige Projekte gerüstet, da wir unsere Fähigkeiten und Kenntnisse in vielen verschiedenen Bereichen verbessert haben. Die Herausforderungen haben uns als Team zusammengeschweißt und gezeigt, dass wir gemeinsam Großes erreichen können. Wir sind zuversichtlich, dass die Erfahrungen und Fähigkeiten, die wir in diesem Projekt gesammelt haben, uns bei vielen zukünftigen Herausforderungen helfen werden und wir diese mit Bravour meistern werden.
 
-
+</details>
 
 
 
