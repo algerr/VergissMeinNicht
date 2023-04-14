@@ -176,7 +176,7 @@ Um den Unterschied zwischen der 2FA-Authentifizierung und unserem Konzept noch e
    Der Zustand von `eingabeAbgeschickt` wird wieder auf `false` gesetzt und der Nutzer kann erneut versuchen, sich anzumelden.
    Sollte der Nutzer es jedoch gar nicht erst geschafft haben, überhaupt beide Eingabefelder auszufüllen, wird er durch ein oberes Modalfenster daran erinnert und auch hier der Zustand von `eingabeAbgeschickt` auf `false` gesetzt.
     
-   ```  
+   ```javascript
    const mapStateToProps = state => {
     return {
         // Hier wird das Token aus dem Authentifizierungsteils des Stores extrahiert und als Prop an die Komponente übergeben.
