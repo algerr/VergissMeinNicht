@@ -160,21 +160,21 @@ Um den Unterschied zwischen der 2FA-Authentifizierung und unserem Konzept noch e
       
    ![Card](https://user-images.githubusercontent.com/65679099/230750401-eeadda78-fe3b-4d9a-809a-59cdde8194fe.png)
 
-   Das Anmeldeformular befindet sich in einem Card-Komponenten aus React-Bootstrap. Dadurch hebt sich die Anmeldung vom Hintergrund der Webseite ab. Das Formular erhält einen Event-Listener 'onSubmit={this.onSubmit}', wodurch beim Abschicken des Formulars unsere Funktion 'onSubmit' aufgerufen wird, die die Anmeldung durchführt.
+   Das Anmeldeformular befindet sich in einem Card-Komponenten aus React-Bootstrap. Dadurch hebt sich die Anmeldung vom Hintergrund der Webseite ab. Das Formular erhält einen Event-Listener `onSubmit={this.onSubmit}`, wodurch beim Abschicken des Formulars unsere Funktion `onSubmit` aufgerufen wird, die die Anmeldung durchführt.
    Das Anmeldeformular ist in zwei Bereiche geteilt, die jeweils aus einem Label und einem Eingabefeld bestehen.
-   Der erste Bereich umfasst die Eingabe des Benutzernamens. Über dem Eingabefeld, in dem sich, bis der Nutzer etwas einträgt, der Platzhalter "Benutzername" befindet, wird noch ein Label "Benutzername" festgelegt. So ist auch, wenn der Nutzer bereits angefangen hat zu schreiben, klar, dass in das Eingabefeld der Benutzername eingetragen werden muss. Um auf den Benutzernamen, den der Nutzer im Eingabefeld eingegeben hat, zuzugreifen, wird das 'ref'-Objekt verwendet. 
+   Der erste Bereich umfasst die Eingabe des Benutzernamens. Über dem Eingabefeld, in dem sich, bis der Nutzer etwas einträgt, der Platzhalter "Benutzername" befindet, wird noch ein Label `Benutzername` festgelegt. So ist auch, wenn der Nutzer bereits angefangen hat zu schreiben, klar, dass in das Eingabefeld der Benutzername eingetragen werden muss. Um auf den Benutzernamen, den der Nutzer im Eingabefeld eingegeben hat, zuzugreifen, wird das `ref`-Objekt verwendet. 
    Das Eingabefeld wird somit auf eine Eigenschaft der Anmeldungs-Komponenten gesetzt, sodass einfach durch 'this.benutzername' auf das Eingabefeld zugegriffen werden kann.
-   Im zweiten Bereich des Anmeldeformulars befindet sich die Eingabe des Passwortes. Das Passwort wird nicht wie der Benutzername im Klartext angezeigt, sondern durch den Passworttyp ('type="password"') des Eingabefeldes unkenntlich gemacht. Auch hier steht über dem Eingabefeld das Label "Passwort" und die Eingabe wird ebenfalls mit dem 'ref-Objekt' als Eigenschaft der Anmeldungs-Komponenten gespeichert. Über 'this.passwort' kann auf dieses Eingabefeld zugegriffen werden. 
-   Unter den Eingabefeldern befindet sich eine Schaltfläche, um zur Registrierung zu gelangen und sich zuerst einen Account zu erstellen. Die zweite Schaltfläche ist Abhängig vom Zustandsboolean 'eingabeAbgeschickt'. Wenn dieser auf 'true' steht, wird ein Lade-Spinner (sich drehender Kreis) angezeigt, ansonsten die Schaltfläche "Anmelden". Wenn der Nutzer auf "Anmelden" klickt, wird das Formular gesendet und die Funktion 'onSubmit()' aufgerufen.
+   Im zweiten Bereich des Anmeldeformulars befindet sich die Eingabe des Passwortes. Das Passwort wird nicht wie der Benutzername im Klartext angezeigt, sondern durch den Passworttyp (`type="password"`) des Eingabefeldes unkenntlich gemacht. Auch hier steht über dem Eingabefeld das Label `Passwort` und die Eingabe wird ebenfalls mit dem `ref`-Objekt als Eigenschaft der Anmeldungs-Komponenten gespeichert. Über `this.passwort` kann auf dieses Eingabefeld zugegriffen werden. 
+   Unter den Eingabefeldern befindet sich eine Schaltfläche, um zur Registrierung zu gelangen und sich zuerst einen Account zu erstellen. Die zweite Schaltfläche ist Abhängig vom Zustandsboolean `eingabeAbgeschickt`. Wenn dieser auf `true` steht, wird ein Lade-Spinner (sich drehender Kreis) angezeigt, ansonsten die Schaltfläche `Anmelden`. Wenn der Nutzer auf `Anmelden` klickt, wird das Formular gesendet und die Funktion `onSubmit()` aufgerufen.
       
    ![onSubmit](https://user-images.githubusercontent.com/65679099/230751118-564405b5-74b2-462b-9236-308f9aaf1dab.png)
       
-   Die 'onSubmit'-Funktion verhindert zuerst die browsereigene Standardaktion, die beim Abschicken eines Formulars geschieht. So wird einfach die selbstdefinierte Funktion ausgeführt. 
+   Die `onSubmit`-Funktion verhindert zuerst die browsereigene Standardaktion, die beim Abschicken eines Formulars geschieht. So wird einfach die selbstdefinierte Funktion ausgeführt. 
    Dann wird der Zustandsboolean `eingabeAbgeschickt` der Komponente destrukturiert, um diesen daraufhin als freien Boolean nutzen zu können.
-   Wenn der Zustand von 'eingabeAbgeschickt' noch nicht auf 'true' steht, wird dieser nun gesetzt, sodass der Anmelde-Button durch das Ladesymbol ersetzt wird. Daraufhin wird überprüft, ob der Nutzer sowohl Benutzername, als auch Passwort eingegeben haben. Wenn das der Fall ist, wird eine Anmeldungsanfrage mit dem eingegebenen Benutzernamen und Passwort an den Server geschickt. Wenn der Server ein Authentifizierungstoken zurück gibt, wird dieses im Browser gespeichert, sodass der Nutzer sich in der nächsten Stunde nicht erneut anmelden muss, und er wird auf die Startseite weitergeleitet.
+   Wenn der Zustand von `eingabeAbgeschickt` noch nicht auf `true` steht, wird dieser nun gesetzt, sodass der Anmelde-Button durch das Ladesymbol ersetzt wird. Daraufhin wird überprüft, ob der Nutzer sowohl Benutzername, als auch Passwort eingegeben haben. Wenn das der Fall ist, wird eine Anmeldungsanfrage mit dem eingegebenen Benutzernamen und Passwort an den Server geschickt. Wenn der Server ein Authentifizierungstoken zurück gibt, wird dieses im Browser gespeichert, sodass der Nutzer sich in der nächsten Stunde nicht erneut anmelden muss, und er wird auf die Startseite weitergeleitet.
    Wenn der Server einen Fehler bei der Anmeldung zurückgibt, öffnet sich ein oberes Modalfenster und zeigt dem Nutzer diese Fehlermeldung an.
-   Der Zustand von 'eingabeAbgeschickt' wird wieder auf 'false' gesetzt und der Nutzer kann erneut versuchen, sich anzumelden.
-   Sollte der Nutzer es jedoch gar nicht erst geschafft haben, überhaupt beide Eingabefelder auszufüllen, wird er durch ein oberes Modalfenster daran erinnert und auch hier der Zustand von 'eingabeAbgeschickt' auf 'false' gesetzt.
+   Der Zustand von `eingabeAbgeschickt` wird wieder auf `false` gesetzt und der Nutzer kann erneut versuchen, sich anzumelden.
+   Sollte der Nutzer es jedoch gar nicht erst geschafft haben, überhaupt beide Eingabefelder auszufüllen, wird er durch ein oberes Modalfenster daran erinnert und auch hier der Zustand von `eingabeAbgeschickt` auf `false` gesetzt.
     
    ```  
    const mapStateToProps = state => {
@@ -241,6 +241,35 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Anmeldung
    Auch hier wird der Zustandsboolean `eingabeAbgeschickt` auf `false` gesetzt, da der Nutzer erneut versuchen muss, sich zu registrieren.
    Sollte das Problem jedoch daran liegen, dass der Nutzer nicht alle Eingabefelder ausgefüllt hat, wird er durch ein oberes Modalfenster daran erinnert, doch bitte alle Felder auszufüllen.
    Auch hierbei wird der Zustandsboolean `eingabeAbgeschickt` auf `false` gesetzt, da der Nutzer erneut versuchen muss, sich zu registrieren.
+   
+   ```javascript
+   const mapStateToProps = state => {
+    return {
+        // Hier wird das Token aus dem Redux-Store extrahiert und als Eigenschaft an die Komponente übergeben.
+        token: state.authentifizierung.token
+    }
+}
+
+// mapDispatchToProps gibt zwei Funktionen zurück, die als Eigenschaft für die Registrierungs-Komponente verfügbar gemacht werden:
+// setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen sind Aktionserzeuger, die das obere Modalfenster verwalten.
+const mapDispatchToProps = dispatch => {
+    return {
+        setzeInhaltFuerOberesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerOberesModalfenster(titel, inhalt, buttons)),
+        oberesModalfensterAnzeigen: () => dispatch(oberesModalfensterAnzeigen())
+    }
+}
+
+// Connect wird verwendet, um die Registrierungs-Komponente mit Redux zu verbinden.
+// mapStateToProps und mapDispatchToProps werden als Argumente übergeben.
+// withRouter wird verwendet, um der Komponente Zugriff auf das Router-Objekt zu geben.
+// Das Ergebnis der Verbindung wird als exportiertes Default-Objekt zurückgegeben.
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Registrierung))
+   ```
+   
+   Aus dem Redux-Store wird der aktuelle Zustand des Tokens als `token` an die Eigenschaften der Komponente übergeben. Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster an die Eigenschaften der Komponente übergeben.
+   Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
+   So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit einer Fehlermeldung anzeigen.
+   
    Im Groben und Ganzen ähneln sich Anmeldung und Registrierung im Frontend. Bei der Registrierung wird zusätzlich noch eine Emailadresse benötigt, aber der eigentliche Unterschied besteht darin, was der Server im Backend mit der Anfrage macht.
    
 </details>
@@ -259,6 +288,32 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    ![render](https://user-images.githubusercontent.com/65679099/230800615-d73c5c49-3cd1-46a6-81a1-f6c9e95f6f67.png)
    
    Zuerst wird auf der Startseite die Seitenleiste gerendert, da diese die angezeigte Seite einschließt. Durch das Switch-Statement wird, je nachdem, welche Route geöffnet wird, der PasswortManager oder die Accounteinstellungen gerendert. Standardmäßig, wenn die Standardseite aufgerufen wird, wird auf den PasswortManager umgeleitet. Wenn kein passender Pfad gefunden wird, wird auf die Error 404 Seite weitergeleitet, die hier an anderer Stelle erklärt wird.
+   
+   ```javascript
+   const mapStateToProps = state => {
+    return {
+        token: state.authentifizierung.token,
+    }
+}
+
+// mapDispatchToProps ist eine Funktion, die Aktionserzeuger in Props konvertiert.
+// Hier werden die passwoerterFestlegen-, setzeInhaltFuerOberesModalfenster- und oberesModalfensterAnzeigen-Aktionserzeuger in Props konvertiert.
+const mapDispatchToProps = dispatch => {
+    return {
+        passwoerterFestlegen: (data) => dispatch(passwoerterFestlegen(data)),
+        setzeInhaltFuerOberesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerOberesModalfenster(titel, inhalt, buttons)),
+        oberesModalfensterAnzeigen: () => dispatch(oberesModalfensterAnzeigen())
+    }
+}
+
+// Die Startseite-Komponente wird mit dem Redux-Store verbunden, indem mapStateToProps und mapDispatchToProps übergeben werden. 
+// So kann die Komponente auf den Redux-Store zugreifen.
+export default connect(mapStateToProps, mapDispatchToProps)(Startseite)
+   ```
+   
+   Aus dem Redux-Store wird der aktuelle Zustand des Tokens als `token` an die Eigenschaften der Komponente übergeben. Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Festlegen der Passwörter an die Eigenschaften der Komponente übergeben.
+   Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
+   So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder die abgerufenen Passwörter des Nutzers festlegen, sodass diese im Passwort Manager angezeigt werden können.
    
    Zusammenfassend lässt sich sagen, dass die Startseite der Ausgangspunkt der Anwendung ist. Egal, wo der Nutzer hin möchte, er kann das Ziel von der Startseite aus erreichen.
 </details>
@@ -304,6 +359,26 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    Um die Entschlüsselung des Passwortes zu verwalten, wird in der `Passwort`-Spalte der Tabelle die Komponente `PasswortAnzeigen` gerendert, die sich damit befasst.
    Für den Inhalt der Tabelle werden alle Passwörter im `statePasswoerter`-Array auf die Tabelle gemapped. Dadurch entsteht ein neuer Array, in dem jedes Element aus einem Array mit der Beschreibung des Passwortes und der `PasswortAnzeige`-Komponente, die sich, wie bereits gesagt, um das Anzeigen des Passwortes in der `Passwort`-Spalte der Tabelle kümmert. Für diese Komponente wird das Passwort `{p}` und das Masterpasswort, mit dem es erstellt wurde als Parameter übergeben.
       
+   ```javascript
+   const mapStateToProps = state => {
+    return {
+
+        // Die "passwoerter"-Props wird aus dem "liste"-Teil des Redux-Stores extrahiert.
+        // Diese beinhaltet alle gespeicherten Passwörter.
+        passwoerter: state.passwoerter.liste
+    }
+}
+
+// Die "connect"-Funktion von Redux wird verwendet, um die Komponente an den Redux-Store anzuschließen.
+// Die "mapStateToProps"-Funktion wird an "connect" übergeben, um die entsprechenden Props zu extrahieren.
+// Somit kann diese nun beispielsweise auf die gespeicherten Passwörter zugreifen.
+export default connect(mapStateToProps)(PasswortManager)
+   ```
+      
+   Aus dem Redux-Store wird der aktuelle Zustand der Liste der Passwörter des Nutzers als `passwoerter` an die Eigenschaften der Komponente übergeben. 
+   Zum Schluss wird die Komponente noch mit dem Redux-Store verbunden.
+   So kann die Komponente darauf zugreifen und die Passwörter des Nutzers aus der Liste in die Passwörter-Tabelle übertragen.
+      
 </details>
       
       
@@ -332,6 +407,22 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    Unter dem Eingabefeld befindet sich ein Erklärungstext, wie das Masterpasswort und die Ver- und Entschlüsselung der Passwörter funktioniert.
       
    Am Ende des Eingabebereiches folgt noch die Schaltfläche zum Hinzufügen neuer Passwörter. Über den Event-Listener `onClick` wird bei einem Klick auf diese Schaltfläche die Funktion `onPasswortHinzufuegen` ausgeführt, die, wie oben bereits erklärt ein Modalfenster öffnet, in dem ein neues Passwort hinzugefügt werden kann.
+   
+   ```javascript
+   const mapDispatchToProps = dispatch => {
+    return {
+        setzeInhaltFuerZentriertesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerZentriertesModalfenster(titel, inhalt, buttons)),
+        zentriertesModalfensterAnzeigen: () => dispatch(zentriertesModalfensterAnzeigen())
+    }
+}
+
+// Verbindung der Komponente mit dem Redux-Store, um auf die Aktionserzeuger zugreifen zu können.
+export default connect(null, mapDispatchToProps)(EingabeBereich)
+   ```
+   
+   Aus dem Redux-Store werden die Aktionserzeuger-Funktionen zur Verwaltung von Modalfenstern an die Eigenschaften der Komponente übergeben.
+   Zum Schluss wird die Komponente noch mit den Aktionserzeugern verbunden.
+   So kann die Komponente darauf zugreifen und beispielsweise ein zentriertes Modalfenster zum Hinzufügen eines neuen Passwortes anzeigen.
    
 </details>
    
@@ -440,6 +531,38 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    Nun beginnt der Speicherungsprozess des Passwortes. Dafür muss zuerst sichergestellt werden, dass sowohl das Masterpasswort, als auch das Passwort das gespeichert werden soll und die Beschreibung dessen eingegeben wurden. Wenn nicht, wird ein oberes Modalfenster angezeigt, dass den Nutzer darauf hinweist. Wenn jedoch alle Bedingungen erfüllt sind, wird das Passwort zuerst mit dem Masterpasswort gemeinsam, mithilfe der Hilsfunktion `verschluesseln`, verschlüsselt und daraufhin eine Anfrage zum Speichern des Passwortes an den Server geschickt. 
    Sollte der Server einen Fehler zurückgeben, wird dieser dem Nutzer in einem oberen Modalfenster angezeigt. Sollte kein Fehler auftreten und einfach das Passwort zurückgegeben werden, wird dieses im Redux-Store gespeichert, das Modalfenster zum Hinzufügen eines neuen Passwortes ausgeblendet und das neue Passwort in der Tabelle angezeigt. Zum Schluss wird noch der Zustandsboolean `laedt` auf `false` gesetzt, da die Aktion abgeschlossen ist.
       
+   ```javascript
+   const mapStateToProps = state => {
+    return {
+        // Das Authentifizierungs-Token wird aus dem Redux-Store extrahiert.
+        token: state.authentifizierung.token
+    }
+}
+
+// Hier wird die Funktion mapDispatchToProps definiert, die die folgenden Aktionserzeuger-Funktionen als Props 
+// an die verbundene Komponente weiterleitet: zentriertesModalfensterAusblenden, setzeInhaltFuerOberesModalfenster, 
+// oberesModalfensterAnzeigen und passwortHinzufuegen. Diese Funktionen sind Teil des Redux-Stores und werden später
+// aufgerufen, wenn in der Komponente auf bestimmte Ereignisse reagiert werden soll.
+const mapDispatchToProps = dispatch => {
+    return {
+        zentriertesModalfensterAusblenden: () => dispatch(zentriertesModalfensterAusblenden()),
+        setzeInhaltFuerOberesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerOberesModalfenster(titel, inhalt, buttons)),
+        oberesModalfensterAnzeigen: () => dispatch(oberesModalfensterAnzeigen()),
+        passwortHinzufuegen: (data) => dispatch(passwortHinzufuegen(data))
+    }
+}
+
+// Die "connect"-Funktion von Redux wird verwendet, um die Komponente an den Redux-Store anzuschließen.
+// Die "mapStateToProps"-Funktion wird an "connect" übergeben, um die entsprechenden Props zu injizieren.
+// "passwoerter" ist die Komponente, die an den Store angeschlossen werden soll.
+// Somit kann diese nun beispielsweise auf die gespeicherten Passwörter zugreifen.
+export default connect(mapStateToProps, mapDispatchToProps)(NeuesPasswortHinzufuegen)
+   ```
+   
+   Aus dem Redux-Store wird der aktuelle Zustand des Tokens als `token` an die Eigenschaften der Komponente übergeben. Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Hinzufügen eines Passwortes an die Eigenschaften der Komponente übergeben.
+   Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
+   So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder ein neues Passwort in die Passwörter-Tabelle hinzufügen kann.
+
 </details>
    
 ## Die Passwortanzeige
@@ -539,6 +662,36 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    Wenn vom Server ein Fehler zurückgegeben wird, wird dieser dem Nutzer in einem oberen Modalfenster angezeigt.
    Sollte alles funktioniert haben, wird das Passwort auch aus dem Redux-Store und somit aus der Tabelle gelöscht und kann nicht wiederhergestellt werden.
    
+   ```javascript
+   const mapStateToProps = state => {
+    return {
+        token: state.authentifizierung.token
+    }
+}
+
+// Hier wird die Funktion mapDispatchToProps definiert, die die folgenden Funktionen als Props 
+// an das verbundene Komponenten-Element weiterleitet: passwortLoeschen, setzeInhaltFuerOberesModalfenster, 
+// oberesModalfensterAnzeigen und oberesModalfensterAusblenden. Diese Funktionen sind Teil des Redux-Stores und werden später
+// aufgerufen, wenn in der Komponente auf bestimmte Ereignisse reagiert werden soll.
+const mapDispatchToProps = dispatch => {
+    return {
+        passwortLoeschen: (passwort) => dispatch(passwortLoeschen(passwort)),
+        setzeInhaltFuerOberesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerOberesModalfenster(titel, inhalt, buttons)),
+        oberesModalfensterAnzeigen: () => dispatch(oberesModalfensterAnzeigen()),
+        oberesModalfensterAusblenden: () => dispatch(oberesModalfensterAusblenden()),
+    }
+}
+
+// Hier wird das Komponenten-Element "PasswortAnzeige" durch die Funktion "connect" mit dem globalen 
+// Redux-Store verbunden. Durch die Verwendung der beiden vorher definierten Funktionen "mapStateToProps" 
+// und "mapDispatchToProps" werden die entsprechenden Daten und Funktionen an das Komponenten-Element 
+// weitergeleitet, damit es auf die Daten und Ereignisse reagieren kann.
+export default connect(mapStateToProps, mapDispatchToProps)(PasswortAnzeige)
+   ```
+   
+   Aus dem Redux-Store wird der aktuelle Zustand des Tokens als `token` an die Eigenschaften der Komponente übergeben. Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Löschen eines Passwortes an die Eigenschaften der Komponente übergeben.
+   Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
+   So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder ein Passwort aus der Passwörter-Tabelle entfernt werden.
       
 </details>      
    
@@ -572,6 +725,21 @@ Die Startseite ist das Herzstück unserer Webseite. Von hier aus gelangt der Nut
    return (<Redirect to="/anmeldung" />)
    ```
    
+   ```javascript
+   const mapStateToProps = state => {
+    return {
+        token: state.authentifizierung.token
+    }
+}
+
+// Um auf den Redux-Store zugreifen zu können wird die Komponente mit diesem verbunden.
+export default connect(mapStateToProps)(BenutzerAuthentifizieren)
+   ```
+   
+   Aus dem Redux-Store wird der aktuelle Zustand des Tokens als `token` an die Eigenschaften der Komponente übergeben.
+   Zum Schluss wird die Komponente noch mit dem Redux-Store verbunden.
+   So kann die Komponente darauf zugreifen und die Authentifizierung des Tokens durchführen.
+
 </details>   
    
    
@@ -917,7 +1085,7 @@ Die Seitenleiste lässt sich nach Wunsch ein- und ausblenden. Wenn diese eingebl
    Gerendert wird eine HTML-Tabelle mit den Überschriften und dem Inhalt, die als Eigenschaften an die Komponente übergeben wurden. Wenn keine Überschriften oder kein Inhalt übergeben wurden, wird eine Fehlermeldung gerendert. Die Tabellenzeilen werden aus dem `inhalt`-Array generiert, wobei für jede Zeile eine separate `tr`-Komponente erstellt wird und die Zellen mit den entsprechenden Daten aus dem `tr`-Array als `td`-Tags gerendert werden. 
    
 <details>
-<summary>Nähere Informationen</summary
+<summary>Erklärung zu `tr` und `td`</summary
       
    `tr` und `td` werden als `Table Row` (Tabellenzeile) und `Table Data` (Tabellendaten) verwendet. Sie beziehen sich auf HTML-Elemente, die verwendet werden, um Tabellen in HTML-Dokumenten zu erstellen. Das "tr"-Element wird verwendet, um eine Tabellenzeile zu definieren und zu erstellen. Eine Tabellenzeile besteht normalerweise aus mehreren "td"-Elementen, die die einzelnen Zellen in der Zeile darstellen. Das "td"-Element hingegen wird verwendet, um eine Tabellendatenzelle innerhalb einer Tabellenzeile zu definieren. Es enthält normalerweise den eigentlichen Inhalt, der in der Zelle angezeigt werden soll, wie Text, Bilder oder andere HTML-Elemente. "td"-Elemente werden normalerweise innerhalb von "tr"-Elementen verwendet, um die Zellen in einer Tabellenzeile zu erstellen.
    Die gemeinsame Darstellung der beiden Elemente ermöglicht eine Tabelle mit mehreren Zeilen und Spalten. Sie können mit CSS gestaltet werden und mit JavaScript manipuliert werden, um dynamische, interaktive Tabellen zu erstellen.   
