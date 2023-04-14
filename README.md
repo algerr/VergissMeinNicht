@@ -175,7 +175,33 @@ Um den Unterschied zwischen der 2FA-Authentifizierung und unserem Konzept noch e
    Wenn der Server einen Fehler bei der Anmeldung zurückgibt, öffnet sich ein oberes Modalfenster und zeigt dem Nutzer diese Fehlermeldung an.
    Der Zustand von 'eingabeAbgeschickt' wird wieder auf 'false' gesetzt und der Nutzer kann erneut versuchen, sich anzumelden.
    Sollte der Nutzer es jedoch gar nicht erst geschafft haben, überhaupt beide Eingabefelder auszufüllen, wird er durch ein oberes Modalfenster daran erinnert und auch hier der Zustand von 'eingabeAbgeschickt' auf 'false' gesetzt.
-      
+    
+   ```  
+   const mapStateToProps = state => {
+    return {
+        // Hier wird das Token aus dem Authentifizierungsteils des Stores extrahiert und als Prop an die Komponente übergeben.
+        token: state.authentifizierung.token
+    }
+}
+
+// Die Funktion mapDispatchToProps wird verwendet, um die Aktionserzeuger mit den Props der Komponente zu verbinden.
+const mapDispatchToProps = dispatch => {
+    return {
+        // Hier werden die Aktionserzeuger authentifizierungsTokenFestlegen, setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen an die Props setAuthToken, setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen gebunden.
+        authentifizierungsTokenFestlegen: (token) => dispatch(authentifizierungsTokenFestlegen(token)),
+        setzeInhaltFuerOberesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerOberesModalfenster(titel, inhalt, buttons)),
+        oberesModalfensterAnzeigen: () => dispatch(oberesModalfensterAnzeigen())
+    }
+}
+
+// Die Komponente (Anmeldeformular) wird mithilfe der connect-Funktion mit dem Redux-Store verbunden und exportiert.
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Anmeldung))
+   ```
+
+   Aus dem Redux-Store wird der aktuelle Zustand des Tokens als `token` an die Eigenschaften der Komponente übergeben. Als Aktionserzeuger-Funktionen werden die Verwaltungsfunktionen für Modalfenster und die Funktion zum Festlegen des Tokens an die Eigenschaften der Komponente übergeben.
+   Zum Schluss wird die Komponente noch mit dem Redux-Store und den Aktionserzeugern verbunden.
+   So kann die Komponente darauf zugreifen und beispielsweise ein oberes Modalfenster mit der Fehlermeldung anzeigen oder das Token nach einer erfolgreichen Anmeldung festlegen.
+
 </details>
       
    ## Die Registrierung
