@@ -6,13 +6,11 @@ https://user-images.githubusercontent.com/65679099/230721605-d894c2f3-10a2-4caa-
 # VergissMeinNicht
 Sind Sie genervt von der ewigen Suche nach dem Passwort? Wir haben die Lösung!
 
-Wir wollten mit diesem Projekt etwas schaffen, wovon die Menschen einen Nutzen haben.
-Da wir selber vom Problem betroffen waren, unsere Passwörter nicht wiederfinden zu können, dachten wir uns, ob man einen Passwort Manager, wie er überall angepriesen wird, nicht auch selber entwickeln kann.
-Bei den großen Plattformen kann man sich nicht sicher sein, ob die Passwörter wirklich gut verschlüsselt und geschützt vor fremden Zugriffen sind. Ein Passwort Manager, der erklärt, wie alles funktioniert und 100% Transparenz schafft, wie die Passwörter und Nutzer Daten nicht Mal den Betreibern zugänglich sind.
-Neben dem standardmäßigen Account-System, das den ersten Faktor zur Authentifizierung des Benutzers darstellt, haben wir uns überlegt, ein Masterpasswort als zweiten Faktor zu nutzen.
-Dieses Masterpasswort ist wie der Schlüssel zu einem unzerstörbaren Safe. Man mag zwar vor ihm stehen, also das Passwort des Accounts kennen, aber ohne den Schlüssel, ist kein Passwort abrufbar.
-Durch diese 2-Faktor-Authentifizierung und die 100% Transparenz, ist VergissMeinNicht die perfekte Wahl für Menschen, die Wert auf ihre Sicherheit und Privatsphäre legen.
-Überzeugen Sie sich einfach selbst!
+Wir wollten mit diesem Projekt etwas schaffen, das den Menschen nützt. Da wir selbst von dem Problem betroffen waren, dass wir unsere Passwörter nicht mehr finden konnten, haben wir uns gefragt, ob es nicht möglich ist, einen Passwort Manager, wie er überall angepriesen wird, selbst zu entwickeln. 
+Bei den großen Plattformen kann man sich nicht sicher sein, ob die Passwörter wirklich gut verschlüsselt und vor fremdem Zugriff geschützt sind. Ein Passwort Manager, der erklärt, wie alles funktioniert und 100% Transparenz schafft, wie Passwörter und Nutzerdaten nicht einmal den Betreibern zugänglich sind, ist definitv vertrauenswürdiger. 
+Neben dem Standard-Account-System, das den ersten Faktor zur Authentifizierung des Benutzers darstellt, haben wir uns überlegt, ein Masterpasswort als zweiten Faktor zu verwenden. Dieses Masterpasswort ist wie der Schlüssel zu einem unzerstörbaren Safe. Man kann zwar davor stehen, d.h. das Passwort des Kontos kennen, aber ohne den Schlüssel ist keines der gespeicherten Passwörter zugänglich. 
+Durch diese 2-Faktor-Authentifizierung und die 100%ige Transparenz ist VergissMeinNicht die perfekte Wahl für Menschen, die Wert auf ihre Sicherheit und Privatsphäre legen. Überzeugen Sie sich selbst!
+
 
 # Inhaltsverzeichnis
 
