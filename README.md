@@ -33,7 +33,7 @@ Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser
       - [Die Accounteinstellungen](#die-accounteinstellungen)
       - [Die Aktualisierung des Passwortes](#die-aktualisierung-des-passwortes)
       - [Die Aktualisierung der Emailadresse](#die-aktualisierung-der-emailadresse)
-   - [Die Hilfsfunktionen](#die-hilsfunktionen)
+   - [Die Hilfsfunktionen](#die-hilfsfunktionen)
       - [Die Verschlüsselung](#die-verschlüsselung)
       - [Der Server](#der-server)
       - [Das Token](#das-token)
