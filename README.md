@@ -6,7 +6,13 @@ https://user-images.githubusercontent.com/65679099/230721605-d894c2f3-10a2-4caa-
 # VergissMeinNicht
 Sind Sie genervt von der ewigen Suche nach dem Passwort? Wir haben die Lösung!
 
-Wie bereits in unseren Blogeinträgen erwähnt, war es seit dem 14.03.2023 unser Hauptziel, bis zu den Osterferien einen Passwortmanager zu entwickeln, der es den Internetnutzern erleichtern soll, den richtigen Umgang mit den von ihnen genutzten Plattformen zu erlernen. Vor allem sollte den Menschen ab sofort Sicherheit geboten werden, damit Hacker kaum noch eine Chance haben, Daten von anderen zu stehlen. Gerade Unternehmen, die mit mehreren Passwörtern im Internet arbeiten, können von einer solchen Idee sehr profitieren. Auch dass es ein Tool geben sollte, das von sich aus Passwörter generiert, die absolut sicher sind, wäre nur von Vorteil. Die erste Grundidee war also, ein Passwort zu generieren, welches die anderen Passwörter, die man hat, durch Verschlüsselung schützt. Insofern sollte dieses Konzept der 2FA-Authentifizierung ähneln, die ebenfalls eine weit verbreitete Möglichkeit ist, Daten bzw. Konten zu schützen, indem eine zusätzliche Sicherheitsmaßnahme wie eine Bestätigung per E-Mail eingebaut wird. 
+Wir wollten mit diesem Projekt etwas schaffen, wovon die Menschen einen Nutzen haben.
+Da wir selber vom Problem betroffen waren, unsere Passwörter nicht wiederfinden zu können, dachten wir uns, ob man einen Passwort Manager, wie er überall angepriesen wird, nicht auch selber entwickeln kann.
+Bei den großen Plattformen kann man sich nicht sicher sein, ob die Passwörter wirklich gut verschlüsselt und geschützt vor fremden Zugriffen sind. Ein Passwort Manager, der erklärt, wie alles funktioniert und 100% Transparenz schafft, wie die Passwörter und Nutzer Daten nicht Mal den Betreibern zugänglich sind.
+Neben dem standardmäßigen Account-System, das den ersten Faktor zur Authentifizierung des Benutzers darstellt, haben wir uns überlegt, ein Masterpasswort als zweiten Faktor zu nutzen.
+Dieses Masterpasswort ist wie der Schlüssel zu einem unzerstörbaren Safe. Man mag zwar vor ihm stehen, also das Passwort des Accounts kennen, aber ohne den Schlüssel, ist kein Passwort abrufbar.
+Durch diese 2-Faktor-Authentifizierung und die 100% Transparenz, ist VergissMeinNicht die perfekte Wahl für Menschen, die Wert auf ihre Sicherheit und Privatsphäre legen.
+Überzeugen Sie sich einfach selbst!
 
 # Inhaltsverzeichnis
 
