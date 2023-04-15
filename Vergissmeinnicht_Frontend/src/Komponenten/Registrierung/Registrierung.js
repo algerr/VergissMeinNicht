@@ -148,7 +148,7 @@ const mapStateToProps = state => {
 }
 
 // mapDispatchToProps gibt zwei Funktionen zurück, die als Props für das Registrierungs-Komponente verfügbar gemacht werden:
-// setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen sind Aktionen, die den Top-Modal (Modales Fenster am oberen Bildschirmrand) im UI aktualisieren.
+// setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen sind Aktionen, die das obere Modalfenster im UI aktualisieren.
 // Sie werden hier mit dispatch verbunden und können in der Komponente als Props verwendet werden.
 const mapDispatchToProps = dispatch => {
     return {
