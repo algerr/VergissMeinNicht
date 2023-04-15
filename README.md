@@ -191,7 +191,7 @@ Im Frontend interagieren unsere UI-Komponenten mit dem Backend und sendet Anfrag
 // Die Funktion mapDispatchToProps wird verwendet, um die Aktionserzeuger mit den Props der Komponente zu verbinden.
 const mapDispatchToProps = dispatch => {
     return {
-        // Hier werden die Aktionserzeuger authentifizierungsTokenFestlegen, setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen an die Props setAuthToken, setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen gebunden.
+        // Hier werden die Aktionserzeuger authentifizierungsTokenFestlegen, setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen an die Props authentifizierungsTokenFestlegen, setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen gebunden.
         authentifizierungsTokenFestlegen: (token) => dispatch(authentifizierungsTokenFestlegen(token)),
         setzeInhaltFuerOberesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerOberesModalfenster(titel, inhalt, buttons)),
         oberesModalfensterAnzeigen: () => dispatch(oberesModalfensterAnzeigen())
@@ -1252,7 +1252,7 @@ const mapStateToProps = state => {
 }
 
 // mapDispatchToProps verbindet das Redux-Store mit den Aktionserzeugern des Stores.
-// Das Objekt, welches zurückgegeben wird, hat die Form: {Action-Creator-Name: dispatch(Action)}
+// Das Objekt, welches zurückgegeben wird, hat die Form: {Aktionserzeuger: dispatch(Aktion)}
 const mapDispatchToProps = dispatch => {
     return {
         zentriertesModalfensterAusblenden: () => dispatch(zentriertesModalfensterAusblenden()),
