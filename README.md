@@ -1921,7 +1921,22 @@ export const SETZE_INHALT_FUER_ZENTRIERTES_MODALFENSTER = "SETZE_INHALT_FUER_ZEN
       
 ## Die Authentifizierung 
       
-   ![carbon (25)](https://user-images.githubusercontent.com/111282979/230963058-7ebf965c-e9f9-41b3-afc5-d2b80922b558.png)
+   ```javascript
+   // Der Aktionstyp, der zur Identifikation der Aktion in der Redux-Anwendung verwendet wird, wird importiert.
+import { AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN } from './aktionsTypen'
+
+// Hier wird die Funktion authentifizierungsTokenFestlegen definiert, die einen Token entgegennimmt und eine Aktion zurückgibt.
+export const authentifizierungsTokenFestlegen = (token) => {
+    return {
+        // Der Aktionstyp "AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN" wird zugewiesen, um die Aktion innerhalb der Redux-Anwendung eindeutig zu identifizieren.
+        type: AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN,
+        // Hier wird das Token als Datenpaket der Aktion übergeben. 
+        // Wenn das Token existiert, also nicht null ist, wird noch der Zusatz "Bearer " angefügt.
+        // JWT liegen im Bearer-Token-Schema vor, was durch diesen Zusatz im Authorisierungs-Header von Anfragen dem Server direkt mitgeteilt wird.
+        token: token ? "Bearer " + token : token
+    }
+}
+   ```
 
    Wie vermutlich aus den vorigen Texten bereits angeklungen ist, spielt die Authentifizierung bei uns eine wichtige Rolle. Folglich haben wir einen Aktionserzeuger für den die Festlegung, bzw. die Speicherung des Authentifizierungstokens.
 Das Token wird als Parameter an die Funktion übergeben. So gibt die Funktion eine Aktion zurück, die den importierten Aktionstyp `"AUTHENTIFIZIERUNGSTOKEN_FESTLEGEN"` verwendet, um die Aktion in Redux eindeutig zu identifizieren.
