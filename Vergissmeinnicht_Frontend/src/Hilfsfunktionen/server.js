@@ -1,4 +1,4 @@
-// Server (Backend) URL
+// Server (Backend - API) URL
 const Server = "https://us-central1-forgetmynot-2f796.cloudfunctions.net/backend"
 
 // In der Anmelde-Funktion werden Benutzername und Passwort geprüft.
