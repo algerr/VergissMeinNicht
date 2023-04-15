@@ -152,7 +152,7 @@ const mapStateToProps = state => {
 // Die Funktion mapDispatchToProps wird verwendet, um die Aktionserzeuger mit den Props der Komponente zu verbinden.
 const mapDispatchToProps = dispatch => {
     return {
-        // Hier wird der Action-Creator authentifizierungsTokenFestlegen, setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen an die Props setAuthToken, setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen gebunden.
+        // Hier werden die Aktionserzeugerfunktionen authentifizierungsTokenFestlegen, setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen an die Props authentifizierungsTokenFestlegen, setzeInhaltFuerOberesModalfenster und oberesModalfensterAnzeigen gebunden.
         authentifizierungsTokenFestlegen: (token) => dispatch(authentifizierungsTokenFestlegen(token)),
         setzeInhaltFuerOberesModalfenster: (titel, inhalt, buttons) => dispatch(setzeInhaltFuerOberesModalfenster(titel, inhalt, buttons)),
         oberesModalfensterAnzeigen: () => dispatch(oberesModalfensterAnzeigen())
