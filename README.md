@@ -52,6 +52,8 @@ Durch diese 2-Faktor-Authentifizierung und die 100%ige Transparenz ist VergissMe
          - [Der Authentifizierungsreduzierer](#der-authentifizierungsreduzierer)
          - [Das Modalfenster](#das-modalfenster) 
          - [Der Passwörter-Reduzierer](#der-passwörter-reduzierer)
+   - [Die Anwendung](#die-anwendung)
+   - [Die Webseite - index.js](#die-webseite-index.js)
 - [Das Backend](#das-backend)
   - [Die Grundfunktionen](#die-grundfunktionen)
       - [Das Abrufen der Daten](#das-abrufen-der-daten)
