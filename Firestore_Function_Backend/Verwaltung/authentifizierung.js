@@ -4,12 +4,13 @@ const Joi = require('@hapi/joi')
 // Zur Authentifizierung werden Jsonwebtokens (JWT) 
 const jwt = require('jsonwebtoken')
 // und für die Verschlüsselung die Bcrypt-Hashfunktion verwendet.
-// Dafür wird die Javascript-Implementierung "bcryptjs" verwendet.
+// Dafür wird die Javascript-Implementierung "bcryptjs" importiert.
 const bcrypt = require('bcryptjs')
 
-// Die Grundfunktionen zur Arbeit mit Datenbanken werden importiert,
+// Die Grundfunktionen zur Arbeit mit Datenbanken werden importiert
 const { datenLesen, datenHinzufuegen, datenAktualisieren, datenLoeschen } = require('../Grundfunktionen/datenbankFunktionen')
 
+// und die Funktion zum Abrufen der Benutzerdaten aus der Firestore-Datenbank.
 const { benutzerDatenAbrufen } = require('../Grundfunktionen/datenAbrufen')
 
 // Für die Registrierung wird das Format (benutzername, passwort, email) vorgegeben, in dem die Daten eingegeben werden müssen.
@@ -24,7 +25,7 @@ exports.registrierung = async (req, res) => {
     const { benutzername, passwort, email } = req.body
 
     // Validierung, ob die eingegebenen Daten aus der Anfrage dem vorgegebenen Format (Benutzername, Passwort, Email) 
-    // und den Anforderung entsprechen. (Bspw. muss eine Email ein @-Zeichen beinhalten, was durch die Funktion "email()" festgelegt wird)
+    // und den Anforderung entsprechen. (Bspw. muss eine Email ein @-Zeichen beinhalten, was durch die Funktion "email()" festgelegt wird.
     const Validierung = Format.validate({ benutzername, passwort, email })
 
     // Wenn die eingegebenen Daten nicht dem Format entsprechen, dann gibt es einen Fehler 400 (Bad-Request). Die Anfrage ist fehlerhaft.
@@ -49,6 +50,7 @@ exports.registrierung = async (req, res) => {
 
     // Wenn der Benutzername aber noch nicht existiert, wird dieser in der Firestore-Datenbank hinzugefuegt.
     // In der Sammlung 'benutzer' wird ein neuer Benutzer mit dem angegebenen Benutzernamen angelegt und diesem die Felder "email", "passwort" und "benutzername" hinzugefuegt.
+    // Das Passwort wird mit Bcrypt mit einem 12-stelligen Salt gehashed.
     await datenHinzufuegen(req.firestore, 'benutzer', benutzername, { benutzername, email: email || '', passwort: bcrypt.hashSync(passwort, 12) })
 
     // Nach der erfolgreichen Registrierung des Benutzers, wird die Anfrage mit dem Statuscode 200 (OK) zurückgegeben.
@@ -59,7 +61,7 @@ exports.registrierung = async (req, res) => {
     })
 }
 
-// Für die Anmeldung wird das Format (benutzername, passwort) vorgegeben, in der die Daten eingegeben werden müssen.
+// Für die Anmeldung wird das Format (benutzername, passwort) vorgegeben, in dem die Daten eingegeben werden müssen.
 exports.anmeldung = async (req, res) => {
     const Format = Joi.object({
         benutzername: Joi.string().required(),
@@ -70,7 +72,7 @@ exports.anmeldung = async (req, res) => {
     const { benutzername, passwort } = req.body
 
     // Validierung, ob die eingegebenen Daten aus der Anfrage dem vorgegebenen Format (Benutzername, Passwort) 
-    // und den Anforderung entsprechen. (Bspw. muss die Eingabe ein String sein, der nicht leer ist)
+    // und den Anforderung entsprechen. (Bspw. muss die Eingabe ein String sein, der nicht leer ist).
     const Validierung = Format.validate({ benutzername, passwort })
 
     // Wenn nicht, dann gibt es einen Fehler 400 (Bad-Request). Die Anfrage ist fehlerhaft.
@@ -87,8 +89,7 @@ exports.anmeldung = async (req, res) => {
         return res.status(400).send({ status: 0, message: `Der Benutzer ${benutzername} existiert nicht!` })
     }
 
-    // Wenn der Benutzer aber existiert, werden dessen Daten (Email und Passwort) abgerufen 
-    // und in der Konstanten "benutzer" gespeichert.
+    // Wenn der Benutzer aber existiert, werden dessen Daten aus der Datenbank abgerufen.
     const benutzer = benutzerDatenAbrufen(b.data())
 
     // Daraufhin erfolgt ein Abgleich des Passwortes, das unter dem Benutzernamen in der Datenbank gespeichert ist und dessen, das bei der Anmeldung eingegeben wurde.
@@ -114,10 +115,10 @@ exports.anmeldung = async (req, res) => {
 
 // Der Benutzer soll auch die Möglichkeit haben, sein Passwort aktualisieren zu können.
 exports.passwortAktualisieren = async (req, res) => {
-    // Dafuer ist erstmal wichtig, dass der Benutzer in dem Moment autorisiert ist.
-    // Wie die Autorisierungsabfrage "authentifizierungsUeberpruefung" genau funktioniert, wird in "../Vermittlung/authentifizierungsUeberpruefung" erklärt.
+    // Dafür ist es erstmal wichtig, dass der Benutzer in dem Moment authentifiziert ist.
+    // Wie die Authentifizierungsabfrage "authentifizierungsUeberpruefung" genau funktioniert, wird in "../Vermittlung/authentifizierungsUeberpruefung" erklärt.
     if (!req.authentifizierungsUeberpruefung) {
-        return res.status(400).send({ status: 0, message: "Nicht autorisiert." })
+        return res.status(400).send({ status: 0, message: "Nicht authentifiziert." })
     }
 
     // Um das Passwort zu aktualisieren, kann nicht, wie bei der Email, einfach das neue eingegeben werden.
@@ -165,10 +166,10 @@ exports.passwortAktualisieren = async (req, res) => {
 
 // Der Benutzer soll auch die Möglichkeit haben, seine Email aktualisieren zu können.
 exports.emailAktualisieren = async (req, res) => {
-    // Dafuer ist erstmal wichtig, dass der Benutzer in dem Moment autorisiert ist.
-    // Wie die Autorisierungsabfrage "authentifizierungsUeberpruefung" genau funktioniert, wird in "../Vermittlung/authentifizierungsUeberpruefung" erklärt.
+    // Dafuer ist erstmal wichtig, dass der Benutzer in dem Moment authentifiziert ist.
+    // Wie die Authentifizierungsabfrage "authentifizierungsUeberpruefung" genau funktioniert, wird in "../Vermittlung/authentifizierungsUeberpruefung" erklärt.
     if (!req.authentifizierungsUeberpruefung) {
-        return res.status(400).send({ status: 0, message: "Nicht autorisiert!" })
+        return res.status(400).send({ status: 0, message: "Nicht authentifiziert!" })
     }
 
     // Das Format fuer die neue Email muss natürlich auch dem einer Mailadresse entsprechen.
@@ -200,7 +201,7 @@ exports.accountLoeschen = async (req, res) => {
     // Dafür muss auf jeden Fall sichergestellt werden, dass der Benutzer authentifiziert ist.
     if (!req.authentifizierungsUeberpruefung) {
         // Wenn dies nicht der Fall ist, wird eine Fehlermeldung zurückgegeben.
-        return res.status(400).send({ status: 0, message: "Nicht autorisiert!" })
+        return res.status(400).send({ status: 0, message: "Nicht authenfiziert!" })
     }
 
     // Wenn der Nutzer jedoch authentifiziert ist, diese Aktion auszuführen, werden zuerst alle Passwörter gelöscht, die auf den
