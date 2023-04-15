@@ -1,31 +1,31 @@
-// Import der Joi-Library für die Validierung von Anfragen
+// Import der Joi-Library für die Validierung von Anfragen.
 const Joi = require('@hapi/joi')
 
-// Import von Hilfsfunktionen für die Verarbeitung von Daten und Datenbankzugriffe
+// Import der Datenbankfunktionen und der Funktion zum Abrufen der Passwortdaten.
 const { passwortDatenAbrufen } = require('../Grundfunktionen/datenAbrufen')
 const { datenHinzufuegen, datenLesen, datenLoeschen } = require('../Grundfnktionen/datenbankFuntkionen')
 
-// Definierung einer Exportfunktion für das Hinzufügen von Passwörtern
+// Definition einer Exportfunktion für das Hinzufügen von Passwörtern.
 exports.passwortHinzufuegen = async (req, res) => {
-    // Überprüfung, ob der Nutzer authentifiziert ist, um unbefugten Zugriff zu verhindern
+    // Überprüfung, ob der Nutzer authentifiziert ist, um unbefugten Zugriff zu verhindern.
     if (!req.authentifizierungsUeberpruefung) {
         return res.status(400).send({
             status: 0,
-            message: "Nicht autorisiert!"
+            message: "Nicht authentifiziert!"
         })
     }
 
-    // Definierung eines Formats für die erwartete Anfrage mit Hilfe von Joi
+    // Definierung eines Formats für die erwartete Anfrage mithilfe von Joi.
     const format = Joi.object({
         beschreibung: Joi.string().required(),
         verschluesseltesPasswort: Joi.string().required(),
         sicherheitswert: Joi.string().required()
     })
 
-    // Extraktion von Beschreibung, verschluesseltem Passwort und Sicherheitswert aus der Anfrage
+    // Extrahieren von Beschreibung, verschluesseltem Passwort und Sicherheitswert aus der Anfrage.
     const { beschreibung, verschluesseltesPasswort, sicherheitswert } = req.body
 
-    // Überprüfung, ob die Anfrage dem erwarteten Format entspricht
+    // Überprüfung, ob die Anfrage dem erwarteten Format entspricht.
     const validierung = format.validate({ beschreibung, verschluesseltesPasswort, sicherheitswert })
 
     // Wenn die Anfrage nicht dem erwarteten Format entspricht, wird eine Fehlermeldung zurückgegeben (Status 400 (Bad-Request)).
@@ -53,14 +53,14 @@ exports.passwortHinzufuegen = async (req, res) => {
     })
 }
 
-// Definition der Exportfunktion für das Löschen von Passwörtern
+// Definition der Exportfunktion für das Löschen von Passwörtern.
 exports.passwortLoeschen = async (req, res) => {
-    // Zuerst wird überprüft, ob der Nutzer autorisiert ist.
+    // Zuerst wird überprüft, ob der Nutzer authentifiziert ist.
     // Wenn das nicht der Fall ist, wird ein Status 400 gesendet.
     if (!req.authentifizierungsUeberpruefung) {
         return res.status(400).send({
             status: 0,
-            message: "Nicht autorisiert!"
+            message: "Nicht authentifiziert!"
         })
     }
 
@@ -108,7 +108,7 @@ exports.allePasswoerter = async (req, res) => {
     if (!req.authentifizierungsUeberpruefung) {
         return res.status(400).send({
             status: 0,
-            message: "Nicht autorisiert!"
+            message: "Nicht authentifiziert!"
         })
     }
 
@@ -144,7 +144,7 @@ const validierungPasswortBenutzername = async (req, id) => {
 
 
     // Ansonsten werden die gespeicherten Daten des Passwortes ausgegeben
-    let passwort = passwortDatenAbrufen(p.data()) // parse item data
+    let passwort = passwortDatenAbrufen(p.data())
 
     // und validiert, ob der Benutzername, der im Passwort gespeichert ist, dem Benutzernamen, der in der Anfrage übergeben wurde, entspricht.
     if (passwort.benutzername !== req.benutzername) {
