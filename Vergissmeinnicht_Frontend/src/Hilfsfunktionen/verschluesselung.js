@@ -1,10 +1,10 @@
-// Die Kryptographie-Bibliothekl "tweetnacl" wird verwendet, um die Verschlüsselungen durchzuführen
+// Die Kryptographie-Bibliothek "tweetnacl" wird verwendet, um die Verschlüsselungen durchzuführen
 // und Base64 ist zur Konvertierung von Daten in und aus Base64.
 import Base64 from 'base64-js'
 import nacl from 'tweetnacl'
 
 
-// Funktion zur Verschlüsselung von Daten
+// Funktion zur Verschlüsselung von Daten.
 export const verschluesseln = (schluessel, datenString) => {
     // Die Daten aus der Zeichenfolge werden in einen Byte-Array umgewandelt.
     const datenDecodiert = new Uint8Array(decodeUTF8(datenString))
