@@ -83,7 +83,7 @@ const mapStateToProps = state => {
 }
 
 // mapDispatchToProps verbindet das Redux-Store mit den Aktionserzeugern des Stores.
-// Das Objekt, welches zurückgegeben wird, hat die Form: {Action-Creator-Name: dispatch(Action)}
+// Das Objekt, welches zurückgegeben wird, hat die Form: {Aktionserzeuger: dispatch(Aktion)}
 const mapDispatchToProps = dispatch => {
     return {
         zentriertesModalfensterAusblenden: () => dispatch(zentriertesModalfensterAusblenden()),
