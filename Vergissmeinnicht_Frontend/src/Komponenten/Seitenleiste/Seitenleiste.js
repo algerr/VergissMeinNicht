@@ -93,9 +93,6 @@ const mapStateToProps = state => {
     }
 }
 
-// Hier wird die Seitenleisten-Komponente mit Redux verbunden, indem mapStateToProps und mapDispatchToProps
-// als Parameter an die connect-Funktion übergeben werden, die eine neue Komponente zurückgibt,
-// die mit dem Redux-Store verbunden ist.
 const mapDispatchToProps = dispatch => {
     return {
         authentifizierungsTokenFestlegen: (token) => dispatch(authentifizierungsTokenFestlegen(token)),
