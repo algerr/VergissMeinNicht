@@ -72,7 +72,7 @@ Durch diese 2-Faktor-Authentifizierung und die 100%ige Transparenz ist VergissMe
          - [Die Aktualisierung des Passwortes](#die-aktualisierung-des-passwortes)
          - [Den Account löschen](#den-account-löschen)
       - [Die Passwortverwaltung](#die-passwortverwaltung)
-- [Authoren](#authoren)
+- [Autoren](#autoren)
 
 # Das Stundenprotokoll
 
