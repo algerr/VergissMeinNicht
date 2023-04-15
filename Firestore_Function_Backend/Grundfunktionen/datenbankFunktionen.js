@@ -1,4 +1,4 @@
-// fuer die Operationen in der Datenbank werden die Funktionen zum: Hinzufuegen, Lesen, Aktualisieren, Löschen.
+// Für die Operationen in der Datenbank werden die Funktionen zum: Hinzufuegen, Lesen, Aktualisieren, Löschen.
 
 // ----------------------------------------------------------------------------------------------------------
 //                              Kurze Erklärung zur Funktionsweise von Firestore:
@@ -17,24 +17,24 @@
 
 
 // Die Funktion zum Schreiben nimmt als Eingabe:
-// (Datenbank (datenbank), sammlung - zu der die Daten hinzugefuegt werden soll, die ID - die zur Identifizierung des Dokumentes.
+// (Datenbank (datenbank), sammlung (zu der die Daten hinzugefügt werden sollen), die ID (die zur Identifizierung des Dokumentes)).
 exports.datenHinzufuegen = (datenbank, sammlung, id, daten) => {
-    // Wenn keine ID angegeben wird, wird automatisch ein zufälliger Key als Id erstellt.
+    // Wenn keine ID angegeben wird, wird automatisch eine zufällige Zeichenkette als ID erstellt.
     if (id === null) {
         return datenbank.collection(sammlung).add(daten)
     }
-    // Mit ID werden die Daten mit ID in die Sammlung hinzugefuegt.
+    // Wenn eine ID angegeben ist, wird ein Dokument mit der ID und den Daten in der Sammlung angelegt.
     return datenbank.collection(sammlung).doc(id).set(daten)
 }
 
-// Zum Lesen wird als Eingabe wieder die Datenbank, die Colletion, aus der die Daten abgerufen werden und die ID, deren Daten konkret gelesen werden sollen.
+// Zum Lesen wird als Eingabe wieder die Datenbank, die Sammlung, aus der die Daten abgerufen werden sollen und die ID, deren Daten konkret gelesen werden sollen.
 exports.datenLesen = (datenbank, sammlung, id) => {
-    // Mit der Funktion get() erhält man die Felder des Dokuments im JSON Format.
+    // Mit der Funktion 'get()' erhält man die Felder des Dokuments im JSON Format.
     return datenbank.collection(sammlung).doc(id).get()
 }
 
 // Bei der Aktualisierung wird die ID des Dokuments benötigt, das aktualisiert werden soll
-// und die Felder mitsamt der aktualisierten Daten, welche die alten überschreiben sollen.
+// und die aktualisierten Daten, welche die alten überschreiben sollen.
 exports.datenAktualisieren = (datenbank, sammlung, id, aktualisierteDaten) => {
     return datenbank.collection(sammlung).doc(id).update(aktualisierteDaten)
 }
