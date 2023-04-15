@@ -1850,7 +1850,9 @@ Die Funktion nimmt einen Schlüssel, einen Base64-Datenstring und einen Base64-S
 Der Redux-Store ist wie ein zentrales Lagerhaus für den Zustand einer React-Anwendung. Statt den Zustand in verschiedenen Komponenten zu verwalten, wird der Zustand im Redux-Store gespeichert und von den Komponenten aus gelesen oder in den Store geschrieben. Der Redux-Store ist ein unveränderlicher Zustand, das bedeutet, dass er nicht direkt geändert werden kann. Stattdessen werden Änderungen am Zustand durch Aktionen ausgelöst, die von den Komponenten ausgelöst und an den Store gesendet werden. Der Redux-Store ermöglicht eine klare Trennung von Zustand und Darstellung in der Anwendung. Komponenten können den aktuellen Zustand aus dem Store lesen und auf Änderungen reagieren, indem sie sich erneut rendern. Wenn Komponenten den Zustand ändern müssen, senden sie eine Aktion an den Store, der den Zustand aktualisiert und allen abhängigen Komponenten die neuen Daten bereitstellt.
       
    Insgesamt erleichtert der Redux-Store die Verwaltung des Zustands in React-Anwendungen, indem er eine zentrale Datenquelle für den gesamten Zustand der Anwendung bereitstellt und die Veränderungen am Zustand durch Aktionen koordiniert.
-      
+   
+![Redux-Store](https://user-images.githubusercontent.com/65679099/232251361-34a6bd5f-d554-420e-be50-de67961e761f.png)
+  
 <details>
 <summary><h3>Die Aktionserzeuger</h3></summary>
    
