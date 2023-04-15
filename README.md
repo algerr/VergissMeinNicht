@@ -1107,7 +1107,7 @@ Unsere Anwendung besteht nicht nur aus dem Passwort Manager, auch wenn darauf de
 <details>
 <summary>Nähere Informationen</summary>   
       
-      ```javascript
+```javascript
       render() {
         // Die Variable "token" wird aus den Props des Komponenten gelesen.
         const { token } = this.props
@@ -1144,7 +1144,7 @@ Unsere Anwendung besteht nicht nur aus dem Passwort Manager, auch wenn darauf de
             </Container>
         )
     }
-      ```
+```
    
    Die Accounteinstellungen sind in verschiedene Zeilen (Rows) und Spalten (Columns) eingeteilt.
    In der ersten Zeile wird der Titel `Accounteinstellungen` gerendert.
