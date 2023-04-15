@@ -2357,10 +2357,97 @@ Firestore wurde für die Verwendung in Anwendungen entwickelt, die Daten in Echt
 Firestore bietet verschiedene Funktionen zum Schreiben, Lesen, Aktualisieren und Löschen von Daten. Firestore-Daten können einfach über APIs abgerufen und bearbeitet werden. Firestore bietet auch eine Abfragesprache, mit der Entwickler komplexe Abfragen ausführen können, um bestimmte Daten aus Sammlungen abzurufen. Firestore ist Teil der Firebase-Plattform von Google und lässt sich problemlos in andere Firebase-Dienste wie Authentifizierung, Cloud-Messaging und Cloud-Funktionen integrieren. Firestore ist auch auf der Google Cloud Platform (GCP) verfügbar. Das bedeutet, dass es sich nahtlos in Anwendungen integrieren lässt, die auf der GCP gehostet werden.
 
 </details>
+
+
+## Die Anwendung
+
+Nachdem alle Komponenten, Hilfsfunktionen und der Redux-Store definiert wurden, können diese nun in einer Anwendung `App.js` zusammengefasst werden, die daraufhin auf der Webseite gerendert wird.
+
+```javascript
+// Die benötigten React-Komponenten und Module werden importiert.
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { Provider } from 'react-redux'
+
+// Die verschiedenen Komponenten der Anwendung werden importiert.
+import BenutzerAuthentifizieren from './Komponenten/BenutzerAuthentifizieren/BenutzerAuthentifizieren'
+import Anmeldung from './Komponenten/Anmeldung/Anmeldung'
+import Registrierung from './Komponenten/Registrierung/Registrierung'
+import Startseite from './Komponenten/Startseite/Startseite'
+import NichtGefunden from './Komponenten/RoutenError/NichtGefunden'
+import OberesModalfenster from './Komponenten/OberesModalfenster/OberesModalfenster'
+import ZentriertesModalfenster from './Komponenten/ZentriertesModalfenster/ZentriertesModalfenster'
+import reduxStore from './ReduxStore/reduxStore'
+```
+
+Dafür werden zuerst alle benötigten React-Komponenten und Module sowie die verschiedenen Module der Anwendung importiert.
+
+```javascript
+// Der Redux Store wird für die Anwendung erstellt.
+const store = reduxStore()
+```
+
+Daraufhin wird der Redux-Store für die Anwendung erstellt und die Anwendung kann gerendert werden.
+
+```javascript
+render() {
+        // Der Inhalt der App-Komponente wird als HTML-Code zurückgegeben.
+        return (
+            // Der Redux-Store wird als Provider für die gesamte Anwendung verfügbar gemacht.
+            // Alle Komponenten können somit auf ihn zugreifen können, um den Zustand der Anwendung zu aktualisieren oder zu lesen.
+            <Provider store={store}>
+                {/* Die Modalfenster werden gerendert. Ob sie sichtbar sind und wie sie aussehen wird durch den State des oberen und zentrierten Modalfensters entschieden. */}
+                <OberesModalfenster />
+                <ZentriertesModalfenster />
+                {/* Die Router-Komponente, die die Routen der Anwendung verwaltet, wird definiert. */}
+                <Router>
+                    <Switch>
+                        {/* Beim Standardpfad wird die Anmeldungskomponente gerendert. */}
+                        <Route exact path="/" component={Anmeldung} />
+                        {/* Bei /anmeldung wird die Anmeldungskomponente gerendert.*/}
+                        <Route exact path="/anmeldung" component={Anmeldung} />
+                        {/* Bei /registrierung wird die Registrierungskomponente gerendert. */}
+                        <Route exact path="/registrierung" component={Registrierung} />
+                        {/* Bei /startseite wird die Startseite-Komponente gerendert. */}
+                        <BenutzerAuthentifizieren path="/startseite" component={Startseite} />
+                        {/* Bei /404 wird die 404-Fehlerseite-Komponente gerendert. */}
+                        <Route exact path="/404" component={NichtGefunden} />
+                        {/* Wenn keine passende Route gefunden wird, wird auf die 404-Fehlerseite umgeleitet. */}
+                        <Redirect to="/404" />
+                    </Switch>
+                </Router>
+            </Provider>
+        )
+    }
+```
+
+Damit der Redux-Store für die gesamte Anwendung verfügbar ist, wird dieser als Provider gesetzt. So können alle Komponenten auf den aktuellen Zustand, der im Redux-Store gespeichert ist, zugreifen und diesen lesen oder aktualisieren.
+Die Modalfenster werden gerendert, sodass ihre Eigenschaften durch ihre Zustände im Redux-Store verwaltet werden können.
+Nun werden noch die einzelnen Komponenten unterschiedlichen Routen zugeschrieben. Beim Standardpfad `/` wird die Anmeldungskomponente gerendert. Bei `/anmeldung` ebenfalls. Die Registrierung wird bei `/registrierung`, die Startseite, wenn der Nutzer authentifiziert ist, bei `/startseite` und die 404-Fehlerseite bei `/404` gerendert.
+Sollte der eingegebene Pfad nicht existieren, wird der Nutzer zu `/404` umgeleitet.
+
+```javascript
+export default App
+```
+
+Zum Schluss wird diese App-Komponente noch als Standard exportiert, sodass diese auf der Webseite gerendert werden kann.
+
+## Die Webseite - index.js
+
+Nun sind wir am Ende des Frontends angekommen. Hier wird die App-Komponente und damit die gesamte Webseite gerendert. Auf der Webseite wird somit die App-Komponente aufgerufen und darin die einzelnen Komponenten, verbunden mit Redux-Store.
+
+```javascript
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
+
 </details>
       
       
-      
+ 
+ 
+ 
+ 
       
 <details>
    <summary><h1>Das Backend</h1></summary>
