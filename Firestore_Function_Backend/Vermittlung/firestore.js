@@ -1,7 +1,7 @@
-// Das Firebase Admin-SDK-Moduls wird importiert.
+// Das Firebase Admin-SDK-Modul wird importiert.
 const admin = require("firebase-admin")
 
-// Die Firebase Admin-SDKs wird initialisiert.
+// Die Firebase Admin-SDK wird initialisiert.
 admin.initializeApp()
 
 // Eine Firestore-Instanz wird erstellt.
