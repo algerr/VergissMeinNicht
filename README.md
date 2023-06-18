@@ -3211,7 +3211,11 @@ Wir sind stolz auf das, was wir erreicht haben und fühlen uns nun besser für z
 
 </details>
 
+## Eigenständigkeitserklärung
 
+Hiermit erklären wir, dass das Projekt selbstständig bearbeitet wurde und keine anderen als die angegebenen Quellen benutzt wurden. 
+Ahrensburg, den 05. Mai 2023 
+Laurenz Brause und Daniel Pauli
 
 ## Autoren
 
